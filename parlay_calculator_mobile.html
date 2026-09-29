@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Parlay Arb Calc (Mobile)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .touch-btn {
+            touch-action: manipulation;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-900 min-h-screen pb-32">
+
+    <!-- Sticky Mobile Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 py-3 shadow-xs">
+        <div class="flex items-center justify-between mb-2.5">
+            <div class="flex items-center space-x-2.5">
+                <div class="p-2 bg-indigo-600 rounded-lg text-white shadow-xs">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-base font-bold text-slate-800 leading-tight">Parlay Arb Calculator</h1>
+                    <p class="text-[11px] text-slate-500">Mobile Advantage Betting</p>
+                </div>
+            </div>
+
+            <!-- Mode Selector (iOS Segmented Style) -->
+            <div class="bg-slate-100 p-0.5 rounded-lg flex text-xs font-semibold">
+                <button id="tabBtnSeq" onclick="switchMobileTab('sequential')" class="px-2.5 py-1.5 rounded-md bg-white text-indigo-700 shadow-xs transition">
+                    Sequential
+                </button>
+                <button id="tabBtnDutch" onclick="switchMobileTab('dutching')" class="px-2.5 py-1.5 rounded-md text-slate-600 hover:text-slate-900 transition">
+                    Dutching
+                </button>
+            </div>
+        </div>
+
+        <!-- Horizontal Swipeable Presets -->
+        <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1 -mx-4 px-4 text-[11px] font-medium">
+            <span class="text-slate-400 font-bold uppercase tracking-wider text-[10px] whitespace-nowrap mr-1">Presets:</span>
+            <button onclick="loadMobilePreset('nfl_staggered')" class="px-2.5 py-1 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 rounded-full whitespace-nowrap active:scale-95 transition">
+                🏈 2-Leg NFL
+            </button>
+            <button onclick="loadMobilePreset('nfl_3leg')" class="px-2.5 py-1 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 rounded-full whitespace-nowrap active:scale-95 transition">
+                🏆 3-Leg SNF
+            </button>
+            <button onclick="loadMobilePreset('bonus_bet')" class="px-2.5 py-1 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 rounded-full whitespace-nowrap active:scale-95 transition">
+                🎁 $50 Free Bet
+            </button>
+            <button onclick="loadMobilePreset('dk_2bet_boost')" class="px-2.5 py-1 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 rounded-full whitespace-nowrap active:scale-95 transition">
+                ⚡ 2-Bet @ +400
+            </button>
+            <button onclick="loadMobilePreset('dk_3bet_boost')" class="px-2.5 py-1 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 rounded-full whitespace-nowrap active:scale-95 transition">
+                🚀 3-Bet @ +1200
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-lg mx-auto p-4 space-y-4">
+
+        <!-- ========================================================================= -->
+        <!-- MODE 1: SEQUENTIAL HEDGE -->
+        <!-- ========================================================================= -->
+        <div id="mobSectionSequential" class="space-y-4">
+            
+            <!-- Parlay Structure Toggle -->
+            <div class="bg-white p-3 rounded-2xl shadow-xs border border-slate-200 flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-700">Parlay Type:</span>
+                <div class="bg-slate-100 p-0.5 rounded-lg flex text-xs font-semibold">
+                    <button type="button" id="mobSeqBtn2Leg" onclick="setMobSeqLegs(2)" class="px-3 py-1 rounded-md bg-white text-indigo-700 shadow-xs">
+                        2-Leg
+                    </button>
+                    <button type="button" id="mobSeqBtn3Leg" onclick="setMobSeqLegs(3)" class="px-3 py-1 rounded-md text-slate-600">
+                        3-Leg
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 1: Original Ticket -->
+            <div class="bg-white p-4 rounded-2xl shadow-xs border border-slate-200 space-y-3">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">1. Original Parlay</h2>
+                    <span id="mobSeqBadgeWon" class="px-2 py-0.5 text-[11px] font-bold rounded-full bg-emerald-100 text-emerald-800">
+                        Leg 1 WON
+                    </span>
+                </div>
+
+                <!-- 3-Leg Stage Dropdown -->
+                <div id="mobSeq3LegStageWrapper" class="hidden">
+                    <label class="block text-[11px] font-semibold text-slate-600 mb-1">Ticket Progress</label>
+                    <select id="mobSeqStage" onchange="onMobSeqStageChange()" class="w-full p-2 bg-indigo-50/60 border border-indigo-200 rounded-xl text-xs font-bold text-indigo-900 outline-none">
+                        <option value="final_leg">Legs 1 & 2 WON &rarr; Hedging Final Leg 3</option>
+                        <option value="rolling">Leg 1 WON &rarr; Rolling Step-by-Step</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-medium text-slate-600 mb-1">Stake ($)</label>
+                        <input type="number" id="mobSeqStake" value="50" min="1" step="1" inputmode="decimal" oninput="calcMobSequential()" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-base font-bold text-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-slate-600 mb-1">Total Payout ($)</label>
+                        <input type="number" id="mobSeqPayout" value="200" min="1" step="1" inputmode="decimal" oninput="calcMobSequential()" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-base font-bold text-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                </div>
+
+                <!-- Quick Increment Chips -->
+                <div class="flex items-center space-x-1.5 pt-1">
+                    <span class="text-[10px] text-slate-400 font-semibold uppercase">Quick Add:</span>
+                    <button type="button" onclick="adjustStake('mobSeqStake', 10)" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md text-[11px] font-medium active:scale-95">+$10</button>
+                    <button type="button" onclick="adjustStake('mobSeqStake', 50)" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md text-[11px] font-medium active:scale-95">+$50</button>
+                    <button type="button" onclick="adjustStake('mobSeqPayout', 50)" class="px-2 py-0.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-md text-[11px] font-medium active:scale-95">+Payout $50</button>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-medium text-slate-600 mb-1">Wager Type</label>
+                    <select id="mobSeqBetType" onchange="calcMobSequential()" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 outline-none">
+                        <option value="cash">Cash Wager (Risking Stake)</option>
+                        <option value="bonus">Free Bet / Bonus Bet (SNR - Stake Not Returned)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Card 2: Pending Leg Hedge -->
+            <div class="bg-white p-4 rounded-2xl shadow-xs border border-slate-200 space-y-3">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">2. Pending Leg Hedge</h2>
+                    <span id="mobSeqDecLabel" class="text-[11px] font-mono text-slate-400">2.10 dec</span>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-medium text-slate-600 mb-1">Opponent Odds (American +/-)</label>
+                    <div class="relative">
+                        <input type="text" id="mobSeqOppOdds" value="+110" inputmode="text" oninput="calcMobSequential()" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-base font-bold font-mono text-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                        <div class="absolute right-2 top-2 flex items-center space-x-1">
+                            <button type="button" onclick="setOppOdds('-110')" class="px-1.5 py-0.5 bg-slate-200 hover:bg-slate-300 rounded text-[10px] font-mono font-semibold text-slate-700">-110</button>
+                            <button type="button" onclick="setOppOdds('+100')" class="px-1.5 py-0.5 bg-slate-200 hover:bg-slate-300 rounded text-[10px] font-mono font-semibold text-slate-700">+100</button>
+                            <button type="button" onclick="setOppOdds('+120')" class="px-1.5 py-0.5 bg-slate-200 hover:bg-slate-300 rounded text-[10px] font-mono font-semibold text-slate-700">+120</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategy Toggle -->
+                <div>
+                    <label class="block text-[11px] font-medium text-slate-600 mb-1.5">Strategy Mode</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button type="button" id="mobStratEqual" onclick="setMobStrategy('equal_profit')" class="py-2.5 px-3 border border-indigo-600 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-xl text-center shadow-2xs">
+                            ⚖️ Equal Profit
+                        </button>
+                        <button type="button" id="mobStratFree" onclick="setMobStrategy('freeroll')" class="py-2.5 px-3 border border-slate-200 bg-white text-slate-600 text-xs font-medium rounded-xl text-center hover:bg-slate-50">
+                            🛡️ Freeroll ($0 Risk)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Slider -->
+                <div class="pt-1">
+                    <div class="flex justify-between text-[11px] text-slate-500 mb-1">
+                        <span>Hedge Intensity</span>
+                        <span id="mobSliderLabel" class="font-bold text-indigo-600">100%</span>
+                    </div>
+                    <input type="range" id="mobSeqSlider" min="0" max="100" value="100" step="5" oninput="onMobSliderChange()" class="w-full accent-indigo-600 h-2 bg-slate-200 rounded-lg cursor-pointer">
+                </div>
+            </div>
+
+            <!-- Card 3: Scenarios Stack -->
+            <div class="space-y-2.5 pt-1">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 px-1">Outcome Scenarios</h3>
+
+                <!-- Scenario A -->
+                <div class="bg-white p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between shadow-xs">
+                    <div class="space-y-0.5">
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
+                            <span class="text-xs font-bold text-slate-800">Original Parlay Hits</span>
+                        </div>
+                        <p class="text-[10px] text-slate-400 font-mono">
+                            Payout: <span id="mobScenAPayout" class="text-slate-700 font-semibold">$200.00</span> &bull; Hedge: <span id="mobScenAHedge" class="text-rose-600">-$95.24</span>
+                        </p>
+                    </div>
+                    <div class="text-right">
+                        <div id="mobScenANet" class="text-lg font-extrabold text-emerald-600">+$54.76</div>
+                        <span id="mobScenARoi" class="text-[10px] font-semibold text-emerald-700">+37.7% ROI</span>
+                    </div>
+                </div>
+
+                <!-- Scenario B -->
+                <div class="bg-white p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between shadow-xs">
+                    <div class="space-y-0.5">
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                            <span class="text-xs font-bold text-slate-800">Hedge Wins (Parlay Loses)</span>
+                        </div>
+                        <p class="text-[10px] text-slate-400 font-mono">
+                            Hedge Payout: <span id="mobScenBPayout" class="text-slate-700 font-semibold">$200.00</span> &bull; Stake: <span id="mobScenBOrig" class="text-slate-500">-$50.00</span>
+                        </p>
+                    </div>
+                    <div class="text-right">
+                        <div id="mobScenBNet" class="text-lg font-extrabold text-emerald-600">+$54.76</div>
+                        <span id="mobScenBRoi" class="text-[10px] font-semibold text-emerald-700">+37.7% ROI</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Quick Checklist -->
+            <div class="bg-indigo-50/70 p-3.5 rounded-2xl border border-indigo-100 text-xs text-slate-700 space-y-1.5">
+                <span class="font-bold text-indigo-950 flex items-center text-[11px] uppercase tracking-wider">
+                    ⚡ Fast Mobile Checklist
+                </span>
+                <p class="text-[11px] text-slate-600 leading-relaxed">
+                    Bet exactly <strong id="mobStepStake" class="text-indigo-700 font-mono font-bold">$95.24</strong> on the opponent at <strong id="mobStepOdds" class="text-indigo-700 font-mono font-bold">+110</strong> (e.g. on Novig). Regardless of who wins, your profit is locked in!
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- MODE 2: PARLAY DUTCHING (INITIAL BET & PARLAY ODDS) -->
+        <!-- ========================================================================= -->
+        <div id="mobSectionDutching" class="hidden space-y-4">
+            
+            <!-- Sub-selector for Dutching -->
+            <div class="bg-white p-3 rounded-2xl shadow-xs border border-slate-200 flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-700">Bets / Games:</span>
+                <div class="bg-slate-100 p-0.5 rounded-lg flex text-xs font-semibold">
+                    <button type="button" id="mobDutchBtn2" onclick="setMobDutchBets(2)" class="px-3 py-1 rounded-md bg-white text-indigo-700 shadow-xs">
+                        2 Bets (4 Combos)
+                    </button>
+                    <button type="button" id="mobDutchBtn3" onclick="setMobDutchBets(3)" class="px-3 py-1 rounded-md text-slate-600">
+                        3 Bets (8 Combos)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 1: Initial Parlay Bet -->
+            <div class="bg-white p-4 rounded-2xl shadow-xs border border-slate-200 space-y-2">
+                <div class="flex items-center justify-between">
+                    <label class="text-xs font-bold uppercase tracking-wider text-slate-500">Initial Parlay Bet ($)</label>
+                    <span id="mobDutchMarginHeader" class="text-[11px] font-bold text-emerald-600">Ticket 1 Stake</span>
+                </div>
+                <input type="number" id="mobDutchInitialBet" value="50" min="1" step="5" inputmode="decimal" oninput="calcMobDutching()" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-lg font-bold text-slate-800 focus:bg-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                <div class="flex items-center space-x-1.5 pt-1">
+                    <span class="text-[10px] text-slate-400 font-semibold uppercase">Quick Add:</span>
+                    <button type="button" onclick="adjustStake('mobDutchInitialBet', 10)" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md text-[11px] font-medium active:scale-95">+$10</button>
+                    <button type="button" onclick="adjustStake('mobDutchInitialBet', 25)" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md text-[11px] font-medium active:scale-95">+$25</button>
+                    <button type="button" onclick="adjustStake('mobDutchInitialBet', 50)" class="px-2 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md text-[11px] font-medium active:scale-95">+$50</button>
+                </div>
+            </div>
+
+            <!-- Card 2: Ticket 1 Parlay Odds Box -->
+            <div class="bg-white p-4 rounded-2xl shadow-xs border border-indigo-200 bg-indigo-50/20 space-y-2">
+                <div class="flex items-center justify-between">
+                    <label id="mobParlayOddsLabel" class="text-xs font-bold uppercase tracking-wider text-indigo-950">Parlay Odds (Ticket 1)</label>
+                    <span id="mobNaturalOddsBadge" class="text-[10px] font-mono text-slate-500 bg-white px-1.5 py-0.5 rounded border border-slate-200">Fair: +282</span>
+                </div>
+                <div class="relative">
+                    <input type="text" id="mobParlayOddsInput" value="+400" oninput="onMobParlayOddsUserEdit()" class="w-full p-2.5 bg-white border border-indigo-300 rounded-xl text-lg font-bold font-mono text-indigo-900 focus:ring-2 focus:ring-indigo-500 outline-none">
+                    <button type="button" onclick="resetMobNaturalOdds()" class="absolute right-2 top-2 px-2 py-1 bg-slate-100 hover:bg-indigo-100 text-indigo-700 rounded-lg text-[10px] font-bold">
+                        Auto-Sync
+                    </button>
+                </div>
+                <div class="flex items-center space-x-1 pt-1 overflow-x-auto no-scrollbar">
+                    <span class="text-[10px] text-slate-400 font-semibold uppercase whitespace-nowrap">Presets:</span>
+                    <button type="button" onclick="setMobParlayOdds('+300')" class="px-2 py-0.5 bg-slate-100 rounded text-[10px] font-mono font-semibold text-slate-700">+300</button>
+                    <button type="button" onclick="setMobParlayOdds('+350')" class="px-2 py-0.5 bg-slate-100 rounded text-[10px] font-mono font-semibold text-slate-700">+350</button>
+                    <button type="button" onclick="setMobParlayOdds('+400')" class="px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-[10px] font-mono font-bold">+400</button>
+                    <button type="button" onclick="setMobParlayOdds('+500')" class="px-2 py-0.5 bg-slate-100 rounded text-[10px] font-mono font-semibold text-slate-700">+500</button>
+                </div>
+            </div>
+
+            <!-- Card 3: Game Odds Inputs (Compact Grid) -->
+            <div class="bg-white p-4 rounded-2xl shadow-xs border border-slate-200 space-y-3">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100 pb-2">
+                    Individual Game Odds
+                </h2>
+
+                <!-- Game 1 -->
+                <div>
+                    <span class="text-[11px] font-semibold text-slate-600 block mb-1">Game 1: Side A vs Side B</span>
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" id="mobG1A" value="+100" oninput="onMobGameOddsChange()" placeholder="+100" class="p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-800 outline-none">
+                        <input type="text" id="mobG1B" value="-110" oninput="onMobGameOddsChange()" placeholder="-110" class="p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-800 outline-none">
+                    </div>
+                </div>
+
+                <!-- Game 2 -->
+                <div>
+                    <span class="text-[11px] font-semibold text-slate-600 block mb-1">Game 2: Side C vs Side D</span>
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" id="mobG2C" value="+100" oninput="onMobGameOddsChange()" placeholder="+100" class="p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-800 outline-none">
+                        <input type="text" id="mobG2D" value="-110" oninput="onMobGameOddsChange()" placeholder="-110" class="p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-800 outline-none">
+                    </div>
+                </div>
+
+                <!-- Game 3 (Hidden unless 3-bet enabled) -->
+                <div id="mobG3Wrapper" class="hidden">
+                    <span class="text-[11px] font-bold text-indigo-700 block mb-1">Game 3: Side E vs Side F (3rd Bet)</span>
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" id="mobG3E" value="+100" oninput="onMobGameOddsChange()" placeholder="+100" class="p-2 bg-indigo-50/50 border border-indigo-200 rounded-xl text-xs font-mono font-bold text-indigo-950 outline-none">
+                        <input type="text" id="mobG3F" value="-105" oninput="onMobGameOddsChange()" placeholder="-105" class="p-2 bg-indigo-50/50 border border-indigo-200 rounded-xl text-xs font-mono font-bold text-indigo-950 outline-none">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section: Mobile Ticket Cards List (NO CRAMPED TABLES) -->
+            <div class="space-y-2.5 pt-1">
+                <div class="flex items-center justify-between px-1">
+                    <h3 id="mobTicketsHeader" class="text-xs font-bold uppercase tracking-wider text-slate-500">
+                        Ticket Staking Plan (4 Tickets)
+                    </h3>
+                    <span id="mobTotalOutlayBadge" class="text-[11px] font-bold text-slate-700">Outlay: $285.50</span>
+                </div>
+
+                <!-- Cards Container -->
+                <div id="mobTicketsCardContainer" class="space-y-2">
+                    <!-- Dynamic Ticket Cards Injected by JS -->
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- ========================================================================= -->
+    <!-- STICKY REAL-TIME BOTTOM SHEET / ACTION BAR -->
+    <!-- ========================================================================= -->
+    <div id="stickyBar" class="fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-2xl p-3 z-50 transition-all">
+        <div class="max-w-lg mx-auto flex items-center justify-between">
+            <div>
+                <div class="flex items-center space-x-1.5">
+                    <span id="stickyBadge" class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800">
+                        GUARANTEED PROFIT
+                    </span>
+                    <span id="stickyRoi" class="text-[11px] font-extrabold text-emerald-700">+37.7% ROI</span>
+                </div>
+                <div id="stickyProfit" class="text-2xl font-black text-emerald-700 tracking-tight leading-none mt-1">
+                    +$54.76
+                </div>
+            </div>
+
+            <div class="text-right">
+                <button type="button" onclick="scrollDetails()" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold rounded-xl text-xs shadow-md shadow-indigo-600/20 flex flex-col items-end touch-btn">
+                    <span class="text-[10px] uppercase font-medium opacity-80" id="stickyActionSub">Recommended Hedge</span>
+                    <span class="text-sm font-extrabold" id="stickyActionMain">Bet $95.24</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Utilities
+        const formatMoney = (amount) => {
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+        };
+
+        const usToDecimal = (usOdds) => {
+            const odds = parseFloat(usOdds);
+            if (isNaN(odds) || odds === 0) return 0;
+            if (odds > 0) return 1 + (odds / 100);
+            return 1 + (100 / Math.abs(odds));
+        };
+
+        const decimalToUs = (dec) => {
+            if (!dec || dec <= 1) return "";
+            if (dec >= 2.0) {
+                return "+" + Math.round((dec - 1) * 100);
+            } else {
+                return Math.round(-100 / (dec - 1)).toString();
+            }
+        };
+
+        function adjustStake(inputId, amount) {
+            const el = document.getElementById(inputId);
+            el.value = (parseFloat(el.value) || 0) + amount;
+            if (currentMobileTab === 'sequential') calcMobSequential();
+            else calcMobDutching();
+        }
+
+        function setOppOdds(val) {
+            document.getElementById('mobSeqOppOdds').value = val;
+            calcMobSequential();
+        }
+
+        function setMobParlayOdds(odds) {
+            document.getElementById('mobParlayOddsInput').value = odds;
+            isMobUserCustomOdds = true;
+            calcMobDutching();
+        }
+
+        function scrollDetails() {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        // Tab Navigation
+        let currentMobileTab = 'sequential';
+
+        function switchMobileTab(tab) {
+            currentMobileTab = tab;
+            const secSeq = document.getElementById('mobSectionSequential');
+            const secDutch = document.getElementById('mobSectionDutching');
+            const btnSeq = document.getElementById('tabBtnSeq');
+            const btnDutch = document.getElementById('tabBtnDutch');
+
+            if (tab === 'sequential') {
+                secSeq.classList.remove('hidden');
+                secDutch.classList.add('hidden');
+                btnSeq.className = "px-2.5 py-1.5 rounded-md bg-white text-indigo-700 shadow-xs transition";
+                btnDutch.className = "px-2.5 py-1.5 rounded-md text-slate-600 hover:text-slate-900 transition";
+                calcMobSequential();
+            } else {
+                secSeq.classList.add('hidden');
+                secDutch.classList.remove('hidden');
+                btnDutch.className = "px-2.5 py-1.5 rounded-md bg-white text-indigo-700 shadow-xs transition";
+                btnSeq.className = "px-2.5 py-1.5 rounded-md text-slate-600 hover:text-slate-900 transition";
+                calcMobDutching();
+            }
+        }
+
+        // =========================================================================
+        // SEQUENTIAL LOGIC
+        // =========================================================================
+        let mobSeqLegs = 2;
+        let mobSeqStrat = 'equal_profit';
+
+        function setMobSeqLegs(legs) {
+            mobSeqLegs = legs;
+            const btn2 = document.getElementById('mobSeqBtn2Leg');
+            const btn3 = document.getElementById('mobSeqBtn3Leg');
+            const wrapper = document.getElementById('mobSeq3LegStageWrapper');
+            const badge = document.getElementById('mobSeqBadgeWon');
+
+            if (legs === 2) {
+                btn2.className = "px-3 py-1 rounded-md bg-white text-indigo-700 shadow-xs";
+                btn3.className = "px-3 py-1 rounded-md text-slate-600";
+                wrapper.classList.add('hidden');
+                badge.innerText = "Leg 1 WON";
+                badge.className = "px-2 py-0.5 text-[11px] font-bold rounded-full bg-emerald-100 text-emerald-800";
+            } else {
+                btn3.className = "px-3 py-1 rounded-md bg-white text-indigo-700 shadow-xs";
+                btn2.className = "px-3 py-1 rounded-md text-slate-600";
+                wrapper.classList.remove('hidden');
+                onMobSeqStageChange();
+            }
+            calcMobSequential();
+        }
+
+        function onMobSeqStageChange() {
+            const stage = document.getElementById('mobSeqStage').value;
+            const badge = document.getElementById('mobSeqBadgeWon');
+            if (stage === 'final_leg') {
+                badge.innerText = "Legs 1 & 2 WON";
+                badge.className = "px-2 py-0.5 text-[11px] font-bold rounded-full bg-purple-100 text-purple-800";
+            } else {
+                badge.innerText = "Leg 1 WON (2 Pending)";
+                badge.className = "px-2 py-0.5 text-[11px] font-bold rounded-full bg-blue-100 text-blue-800";
+            }
+            calcMobSequential();
+        }
+
+        function setMobStrategy(strat) {
+            mobSeqStrat = strat;
+            const btnEq = document.getElementById('mobStratEqual');
+            const btnFr = document.getElementById('mobStratFree');
+            const slider = document.getElementById('mobSeqSlider');
+
+            if (strat === 'equal_profit') {
+                btnEq.className = "py-2.5 px-3 border border-indigo-600 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-xl text-center shadow-2xs";
+                btnFr.className = "py-2.5 px-3 border border-slate-200 bg-white text-slate-600 text-xs font-medium rounded-xl text-center hover:bg-slate-50";
+                slider.value = 100;
+                document.getElementById('mobSliderLabel').innerText = "100%";
+            } else {
+                btnFr.className = "py-2.5 px-3 border border-indigo-600 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-xl text-center shadow-2xs";
+                btnEq.className = "py-2.5 px-3 border border-slate-200 bg-white text-slate-600 text-xs font-medium rounded-xl text-center hover:bg-slate-50";
+            }
+            calcMobSequential();
+        }
+
+        function onMobSliderChange() {
+            const val = document.getElementById('mobSeqSlider').value;
+            document.getElementById('mobSliderLabel').innerText = val + "%";
+            calcMobSequential();
+        }
+
+        function calcMobSequential() {
+            const stake = parseFloat(document.getElementById('mobSeqStake').value) || 0;
+            const payout = parseFloat(document.getElementById('mobSeqPayout').value) || 0;
+            const betType = document.getElementById('mobSeqBetType').value;
+            const oppOddsRaw = document.getElementById('mobSeqOppOdds').value.trim();
+            const decOpp = usToDecimal(oppOddsRaw);
+
+            document.getElementById('mobSeqDecLabel').innerText = decOpp > 1 ? decOpp.toFixed(2) + " dec" : "--";
+
+            if (payout <= 0 || decOpp <= 1) return;
+
+            const cashRisk = (betType === 'cash') ? stake : 0;
+            const sliderPct = (parseFloat(document.getElementById('mobSeqSlider').value) || 100) / 100;
+
+            const hedgeEqual = payout / decOpp;
+            const hedgeFreeroll = (decOpp > 1 && cashRisk > 0) ? (cashRisk / (decOpp - 1)) : 0;
+
+            let finalHedge = 0;
+            if (mobSeqStrat === 'equal_profit') {
+                finalHedge = hedgeEqual * sliderPct;
+            } else {
+                finalHedge = hedgeFreeroll;
+            }
+
+            finalHedge = Math.round(finalHedge * 100) / 100;
+
+            const scenAPayout = payout;
+            const scenANet = scenAPayout - cashRisk - finalHedge;
+
+            const scenBPayout = finalHedge * decOpp;
+            const scenBNet = scenBPayout - cashRisk - finalHedge;
+
+            const totalCapital = cashRisk + finalHedge;
+            const minProfit = Math.min(scenANet, scenBNet);
+            const roiPct = totalCapital > 0 ? ((minProfit / totalCapital) * 100) : 0;
+
+            // Scenario cards
+            document.getElementById('mobScenAPayout').innerText = formatMoney(scenAPayout);
+            document.getElementById('mobScenAHedge').innerText = "-" + formatMoney(finalHedge);
+            document.getElementById('mobScenANet').innerText = (scenANet >= 0 ? "+" : "") + formatMoney(scenANet);
+            document.getElementById('mobScenARoi').innerText = (scenANet >= 0 ? "+" : "") + (totalCapital > 0 ? (scenANet / totalCapital * 100).toFixed(1) : 0) + "% ROI";
+
+            document.getElementById('mobScenBPayout').innerText = formatMoney(scenBPayout);
+            document.getElementById('mobScenBOrig').innerText = "-" + formatMoney(cashRisk);
+            document.getElementById('mobScenBNet').innerText = (scenBNet >= 0 ? "+" : "") + formatMoney(scenBNet);
+            document.getElementById('mobScenBRoi').innerText = (scenBNet >= 0 ? "+" : "") + (totalCapital > 0 ? (scenBNet / totalCapital * 100).toFixed(1) : 0) + "% ROI";
+
+            document.getElementById('mobStepStake').innerText = formatMoney(finalHedge);
+            document.getElementById('mobStepOdds').innerText = oppOddsRaw;
+
+            // Update Sticky Bottom Sheet
+            const stickyBadge = document.getElementById('stickyBadge');
+            const stickyRoi = document.getElementById('stickyRoi');
+            const stickyProfit = document.getElementById('stickyProfit');
+            const stickyActionMain = document.getElementById('stickyActionMain');
+            const stickyActionSub = document.getElementById('stickyActionSub');
+
+            if (mobSeqStrat === 'equal_profit' && sliderPct === 1) {
+                stickyBadge.className = "px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800";
+                stickyBadge.innerText = "GUARANTEED EQUAL";
+                stickyRoi.innerText = (roiPct >= 0 ? "+" : "") + roiPct.toFixed(1) + "% ROI";
+                stickyProfit.className = "text-2xl font-black text-emerald-700 tracking-tight leading-none mt-1";
+                stickyProfit.innerText = "+" + formatMoney(minProfit);
+                stickyActionSub.innerText = "Hedge Bet";
+                stickyActionMain.innerText = "Bet " + formatMoney(finalHedge);
+            } else if (mobSeqStrat === 'freeroll') {
+                stickyBadge.className = "px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-100 text-blue-800";
+                stickyBadge.innerText = "ZERO RISK FREEROLL";
+                stickyRoi.innerText = "Risk-Free";
+                stickyProfit.className = "text-2xl font-black text-blue-800 tracking-tight leading-none mt-1";
+                stickyProfit.innerText = "+" + formatMoney(scenANet);
+                stickyActionSub.innerText = "Freeroll Hedge";
+                stickyActionMain.innerText = "Bet " + formatMoney(finalHedge);
+            } else {
+                stickyBadge.className = "px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-indigo-100 text-indigo-800";
+                stickyBadge.innerText = `PARTIAL (${Math.round(sliderPct * 100)}%)`;
+                stickyRoi.innerText = "";
+                stickyProfit.className = "text-2xl font-black text-indigo-900 tracking-tight leading-none mt-1";
+                stickyProfit.innerText = "+" + formatMoney(scenANet);
+                stickyActionSub.innerText = "Partial Hedge";
+                stickyActionMain.innerText = "Bet " + formatMoney(finalHedge);
+            }
+        }
+
+        // =========================================================================
+        // DUTCHING LOGIC (INITIAL BET & PARLAY ODDS BOX)
+        // =========================================================================
+        let mobDutchBets = 2;
+        let isMobUserCustomOdds = false;
+
+        function setMobDutchBets(bets) {
+            mobDutchBets = bets;
+            const btn2 = document.getElementById('mobDutchBtn2');
+            const btn3 = document.getElementById('mobDutchBtn3');
+            const g3 = document.getElementById('mobG3Wrapper');
+            const label = document.getElementById('mobParlayOddsLabel');
+
+            if (bets === 2) {
+                btn2.className = "px-3 py-1 rounded-md bg-white text-indigo-700 shadow-xs";
+                btn3.className = "px-3 py-1 rounded-md text-slate-600";
+                g3.classList.add('hidden');
+                document.getElementById('mobTicketsHeader').innerText = "Ticket Staking Plan (4 Tickets)";
+                label.innerText = "Parlay Odds: Side A + C";
+            } else {
+                btn3.className = "px-3 py-1 rounded-md bg-white text-indigo-700 shadow-xs";
+                btn2.className = "px-3 py-1 rounded-md text-slate-600";
+                g3.classList.remove('hidden');
+                document.getElementById('mobTicketsHeader').innerText = "Ticket Staking Plan (8 Tickets)";
+                label.innerText = "Parlay Odds: Side A + C + E";
+            }
+            updateMobNaturalOddsDisplay();
+            calcMobDutching();
+        }
+
+        function onMobParlayOddsUserEdit() {
+            isMobUserCustomOdds = true;
+            calcMobDutching();
+        }
+
+        function onMobGameOddsChange() {
+            updateMobNaturalOddsDisplay();
+            if (!isMobUserCustomOdds) {
+                resetMobNaturalOdds();
+            } else {
+                calcMobDutching();
+            }
+        }
+
+        function getMobNaturalOddsDecimal() {
+            const dec1A = usToDecimal(document.getElementById('mobG1A').value);
+            const dec2C = usToDecimal(document.getElementById('mobG2C').value);
+            if (mobDutchBets === 2) {
+                return dec1A * dec2C;
+            } else {
+                const dec3E = usToDecimal(document.getElementById('mobG3E').value);
+                return dec1A * dec2C * dec3E;
+            }
+        }
+
+        function updateMobNaturalOddsDisplay() {
+            const dec = getMobNaturalOddsDecimal();
+            const badge = document.getElementById('mobNaturalOddsBadge');
+            if (dec > 1) {
+                badge.innerText = `Fair: ${decimalToUs(dec)} (${dec.toFixed(2)}x)`;
+            } else {
+                badge.innerText = "Fair: --";
+            }
+        }
+
+        function resetMobNaturalOdds() {
+            const dec = getMobNaturalOddsDecimal();
+            if (dec > 1) {
+                document.getElementById('mobParlayOddsInput').value = decimalToUs(dec);
+                isMobUserCustomOdds = false;
+                calcMobDutching();
+            }
+        }
+
+        function calcMobDutching() {
+            const initialBet = parseFloat(document.getElementById('mobDutchInitialBet').value) || 0;
+            const dec1A = usToDecimal(document.getElementById('mobG1A').value);
+            const dec1B = usToDecimal(document.getElementById('mobG1B').value);
+            const dec2C = usToDecimal(document.getElementById('mobG2C').value);
+            const dec2D = usToDecimal(document.getElementById('mobG2D').value);
+            const parlayOddsRaw = document.getElementById('mobParlayOddsInput').value.trim();
+            const decT1 = usToDecimal(parlayOddsRaw);
+
+            updateMobNaturalOddsDisplay();
+
+            if (dec1A <= 1 || dec1B <= 1 || dec2C <= 1 || dec2D <= 1 || decT1 <= 1 || initialBet <= 0) return;
+
+            let tickets = [];
+
+            if (mobDutchBets === 2) {
+                let decAD = dec1A * dec2D;
+                let decBC = dec1B * dec2C;
+                let decBD = dec1B * dec2D;
+
+                tickets = [
+                    { id: 1, name: "Side A + Side C", dec: decT1, isPrimary: true },
+                    { id: 2, name: "Side A + Side D", dec: decAD, isPrimary: false },
+                    { id: 3, name: "Side B + Side C", dec: decBC, isPrimary: false },
+                    { id: 4, name: "Side B + Side D", dec: decBD, isPrimary: false }
+                ];
+            } else {
+                const dec3E = usToDecimal(document.getElementById('mobG3E').value);
+                const dec3F = usToDecimal(document.getElementById('mobG3F').value);
+                if (dec3E <= 1 || dec3F <= 1) return;
+
+                let decACF = dec1A * dec2C * dec3F;
+                let decADE = dec1A * dec2D * dec3E;
+                let decADF = dec1A * dec2D * dec3F;
+                let decBCE = dec1B * dec2C * dec3E;
+                let decBCF = dec1B * dec2C * dec3F;
+                let decBDE = dec1B * dec2D * dec3E;
+                let decBDF = dec1B * dec2D * dec3F;
+
+                tickets = [
+                    { id: 1, name: "Side A + Side C + Side E", dec: decT1, isPrimary: true },
+                    { id: 2, name: "Side A + Side C + Side F", dec: decACF, isPrimary: false },
+                    { id: 3, name: "Side A + Side D + Side E", dec: decADE, isPrimary: false },
+                    { id: 4, name: "Side A + Side D + Side F", dec: decADF, isPrimary: false },
+                    { id: 5, name: "Side B + Side C + Side E", dec: decBCE, isPrimary: false },
+                    { id: 6, name: "Side B + Side C + Side F", dec: decBCF, isPrimary: false },
+                    { id: 7, name: "Side B + Side D + Side E", dec: decBDE, isPrimary: false },
+                    { id: 8, name: "Side B + Side D + Side F", dec: decBDF, isPrimary: false }
+                ];
+            }
+
+            const targetPayout = initialBet * decT1;
+            let totalOutlay = initialBet;
+            tickets[0].targetStake = initialBet;
+            tickets[0].payout = targetPayout;
+
+            for (let i = 1; i < tickets.length; i++) {
+                const reqStake = Math.round((targetPayout / tickets[i].dec) * 100) / 100;
+                tickets[i].targetStake = reqStake;
+                tickets[i].payout = reqStake * tickets[i].dec;
+                totalOutlay += reqStake;
+            }
+
+            totalOutlay = Math.round(totalOutlay * 100) / 100;
+            const additionalHedges = Math.round((totalOutlay - initialBet) * 100) / 100;
+
+            tickets.forEach(t => {
+                t.netProfit = Math.round((t.payout - totalOutlay) * 100) / 100;
+            });
+
+            let sumInv = 0;
+            tickets.forEach(t => sumInv += (1 / t.dec));
+            const marginPct = (1 - sumInv) * 100;
+            const guaranteedNet = tickets[0].netProfit;
+            const roiPct = totalOutlay > 0 ? (guaranteedNet / totalOutlay * 100) : 0;
+
+            document.getElementById('mobTotalOutlayBadge').innerText = `Outlay: ${formatMoney(totalOutlay)}`;
+            document.getElementById('mobDutchMarginHeader').innerText = (marginPct >= 0 ? "+" : "") + marginPct.toFixed(2) + "% Arb Margin";
+
+            // Render Stacked Ticket Cards
+            const container = document.getElementById('mobTicketsCardContainer');
+            container.innerHTML = "";
+            tickets.forEach(t => {
+                const card = document.createElement('div');
+                card.className = t.isPrimary 
+                    ? "bg-indigo-50/70 p-3.5 rounded-2xl border border-indigo-200 shadow-2xs flex items-center justify-between"
+                    : "bg-white p-3.5 rounded-2xl border border-slate-200 shadow-2xs flex items-center justify-between";
+                card.innerHTML = `
+                    <div class="space-y-1">
+                        <div class="flex items-center space-x-1.5">
+                            <span class="text-[11px] font-extrabold text-slate-500">#${t.id}</span>
+                            <span class="text-xs font-bold text-slate-800">${t.name}</span>
+                            ${t.isPrimary ? `<span class="px-1.5 py-0.5 text-[9px] font-extrabold bg-indigo-200 text-indigo-900 rounded-md">Primary Parlay</span>` : ''}
+                        </div>
+                        <div class="text-[11px] text-slate-500 font-mono">
+                            Odds: <strong class="text-slate-700">${decimalToUs(t.dec)}</strong> (${t.dec.toFixed(2)}x)
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-extrabold font-mono text-indigo-700">${formatMoney(t.targetStake)}</div>
+                        <div class="text-[10px] font-bold font-mono ${t.netProfit >= 0 ? 'text-emerald-600' : 'text-rose-600'}">
+                            ${(t.netProfit >= 0 ? '+' : '')}${formatMoney(t.netProfit)} Return
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            // Sticky bottom update
+            const stickyBadge = document.getElementById('stickyBadge');
+            const stickyRoi = document.getElementById('stickyRoi');
+            const stickyProfit = document.getElementById('stickyProfit');
+            const stickyActionMain = document.getElementById('stickyActionMain');
+            const stickyActionSub = document.getElementById('stickyActionSub');
+
+            if (guaranteedNet > 0) {
+                stickyBadge.className = "px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800";
+                stickyBadge.innerText = "DUTCH ARB FOUND";
+                stickyRoi.innerText = (roiPct >= 0 ? "+" : "") + roiPct.toFixed(1) + "% ROI";
+                stickyProfit.className = "text-2xl font-black text-emerald-700 tracking-tight leading-none mt-1";
+                stickyProfit.innerText = "+" + formatMoney(guaranteedNet);
+                stickyActionSub.innerText = "Hedges: " + formatMoney(additionalHedges);
+                stickyActionMain.innerText = "Outlay " + formatMoney(totalOutlay);
+            } else {
+                stickyBadge.className = "px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-slate-200 text-slate-700";
+                stickyBadge.innerText = "HEDGE COST";
+                stickyRoi.innerText = marginPct.toFixed(1) + "% Edge";
+                stickyProfit.className = "text-2xl font-black text-slate-700 tracking-tight leading-none mt-1";
+                stickyProfit.innerText = formatMoney(guaranteedNet);
+                stickyActionSub.innerText = "Cost: " + formatMoney(Math.abs(guaranteedNet));
+                stickyActionMain.innerText = "Outlay " + formatMoney(totalOutlay);
+            }
+        }
+
+        // Presets
+        function loadMobilePreset(p) {
+            if (p === 'nfl_staggered') {
+                switchMobileTab('sequential');
+                setMobSeqLegs(2);
+                document.getElementById('mobSeqStake').value = "50";
+                document.getElementById('mobSeqPayout').value = "240";
+                document.getElementById('mobSeqBetType').value = "cash";
+                document.getElementById('mobSeqOppOdds').value = "+120";
+                setMobStrategy('equal_profit');
+            } else if (p === 'nfl_3leg') {
+                switchMobileTab('sequential');
+                setMobSeqLegs(3);
+                document.getElementById('mobSeqStage').value = "final_leg";
+                onMobSeqStageChange();
+                document.getElementById('mobSeqStake').value = "50";
+                document.getElementById('mobSeqPayout').value = "420";
+                document.getElementById('mobSeqBetType').value = "cash";
+                document.getElementById('mobSeqOppOdds').value = "-105";
+                setMobStrategy('equal_profit');
+            } else if (p === 'bonus_bet') {
+                switchMobileTab('sequential');
+                setMobSeqLegs(2);
+                document.getElementById('mobSeqStake').value = "50";
+                document.getElementById('mobSeqPayout').value = "200";
+                document.getElementById('mobSeqBetType').value = "bonus";
+                document.getElementById('mobSeqOppOdds').value = "-130";
+                setMobStrategy('equal_profit');
+            } else if (p === 'dk_2bet_boost') {
+                switchMobileTab('dutching');
+                setMobDutchBets(2);
+                document.getElementById('mobDutchInitialBet').value = "50";
+                document.getElementById('mobG1A').value = "+100";
+                document.getElementById('mobG1B').value = "-110";
+                document.getElementById('mobG2C').value = "+100";
+                document.getElementById('mobG2D').value = "-110";
+                document.getElementById('mobParlayOddsInput').value = "+400";
+                isMobUserCustomOdds = true;
+                calcMobDutching();
+            } else if (p === 'dk_3bet_boost') {
+                switchMobileTab('dutching');
+                setMobDutchBets(3);
+                document.getElementById('mobDutchInitialBet').value = "50";
+                document.getElementById('mobG1A').value = "+100";
+                document.getElementById('mobG1B').value = "-105";
+                document.getElementById('mobG2C').value = "+100";
+                document.getElementById('mobG2D').value = "-105";
+                document.getElementById('mobG3E').value = "+100";
+                document.getElementById('mobG3F').value = "-105";
+                document.getElementById('mobParlayOddsInput').value = "+1200";
+                isMobUserCustomOdds = true;
+                calcMobDutching();
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            calcMobSequential();
+        });
+    </script>
+</body>
+</html>

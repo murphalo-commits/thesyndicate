@@ -1,0 +1,273 @@
+<USER_REQUEST>
+Here's the code, it's an arbitrage calculator that I built:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arbitrage Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles to ensure inputs look good on all backgrounds */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto space-y-6">
+        
+        <!-- Header -->
+        <header class="flex items-center space-x-3 mb-8">
+            <div class="p-3 bg-blue-600 rounded-lg shadow-lg">
+                <!-- Calculator Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+            </div>
+            <div>
+                <h1 class="text-2xl font-bold text-slate-800">Arbitrage Calculator</h1>
+                <p class="text-slate-500">US Odds Converter & Stake Optimizer</p>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Input Section -->
+            <div class="lg:col-span-1 space-y-6">
+                
+                <!-- Total Stake Input -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h2 class="text-lg font-semibold mb-4 flex items-center">
+                        <!-- Dollar Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        Investment
+                    </h2>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">Total Stake ($)</label>
+                        <input type="number" id="totalStake" value="1000" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                    </div>
+                </div>
+
+                <!-- Odds Input -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h2 class="text-lg font-semibold mb-4 flex items-center">
+                        <!-- Trending Up Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                        Odds (US Format)
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">Outcome A (e.g., -110)</label>
+                            <input type="text" id="odds1" value="-110" placeholder="-110" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">Outcome B (e.g., +120)</label>
+                            <input type="text" id="odds2" value="+120" placeholder="+120" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="lg:col-span-2" id="resultsContainer">
+                <div class="space-y-6">
+                    
+                    <!-- Status Card -->
+                    <div id="statusCard" class="p-6 rounded-xl shadow-md border-l-4 flex items-start justify-between bg-emerald-50 border-emerald-500">
+                        <div>
+                            <h3 id="statusTitle" class="text-xl font-bold text-emerald-800">Arbitrage Opportunity Found!</h3>
+                            <p id="statusText" class="mt-1 text-emerald-600">Guaranteed profit calculated...</p>
+                        </div>
+                        <div id="statusIcon" class="p-3 rounded-full bg-emerald-200 text-emerald-700">
+                            <!-- Icon injected by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Stakes Breakdown -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+                            <h3 class="font-semibold text-slate-700">Betting Strategy</h3>
+                            <span id="marketPercent" class="text-sm text-slate-500">Total Market: --%</span>
+                        </div>
+                        
+                        <div class="divide-y divide-slate-100">
+                            <!-- Row 1 -->
+                            <div class="p-4 grid grid-cols-2 md:grid-cols-4 gap-4 items-center hover:bg-slate-50 transition">
+                                <div class="col-span-2 md:col-span-1">
+                                    <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Outcome A</span>
+                                    <div id="displayOdds1" class="font-bold text-lg text-slate-800">-110</div>
+                                    <div id="displayDec1" class="text-xs text-slate-500">Dec: --</div>
+                                </div>
+                                <div class="col-span-2 md:col-span-3 grid grid-cols-2 gap-4">
+                                    <div class="bg-blue-50 p-3 rounded-lg border border-blue-100">
+                                        <span class="block text-xs text-blue-600 font-semibold mb-1">Bet Amount</span>
+                                        <span id="stake1" class="block text-lg font-bold text-blue-900">$0.00</span>
+                                    </div>
+                                    <div class="p-3">
+                                        <span class="block text-xs text-slate-400 font-semibold mb-1">Win Payout</span>
+                                        <span id="payout1" class="block text-lg font-medium text-slate-700">$0.00</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 2 -->
+                            <div class="p-4 grid grid-cols-2 md:grid-cols-4 gap-4 items-center hover:bg-slate-50 transition">
+                                <div class="col-span-2 md:col-span-1">
+                                    <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Outcome B</span>
+                                    <div id="displayOdds2" class="font-bold text-lg text-slate-800">+120</div>
+                                    <div id="displayDec2" class="text-xs text-slate-500">Dec: --</div>
+                                </div>
+                                <div class="col-span-2 md:col-span-3 grid grid-cols-2 gap-4">
+                                    <div class="bg-blue-50 p-3 rounded-lg border border-blue-100">
+                                        <span class="block text-xs text-blue-600 font-semibold mb-1">Bet Amount</span>
+                                        <span id="stake2" class="block text-lg font-bold text-blue-900">$0.00</span>
+                                    </div>
+                                    <div class="p-3">
+                                        <span class="block text-xs text-slate-400 font-semibold mb-1">Win Payout</span>
+                                        <span id="payout2" class="block text-lg font-medium text-slate-700">$0.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="bg-slate-100 p-4 rounded-lg text-sm text-slate-600">
+                        <div class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 flex-shrink-0 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            <p><strong>How it works:</strong> We convert US odds to Decimal odds, calculate the "implied probability" of each outcome, and sum them up. If the sum is less than 100%, the bookmakers have priced the event inefficiently.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <!-- Empty State (Hidden by default) -->
+            <div id="emptyState" class="lg:col-span-2 hidden">
+                <div class="h-full flex flex-col items-center justify-center text-slate-400 p-12 bg-white rounded-xl border border-dashed border-slate-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mb-4 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+                    <p>Enter valid odds to see calculations</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Icons
+        const iconTrendingUp = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>';
+        const iconAlert = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
+
+        // Elements
+        const totalStakeInput = document.getElementById('totalStake');
+        const odds1Input = document.getElementById('odds1');
+        const odds2Input = document.getElementById('odds2');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const emptyState = document.getElementById('emptyState');
+
+        // Helpers
+        const usToDecimal = (usOdds) => {
+            const odds = parseFloat(usOdds);
+            if (isNaN(odds)) return 0;
+            if (odds > 0) return 1 + (odds / 100);
+            return 1 + (100 / Math.abs(odds));
+        };
+
+        const formatMoney = (amount) => {
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+        };
+
+        // Main Calculation Logic
+        const calculate = () => {
+            const totalStake = parseFloat(totalStakeInput.value) || 0;
+            const odds1Val = odds1Input.value;
+            const odds2Val = odds2Input.value;
+
+            const dec1 = usToDecimal(odds1Val);
+            const dec2 = usToDecimal(odds2Val);
+
+            // Display Logic
+            if (dec1 === 0 || dec2 === 0) {
+                resultsContainer.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            resultsContainer.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+
+            // Math Logic
+            const prob1 = 1 / dec1;
+            const prob2 = 1 / dec2;
+            const marketPercent = prob1 + prob2;
+            const isArb = marketPercent < 1;
+
+            const stake1 = (totalStake * prob1) / marketPercent;
+            const stake2 = (totalStake * prob2) / marketPercent;
+
+            const payout1 = stake1 * dec1;
+            const profit = payout1 - totalStake;
+            const roi = (profit / totalStake) * 100;
+
+            // Update DOM
+            document.getElementById('displayOdds1').innerText = odds1Val;
+            document.getElementById('displayOdds2').innerText = odds2Val;
+            document.getElementById('displayDec1').innerText = `Dec: ${dec1.toFixed(3)}`;
+            document.getElementById('displayDec2').innerText = `Dec: ${dec2.toFixed(3)}`;
+            
+            document.getElementById('marketPercent').innerText = `Total Market: ${(marketPercent * 100).toFixed(2)}%`;
+            
+            document.getElementById('stake1').innerText = formatMoney(stake1);
+            document.getElementById('stake2').innerText = formatMoney(stake2);
+            document.getElementById('payout1').innerText = formatMoney(stake1 * dec1);
+            document.getElementById('payout2').innerText = formatMoney(stake2 * dec2);
+
+            // Status Card Styling
+            const statusCard = document.getElementById('statusCard');
+            const statusTitle = document.getElementById('statusTitle');
+            const statusText = document.getElementById('statusText');
+            const statusIcon = document.getElementById('statusIcon');
+
+            if (isArb) {
+                // Arb Found (Green)
+                statusCard.className = "p-6 rounded-xl shadow-md border-l-4 flex items-start justify-between bg-emerald-50 border-emerald-500";
+                statusTitle.className = "text-xl font-bold text-emerald-800";
+                statusTitle.innerText = "Arbitrage Opportunity Found!";
+                statusText.className = "mt-1 text-emerald-600";
+                statusText.innerText = `Guaranteed profit of ${formatMoney(profit)} (${roi.toFixed(2)}% ROI)`;
+                statusIcon.className = "p-3 rounded-full bg-emerald-200 text-emerald-700";
+                statusIcon.innerHTML = iconTrendingUp;
+            } else {
+                // No Arb (Red)
+                statusCard.className = "p-6 rounded-xl shadow-md border-l-4 flex items-start justify-between bg-rose-50 border-rose-500";
+                statusTitle.className = "text-xl font-bold text-rose-800";
+                statusTitle.innerText = "No Arbitrage Opportunity";
+                statusText.className = "mt-1 text-rose-600";
+                statusText.innerText = `This bet results in a loss of ${formatMoney(Math.abs(profit))} (${roi.toFixed(2)}% ROI)`;
+                statusIcon.className = "p-3 rounded-full bg-rose-200 text-rose-700";
+                statusIcon.innerHTML = iconAlert;
+            }
+        };
+
+        // Listeners
+        [totalStakeInput, odds1Input, odds2Input].forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
+        // Init
+        calculate();
+
+    </script>
+</body>
+</html>
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-09-10T17:16:30-04:00.
+</ADDITIONAL_METADATA>

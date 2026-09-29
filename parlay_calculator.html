@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parlay Arbitrage & Hedging Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto space-y-6">
+        
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-4 border-b border-slate-200">
+            <div class="flex items-center space-x-3">
+                <div class="p-3 bg-indigo-600 rounded-xl shadow-md text-white">
+                    <!-- Split / Layers Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-slate-800">Parlay Arbitrage & Hedging Calculator</h1>
+                    <p class="text-slate-500 text-sm">Low-Capital Sequential Hedging & Multi-Game Dutching (2-Leg & 3-Leg)</p>
+                </div>
+            </div>
+
+            <!-- Quick Mode Tabs -->
+            <div class="flex bg-slate-200 p-1 rounded-xl text-sm font-medium self-start md:self-auto">
+                <button id="btnTabSequential" onclick="switchTab('sequential')" class="px-4 py-2 rounded-lg transition shadow-sm bg-white text-indigo-700 font-semibold">
+                    1. Sequential Hedge (Staggered)
+                </button>
+                <button id="btnTabDutching" onclick="switchTab('dutching')" class="px-4 py-2 rounded-lg transition text-slate-600 hover:text-slate-900">
+                    2. Parlay Dutching (Simultaneous)
+                </button>
+            </div>
+        </header>
+
+        <!-- Presets Bar -->
+        <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex flex-wrap items-center gap-2 text-xs">
+            <span class="font-semibold text-slate-500 uppercase tracking-wider mr-1">Quick Presets:</span>
+            <button onclick="loadPreset('nfl_staggered')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 rounded-lg transition">
+                🏈 2-Leg: 1pm Won &rarr; 4pm Hedge
+            </button>
+            <button onclick="loadPreset('nfl_3leg_staggered')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 rounded-lg transition">
+                🏆 3-Leg: Legs 1&2 Won &rarr; SNF Final Leg Hedge
+            </button>
+            <button onclick="loadPreset('dk_boost_arb')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 rounded-lg transition">
+                ⚡ 2-Bet Dutch: Promo Parlay @ +400
+            </button>
+            <button onclick="loadPreset('dk_3leg_boost_arb')" class="px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-200 rounded-lg transition">
+                🚀 3-Bet Dutch: Promo Parlay @ +1200
+            </button>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- TAB 1: SEQUENTIAL HEDGE (STAGGERED GAMES) -->
+        <!-- ========================================================================= -->
+        <div id="sectionSequential" class="space-y-6">
+            
+            <!-- Sub-selector for Sequential: 2-Leg vs 3-Leg -->
+            <div class="flex items-center justify-between bg-white p-3 rounded-xl border border-slate-200">
+                <div class="flex items-center space-x-2">
+                    <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Parlay Structure:</span>
+                    <div class="inline-flex bg-slate-100 p-0.5 rounded-lg text-xs font-semibold">
+                        <button type="button" id="btnSeq2Leg" onclick="setSeqLegCount(2)" class="px-3 py-1 rounded-md bg-white text-indigo-700 shadow-xs">
+                            2-Leg Parlay
+                        </button>
+                        <button type="button" id="btnSeq3Leg" onclick="setSeqLegCount(3)" class="px-3 py-1 rounded-md text-slate-600 hover:text-slate-900">
+                            3-Leg Parlay
+                        </button>
+                    </div>
+                </div>
+                <div id="seqStageIndicator" class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
+                    Leg 1 Won &bull; Hedging Pending Leg 2
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- Inputs Column -->
+                <div class="lg:col-span-1 space-y-5">
+                    
+                    <!-- Parlay Ticket Details -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between border-b pb-3">
+                            <h2 class="text-base font-semibold text-slate-800 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                Original Parlay Ticket
+                            </h2>
+                            <span id="seqBadgeLegsWon" class="px-2 py-0.5 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-800">
+                                Leg 1 WON
+                            </span>
+                        </div>
+
+                        <!-- 3-Leg Stage Selector (only visible in 3-leg mode) -->
+                        <div id="seq3LegStageWrapper" class="hidden">
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Current Ticket Status</label>
+                            <select id="seq3LegStage" onchange="onSeq3LegStageChange()" class="w-full p-2 border border-indigo-200 bg-indigo-50/50 rounded-lg text-xs font-semibold text-indigo-900 outline-none">
+                                <option value="final_leg">Legs 1 & 2 WON &rarr; Hedging Final Leg 3</option>
+                                <option value="rolling">Leg 1 WON &rarr; Rolling Hedge (Leg 2 then Leg 3)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Ticket Stake ($)</label>
+                            <input type="number" id="seqStake" value="50" min="1" step="1" oninput="calcSequential()" class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Potential Total Payout ($)</label>
+                            <input type="number" id="seqPayout" value="200" min="1" step="1" oninput="calcSequential()" class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+                            <p class="text-[11px] text-slate-400 mt-1">Total cash returned if entire parlay hits (Stake + Winnings)</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Bet Type</label>
+                            <select id="seqBetType" onchange="calcSequential()" class="w-full p-2.5 border border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
+                                <option value="cash">Cash Wager (Risking Stake)</option>
+                                <option value="bonus">Bonus Bet / Free Bet (SNR - Stake Not Returned)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Final Leg Hedge Details -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                        <h2 id="seqHedgeBoxHeader" class="text-base font-semibold text-slate-800 flex items-center border-b pb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            Final Pending Leg Hedge
+                        </h2>
+
+                        <div>
+                            <label id="seqOppOddsLabel" class="block text-xs font-medium text-slate-600 mb-1">Opponent Hedge Odds (US / American)</label>
+                            <div class="relative">
+                                <input type="text" id="seqOppOdds" value="+110" oninput="calcSequential()" class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none font-mono">
+                                <span id="seqOppDecLabel" class="absolute right-3 top-2.5 text-xs text-slate-400 font-mono">2.10 dec</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 mt-1">Odds of the opposing team (e.g. on Novig or other book)</p>
+                        </div>
+
+                        <!-- Hedge Strategy -->
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Hedging Strategy</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button type="button" id="stratEqual" onclick="setSeqStrategy('equal_profit')" class="p-2 border border-indigo-600 bg-indigo-50 text-indigo-700 text-xs font-semibold rounded-lg text-center">
+                                    ⚖️ Equal Profit
+                                </button>
+                                <button type="button" id="stratFreeroll" onclick="setSeqStrategy('freeroll')" class="p-2 border border-slate-200 text-slate-600 text-xs font-medium rounded-lg text-center hover:bg-slate-50">
+                                    🛡️ Freeroll / Zero Risk
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Slider -->
+                        <div id="sliderWrapper" class="pt-2">
+                            <div class="flex justify-between text-xs text-slate-500 mb-1">
+                                <span>Hedge Intensity</span>
+                                <span id="hedgePercentLabel" class="font-semibold text-indigo-600">100%</span>
+                            </div>
+                            <input type="range" id="seqSlider" min="0" max="100" value="100" step="5" oninput="onSeqSliderChange()" class="w-full accent-indigo-600">
+                            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                <span>0% (Let it ride)</span>
+                                <span>50% (Partial)</span>
+                                <span>100% (Equal)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Results Column -->
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- Callout Card -->
+                    <div id="seqCalloutCard" class="p-6 rounded-xl shadow-md border-l-4 bg-emerald-50 border-emerald-500 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span id="seqBadge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-200 text-emerald-800">
+                                    GUARANTEED EQUAL PROFIT
+                                </span>
+                                <span id="seqRoiBadge" class="text-xs font-bold text-emerald-700">
+                                    +37.7% ROI
+                                </span>
+                            </div>
+                            <h3 id="seqHeaderProfit" class="text-3xl font-extrabold text-emerald-900 mt-2">
+                                +$54.76
+                            </h3>
+                            <p id="seqSummaryText" class="text-sm text-emerald-700 mt-1">
+                                Place a <strong>$95.24</strong> hedge bet on the opponent to guarantee identical profit.
+                            </p>
+                        </div>
+
+                        <div class="bg-white/80 backdrop-blur p-4 rounded-xl border border-emerald-200 text-right min-w-[180px]">
+                            <span class="text-xs text-slate-500 uppercase tracking-wider block">Recommended Hedge</span>
+                            <span id="seqHedgeStakeDisplay" class="text-2xl font-bold text-indigo-600 block">$95.24</span>
+                            <span id="seqHedgeOddsDisplay" class="text-xs text-slate-500 font-mono">@ +110 Odds</span>
+                        </div>
+                    </div>
+
+                    <!-- Outcome Comparison Matrix -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+                            <h3 class="font-semibold text-slate-800 text-sm">Outcome Scenario Breakdown</h3>
+                            <span id="seqTotalCapitalDisplay" class="text-xs text-slate-500">Total Capital Committed: <strong>$145.24</strong></span>
+                        </div>
+
+                        <div class="divide-y divide-slate-100">
+                            
+                            <!-- Scenario 1 -->
+                            <div class="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-slate-50/60 transition">
+                                <div class="space-y-1">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="w-3 h-3 rounded-full bg-indigo-600"></span>
+                                        <h4 class="font-bold text-slate-800">Scenario A: Original Parlay Wins</h4>
+                                    </div>
+                                    <p class="text-xs text-slate-500">Your final parlay leg covers. Parlay pays out; hedge bet loses.</p>
+                                    <div class="text-xs text-slate-600 pt-1 font-mono">
+                                        Payout: <span id="scenAPayout" class="text-slate-800 font-semibold">$200.00</span> 
+                                        &bull; Hedge Cost: <span id="scenAHedgeCost" class="text-rose-600 font-semibold">-$95.24</span>
+                                        &bull; Orig Stake: <span id="scenAOrigStake" class="text-slate-500">-$50.00</span>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs text-slate-400 uppercase">Net Profit</span>
+                                    <div id="scenANetProfit" class="text-2xl font-bold text-emerald-600">+$54.76</div>
+                                    <span id="scenARoi" class="text-xs font-medium text-emerald-700">+37.7% ROI</span>
+                                </div>
+                            </div>
+
+                            <!-- Scenario 2 -->
+                            <div class="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-slate-50/60 transition">
+                                <div class="space-y-1">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                                        <h4 class="font-bold text-slate-800">Scenario B: Hedge Wins (Parlay Loses)</h4>
+                                    </div>
+                                    <p class="text-xs text-slate-500">Final leg fails. Your hedge bet covers the loss and yields profit.</p>
+                                    <div class="text-xs text-slate-600 pt-1 font-mono">
+                                        Hedge Payout: <span id="scenBPayout" class="text-slate-800 font-semibold">$200.00</span> 
+                                        &bull; Hedge Cost: <span id="scenBHedgeCost" class="text-rose-600 font-semibold">-$95.24</span>
+                                        &bull; Orig Stake: <span id="scenBOrigStake" class="text-slate-500">-$50.00</span>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs text-slate-400 uppercase">Net Profit</span>
+                                    <div id="scenBNetProfit" class="text-2xl font-bold text-emerald-600">+$54.76</div>
+                                    <span id="scenBRoi" class="text-xs font-medium text-emerald-700">+37.7% ROI</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Step-by-Step Instructions -->
+                    <div class="bg-indigo-50/60 p-5 rounded-xl border border-indigo-100 space-y-2 text-xs text-slate-700">
+                        <h4 class="font-semibold text-indigo-950 flex items-center text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1.5 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            Execution Checklist
+                        </h4>
+                        <ol class="list-decimal list-inside space-y-1 text-slate-600">
+                            <li id="step1Text">Verify that your early leg(s) have officially settled as <strong>WON</strong>.</li>
+                            <li>Go to an exchange like <strong>Novig</strong> or your best-priced alternate book for the pending game.</li>
+                            <li>Place exactly <strong id="stepHedgeStake" class="text-indigo-700 font-mono">$95.24</strong> on the opposing team at <strong id="stepHedgeOdds" class="text-indigo-700 font-mono">+110</strong>.</li>
+                            <li>Regardless of which team wins the game, you collect your profit!</li>
+                        </ol>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- TAB 2: PARLAY DUTCHING (SIMULTANEOUS GAMES: 2-BET OR 3-BET) -->
+        <!-- ========================================================================= -->
+        <div id="sectionDutching" class="hidden space-y-6">
+            
+            <!-- Sub-selector for Dutching: 2 Bets (4 Combos) vs 3 Bets (8 Combos) -->
+            <div class="flex items-center justify-between bg-white p-3 rounded-xl border border-slate-200">
+                <div class="flex items-center space-x-2">
+                    <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Number of Bets / Games:</span>
+                    <div class="inline-flex bg-slate-100 p-0.5 rounded-lg text-xs font-semibold">
+                        <button type="button" id="btnDutch2Game" onclick="setDutchBetCount(2)" class="px-3 py-1 rounded-md bg-white text-indigo-700 shadow-xs">
+                            2 Bets (4 Combinations)
+                        </button>
+                        <button type="button" id="btnDutch3Game" onclick="setDutchBetCount(3)" class="px-3 py-1 rounded-md text-slate-600 hover:text-slate-900">
+                            3 Bets (8 Combinations)
+                        </button>
+                    </div>
+                </div>
+                <div id="dutchCombosIndicator" class="text-xs font-semibold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-200">
+                    Covering 4 Permutations
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- Inputs Column -->
+                <div class="lg:col-span-1 space-y-5">
+                    
+                    <!-- Initial Parlay Bet Input -->
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <h2 class="text-sm font-semibold text-slate-800 mb-2 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                            Initial Parlay Bet ($)
+                        </h2>
+                        <label class="block text-xs font-medium text-slate-600 mb-1">Ticket 1 Wager Stake</label>
+                        <input type="number" id="dutchInitialBet" value="50" min="1" step="5" oninput="calcDutching()" class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none font-bold text-slate-800">
+                        <p class="text-[11px] text-slate-400 mt-1">Stake placed on your primary promotional parlay (Ticket 1)</p>
+                    </div>
+
+                    <!-- Ticket 1 Parlay Odds Input Box -->
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-indigo-200 bg-indigo-50/20 space-y-3">
+                        <div class="flex items-center justify-between border-b border-indigo-100 pb-2">
+                            <h2 class="text-sm font-semibold text-indigo-950 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1.5 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                                Parlay Odds (Ticket 1)
+                            </h2>
+                            <span id="naturalOddsBadge" class="text-[10px] font-mono text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200">Fair: +282</span>
+                        </div>
+                        <div>
+                            <label id="parlayOddsLabel" class="block text-xs font-medium text-slate-700 mb-1">Boosted / Promo Odds (American +/-)</label>
+                            <div class="relative">
+                                <input type="text" id="parlayOddsInput" value="+400" oninput="onParlayOddsUserEdit()" class="w-full p-2.5 border border-indigo-300 bg-white rounded-lg font-mono font-bold text-base text-indigo-900 focus:ring-2 focus:ring-indigo-500 outline-none">
+                                <button type="button" onclick="resetToNaturalOdds()" title="Reset to natural compound odds from games below" class="absolute right-2 top-2.5 px-2 py-0.5 bg-slate-100 hover:bg-indigo-100 text-indigo-700 rounded text-[10px] font-semibold">
+                                    Auto-Sync
+                                </button>
+                            </div>
+                            <p class="text-[11px] text-slate-400 mt-1">Enter the actual boosted or promo odds your sportsbook is offering.</p>
+                        </div>
+                    </div>
+
+                    <!-- Game 1 Odds -->
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-3">
+                        <h2 class="text-sm font-semibold text-slate-800 flex items-center justify-between border-b pb-2">
+                            <span>Game 1: Side A vs Side B</span>
+                            <span class="text-[10px] text-slate-400 uppercase">2-Way Market</span>
+                        </h2>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600 mb-1">Side A (e.g. +100)</label>
+                                <input type="text" id="g1A" value="+100" oninput="onGameOddsChange()" class="w-full p-2 border border-slate-300 rounded-lg font-mono text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600 mb-1">Side B (e.g. -110)</label>
+                                <input type="text" id="g1B" value="-110" oninput="onGameOddsChange()" class="w-full p-2 border border-slate-300 rounded-lg font-mono text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Game 2 Odds -->
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-3">
+                        <h2 class="text-sm font-semibold text-slate-800 flex items-center justify-between border-b pb-2">
+                            <span>Game 2: Side C vs Side D</span>
+                            <span class="text-[10px] text-slate-400 uppercase">2-Way Market</span>
+                        </h2>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600 mb-1">Side C (e.g. +100)</label>
+                                <input type="text" id="g2C" value="+100" oninput="onGameOddsChange()" class="w-full p-2 border border-slate-300 rounded-lg font-mono text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600 mb-1">Side D (e.g. -110)</label>
+                                <input type="text" id="g2D" value="-110" oninput="onGameOddsChange()" class="w-full p-2 border border-slate-300 rounded-lg font-mono text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Game 3 Odds (Only shown when 3 Bets is selected) -->
+                    <div id="game3Wrapper" class="hidden bg-white p-5 rounded-xl shadow-sm border border-indigo-200 space-y-3">
+                        <h2 class="text-sm font-semibold text-indigo-900 flex items-center justify-between border-b pb-2">
+                            <span>Game 3: Side E vs Side F</span>
+                            <span class="text-[10px] font-bold text-indigo-600 uppercase bg-indigo-50 px-1.5 py-0.5 rounded">3rd Bet Added</span>
+                        </h2>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600 mb-1">Side E (e.g. +100)</label>
+                                <input type="text" id="g3E" value="+100" oninput="onGameOddsChange()" class="w-full p-2 border border-slate-300 rounded-lg font-mono text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600 mb-1">Side F (e.g. -105)</label>
+                                <input type="text" id="g3F" value="-105" oninput="onGameOddsChange()" class="w-full p-2 border border-slate-300 rounded-lg font-mono text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Results Column -->
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- Callout Card -->
+                    <div id="dutchCalloutCard" class="p-6 rounded-xl shadow-md border-l-4 bg-emerald-50 border-emerald-500 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span id="dutchBadge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-200 text-emerald-800">
+                                    PARLAY ARBITRAGE FOUND
+                                </span>
+                                <span id="dutchRoiBadge" class="text-xs font-bold text-emerald-700">
+                                    +5.4% ROI
+                                </span>
+                            </div>
+                            <h3 id="dutchHeaderProfit" class="text-3xl font-extrabold text-emerald-900 mt-2">
+                                +$54.20
+                            </h3>
+                            <p id="dutchSummaryText" class="text-sm text-emerald-700 mt-1">
+                                Guaranteed profit across all mutually exclusive combinations.
+                            </p>
+                        </div>
+
+                        <div class="bg-white/80 backdrop-blur p-4 rounded-xl border border-emerald-200 text-right min-w-[170px]">
+                            <span class="text-xs text-slate-500 uppercase tracking-wider block">Total Outlay</span>
+                            <span id="dutchTotalOutlayDisplay" class="text-2xl font-bold text-slate-800 block">$285.50</span>
+                            <span id="dutchHedgeCostDisplay" class="text-xs text-indigo-600 font-semibold font-mono">+$235.50 in Hedges</span>
+                        </div>
+                    </div>
+
+                    <!-- Tickets Staking Breakdown -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+                            <h3 id="dutchTableTitle" class="font-semibold text-slate-800 text-sm">4-Way Ticket Staking Plan</h3>
+                            <span id="dutchTableSub" class="text-xs text-slate-500">Cover all 4 outcomes</span>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm">
+                                <thead class="bg-slate-50 text-slate-500 text-xs uppercase border-b border-slate-200">
+                                    <tr>
+                                        <th class="py-3 px-4">Ticket</th>
+                                        <th class="py-3 px-4">Parlay Combination</th>
+                                        <th class="py-3 px-4">Odds</th>
+                                        <th class="py-3 px-4">Target Stake</th>
+                                        <th class="py-3 px-4 text-right">Net Return</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dutchTicketsBody" class="divide-y divide-slate-100">
+                                    <!-- Injected by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Helpful Explainer -->
+                    <div class="bg-slate-100 p-4 rounded-xl border border-slate-200 text-xs text-slate-600 space-y-1.5">
+                        <span class="font-bold text-slate-800 uppercase tracking-wider block">How Initial Bet & Parlay Odds Dutching Works:</span>
+                        <p>
+                            &bull; <strong>Initial Parlay Bet:</strong> Enter the exact amount you bet on your primary promo ticket (e.g. $50 max promo wager).<br>
+                            &bull; <strong>Parlay Odds Box:</strong> Enter the boosted or promotional odds your sportsbook gives you on Ticket 1.<br>
+                            &bull; <strong>Automatic Hedge Sizing:</strong> The calculator determines the exact hedge stakes for the other combinations so that whichever outcome wins, the gross payout covers all tickets and locks in guaranteed profit!
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Common Helper Functions
+        const formatMoney = (amount) => {
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+        };
+
+        const usToDecimal = (usOdds) => {
+            const odds = parseFloat(usOdds);
+            if (isNaN(odds) || odds === 0) return 0;
+            if (odds > 0) return 1 + (odds / 100);
+            return 1 + (100 / Math.abs(odds));
+        };
+
+        const decimalToUs = (dec) => {
+            if (!dec || dec <= 1) return "";
+            if (dec >= 2.0) {
+                return "+" + Math.round((dec - 1) * 100);
+            } else {
+                return Math.round(-100 / (dec - 1)).toString();
+            }
+        };
+
+        // Tab Switching
+        function switchTab(tab) {
+            const secSeq = document.getElementById('sectionSequential');
+            const secDutch = document.getElementById('sectionDutching');
+            const btnSeq = document.getElementById('btnTabSequential');
+            const btnDutch = document.getElementById('btnTabDutching');
+
+            if (tab === 'sequential') {
+                secSeq.classList.remove('hidden');
+                secDutch.classList.add('hidden');
+                btnSeq.className = "px-4 py-2 rounded-lg transition shadow-sm bg-white text-indigo-700 font-semibold";
+                btnDutch.className = "px-4 py-2 rounded-lg transition text-slate-600 hover:text-slate-900";
+                calcSequential();
+            } else {
+                secSeq.classList.add('hidden');
+                secDutch.classList.remove('hidden');
+                btnDutch.className = "px-4 py-2 rounded-lg transition shadow-sm bg-white text-indigo-700 font-semibold";
+                btnSeq.className = "px-4 py-2 rounded-lg transition text-slate-600 hover:text-slate-900";
+                calcDutching();
+            }
+        }
+
+        // =========================================================================
+        // SEQUENTIAL HEDGE LOGIC
+        // =========================================================================
+        let currentSeqStrategy = 'equal_profit';
+        let seqLegCount = 2;
+
+        function setSeqLegCount(count) {
+            seqLegCount = count;
+            const btn2 = document.getElementById('btnSeq2Leg');
+            const btn3 = document.getElementById('btnSeq3Leg');
+            const stageIndicator = document.getElementById('seqStageIndicator');
+            const stageWrapper = document.getElementById('seq3LegStageWrapper');
+            const badgeWon = document.getElementById('seqBadgeLegsWon');
+
+            if (count === 2) {
+                btn2.className = "px-3 py-1 rounded-md bg-white text-indigo-700 shadow-xs";
+                btn3.className = "px-3 py-1 rounded-md text-slate-600 hover:text-slate-900";
+                stageWrapper.classList.add('hidden');
+                stageIndicator.innerText = "Leg 1 Won • Hedging Pending Leg 2";
+                badgeWon.innerText = "Leg 1 WON";
+                badgeWon.className = "px-2 py-0.5 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-800";
+                document.getElementById('step1Text').innerHTML = "Verify that Leg 1 has officially settled as <strong>WON</strong>.";
+            } else {
+                btn3.className = "px-3 py-1 rounded-md bg-white text-indigo-700 shadow-xs";
+                btn2.className = "px-3 py-1 rounded-md text-slate-600 hover:text-slate-900";
+                stageWrapper.classList.remove('hidden');
+                badgeWon.innerText = "Legs 1 & 2 WON";
+                badgeWon.className = "px-2 py-0.5 text-xs font-semibold rounded-full bg-purple-100 text-purple-800";
+                onSeq3LegStageChange();
+            }
+            calcSequential();
+        }
+
+        function onSeq3LegStageChange() {
+            const stage = document.getElementById('seq3LegStage').value;
+            const stageIndicator = document.getElementById('seqStageIndicator');
+            const badgeWon = document.getElementById('seqBadgeLegsWon');
+
+            if (stage === 'final_leg') {
+                stageIndicator.innerText = "Legs 1 & 2 Won • Hedging Final Leg 3";
+                badgeWon.innerText = "Legs 1 & 2 WON";
+                document.getElementById('step1Text').innerHTML = "Verify that Legs 1 and 2 have both settled as <strong>WON</strong>.";
+            } else {
+                stageIndicator.innerText = "Leg 1 Won • Step-by-Step Rolling Hedge";
+                badgeWon.innerText = "Leg 1 WON (2 Pending)";
+                document.getElementById('step1Text').innerHTML = "Leg 1 is WON. Hedge Leg 2 now, then hedge Leg 3 once Leg 2 covers.";
+            }
+            calcSequential();
+        }
+
+        function setSeqStrategy(strat) {
+            currentSeqStrategy = strat;
+            const btnEqual = document.getElementById('stratEqual');
+            const btnFree = document.getElementById('stratFreeroll');
+            const slider = document.getElementById('seqSlider');
+
+            if (strat === 'equal_profit') {
+                btnEqual.className = "p-2 border border-indigo-600 bg-indigo-50 text-indigo-700 text-xs font-semibold rounded-lg text-center";
+                btnFree.className = "p-2 border border-slate-200 text-slate-600 text-xs font-medium rounded-lg text-center hover:bg-slate-50";
+                slider.value = 100;
+                document.getElementById('hedgePercentLabel').innerText = "100%";
+            } else {
+                btnFree.className = "p-2 border border-indigo-600 bg-indigo-50 text-indigo-700 text-xs font-semibold rounded-lg text-center";
+                btnEqual.className = "p-2 border border-slate-200 text-slate-600 text-xs font-medium rounded-lg text-center hover:bg-slate-50";
+            }
+            calcSequential();
+        }
+
+        function onSeqSliderChange() {
+            const val = document.getElementById('seqSlider').value;
+            document.getElementById('hedgePercentLabel').innerText = val + "%";
+            calcSequential();
+        }
+
+        function calcSequential() {
+            const stake = parseFloat(document.getElementById('seqStake').value) || 0;
+            const payout = parseFloat(document.getElementById('seqPayout').value) || 0;
+            const betType = document.getElementById('seqBetType').value;
+            const oppOddsRaw = document.getElementById('seqOppOdds').value.trim();
+            const decOpp = usToDecimal(oppOddsRaw);
+
+            document.getElementById('seqOppDecLabel').innerText = decOpp > 1 ? decOpp.toFixed(2) + " dec" : "--";
+
+            if (payout <= 0 || decOpp <= 1) return;
+
+            const cashRisk = (betType === 'cash') ? stake : 0;
+            const sliderPct = (parseFloat(document.getElementById('seqSlider').value) || 100) / 100;
+
+            const hedgeEqual = payout / decOpp;
+            const hedgeFreeroll = (decOpp > 1 && cashRisk > 0) ? (cashRisk / (decOpp - 1)) : 0;
+
+            let finalHedgeStake = 0;
+            if (currentSeqStrategy === 'equal_profit') {
+                finalHedgeStake = hedgeEqual * sliderPct;
+            } else if (currentSeqStrategy === 'freeroll') {
+                finalHedgeStake = hedgeFreeroll;
+            }
+
+            finalHedgeStake = Math.round(finalHedgeStake * 100) / 100;
+
+            const scenAPayout = payout;
+            const scenANet = scenAPayout - cashRisk - finalHedgeStake;
+
+            const scenBPayout = finalHedgeStake * decOpp;
+            const scenBNet = scenBPayout - cashRisk - finalHedgeStake;
+
+            const totalCapital = cashRisk + finalHedgeStake;
+            const minProfit = Math.min(scenANet, scenBNet);
+            const roiPct = totalCapital > 0 ? ((minProfit / totalCapital) * 100) : 0;
+
+            document.getElementById('seqHedgeStakeDisplay').innerText = formatMoney(finalHedgeStake);
+            document.getElementById('seqHedgeOddsDisplay').innerText = "@ " + (oppOddsRaw.startsWith('+') || oppOddsRaw.startsWith('-') ? oppOddsRaw : "+" + oppOddsRaw);
+            document.getElementById('stepHedgeStake').innerText = formatMoney(finalHedgeStake);
+            document.getElementById('stepHedgeOdds').innerText = oppOddsRaw;
+
+            document.getElementById('scenAPayout').innerText = formatMoney(scenAPayout);
+            document.getElementById('scenAHedgeCost').innerText = "-" + formatMoney(finalHedgeStake);
+            document.getElementById('scenAOrigStake').innerText = "-" + formatMoney(cashRisk);
+            document.getElementById('scenANetProfit').innerText = (scenANet >= 0 ? "+" : "") + formatMoney(scenANet);
+            document.getElementById('scenARoi').innerText = (scenANet >= 0 ? "+" : "") + (totalCapital > 0 ? (scenANet / totalCapital * 100).toFixed(1) : 0) + "% ROI";
+
+            document.getElementById('scenBPayout').innerText = formatMoney(scenBPayout);
+            document.getElementById('scenBHedgeCost').innerText = "-" + formatMoney(finalHedgeStake);
+            document.getElementById('scenBOrigStake').innerText = "-" + formatMoney(cashRisk);
+            document.getElementById('scenBNetProfit').innerText = (scenBNet >= 0 ? "+" : "") + formatMoney(scenBNet);
+            document.getElementById('scenBRoi').innerText = (scenBNet >= 0 ? "+" : "") + (totalCapital > 0 ? (scenBNet / totalCapital * 100).toFixed(1) : 0) + "% ROI";
+
+            document.getElementById('seqTotalCapitalDisplay').innerHTML = `Total Capital Committed: <strong>${formatMoney(totalCapital)}</strong>`;
+
+            const card = document.getElementById('seqCalloutCard');
+            const headerProfit = document.getElementById('seqHeaderProfit');
+            const summaryText = document.getElementById('seqSummaryText');
+            const badge = document.getElementById('seqBadge');
+            const roiBadge = document.getElementById('seqRoiBadge');
+
+            if (currentSeqStrategy === 'equal_profit' && sliderPct === 1) {
+                card.className = "p-6 rounded-xl shadow-md border-l-4 bg-emerald-50 border-emerald-500 flex flex-col md:flex-row items-start md:items-center justify-between gap-4";
+                badge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-200 text-emerald-800";
+                badge.innerText = "GUARANTEED EQUAL PROFIT";
+                headerProfit.className = "text-3xl font-extrabold text-emerald-900 mt-2";
+                headerProfit.innerText = "+" + formatMoney(minProfit);
+                roiBadge.className = "text-xs font-bold text-emerald-700";
+                roiBadge.innerText = (roiPct >= 0 ? "+" : "") + roiPct.toFixed(1) + "% ROI";
+                summaryText.className = "text-sm text-emerald-700 mt-1";
+                summaryText.innerHTML = `Place a <strong>${formatMoney(finalHedgeStake)}</strong> hedge bet to lock in <strong>${formatMoney(minProfit)}</strong> profit regardless of who wins!`;
+            } else if (currentSeqStrategy === 'freeroll') {
+                card.className = "p-6 rounded-xl shadow-md border-l-4 bg-blue-50 border-blue-500 flex flex-col md:flex-row items-start md:items-center justify-between gap-4";
+                badge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-200 text-blue-800";
+                badge.innerText = "ZERO RISK FREEROLL";
+                headerProfit.className = "text-3xl font-extrabold text-blue-900 mt-2";
+                headerProfit.innerText = "+" + formatMoney(scenANet) + " / " + formatMoney(scenBNet);
+                roiBadge.className = "text-xs font-bold text-blue-700";
+                roiBadge.innerText = "Risk-Free";
+                summaryText.className = "text-sm text-blue-700 mt-1";
+                summaryText.innerHTML = `Betting <strong>${formatMoney(finalHedgeStake)}</strong> guarantees you lose $0 if the hedge wins, and profit <strong>${formatMoney(scenANet)}</strong> if the parlay hits!`;
+            } else {
+                card.className = "p-6 rounded-xl shadow-md border-l-4 bg-indigo-50 border-indigo-500 flex flex-col md:flex-row items-start md:items-center justify-between gap-4";
+                badge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-200 text-indigo-800";
+                badge.innerText = `PARTIAL HEDGE (${Math.round(sliderPct * 100)}%)`;
+                headerProfit.className = "text-3xl font-extrabold text-indigo-900 mt-2";
+                headerProfit.innerText = `+${formatMoney(scenANet)} / +${formatMoney(scenBNet)}`;
+                roiBadge.innerText = "";
+                summaryText.className = "text-sm text-indigo-700 mt-1";
+                summaryText.innerHTML = `Custom hedge dialed to <strong>${Math.round(sliderPct * 100)}%</strong>.`;
+            }
+        }
+
+        // =========================================================================
+        // PARLAY DUTCHING LOGIC (INITIAL BET & PARLAY ODDS BOX)
+        // =========================================================================
+        let dutchBetCount = 2;
+        let isUserCustomParlayOdds = false;
+
+        function setDutchBetCount(count) {
+            dutchBetCount = count;
+            const btn2 = document.getElementById('btnDutch2Game');
+            const btn3 = document.getElementById('btnDutch3Game');
+            const g3Wrapper = document.getElementById('game3Wrapper');
+            const combosIndicator = document.getElementById('dutchCombosIndicator');
+            const tableTitle = document.getElementById('dutchTableTitle');
+            const tableSub = document.getElementById('dutchTableSub');
+            const parlayLabel = document.getElementById('parlayOddsLabel');
+
+            if (count === 2) {
+                btn2.className = "px-3 py-1 rounded-md bg-white text-indigo-700 shadow-xs";
+                btn3.className = "px-3 py-1 rounded-md text-slate-600 hover:text-slate-900";
+                g3Wrapper.classList.add('hidden');
+                combosIndicator.innerText = "Covering 4 Permutations";
+                tableTitle.innerText = "4-Way Ticket Staking Plan";
+                tableSub.innerText = "Cover all 4 outcomes";
+                parlayLabel.innerText = "Ticket 1 (A + C) Promo Odds (American +/-)";
+            } else {
+                btn3.className = "px-3 py-1 rounded-md bg-white text-indigo-700 shadow-xs";
+                btn2.className = "px-3 py-1 rounded-md text-slate-600 hover:text-slate-900";
+                g3Wrapper.classList.remove('hidden');
+                combosIndicator.innerText = "Covering 8 Permutations (3 Bets)";
+                tableTitle.innerText = "8-Way Ticket Staking Plan (3 Bets)";
+                tableSub.innerText = "Cover all 8 combinations";
+                parlayLabel.innerText = "Ticket 1 (A + C + E) Promo Odds (American +/-)";
+            }
+            updateNaturalOddsDisplay();
+            calcDutching();
+        }
+
+        function onParlayOddsUserEdit() {
+            isUserCustomParlayOdds = true;
+            calcDutching();
+        }
+
+        function onGameOddsChange() {
+            updateNaturalOddsDisplay();
+            if (!isUserCustomParlayOdds) {
+                resetToNaturalOdds();
+            } else {
+                calcDutching();
+            }
+        }
+
+        function getNaturalOddsDecimal() {
+            const dec1A = usToDecimal(document.getElementById('g1A').value);
+            const dec2C = usToDecimal(document.getElementById('g2C').value);
+            if (dutchBetCount === 2) {
+                return dec1A * dec2C;
+            } else {
+                const dec3E = usToDecimal(document.getElementById('g3E').value);
+                return dec1A * dec2C * dec3E;
+            }
+        }
+
+        function updateNaturalOddsDisplay() {
+            const naturalDec = getNaturalOddsDecimal();
+            const badge = document.getElementById('naturalOddsBadge');
+            if (naturalDec > 1) {
+                badge.innerText = `Fair: ${decimalToUs(naturalDec)} (${naturalDec.toFixed(2)}x)`;
+            } else {
+                badge.innerText = "Fair: --";
+            }
+        }
+
+        function resetToNaturalOdds() {
+            const naturalDec = getNaturalOddsDecimal();
+            if (naturalDec > 1) {
+                document.getElementById('parlayOddsInput').value = decimalToUs(naturalDec);
+                isUserCustomParlayOdds = false;
+                calcDutching();
+            }
+        }
+
+        function calcDutching() {
+            const initialBet = parseFloat(document.getElementById('dutchInitialBet').value) || 0;
+            const dec1A = usToDecimal(document.getElementById('g1A').value);
+            const dec1B = usToDecimal(document.getElementById('g1B').value);
+            const dec2C = usToDecimal(document.getElementById('g2C').value);
+            const dec2D = usToDecimal(document.getElementById('g2D').value);
+            const parlayOddsRaw = document.getElementById('parlayOddsInput').value.trim();
+            const decT1 = usToDecimal(parlayOddsRaw);
+
+            updateNaturalOddsDisplay();
+
+            if (dec1A <= 1 || dec1B <= 1 || dec2C <= 1 || dec2D <= 1 || decT1 <= 1 || initialBet <= 0) {
+                return;
+            }
+
+            let tickets = [];
+
+            if (dutchBetCount === 2) {
+                let decAD = dec1A * dec2D;
+                let decBC = dec1B * dec2C;
+                let decBD = dec1B * dec2D;
+
+                tickets = [
+                    { id: 1, name: "Side A + Side C", dec: decT1, isPrimary: true },
+                    { id: 2, name: "Side A + Side D", dec: decAD, isPrimary: false },
+                    { id: 3, name: "Side B + Side C", dec: decBC, isPrimary: false },
+                    { id: 4, name: "Side B + Side D", dec: decBD, isPrimary: false }
+                ];
+            } else {
+                const dec3E = usToDecimal(document.getElementById('g3E').value);
+                const dec3F = usToDecimal(document.getElementById('g3F').value);
+                if (dec3E <= 1 || dec3F <= 1) return;
+
+                let decACF = dec1A * dec2C * dec3F;
+                let decADE = dec1A * dec2D * dec3E;
+                let decADF = dec1A * dec2D * dec3F;
+                let decBCE = dec1B * dec2C * dec3E;
+                let decBCF = dec1B * dec2C * dec3F;
+                let decBDE = dec1B * dec2D * dec3E;
+                let decBDF = dec1B * dec2D * dec3F;
+
+                tickets = [
+                    { id: 1, name: "Side A + Side C + Side E", dec: decT1, isPrimary: true },
+                    { id: 2, name: "Side A + Side C + Side F", dec: decACF, isPrimary: false },
+                    { id: 3, name: "Side A + Side D + Side E", dec: decADE, isPrimary: false },
+                    { id: 4, name: "Side A + Side D + Side F", dec: decADF, isPrimary: false },
+                    { id: 5, name: "Side B + Side C + Side E", dec: decBCE, isPrimary: false },
+                    { id: 6, name: "Side B + Side C + Side F", dec: decBCF, isPrimary: false },
+                    { id: 7, name: "Side B + Side D + Side E", dec: decBDE, isPrimary: false },
+                    { id: 8, name: "Side B + Side D + Side F", dec: decBDF, isPrimary: false }
+                ];
+            }
+
+            // Ticket 1 target payout = initialBet * decT1
+            const targetPayout = initialBet * decT1;
+
+            // Compute required hedge stake on tickets 2..N to match target payout
+            let totalOutlay = initialBet;
+            tickets[0].targetStake = initialBet;
+            tickets[0].payout = targetPayout;
+
+            for (let i = 1; i < tickets.length; i++) {
+                const reqStake = Math.round((targetPayout / tickets[i].dec) * 100) / 100;
+                tickets[i].targetStake = reqStake;
+                tickets[i].payout = reqStake * tickets[i].dec;
+                totalOutlay += reqStake;
+            }
+
+            totalOutlay = Math.round(totalOutlay * 100) / 100;
+            const additionalHedges = Math.round((totalOutlay - initialBet) * 100) / 100;
+
+            // Calculate net profit for each ticket
+            tickets.forEach(t => {
+                t.netProfit = Math.round((t.payout - totalOutlay) * 100) / 100;
+            });
+
+            // Implied Probability & Arb Margin
+            let sumInv = 0;
+            tickets.forEach(t => sumInv += (1 / t.dec));
+            const marginPct = (1 - sumInv) * 100;
+            const guaranteedNet = tickets[0].netProfit;
+            const roiPct = totalOutlay > 0 ? (guaranteedNet / totalOutlay * 100) : 0;
+
+            // Update UI Table
+            const tbody = document.getElementById('dutchTicketsBody');
+            tbody.innerHTML = "";
+            tickets.forEach(t => {
+                const tr = document.createElement('tr');
+                tr.className = t.isPrimary ? "bg-indigo-50/50 hover:bg-indigo-50 transition font-medium" : "hover:bg-slate-50 transition";
+                tr.innerHTML = `
+                    <td class="py-2.5 px-4 font-semibold text-slate-700">
+                        Ticket #${t.id}
+                        ${t.isPrimary ? `<span class="ml-1.5 px-2 py-0.5 text-[10px] font-bold rounded bg-indigo-100 text-indigo-800">Primary Parlay</span>` : ''}
+                    </td>
+                    <td class="py-2.5 px-4">
+                        <span class="text-slate-800">${t.name}</span>
+                    </td>
+                    <td class="py-2.5 px-4 font-mono text-slate-600">
+                        ${decimalToUs(t.dec)} <span class="text-xs text-slate-400">(${t.dec.toFixed(2)}x)</span>
+                    </td>
+                    <td class="py-2.5 px-4 font-bold font-mono text-indigo-700">${formatMoney(t.targetStake)}</td>
+                    <td class="py-2.5 px-4 text-right font-bold font-mono ${t.netProfit >= 0 ? 'text-emerald-600' : 'text-rose-600'}">
+                        ${(t.netProfit >= 0 ? '+' : '')}${formatMoney(t.netProfit)}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Update Outlay and Callout
+            document.getElementById('dutchTotalOutlayDisplay').innerText = formatMoney(totalOutlay);
+            document.getElementById('dutchHedgeCostDisplay').innerText = `+${formatMoney(additionalHedges)} in Hedges`;
+
+            const card = document.getElementById('dutchCalloutCard');
+            const badge = document.getElementById('dutchBadge');
+            const roiBadge = document.getElementById('dutchRoiBadge');
+            const headerProfit = document.getElementById('dutchHeaderProfit');
+            const summaryText = document.getElementById('dutchSummaryText');
+
+            if (guaranteedNet > 0) {
+                card.className = "p-6 rounded-xl shadow-md border-l-4 bg-emerald-50 border-emerald-500 flex flex-col md:flex-row items-start md:items-center justify-between gap-4";
+                badge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-200 text-emerald-800";
+                badge.innerText = "PARLAY ARBITRAGE FOUND!";
+                roiBadge.className = "text-xs font-bold text-emerald-700";
+                roiBadge.innerText = (roiPct >= 0 ? "+" : "") + roiPct.toFixed(1) + "% ROI";
+                headerProfit.className = "text-3xl font-extrabold text-emerald-900 mt-2";
+                headerProfit.innerText = "+" + formatMoney(guaranteedNet);
+                summaryText.className = "text-sm text-emerald-700 mt-1";
+                summaryText.innerHTML = `Your <strong>${formatMoney(initialBet)}</strong> parlay locks in <strong>+${formatMoney(guaranteedNet)}</strong> profit after placing <strong>${formatMoney(additionalHedges)}</strong> across hedge tickets!`;
+            } else {
+                card.className = "p-6 rounded-xl shadow-md border-l-4 bg-slate-100 border-slate-400 flex flex-col md:flex-row items-start md:items-center justify-between gap-4";
+                badge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-200 text-slate-700";
+                badge.innerText = "NO ARBITRAGE (HEDGE COST)";
+                roiBadge.className = "text-xs font-bold text-slate-600";
+                roiBadge.innerText = marginPct.toFixed(1) + "% Edge";
+                headerProfit.className = "text-3xl font-extrabold text-slate-700 mt-2";
+                headerProfit.innerText = formatMoney(guaranteedNet);
+                summaryText.className = "text-sm text-slate-600 mt-1";
+                summaryText.innerHTML = `Hedging this <strong>${formatMoney(initialBet)}</strong> parlay would currently cost <strong>${formatMoney(Math.abs(guaranteedNet))}</strong>. Increase your promo parlay odds or find better market lines to create an arb.`;
+            }
+        }
+
+        // =========================================================================
+        // PRESET LOADERS
+        // =========================================================================
+        function loadPreset(preset) {
+            if (preset === 'nfl_staggered') {
+                switchTab('sequential');
+                setSeqLegCount(2);
+                document.getElementById('seqStake').value = "50";
+                document.getElementById('seqPayout').value = "240";
+                document.getElementById('seqBetType').value = "cash";
+                document.getElementById('seqOppOdds').value = "+120";
+                setSeqStrategy('equal_profit');
+            } else if (preset === 'nfl_3leg_staggered') {
+                switchTab('sequential');
+                setSeqLegCount(3);
+                document.getElementById('seq3LegStage').value = "final_leg";
+                onSeq3LegStageChange();
+                document.getElementById('seqStake').value = "50";
+                document.getElementById('seqPayout').value = "420";
+                document.getElementById('seqBetType').value = "cash";
+                document.getElementById('seqOppOdds').value = "-105";
+                setSeqStrategy('equal_profit');
+            } else if (preset === 'dk_boost_arb') {
+                switchTab('dutching');
+                setDutchBetCount(2);
+                document.getElementById('dutchInitialBet').value = "50";
+                document.getElementById('g1A').value = "+100";
+                document.getElementById('g1B').value = "-110";
+                document.getElementById('g2C').value = "+100";
+                document.getElementById('g2D').value = "-110";
+                document.getElementById('parlayOddsInput').value = "+400";
+                isUserCustomParlayOdds = true;
+                calcDutching();
+            } else if (preset === 'dk_3leg_boost_arb') {
+                switchTab('dutching');
+                setDutchBetCount(3);
+                document.getElementById('dutchInitialBet').value = "50";
+                document.getElementById('g1A').value = "+100";
+                document.getElementById('g1B').value = "-105";
+                document.getElementById('g2C').value = "+100";
+                document.getElementById('g2D').value = "-105";
+                document.getElementById('g3E').value = "+100";
+                document.getElementById('g3F').value = "-105";
+                document.getElementById('parlayOddsInput').value = "+1200";
+                isUserCustomParlayOdds = true;
+                calcDutching();
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            calcSequential();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Syndicate - Betting Toolkit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 p-4 md:p-8">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // Icons
+    const Calculator = ({ className = "w-6 h-6", size }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+    );
+    const DollarSign = ({ className = "w-5 h-5 mr-2 text-blue-600", size }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    );
+    const TrendingUp = ({ className = "w-5 h-5 mr-2 text-blue-600", size }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+    );
+    const AlertTriangle = ({ className = "w-6 h-6", size }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    );
+    const RefreshCw = ({ className = "w-12 h-12 mb-4 opacity-50", size }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 2v6h-6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 22v-6h6"/></svg>
+    );
+    const Info = ({ className = "w-5 h-5 mr-2 flex-shrink-0 text-slate-400", size }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    );
+    const Gift = ({ className = "w-5 h-5 mr-2 text-indigo-600", size }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+    );
+    const Percent = ({ className = "w-6 h-6 mr-2 text-violet-600", size }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+    );
+    const ArrowRightLeft = ({ className = "w-6 h-6", size }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size || 24} height={size || 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg>
+    );
+
+    // Common Helper Functions
+    const formatMoney = (amount) => {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+    };
+
+    const usToDecimal = (usOdds) => {
+      const odds = parseFloat(usOdds);
+      if (isNaN(odds)) return 0;
+      if (odds > 0) return 1 + (odds / 100);
+      return 1 + (100 / Math.abs(odds));
+    };
+
+    const ArbitrageCalculator = () => {
+      const [totalStake, setTotalStake] = useState(1000);
+      const [odds1, setOdds1] = useState('-110');
+      const [odds2, setOdds2] = useState('+120');
+      const [results, setResults] = useState(null);
+
+      useEffect(() => {
+        const dec1 = usToDecimal(odds1);
+        const dec2 = usToDecimal(odds2);
+
+        if (dec1 === 0 || dec2 === 0) {
+          setResults(null);
+          return;
+        }
+
+        const prob1 = 1 / dec1;
+        const prob2 = 1 / dec2;
+        const marketPercent = prob1 + prob2;
+        const isArb = marketPercent < 1;
+        const stake1 = (totalStake * prob1) / marketPercent;
+        const stake2 = (totalStake * prob2) / marketPercent;
+        const payout1 = stake1 * dec1;
+        const profit = payout1 - totalStake;
+        const roi = (profit / totalStake) * 100;
+
+        setResults({
+          dec1, dec2, prob1: prob1 * 100, prob2: prob2 * 100,
+          marketPercent: marketPercent * 100, isArb,
+          stake1, stake2, payout: payout1, profit, roi
+        });
+      }, [totalStake, odds1, odds2]);
+
+      return (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-in fade-in duration-300">
+          <div className="lg:col-span-1 space-y-6">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+              <h2 className="text-lg font-semibold mb-4 flex items-center">
+                <DollarSign className="w-5 h-5 mr-2 text-blue-600" /> Investment
+              </h2>
+              <div>
+                <label className="block text-sm font-medium text-slate-600 mb-1">Total Stake ($)</label>
+                <input type="number" value={totalStake} onChange={(e) => setTotalStake(parseFloat(e.target.value) || 0)} className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" />
+              </div>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+              <h2 className="text-lg font-semibold mb-4 flex items-center">
+                <TrendingUp className="w-5 h-5 mr-2 text-blue-600" /> Odds (US)
+              </h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">Outcome A (e.g., -110)</label>
+                  <input type="text" value={odds1} onChange={(e) => setOdds1(e.target.value)} className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">Outcome B (e.g., +120)</label>
+                  <input type="text" value={odds2} onChange={(e) => setOdds2(e.target.value)} className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-2">
+            {results ? (
+              <div className="space-y-6">
+                <div className={`p-6 rounded-xl shadow-md border-l-4 flex items-start justify-between ${results.isArb ? 'bg-emerald-50 border-emerald-500' : 'bg-rose-50 border-rose-500'}`}>
+                  <div>
+                    <h3 className={`text-xl font-bold ${results.isArb ? 'text-emerald-800' : 'text-rose-800'}`}>
+                      {results.isArb ? 'Arbitrage Opportunity Found!' : 'No Arbitrage Opportunity'}
+                    </h3>
+                    <p className={`mt-1 ${results.isArb ? 'text-emerald-600' : 'text-rose-600'}`}>
+                      {results.isArb ? `Guaranteed profit of ${formatMoney(results.profit)} (${results.roi.toFixed(2)}% ROI)` : `This bet results in a loss of ${formatMoney(Math.abs(results.profit))} (${results.roi.toFixed(2)}% ROI)`}
+                    </p>
+                  </div>
+                  <div className={`p-3 rounded-full ${results.isArb ? 'bg-emerald-200 text-emerald-700' : 'bg-rose-200 text-rose-700'}`}>
+                    {results.isArb ? <TrendingUp size={24} className="text-emerald-700" /> : <AlertTriangle size={24} className="text-rose-700" />}
+                  </div>
+                </div>
+                
+                <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                  <div className="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+                    <h3 className="font-semibold text-slate-700">Betting Strategy</h3>
+                    <span className="text-sm text-slate-500">Market: {results.marketPercent.toFixed(2)}%</span>
+                  </div>
+                  <div className="divide-y divide-slate-100">
+                    <div className="p-4 grid grid-cols-2 md:grid-cols-4 gap-4 items-center">
+                      <div className="col-span-2 md:col-span-1">
+                        <span className="text-xs font-bold uppercase text-slate-400">Outcome A</span>
+                        <div className="font-bold text-lg text-slate-800">{odds1}</div>
+                      </div>
+                      <div className="col-span-2 md:col-span-3 grid grid-cols-2 gap-4">
+                        <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
+                          <span className="block text-xs text-blue-600 font-semibold mb-1">Bet Amount</span>
+                          <span className="block text-lg font-bold text-blue-900">{formatMoney(results.stake1)}</span>
+                        </div>
+                        <div className="p-3">
+                          <span className="block text-xs text-slate-400 font-semibold mb-1">Win Payout</span>
+                          <span className="block text-lg font-medium text-slate-700">{formatMoney(results.stake1 * results.dec1)}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-4 grid grid-cols-2 md:grid-cols-4 gap-4 items-center">
+                      <div className="col-span-2 md:col-span-1">
+                        <span className="text-xs font-bold uppercase text-slate-400">Outcome B</span>
+                        <div className="font-bold text-lg text-slate-800">{odds2}</div>
+                      </div>
+                      <div className="col-span-2 md:col-span-3 grid grid-cols-2 gap-4">
+                        <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
+                          <span className="block text-xs text-blue-600 font-semibold mb-1">Bet Amount</span>
+                          <span className="block text-lg font-bold text-blue-900">{formatMoney(results.stake2)}</span>
+                        </div>
+                        <div className="p-3">
+                          <span className="block text-xs text-slate-400 font-semibold mb-1">Win Payout</span>
+                          <span className="block text-lg font-medium text-slate-700">{formatMoney(results.stake2 * results.dec2)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="h-full flex flex-col items-center justify-center text-slate-400 p-12 bg-white rounded-xl border border-dashed border-slate-300">
+                <RefreshCw className="w-12 h-12 mb-4 opacity-50" />
+                <p>Enter valid odds to see calculations</p>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    const FreeBetConverter = () => {
+      const [freeBetAmount, setFreeBetAmount] = useState(100);
+      const [freePlayLine, setFreePlayLine] = useState('+300');
+      const [hedgeLine, setHedgeLine] = useState('-350');
+      const [results, setResults] = useState(null);
+
+      useEffect(() => {
+        const F = parseFloat(freeBetAmount);
+        const fbOddsDec = usToDecimal(freePlayLine);
+        const hOddsDec = usToDecimal(hedgeLine);
+
+        if (!F || !fbOddsDec || !hOddsDec) {
+          setResults(null);
+          return;
+        }
+
+        const potentialFbWinnings = F * (fbOddsDec - 1);
+        const hedgeBet = potentialFbWinnings / hOddsDec;
+        const guaranteedProfit = potentialFbWinnings - hedgeBet;
+        const conversionPercent = (guaranteedProfit / F) * 100;
+        const hedgeProfitNum = hedgeBet * (hOddsDec - 1);
+
+        setResults({
+          potentialFbWinnings, hedgeBet, guaranteedProfit,
+          conversionPercent, hedgeProfitNum
+        });
+      }, [freeBetAmount, freePlayLine, hedgeLine]);
+
+      return (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-in fade-in duration-300">
+          <div className="lg:col-span-1 space-y-6">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+              <h2 className="text-lg font-semibold mb-4 text-slate-700 flex items-center">
+                <Gift className="w-5 h-5 mr-2 text-indigo-600" /> Bet Details
+              </h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">Free Play Amount ($)</label>
+                  <input type="number" value={freeBetAmount} onChange={(e) => setFreeBetAmount(e.target.value)} className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">Free Play Line (e.g., +300)</label>
+                  <input type="text" value={freePlayLine} onChange={(e) => setFreePlayLine(e.target.value)} className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" />
+                </div>
+                <div className="pt-2 border-t border-slate-100">
+                  <label className="block text-sm font-medium text-slate-600 mb-1">Hedge Line (e.g., -350)</label>
+                  <input type="text" value={hedgeLine} onChange={(e) => setHedgeLine(e.target.value)} className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-2">
+            {results ? (
+              <div className="space-y-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  <div className="bg-indigo-600 text-white p-5 rounded-xl shadow-md">
+                    <span className="block text-indigo-200 text-sm font-medium mb-1">Hedge Bet Required</span>
+                    <span className="text-2xl md:text-3xl font-bold">{formatMoney(results.hedgeBet)}</span>
+                  </div>
+                  <div className="bg-emerald-500 text-white p-5 rounded-xl shadow-md">
+                    <span className="block text-emerald-100 text-sm font-medium mb-1">Guaranteed Profit</span>
+                    <span className="text-2xl md:text-3xl font-bold">{formatMoney(results.guaranteedProfit)}</span>
+                  </div>
+                  <div className="col-span-2 md:col-span-1 bg-white border border-slate-200 p-5 rounded-xl shadow-sm flex flex-col justify-center">
+                    <span className="block text-slate-500 text-sm font-medium mb-1">Conversion %</span>
+                    <span className="text-2xl md:text-3xl font-bold text-slate-800">{results.conversionPercent.toFixed(2)}%</span>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                  <div className="p-4 bg-slate-50 border-b border-slate-200">
+                    <h3 className="font-semibold text-slate-700">What happens in either outcome?</h3>
+                  </div>
+                  <div className="divide-y divide-slate-100">
+                    <div className="p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                      <div>
+                        <h4 className="font-bold text-slate-800 flex items-center">
+                          <span className="w-3 h-3 rounded-full bg-indigo-500 mr-2"></span>If Free Bet Wins
+                        </h4>
+                        <p className="text-sm text-slate-500 mt-1">You win the free bet profit, but lose your real cash hedge.</p>
+                      </div>
+                      <div className="text-right w-full md:w-auto bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <div className="flex justify-between md:justify-end gap-6 text-sm mb-1"><span className="text-slate-500">FB Profit:</span><span className="font-medium text-emerald-600">+{formatMoney(results.potentialFbWinnings)}</span></div>
+                        <div className="flex justify-between md:justify-end gap-6 text-sm mb-2 border-b border-slate-200 pb-2"><span className="text-slate-500">Lost Hedge:</span><span className="font-medium text-rose-500">-{formatMoney(results.hedgeBet)}</span></div>
+                        <div className="flex justify-between md:justify-end gap-6 font-bold"><span className="text-slate-700">Net Profit:</span><span className="text-emerald-600">{formatMoney(results.potentialFbWinnings - results.hedgeBet)}</span></div>
+                      </div>
+                    </div>
+                    <div className="p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                      <div>
+                        <h4 className="font-bold text-slate-800 flex items-center">
+                          <span className="w-3 h-3 rounded-full bg-blue-400 mr-2"></span>If Hedge Bet Wins
+                        </h4>
+                        <p className="text-sm text-slate-500 mt-1">You lose the free bet (costs you nothing), and win the hedge bet.</p>
+                      </div>
+                      <div className="text-right w-full md:w-auto bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <div className="flex justify-between md:justify-end gap-6 text-sm mb-1"><span className="text-slate-500">FB Loss:</span><span className="font-medium text-slate-400">$0.00</span></div>
+                        <div className="flex justify-between md:justify-end gap-6 text-sm mb-2 border-b border-slate-200 pb-2"><span className="text-slate-500">Hedge Profit:</span><span className="font-medium text-emerald-600">+{formatMoney(results.hedgeProfitNum)}</span></div>
+                        <div className="flex justify-between md:justify-end gap-6 font-bold"><span className="text-slate-700">Net Profit:</span><span className="text-emerald-600">{formatMoney(results.hedgeProfitNum)}</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="h-full flex flex-col items-center justify-center text-slate-400 p-12 bg-white rounded-xl border border-dashed border-slate-300">
+                <RefreshCw className="w-12 h-12 mb-4 opacity-50" />
+                <p>Enter a valid amount and odds to calculate.</p>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    const OddsConverter = () => {
+      const [american, setAmerican] = useState('-150');
+      const [probability, setProbability] = useState('60');
+
+      const handleAmericanChange = (val) => {
+        setAmerican(val);
+        const odds = parseInt(val, 10);
+        if (isNaN(odds)) {
+          setProbability('');
+          return;
+        }
+        let prob = 0;
+        if (odds > 0) {
+          prob = 100 / (odds + 100);
+        } else if (odds < 0) {
+          prob = Math.abs(odds) / (Math.abs(odds) + 100);
+        }
+        setProbability((prob * 100).toFixed(2));
+      };
+
+      const handleProbabilityChange = (val) => {
+        setProbability(val);
+        const prob = parseFloat(val) / 100;
+        if (isNaN(prob) || prob <= 0 || prob >= 1) {
+          setAmerican('');
+          return;
+        }
+        let odds = 0;
+        if (prob > 0.5) {
+          odds = Math.round(-(prob / (1 - prob)) * 100);
+        } else {
+          odds = Math.round(((1 - prob) / prob) * 100);
+          if (odds > 0) odds = '+' + odds;
+        }
+        setAmerican(odds.toString());
+      };
+
+      return (
+        <div className="max-w-3xl mx-auto animate-in fade-in duration-300">
+          <div className="bg-white p-6 md:p-10 rounded-xl shadow-sm border border-slate-200">
+            <h2 className="text-xl font-semibold mb-8 text-slate-800 text-center flex items-center justify-center">
+              <Percent className="w-6 h-6 mr-2 text-violet-600" /> Probability Translator
+            </h2>
+            
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="w-full">
+                <label className="block text-sm font-semibold text-slate-600 mb-2 uppercase tracking-wide">American Odds</label>
+                <div className="relative">
+                  <input 
+                    type="text" 
+                    value={american} 
+                    onChange={(e) => handleAmericanChange(e.target.value)} 
+                    className="w-full p-4 text-2xl font-bold text-center border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-violet-500/20 focus:border-violet-500 outline-none transition" 
+                    placeholder="-150" 
+                  />
+                </div>
+                <p className="text-xs text-slate-400 mt-2 text-center">e.g. -110 or +150</p>
+              </div>
+
+              <div className="p-4 rounded-full bg-slate-50 border border-slate-100 flex-shrink-0 text-slate-400 hidden md:block">
+                <ArrowRightLeft className="w-6 h-6" />
+              </div>
+
+              <div className="w-full">
+                <label className="block text-sm font-semibold text-slate-600 mb-2 uppercase tracking-wide">Implied Probability</label>
+                <div className="relative">
+                  <input 
+                    type="number" 
+                    value={probability} 
+                    onChange={(e) => handleProbabilityChange(e.target.value)} 
+                    className="w-full p-4 text-2xl font-bold text-center border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-violet-500/20 focus:border-violet-500 outline-none transition" 
+                    placeholder="60.00" 
+                  />
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-2xl font-bold text-slate-400">%</span>
+                </div>
+                <p className="text-xs text-slate-400 mt-2 text-center">0% to 100%</p>
+              </div>
+            </div>
+            
+            <div className="mt-8 bg-slate-50 p-4 rounded-lg border border-slate-100">
+               <div className="flex items-start text-sm text-slate-600">
+                  <Info className="w-5 h-5 mr-2 flex-shrink-0 text-slate-400" />
+                  <p>Type in either box to instantly convert between traditional American sports betting odds and the actual real-world percentage chance (implied probability) that the event will happen.</p>
+               </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const App = () => {
+      const [activeTab, setActiveTab] = useState('arbitrage');
+
+      return (
+        <div className="min-h-screen bg-slate-50 text-slate-900 font-sans p-4 md:p-8">
+          <div className="max-w-5xl mx-auto">
+            
+            {/* App Header */}
+            <header className="mb-8 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center space-x-3">
+                <div className="p-3 bg-slate-900 rounded-xl shadow-lg">
+                  <Calculator className="w-8 h-8 text-white" />
+                </div>
+                <div className="text-left">
+                  <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">Betting Toolkit</h1>
+                  <p className="text-slate-500 font-medium">Smart calculators for maximizing edge</p>
+                </div>
+              </div>
+            </header>
+
+            {/* Navigation Tabs */}
+            <div className="flex overflow-x-auto pb-4 mb-6 space-x-2 hide-scrollbar">
+              <button 
+                onClick={() => setActiveTab('arbitrage')}
+                className={`flex items-center px-5 py-3 rounded-xl font-semibold transition whitespace-nowrap ${
+                  activeTab === 'arbitrage' 
+                    ? 'bg-blue-600 text-white shadow-md' 
+                    : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                }`}
+              >
+                <TrendingUp className="w-4 h-4 mr-2" /> Arbitrage Finder
+              </button>
+              <button 
+                onClick={() => setActiveTab('freebet')}
+                className={`flex items-center px-5 py-3 rounded-xl font-semibold transition whitespace-nowrap ${
+                  activeTab === 'freebet' 
+                    ? 'bg-indigo-600 text-white shadow-md' 
+                    : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                }`}
+              >
+                <Gift className="w-4 h-4 mr-2" /> Free Bet Converter
+              </button>
+              <button 
+                onClick={() => setActiveTab('converter')}
+                className={`flex items-center px-5 py-3 rounded-xl font-semibold transition whitespace-nowrap ${
+                  activeTab === 'converter' 
+                    ? 'bg-violet-600 text-white shadow-md' 
+                    : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                }`}
+              >
+                <Percent className="w-4 h-4 mr-2" /> Odds Translator
+              </button>
+            </div>
+
+            {/* Active Tab Content */}
+            <div className="transition-all duration-300">
+              {activeTab === 'arbitrage' && <ArbitrageCalculator />}
+              {activeTab === 'freebet' && <FreeBetConverter />}
+              {activeTab === 'converter' && <OddsConverter />}
+            </div>
+            
+          </div>
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
