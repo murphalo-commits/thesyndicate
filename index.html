@@ -243,35 +243,59 @@
                         <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">Hedge Tool</span>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-2.5 mb-2.5">
-                        <div>
-                            <label class="block text-[10.5px] font-semibold text-slate-400 mb-1">Bet 1 (Odds):</label>
-                            <input type="text" id="calcOdds1" value="+127" oninput="calculateArb()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-xs font-black text-emerald-400 text-center focus:border-emerald-500 focus:outline-none">
+                    <!-- Bet 1 Box -->
+                    <div class="bg-slate-900/80 border border-slate-700/60 rounded-xl p-2.5 mb-2.5">
+                        <div class="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-emerald-400 mb-1.5">
+                            <span>Bet 1 (Primary)</span>
+                            <span class="text-[9.5px] text-slate-400 font-normal">Payout Total: <strong id="calcPayout1" class="text-emerald-400 font-extrabold text-xs">$476.70</strong></span>
                         </div>
-                        <div>
-                            <label class="block text-[10.5px] font-semibold text-slate-400 mb-1">Bet 1 Stake ($):</label>
-                            <input type="number" id="calcStake1" value="210" oninput="calculateArb()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-xs font-black text-white text-center focus:border-emerald-500 focus:outline-none">
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[9.5px] font-semibold text-slate-400 mb-1">Odds (US):</label>
+                                <input type="text" id="calcOdds1" value="+127" oninput="calculateArb()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1.5 text-xs font-black text-emerald-400 text-center focus:border-emerald-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[9.5px] font-semibold text-slate-400 mb-1">Stake ($):</label>
+                                <input type="number" id="calcStake1" value="210" oninput="calculateArb()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1.5 text-xs font-black text-white text-center focus:border-emerald-500 focus:outline-none">
+                            </div>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-2.5 mb-3">
-                        <div>
-                            <label class="block text-[10.5px] font-semibold text-slate-400 mb-1">Bet 2 (Hedge Odds):</label>
-                            <input type="text" id="calcOdds2" value="-125" oninput="calculateArb()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-xs font-black text-cyan-400 text-center focus:border-emerald-500 focus:outline-none">
+                    <!-- Bet 2 Box -->
+                    <div class="bg-slate-900/80 border border-slate-700/60 rounded-xl p-2.5 mb-3">
+                        <div class="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-cyan-400 mb-1.5">
+                            <span>Bet 2 (Hedge)</span>
+                            <span class="text-[9.5px] text-slate-400 font-normal">Payout Total: <strong id="calcPayout2" class="text-emerald-400 font-extrabold text-xs">$477.00</strong></span>
                         </div>
-                        <div>
-                            <label class="block text-[10.5px] font-semibold text-slate-400 mb-1">Required Hedge ($):</label>
-                            <div id="calcHedgeStake" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1.5 text-xs font-black text-amber-400 text-center">$265.00</div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[9.5px] font-semibold text-slate-400 mb-1">Hedge Odds (US):</label>
+                                <input type="text" id="calcOdds2" value="-125" oninput="calculateArb()" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1.5 text-xs font-black text-cyan-400 text-center focus:border-emerald-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[9.5px] font-semibold text-slate-400 mb-1">Required Hedge ($):</label>
+                                <div id="calcHedgeStake" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1.5 text-xs font-black text-amber-400 text-center leading-[1.6]">$265.00</div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Payout Summary Card -->
-                    <div class="bg-slate-950 rounded-xl p-3 border border-slate-800">
-                        <div class="flex justify-between items-center text-[11px] mb-1">
+                    <div class="bg-slate-950 rounded-xl p-3 border border-slate-800 space-y-1.5">
+                        <div class="flex justify-between items-center text-[11px]">
                             <span class="text-slate-400">Total Capital Outlay:</span>
                             <span class="font-bold text-white" id="calcTotalOutlay">$475.00</span>
                         </div>
-                        <div class="flex justify-between items-center text-[11px] mb-1">
+                        <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-900 text-[10px]">
+                            <div class="bg-slate-900/90 rounded-lg px-2 py-1 border border-slate-800 flex justify-between items-center">
+                                <span class="text-slate-400">Bet 1 Payout:</span>
+                                <strong id="calcSummaryPayout1" class="text-emerald-400 font-bold">$476.70</strong>
+                            </div>
+                            <div class="bg-slate-900/90 rounded-lg px-2 py-1 border border-slate-800 flex justify-between items-center">
+                                <span class="text-slate-400">Bet 2 Payout:</span>
+                                <strong id="calcSummaryPayout2" class="text-emerald-400 font-bold">$477.00</strong>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-[11px] pt-1 border-t border-slate-900">
                             <span class="text-slate-400">Guaranteed Return:</span>
                             <span class="font-bold text-emerald-400" id="calcGuaranteedPayout">$476.70</span>
                         </div>
@@ -81193,12 +81217,27 @@
             const stake1 = parseFloat(document.getElementById('calcStake1').value) || 0;
 
             const res = computeHedge(odds1, odds2, stake1);
+            const stakeB = parseFloat(res.stakeB) || 0;
+            const totalOutlay = stake1 + stakeB;
+            const payoutA = parseFloat(res.payoutA) || 0;
+            const payoutB = parseFloat(res.payoutB) || 0;
+            const minPayout = Math.min(payoutA, payoutB);
+            const profit = Math.round((minPayout - totalOutlay) * 100) / 100;
+            const roi = totalOutlay > 0 ? ((profit / totalOutlay) * 100).toFixed(2) : '0.00';
+
             document.getElementById('calcHedgeStake').textContent = `$${res.stakeB}`;
-            document.getElementById('calcTotalOutlay').textContent = `$${(stake1 + parseFloat(res.stakeB)).toFixed(2)}`;
-            document.getElementById('calcGuaranteedPayout').textContent = `$${res.payoutA}`;
-            
-            const roi = (((parseFloat(res.payoutA) - (stake1 + parseFloat(res.stakeB))) / (stake1 + parseFloat(res.stakeB))) * 100).toFixed(2);
-            document.getElementById('calcNetProfit').textContent = `${res.profit >= 0 ? '+' : ''}$${res.profit} (${roi >= 0 ? '+' : ''}${roi}% ROI)`;
+            const p1El = document.getElementById('calcPayout1');
+            if (p1El) p1El.textContent = `$${res.payoutA}`;
+            const p2El = document.getElementById('calcPayout2');
+            if (p2El) p2El.textContent = `$${res.payoutB}`;
+            const sumP1 = document.getElementById('calcSummaryPayout1');
+            if (sumP1) sumP1.textContent = `$${res.payoutA}`;
+            const sumP2 = document.getElementById('calcSummaryPayout2');
+            if (sumP2) sumP2.textContent = `$${res.payoutB}`;
+
+            document.getElementById('calcTotalOutlay').textContent = `$${totalOutlay.toFixed(2)}`;
+            document.getElementById('calcGuaranteedPayout').textContent = `$${minPayout.toFixed(2)}`;
+            document.getElementById('calcNetProfit').textContent = `${profit >= 0 ? '+' : ''}$${profit.toFixed(2)} (${profit >= 0 ? '+' : ''}${roi}% ROI)`;
         }
 
         // Helper to parse American odds string into decimal
