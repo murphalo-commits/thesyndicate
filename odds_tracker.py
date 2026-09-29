@@ -791,26 +791,37 @@ def export_mobile_data(odds_data_with_liq, props_data):
                             if best_retail_ml_away is None or r["price"] > best_retail_ml_away["price"]:
                                 best_retail_ml_away = entry
 
-            if best_ml_home and best_ml_away:
-                tot_imp = american_to_implied(best_ml_home["price"]) + american_to_implied(best_ml_away["price"])
-                if tot_imp < 1.015:
-                    roi = round((1.0 - tot_imp) * 100, 2)
-                    has_novig = (best_ml_away["book"].lower() == "novig" or best_ml_home["book"].lower() == "novig")
-                    arbs_list.append({
-                        "id": f"arb_ml_{eid}",
-                        "sport": ev["sport_label"],
-                        "matchup": f"{away} @ {home}",
-                        "market": "Moneyline",
-                        "roi": roi if roi > 0 else 0.1,
-                        "hold": round(tot_imp * 100, 2),
-                        "commence_time": ev["commence_time"],
-                        "is_novig": has_novig,
-                        "side_a": {"name": away, "outcome": f"{away} ML", "book": best_ml_away["book"], "price": best_ml_away["price"], "liquidity": best_ml_away["liquidity"]},
-                        "side_b": {"name": home, "outcome": f"{home} ML", "book": best_ml_home["book"], "price": best_ml_home["price"], "liquidity": best_ml_home["liquidity"]}
-                    })
+            # Moneyline: Overall best
+            best_ml_away = novig_ml_away if (novig_ml_away and (not best_retail_ml_away or novig_ml_away["price"] > best_retail_ml_away["price"])) else best_retail_ml_away
+            best_ml_home = novig_ml_home if (novig_ml_home and (not best_retail_ml_home or novig_ml_home["price"] > best_retail_ml_home["price"])) else best_retail_ml_home
 
-            # Spreads: Overall, Retail-only, and Novig-only
-            spread_points = {}
+            # Moneyline Arbs: Novig can only be ONE side of the bet!
+            ml_pairs = [
+                (best_retail_ml_away, best_retail_ml_home, f"arb_ml_{eid}_ret"),
+                (best_retail_ml_away, novig_ml_home, f"arb_ml_{eid}_ret_nov"),
+                (novig_ml_away, best_retail_ml_home, f"arb_ml_{eid}_nov_ret")
+            ]
+            for s_a, s_b, arb_id in ml_pairs:
+                if s_a and s_b:
+                    tot_imp = american_to_implied(s_a["price"]) + american_to_implied(s_b["price"])
+                    if tot_imp < 1.015:
+                        roi = round((1.0 - tot_imp) * 100, 2)
+                        has_novig = (s_a["book"].lower() == "novig" or s_b["book"].lower() == "novig")
+                        arbs_list.append({
+                            "id": arb_id,
+                            "sport": ev["sport_label"],
+                            "matchup": f"{away} @ {home}",
+                            "market": "Moneyline",
+                            "roi": roi if roi > 0 else 0.1,
+                            "hold": round(tot_imp * 100, 2),
+                            "commence_time": ev["commence_time"],
+                            "is_novig": has_novig,
+                            "side_a": {"name": away, "outcome": f"{away} ML", "book": s_a["book"], "price": s_a["price"], "liquidity": s_a["liquidity"]},
+                            "side_b": {"name": home, "outcome": f"{home} ML", "book": s_b["book"], "price": s_b["price"], "liquidity": s_b["liquidity"]}
+                        })
+
+            # Spreads: Bucket by target home point so away point is strictly opposite (-point)
+            spread_buckets = {}
             for book, rows in ev["markets"]["spreads"].items():
                 is_novig = (book.lower() == "novig")
                 for r in rows:
@@ -820,68 +831,73 @@ def export_mobile_data(odds_data_with_liq, props_data):
                         pt_val = float(pt)
                     except Exception:
                         continue
-                    abs_pt = abs(pt_val)
-                    if abs_pt not in spread_points: 
-                        spread_points[abs_pt] = {"home": [], "away": [], "retail_home": [], "retail_away": [], "novig_home": [], "novig_away": []}
+                    is_home = (r["outcome"] == home)
+                    target_home_pt = pt_val if is_home else -pt_val
+                    if target_home_pt not in spread_buckets:
+                        spread_buckets[target_home_pt] = {"retail_home": [], "retail_away": [], "novig_home": [], "novig_away": []}
                     entry = {"book": book, "point": pt_val, "price": r["price"], "liquidity": r["liquidity"]}
-                    if r["outcome"] == home: 
-                        spread_points[abs_pt]["home"].append(entry)
-                        if is_novig:
-                            spread_points[abs_pt]["novig_home"].append(entry)
-                        else:
-                            spread_points[abs_pt]["retail_home"].append(entry)
-                    else: 
-                        spread_points[abs_pt]["away"].append(entry)
-                        if is_novig:
-                            spread_points[abs_pt]["novig_away"].append(entry)
-                        else:
-                            spread_points[abs_pt]["retail_away"].append(entry)
+                    if is_home:
+                        if is_novig: spread_buckets[target_home_pt]["novig_home"].append(entry)
+                        else: spread_buckets[target_home_pt]["retail_home"].append(entry)
+                    else:
+                        if is_novig: spread_buckets[target_home_pt]["novig_away"].append(entry)
+                        else: spread_buckets[target_home_pt]["retail_away"].append(entry)
 
             best_spread_home, best_spread_away = None, None
             best_retail_spread_home, best_retail_spread_away = None, None
             novig_spread_home, novig_spread_away = None, None
+            lowest_spd_hold = 999.0
 
-            for pt, sides in spread_points.items():
-                best_h = max(sides["home"], key=lambda x: x["price"]) if sides["home"] else None
-                best_a = max(sides["away"], key=lambda x: x["price"]) if sides["away"] else None
-                if best_h and best_a:
-                    imp = american_to_implied(best_h["price"]) + american_to_implied(best_a["price"])
-                    if best_spread_home is None or imp < (american_to_implied(best_spread_home["price"]) + american_to_implied(best_spread_away["price"])):
-                        best_spread_home = best_h
-                        best_spread_away = best_a
-                    if imp < 1.015:
-                        roi = round((1.0 - imp) * 100, 2)
-                        has_novig = (best_a["book"].lower() == "novig" or best_h["book"].lower() == "novig")
-                        arbs_list.append({
-                            "id": f"arb_spd_{eid}_{pt}",
-                            "sport": ev["sport_label"],
-                            "matchup": f"{away} @ {home}",
-                            "market": f"Spread ({pt})",
-                            "roi": roi if roi > 0 else 0.2,
-                            "hold": round(imp * 100, 2),
-                            "commence_time": ev["commence_time"],
-                            "is_novig": has_novig,
-                            "side_a": {"name": away, "outcome": f"{away} {best_a['point']:+g}", "book": best_a["book"], "price": best_a["price"], "liquidity": best_a["liquidity"]},
-                            "side_b": {"name": home, "outcome": f"{home} {best_h['point']:+g}", "book": best_h["book"], "price": best_h["price"], "liquidity": best_h["liquidity"]}
-                        })
+            for h_pt, bucket in spread_buckets.items():
+                ret_h = max(bucket["retail_home"], key=lambda x: x["price"]) if bucket["retail_home"] else None
+                ret_a = max(bucket["retail_away"], key=lambda x: x["price"]) if bucket["retail_away"] else None
+                nov_h = max(bucket["novig_home"], key=lambda x: x["price"]) if bucket["novig_home"] else None
+                nov_a = max(bucket["novig_away"], key=lambda x: x["price"]) if bucket["novig_away"] else None
 
-                # Retail spread best
-                ret_h = max(sides["retail_home"], key=lambda x: x["price"]) if sides["retail_home"] else None
-                ret_a = max(sides["retail_away"], key=lambda x: x["price"]) if sides["retail_away"] else None
-                if ret_h and ret_a:
-                    ret_imp = american_to_implied(ret_h["price"]) + american_to_implied(ret_a["price"])
-                    if best_retail_spread_home is None or ret_imp < (american_to_implied(best_retail_spread_home["price"]) + american_to_implied(best_retail_spread_away["price"])):
+                # For matchup display: pick the spread line with the tightest market hold
+                cur_best_h = nov_h if (nov_h and (not ret_h or nov_h["price"] > ret_h["price"])) else ret_h
+                cur_best_a = nov_a if (nov_a and (not ret_a or nov_a["price"] > ret_a["price"])) else ret_a
+                if cur_best_h and cur_best_a:
+                    cur_hold = american_to_implied(cur_best_h["price"]) + american_to_implied(cur_best_a["price"])
+                    if cur_hold < lowest_spd_hold:
+                        lowest_spd_hold = cur_hold
+                        best_spread_home = cur_best_h
+                        best_spread_away = cur_best_a
                         best_retail_spread_home = ret_h
                         best_retail_spread_away = ret_a
+                        novig_spread_home = nov_h
+                        novig_spread_away = nov_a
 
-                # Novig spread
-                nov_h = max(sides["novig_home"], key=lambda x: x["price"]) if sides["novig_home"] else None
-                nov_a = max(sides["novig_away"], key=lambda x: x["price"]) if sides["novig_away"] else None
-                if nov_h: novig_spread_home = nov_h
-                if nov_a: novig_spread_away = nov_a
+                # Spread Arbs: Novig can only be ONE side of the bet!
+                spd_pairs = [
+                    (ret_a, ret_h, f"arb_spd_{eid}_{h_pt}_ret"),
+                    (ret_a, nov_h, f"arb_spd_{eid}_{h_pt}_ret_nov"),
+                    (nov_a, ret_h, f"arb_spd_{eid}_{h_pt}_nov_ret")
+                ]
+                for s_a, s_b, arb_id in spd_pairs:
+                    if s_a and s_b and (round(s_a["point"] + s_b["point"], 2) == 0):
+                        tot_imp = american_to_implied(s_a["price"]) + american_to_implied(s_b["price"])
+                        if tot_imp < 1.015:
+                            roi = round((1.0 - tot_imp) * 100, 2)
+                            has_novig = (s_a["book"].lower() == "novig" or s_b["book"].lower() == "novig")
+                            pt_a_str = f"{s_a['point']:+g}"
+                            pt_b_str = f"{s_b['point']:+g}"
+                            display_pt = abs(h_pt)
+                            arbs_list.append({
+                                "id": arb_id,
+                                "sport": ev["sport_label"],
+                                "matchup": f"{away} @ {home}",
+                                "market": f"Spread ({display_pt:g})",
+                                "roi": roi if roi > 0 else 0.2,
+                                "hold": round(tot_imp * 100, 2),
+                                "commence_time": ev["commence_time"],
+                                "is_novig": has_novig,
+                                "side_a": {"name": away, "outcome": f"{away} {pt_a_str}", "book": s_a["book"], "price": s_a["price"], "liquidity": s_a["liquidity"]},
+                                "side_b": {"name": home, "outcome": f"{home} {pt_b_str}", "book": s_b["book"], "price": s_b["price"], "liquidity": s_b["liquidity"]}
+                            })
 
-            # Totals: Overall, Retail-only, and Novig-only
-            total_points = {}
+            # Totals: Bucket by total point
+            total_buckets = {}
             for book, rows in ev["markets"]["totals"].items():
                 is_novig = (book.lower() == "novig")
                 for r in rows:
@@ -891,64 +907,71 @@ def export_mobile_data(odds_data_with_liq, props_data):
                         pt_val = float(pt)
                     except Exception:
                         continue
-                    if pt_val not in total_points: 
-                        total_points[pt_val] = {"over": [], "under": [], "retail_over": [], "retail_under": [], "novig_over": [], "novig_under": []}
+                    if pt_val not in total_buckets:
+                        total_buckets[pt_val] = {"retail_over": [], "retail_under": [], "novig_over": [], "novig_under": []}
                     entry = {"book": book, "point": pt_val, "price": r["price"], "liquidity": r["liquidity"]}
-                    if r["outcome"].lower() == "over": 
-                        total_points[pt_val]["over"].append(entry)
-                        if is_novig:
-                            total_points[pt_val]["novig_over"].append(entry)
-                        else:
-                            total_points[pt_val]["retail_over"].append(entry)
-                    elif r["outcome"].lower() == "under": 
-                        total_points[pt_val]["under"].append(entry)
-                        if is_novig:
-                            total_points[pt_val]["novig_under"].append(entry)
-                        else:
-                            total_points[pt_val]["retail_under"].append(entry)
+                    if r["outcome"].lower() == "over":
+                        if is_novig: total_buckets[pt_val]["novig_over"].append(entry)
+                        else: total_buckets[pt_val]["retail_over"].append(entry)
+                    elif r["outcome"].lower() == "under":
+                        if is_novig: total_buckets[pt_val]["novig_under"].append(entry)
+                        else: total_buckets[pt_val]["retail_under"].append(entry)
 
             best_total_over, best_total_under = None, None
             best_retail_total_over, best_retail_total_under = None, None
             novig_total_over, novig_total_under = None, None
+            lowest_tot_hold = 999.0
 
-            for pt, sides in total_points.items():
-                best_o = max(sides["over"], key=lambda x: x["price"]) if sides["over"] else None
-                best_u = max(sides["under"], key=lambda x: x["price"]) if sides["under"] else None
-                if best_o and best_u:
-                    imp = american_to_implied(best_o["price"]) + american_to_implied(best_u["price"])
-                    if best_total_over is None or imp < (american_to_implied(best_total_over["price"]) + american_to_implied(best_total_under["price"])):
-                        best_total_over = best_o
-                        best_total_under = best_u
-                    if imp < 1.015:
-                        roi = round((1.0 - imp) * 100, 2)
-                        has_novig = (best_o["book"].lower() == "novig" or best_u["book"].lower() == "novig")
-                        arbs_list.append({
-                            "id": f"arb_tot_{eid}_{pt}",
-                            "sport": ev["sport_label"],
-                            "matchup": f"{away} @ {home}",
-                            "market": f"Total ({pt})",
-                            "roi": roi if roi > 0 else 0.15,
-                            "hold": round(imp * 100, 2),
-                            "commence_time": ev["commence_time"],
-                            "is_novig": has_novig,
-                            "side_a": {"name": "Over", "outcome": f"Over {pt}", "book": best_o["book"], "price": best_o["price"], "liquidity": best_o["liquidity"]},
-                            "side_b": {"name": "Under", "outcome": f"Under {pt}", "book": best_u["book"], "price": best_u["price"], "liquidity": best_u["liquidity"]}
-                        })
+            for pt, bucket in total_buckets.items():
+                ret_o = max(bucket["retail_over"], key=lambda x: x["price"]) if bucket["retail_over"] else None
+                ret_u = max(bucket["retail_under"], key=lambda x: x["price"]) if bucket["retail_under"] else None
+                nov_o = max(bucket["novig_over"], key=lambda x: x["price"]) if bucket["novig_over"] else None
+                nov_u = max(bucket["novig_under"], key=lambda x: x["price"]) if bucket["novig_under"] else None
 
-                # Retail totals best
-                ret_o = max(sides["retail_over"], key=lambda x: x["price"]) if sides["retail_over"] else None
-                ret_u = max(sides["retail_under"], key=lambda x: x["price"]) if sides["retail_under"] else None
-                if ret_o and ret_u:
-                    ret_imp = american_to_implied(ret_o["price"]) + american_to_implied(ret_u["price"])
-                    if best_retail_total_over is None or ret_imp < (american_to_implied(best_retail_total_over["price"]) + american_to_implied(best_retail_total_under["price"])):
+                # For matchup display: pick the total line with the tightest market hold
+                cur_best_o = nov_o if (nov_o and (not ret_o or nov_o["price"] > ret_o["price"])) else ret_o
+                cur_best_u = nov_u if (nov_u and (not ret_u or nov_u["price"] > ret_u["price"])) else ret_u
+                if cur_best_o and cur_best_u:
+                    cur_hold = american_to_implied(cur_best_o["price"]) + american_to_implied(cur_best_u["price"])
+                    if cur_hold < lowest_tot_hold:
+                        lowest_tot_hold = cur_hold
+                        best_total_over = cur_best_o
+                        best_total_under = cur_best_u
                         best_retail_total_over = ret_o
                         best_retail_total_under = ret_u
+                        novig_total_over = nov_o
+                        novig_total_under = nov_u
 
-                # Novig totals
-                nov_o = max(sides["novig_over"], key=lambda x: x["price"]) if sides["novig_over"] else None
-                nov_u = max(sides["novig_under"], key=lambda x: x["price"]) if sides["novig_under"] else None
-                if nov_o: novig_total_over = nov_o
-                if nov_u: novig_total_under = nov_u
+                # Total Arbs: Novig can only be ONE side of the bet!
+                tot_pairs = [
+                    (ret_o, ret_u, f"arb_tot_{eid}_{pt}_ret"),
+                    (ret_o, nov_u, f"arb_tot_{eid}_{pt}_ret_nov"),
+                    (nov_o, ret_u, f"arb_tot_{eid}_{pt}_nov_ret")
+                ]
+                for s_a, s_b, arb_id in tot_pairs:
+                    if s_a and s_b:
+                        tot_imp = american_to_implied(s_a["price"]) + american_to_implied(s_b["price"])
+                        if tot_imp < 1.015:
+                            roi = round((1.0 - tot_imp) * 100, 2)
+                            has_novig = (s_a["book"].lower() == "novig" or s_b["book"].lower() == "novig")
+                            arbs_list.append({
+                                "id": arb_id,
+                                "sport": ev["sport_label"],
+                                "matchup": f"{away} @ {home}",
+                                "market": f"Total ({pt:g})",
+                                "roi": roi if roi > 0 else 0.15,
+                                "hold": round(tot_imp * 100, 2),
+                                "commence_time": ev["commence_time"],
+                                "is_novig": has_novig,
+                                "side_a": {"name": "Over", "outcome": f"Over {pt:g}", "book": s_a["book"], "price": s_a["price"], "liquidity": s_a["liquidity"]},
+                                "side_b": {"name": "Under", "outcome": f"Under {pt:g}", "book": s_b["book"], "price": s_b["price"], "liquidity": s_b["liquidity"]}
+                            })
+
+            # Fallback if no spread/total found for matchup
+            if not best_retail_spread_home and ret_h: best_retail_spread_home = ret_h
+            if not best_retail_spread_away and ret_a: best_retail_spread_away = ret_a
+            if not best_retail_total_over and ret_o: best_retail_total_over = ret_o
+            if not best_retail_total_under and ret_u: best_retail_total_under = ret_u
 
             matchups_list.append({
                 "id": eid,
@@ -983,6 +1006,7 @@ def export_mobile_data(odds_data_with_liq, props_data):
             })
 
         matchups_list.sort(key=lambda x: x["commence_time"])
+        arbs_list.sort(key=lambda x: x["roi"], reverse=True)
 
         # Props
         props_list = []
