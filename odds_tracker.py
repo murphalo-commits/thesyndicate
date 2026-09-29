@@ -763,20 +763,39 @@ def export_mobile_data(odds_data_with_liq, props_data):
             home = ev["home_team"]
             away = ev["away_team"]
 
+            # Moneyline: Overall, Retail-only, and Novig-only
             best_ml_home, best_ml_away = None, None
+            best_retail_ml_home, best_retail_ml_away = None, None
+            novig_ml_home, novig_ml_away = None, None
+
             for book, rows in ev["markets"]["h2h"].items():
+                is_novig = (book.lower() == "novig")
                 for r in rows:
+                    entry = {"book": book, "price": r["price"], "liquidity": r["liquidity"]}
                     if r["outcome"] == home:
                         if best_ml_home is None or r["price"] > best_ml_home["price"]:
-                            best_ml_home = {"book": book, "price": r["price"], "liquidity": r["liquidity"]}
+                            best_ml_home = entry
+                        if is_novig:
+                            if novig_ml_home is None or r["price"] > novig_ml_home["price"]:
+                                novig_ml_home = entry
+                        else:
+                            if best_retail_ml_home is None or r["price"] > best_retail_ml_home["price"]:
+                                best_retail_ml_home = entry
                     elif r["outcome"] == away:
                         if best_ml_away is None or r["price"] > best_ml_away["price"]:
-                            best_ml_away = {"book": book, "price": r["price"], "liquidity": r["liquidity"]}
+                            best_ml_away = entry
+                        if is_novig:
+                            if novig_ml_away is None or r["price"] > novig_ml_away["price"]:
+                                novig_ml_away = entry
+                        else:
+                            if best_retail_ml_away is None or r["price"] > best_retail_ml_away["price"]:
+                                best_retail_ml_away = entry
 
             if best_ml_home and best_ml_away:
                 tot_imp = american_to_implied(best_ml_home["price"]) + american_to_implied(best_ml_away["price"])
                 if tot_imp < 1.015:
                     roi = round((1.0 - tot_imp) * 100, 2)
+                    has_novig = (best_ml_away["book"].lower() == "novig" or best_ml_home["book"].lower() == "novig")
                     arbs_list.append({
                         "id": f"arb_ml_{eid}",
                         "sport": ev["sport_label"],
@@ -785,13 +804,15 @@ def export_mobile_data(odds_data_with_liq, props_data):
                         "roi": roi if roi > 0 else 0.1,
                         "hold": round(tot_imp * 100, 2),
                         "commence_time": ev["commence_time"],
+                        "is_novig": has_novig,
                         "side_a": {"name": away, "outcome": f"{away} ML", "book": best_ml_away["book"], "price": best_ml_away["price"], "liquidity": best_ml_away["liquidity"]},
                         "side_b": {"name": home, "outcome": f"{home} ML", "book": best_ml_home["book"], "price": best_ml_home["price"], "liquidity": best_ml_home["liquidity"]}
                     })
 
-            # Spreads
+            # Spreads: Overall, Retail-only, and Novig-only
             spread_points = {}
             for book, rows in ev["markets"]["spreads"].items():
+                is_novig = (book.lower() == "novig")
                 for r in rows:
                     pt = r.get("point")
                     if pt is None or pt == "": continue
@@ -800,11 +821,26 @@ def export_mobile_data(odds_data_with_liq, props_data):
                     except Exception:
                         continue
                     abs_pt = abs(pt_val)
-                    if abs_pt not in spread_points: spread_points[abs_pt] = {"home": [], "away": []}
-                    if r["outcome"] == home: spread_points[abs_pt]["home"].append({"book": book, "point": pt_val, "price": r["price"], "liquidity": r["liquidity"]})
-                    else: spread_points[abs_pt]["away"].append({"book": book, "point": pt_val, "price": r["price"], "liquidity": r["liquidity"]})
+                    if abs_pt not in spread_points: 
+                        spread_points[abs_pt] = {"home": [], "away": [], "retail_home": [], "retail_away": [], "novig_home": [], "novig_away": []}
+                    entry = {"book": book, "point": pt_val, "price": r["price"], "liquidity": r["liquidity"]}
+                    if r["outcome"] == home: 
+                        spread_points[abs_pt]["home"].append(entry)
+                        if is_novig:
+                            spread_points[abs_pt]["novig_home"].append(entry)
+                        else:
+                            spread_points[abs_pt]["retail_home"].append(entry)
+                    else: 
+                        spread_points[abs_pt]["away"].append(entry)
+                        if is_novig:
+                            spread_points[abs_pt]["novig_away"].append(entry)
+                        else:
+                            spread_points[abs_pt]["retail_away"].append(entry)
 
             best_spread_home, best_spread_away = None, None
+            best_retail_spread_home, best_retail_spread_away = None, None
+            novig_spread_home, novig_spread_away = None, None
+
             for pt, sides in spread_points.items():
                 best_h = max(sides["home"], key=lambda x: x["price"]) if sides["home"] else None
                 best_a = max(sides["away"], key=lambda x: x["price"]) if sides["away"] else None
@@ -815,6 +851,7 @@ def export_mobile_data(odds_data_with_liq, props_data):
                         best_spread_away = best_a
                     if imp < 1.015:
                         roi = round((1.0 - imp) * 100, 2)
+                        has_novig = (best_a["book"].lower() == "novig" or best_h["book"].lower() == "novig")
                         arbs_list.append({
                             "id": f"arb_spd_{eid}_{pt}",
                             "sport": ev["sport_label"],
@@ -823,13 +860,30 @@ def export_mobile_data(odds_data_with_liq, props_data):
                             "roi": roi if roi > 0 else 0.2,
                             "hold": round(imp * 100, 2),
                             "commence_time": ev["commence_time"],
+                            "is_novig": has_novig,
                             "side_a": {"name": away, "outcome": f"{away} {best_a['point']:+g}", "book": best_a["book"], "price": best_a["price"], "liquidity": best_a["liquidity"]},
                             "side_b": {"name": home, "outcome": f"{home} {best_h['point']:+g}", "book": best_h["book"], "price": best_h["price"], "liquidity": best_h["liquidity"]}
                         })
 
-            # Totals
+                # Retail spread best
+                ret_h = max(sides["retail_home"], key=lambda x: x["price"]) if sides["retail_home"] else None
+                ret_a = max(sides["retail_away"], key=lambda x: x["price"]) if sides["retail_away"] else None
+                if ret_h and ret_a:
+                    ret_imp = american_to_implied(ret_h["price"]) + american_to_implied(ret_a["price"])
+                    if best_retail_spread_home is None or ret_imp < (american_to_implied(best_retail_spread_home["price"]) + american_to_implied(best_retail_spread_away["price"])):
+                        best_retail_spread_home = ret_h
+                        best_retail_spread_away = ret_a
+
+                # Novig spread
+                nov_h = max(sides["novig_home"], key=lambda x: x["price"]) if sides["novig_home"] else None
+                nov_a = max(sides["novig_away"], key=lambda x: x["price"]) if sides["novig_away"] else None
+                if nov_h: novig_spread_home = nov_h
+                if nov_a: novig_spread_away = nov_a
+
+            # Totals: Overall, Retail-only, and Novig-only
             total_points = {}
             for book, rows in ev["markets"]["totals"].items():
+                is_novig = (book.lower() == "novig")
                 for r in rows:
                     pt = r.get("point")
                     if pt is None or pt == "": continue
@@ -837,11 +891,26 @@ def export_mobile_data(odds_data_with_liq, props_data):
                         pt_val = float(pt)
                     except Exception:
                         continue
-                    if pt_val not in total_points: total_points[pt_val] = {"over": [], "under": []}
-                    if r["outcome"].lower() == "over": total_points[pt_val]["over"].append({"book": book, "point": pt_val, "price": r["price"], "liquidity": r["liquidity"]})
-                    elif r["outcome"].lower() == "under": total_points[pt_val]["under"].append({"book": book, "point": pt_val, "price": r["price"], "liquidity": r["liquidity"]})
+                    if pt_val not in total_points: 
+                        total_points[pt_val] = {"over": [], "under": [], "retail_over": [], "retail_under": [], "novig_over": [], "novig_under": []}
+                    entry = {"book": book, "point": pt_val, "price": r["price"], "liquidity": r["liquidity"]}
+                    if r["outcome"].lower() == "over": 
+                        total_points[pt_val]["over"].append(entry)
+                        if is_novig:
+                            total_points[pt_val]["novig_over"].append(entry)
+                        else:
+                            total_points[pt_val]["retail_over"].append(entry)
+                    elif r["outcome"].lower() == "under": 
+                        total_points[pt_val]["under"].append(entry)
+                        if is_novig:
+                            total_points[pt_val]["novig_under"].append(entry)
+                        else:
+                            total_points[pt_val]["retail_under"].append(entry)
 
             best_total_over, best_total_under = None, None
+            best_retail_total_over, best_retail_total_under = None, None
+            novig_total_over, novig_total_under = None, None
+
             for pt, sides in total_points.items():
                 best_o = max(sides["over"], key=lambda x: x["price"]) if sides["over"] else None
                 best_u = max(sides["under"], key=lambda x: x["price"]) if sides["under"] else None
@@ -852,6 +921,7 @@ def export_mobile_data(odds_data_with_liq, props_data):
                         best_total_under = best_u
                     if imp < 1.015:
                         roi = round((1.0 - imp) * 100, 2)
+                        has_novig = (best_o["book"].lower() == "novig" or best_u["book"].lower() == "novig")
                         arbs_list.append({
                             "id": f"arb_tot_{eid}_{pt}",
                             "sport": ev["sport_label"],
@@ -860,9 +930,25 @@ def export_mobile_data(odds_data_with_liq, props_data):
                             "roi": roi if roi > 0 else 0.15,
                             "hold": round(imp * 100, 2),
                             "commence_time": ev["commence_time"],
+                            "is_novig": has_novig,
                             "side_a": {"name": "Over", "outcome": f"Over {pt}", "book": best_o["book"], "price": best_o["price"], "liquidity": best_o["liquidity"]},
                             "side_b": {"name": "Under", "outcome": f"Under {pt}", "book": best_u["book"], "price": best_u["price"], "liquidity": best_u["liquidity"]}
                         })
+
+                # Retail totals best
+                ret_o = max(sides["retail_over"], key=lambda x: x["price"]) if sides["retail_over"] else None
+                ret_u = max(sides["retail_under"], key=lambda x: x["price"]) if sides["retail_under"] else None
+                if ret_o and ret_u:
+                    ret_imp = american_to_implied(ret_o["price"]) + american_to_implied(ret_u["price"])
+                    if best_retail_total_over is None or ret_imp < (american_to_implied(best_retail_total_over["price"]) + american_to_implied(best_retail_total_under["price"])):
+                        best_retail_total_over = ret_o
+                        best_retail_total_under = ret_u
+
+                # Novig totals
+                nov_o = max(sides["novig_over"], key=lambda x: x["price"]) if sides["novig_over"] else None
+                nov_u = max(sides["novig_under"], key=lambda x: x["price"]) if sides["novig_under"] else None
+                if nov_o: novig_total_over = nov_o
+                if nov_u: novig_total_under = nov_u
 
             matchups_list.append({
                 "id": eid,
@@ -879,7 +965,19 @@ def export_mobile_data(odds_data_with_liq, props_data):
                     "spread_away": best_spread_away,
                     "spread_home": best_spread_home,
                     "total_over": best_total_over,
-                    "total_under": best_total_under
+                    "total_under": best_total_under,
+                    "retail_h2h_away": best_retail_ml_away or best_ml_away,
+                    "retail_h2h_home": best_retail_ml_home or best_ml_home,
+                    "retail_spread_away": best_retail_spread_away or best_spread_away,
+                    "retail_spread_home": best_retail_spread_home or best_spread_home,
+                    "retail_total_over": best_retail_total_over or best_total_over,
+                    "retail_total_under": best_retail_total_under or best_total_under,
+                    "novig_h2h_away": novig_ml_away,
+                    "novig_h2h_home": novig_ml_home,
+                    "novig_spread_away": novig_spread_away,
+                    "novig_spread_home": novig_spread_home,
+                    "novig_total_over": novig_total_over,
+                    "novig_total_under": novig_total_under
                 },
                 "all_markets": ev["markets"]
             })
