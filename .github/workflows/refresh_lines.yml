@@ -1,9 +1,9 @@
 name: Refresh Betting Lines & Rebuild Web App
 
 on:
-  schedule:
-    # Run every 30 minutes
-    - cron: '*/30 * * * *'
+  # Schedule disabled for now - runs on-demand only
+  # schedule:
+  #   - cron: '*/30 * * * *'
   workflow_dispatch:
     # Allows manual 1-tap trigger from GitHub Web or GitHub Mobile App
     inputs:
