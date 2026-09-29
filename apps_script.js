@@ -566,7 +566,7 @@ function toggleAutoUpdate() {
  * Helper to update status message and timestamp on Settings sheet.
  */
 function updateStatus(message, settingsSheet) {
-  var timestamp = Utilities.formatDate(new Date(), "GMT-5", "yyyy-MM-dd HH:mm:ss");
+  var timestamp = Utilities.formatDate(new Date(), "America/New_York", "yyyy-MM-dd hh:mm:ss a 'ET'");
   settingsSheet.getRange("B23").setValue(timestamp);
   settingsSheet.getRange("B24").setValue(message);
   SpreadsheetApp.flush();
@@ -589,7 +589,7 @@ function doGet(e) {
   
   // Return simple JSON feed
   var result = {
-    updated_at: Utilities.formatDate(new Date(), "GMT-4", "yyyy-MM-dd hh:mm:ss a 'ET'"),
+    updated_at: Utilities.formatDate(new Date(), "America/New_York", "yyyy-MM-dd hh:mm:ss a 'ET'"),
     odds: oddsRows,
     props: propsRows
   };

@@ -9,8 +9,18 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
 
+def get_eastern_now():
+    """Returns current datetime in US Eastern Time (handling EDT/EST automatically)."""
+    try:
+        return datetime.now(ZoneInfo("America/New_York"))
+    except Exception:
+        now_utc = datetime.now(timezone.utc)
+        month = now_utc.month
+        offset_hours = -4 if 3 <= month <= 11 else -5
+        return now_utc.astimezone(timezone(timedelta(hours=offset_hours)))
+
 def format_to_eastern(iso_str):
-    """Converts an ISO 8601 UTC timestamp string to US Eastern Time (YYYY-MM-DD HH:MM:SS)."""
+    """Converts an ISO 8601 UTC timestamp string to US Eastern Time in 12-hour format (YYYY-MM-DD hh:mm:ss AM/PM)."""
     if not iso_str:
         return ""
     try:
@@ -19,8 +29,10 @@ def format_to_eastern(iso_str):
         try:
             dt_eastern = dt.astimezone(ZoneInfo("America/New_York"))
         except Exception:
-            dt_eastern = dt.astimezone(timezone(timedelta(hours=-4)))
-        return dt_eastern.strftime("%Y-%m-%d %H:%M:%S")
+            month = dt.month
+            offset_hours = -4 if 3 <= month <= 11 else -5
+            dt_eastern = dt.astimezone(timezone(timedelta(hours=offset_hours)))
+        return dt_eastern.strftime("%Y-%m-%d %I:%M:%S %p")
     except Exception:
         return iso_str.replace("T", " ").replace("Z", "")
 
@@ -193,7 +205,7 @@ def read_settings(settings_sheet):
 
 def update_status(settings_sheet, message):
     """Updates the status timestamp and message in the Settings tab."""
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    timestamp = get_eastern_now().strftime("%Y-%m-%d %I:%M:%S %p ET")
     labels = settings_sheet.col_values(1)
     
     last_updated_row = None
@@ -1052,7 +1064,7 @@ def export_mobile_data(odds_data_with_liq, props_data):
                 })
 
         output = {
-            "updated_at": datetime.now().strftime("%Y-%m-%d %I:%M:%S %p ET"),
+            "updated_at": get_eastern_now().strftime("%Y-%m-%d %I:%M:%S %p ET"),
             "sports_count": len(set(m["sport_label"] for m in matchups_list)),
             "matchups_count": len(matchups_list),
             "arbs_count": len(arbs_list),
@@ -1068,7 +1080,7 @@ def export_mobile_data(odds_data_with_liq, props_data):
         print(f"Warning: Could not export mobile_data.json: {e}")
 
 def main():
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] Connecting to Google Sheets...")
+    print(f"[{get_eastern_now().strftime('%I:%M:%S %p ET')}] Connecting to Google Sheets...")
     sheet = get_google_sheet()
     
     settings_sheet = sheet.worksheet("Settings")
@@ -1193,7 +1205,7 @@ def main():
         
     # Synthesize missing Novig rows if Novig was selected
     if "novig" in bookmakers and depth_data:
-        update_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        update_time = get_eastern_now().strftime("%Y-%m-%d %I:%M:%S %p")
         
         # Collect distinct market outcomes across all other bookmakers
         outcomes_by_game = {}
@@ -1295,7 +1307,7 @@ def main():
     # Export mobile-ready JSON bundle for mobile web app
     export_mobile_data(odds_data_with_liquidity, props_data)
     
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] Done!")
+    print(f"[{get_eastern_now().strftime('%I:%M:%S %p ET')}] Done!")
 
 if __name__ == "__main__":
     main()

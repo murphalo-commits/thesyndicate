@@ -592,7 +592,7 @@ def build_mobile_app_html():
         function formatGameTime(timeStr) {{
             if (!timeStr) return '';
             try {{
-                const parts = timeStr.trim().split(' ');
+                const parts = timeStr.trim().split(/\\s+/);
                 if (parts.length >= 2) {{
                     const dateParts = parts[0].split('-');
                     const timeParts = parts[1].split(':');
@@ -600,9 +600,16 @@ def build_mobile_app_html():
                     const day = parseInt(dateParts[2], 10);
                     let hour = parseInt(timeParts[0], 10);
                     const min = timeParts[1];
-                    const ampm = hour >= 12 ? 'PM' : 'AM';
-                    hour = hour % 12;
-                    hour = hour ? hour : 12;
+                    let ampm;
+                    if (parts.length >= 3 && (parts[2].toUpperCase() === 'AM' || parts[2].toUpperCase() === 'PM')) {{
+                        ampm = parts[2].toUpperCase();
+                        hour = hour % 12;
+                        hour = hour ? hour : 12;
+                    }} else {{
+                        ampm = hour >= 12 ? 'PM' : 'AM';
+                        hour = hour % 12;
+                        hour = hour ? hour : 12;
+                    }}
                     
                     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                     const mName = monthNames[month - 1] || `${{month}}`;
@@ -612,6 +619,31 @@ def build_mobile_app_html():
             }} catch(e) {{
                 return timeStr;
             }}
+        }}
+
+        function formatHeaderTime(timeStr) {{
+            if (!timeStr) return 'Updated Just Now';
+            try {{
+                const parts = timeStr.trim().split(/\\s+/);
+                if (parts.length >= 3) {{
+                    const tParts = parts[1].split(':');
+                    let h = parseInt(tParts[0], 10);
+                    let m = tParts[1];
+                    let ampm = parts[2];
+                    let tz = parts[3] || 'ET';
+                    if (ampm !== 'AM' && ampm !== 'PM') {{
+                        ampm = h >= 12 ? 'PM' : 'AM';
+                        h = h % 12;
+                        h = h ? h : 12;
+                        tz = parts[2] || 'ET';
+                    }} else {{
+                        h = h % 12;
+                        h = h ? h : 12;
+                    }}
+                    return `Updated ${{h}}:${{m}} ${{ampm}} ${{tz}}`;
+                }}
+            }} catch(e) {{}}
+            return timeStr;
         }}
 
         // Tab Navigation
@@ -1706,7 +1738,7 @@ def build_mobile_app_html():
             renderMatchups();
             renderArbs();
             renderProps();
-            document.getElementById('headerUpdatedTime').textContent = appData.updated_at || 'Just now';
+            document.getElementById('headerUpdatedTime').textContent = formatHeaderTime(appData.updated_at);
             document.getElementById('modalMatchupCount').textContent = appData.matchups_count || 0;
             document.getElementById('modalPropsCount').textContent = appData.props_count || 0;
             document.getElementById('modalLastSync').textContent = appData.updated_at || '-';

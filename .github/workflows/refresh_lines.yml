@@ -23,6 +23,8 @@ jobs:
   refresh:
     name: Refresh Odds Data
     runs-on: ubuntu-latest
+    env:
+      TZ: 'America/New_York'
 
     steps:
       - name: Checkout Repository
