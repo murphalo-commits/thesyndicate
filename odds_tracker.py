@@ -92,14 +92,24 @@ PROPS_SPORT_CONFIG = [
 ]
 
 def get_google_sheet():
-    """Connects to Google Sheets using the service account credentials."""
-    if not os.path.exists(CREDENTIALS_FILE):
-        print(f"Error: '{CREDENTIALS_FILE}' not found in the current folder.")
-        print("Please follow the setup instructions in the README to create your Google Cloud credentials.")
-        sys.exit(1)
-        
+    """Connects to Google Sheets using service account credentials from file or GOOGLE_CREDENTIALS env var."""
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILE, scope)
+    creds = None
+
+    if os.path.exists(CREDENTIALS_FILE):
+        creds = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILE, scope)
+    elif os.environ.get("GOOGLE_CREDENTIALS"):
+        try:
+            creds_dict = json.loads(os.environ["GOOGLE_CREDENTIALS"])
+            creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+        except Exception as e:
+            print(f"Error parsing GOOGLE_CREDENTIALS environment variable: {e}")
+            sys.exit(1)
+    else:
+        print(f"Error: '{CREDENTIALS_FILE}' not found and GOOGLE_CREDENTIALS env var not set.")
+        print("Please follow setup instructions or set GOOGLE_CREDENTIALS in your GitHub repository secrets.")
+        sys.exit(1)
+
     client = gspread.authorize(creds)
     
     try:
@@ -1284,6 +1294,13 @@ def main():
     
     # Export mobile-ready JSON bundle for mobile web app
     export_mobile_data(odds_data_with_liquidity, props_data)
+
+    # Auto-rebuild mobile web app HTML and index.html
+    try:
+        from build_mobile_html import build_mobile_app_html
+        build_mobile_app_html()
+    except Exception as e:
+        print(f"Note: Could not run build_mobile_app_html automatically: {e}")
     
     print(f"[{datetime.now().strftime('%H:%M:%S')}] Done!")
 

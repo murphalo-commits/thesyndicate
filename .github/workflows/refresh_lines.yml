@@ -1,0 +1,58 @@
+name: Refresh Betting Lines & Rebuild Web App
+
+on:
+  schedule:
+    # Run every 30 minutes
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+    # Allows manual 1-tap trigger from GitHub Web or GitHub Mobile App
+    inputs:
+      reason:
+        description: 'Reason for manual refresh'
+        required: false
+        default: 'Manual mobile refresh'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-odds
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh Odds & Redeploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Odds Tracker & Build Mobile Web App
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+        run: |
+          python odds_tracker.py
+
+      - name: Commit & Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add mobile_data.json mobile_odds_hub.html index.html
+          if git diff --staged --quiet; then
+            echo "No new changes to deploy."
+          else
+            git commit -m "Auto-refresh lines via GitHub Actions [skip ci]"
+            git push origin main
+          fi
