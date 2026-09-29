@@ -3,9 +3,6 @@ import json
 
 def build_mobile_app_html():
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    data_path = os.path.join(base_dir, "mobile_data.json")
-    with open(data_path, "r", encoding="utf-8") as f:
-        data_json_str = f.read()
 
     html_content = f'''<!DOCTYPE html>
 <html lang="en" class="dark">
@@ -528,9 +525,9 @@ def build_mobile_app_html():
         </div>
     </div>
 
-    <!-- EMBEDDED DATASET (Guarantees Instant Offline & Standalone Operation) -->
+    <!-- Dynamic Data Initializer (Fetches mobile_data.json on demand) -->
     <script>
-        window.INITIAL_DATA = {data_json_str};
+        window.INITIAL_DATA = null;
     </script>
 
     <!-- App Logic Script -->
@@ -1715,21 +1712,21 @@ def build_mobile_app_html():
             document.getElementById('modalLastSync').textContent = appData.updated_at || '-';
         }}
 
-        // Data Refresh (Local File & Google Apps Script Support)
+        // Data Refresh (Loads dynamically from ./mobile_data.json)
         async function refreshData() {{
             const btn = document.getElementById('refreshBtn');
-            btn.innerHTML = `<span class="animate-spin">⟳</span><span>Syncing...</span>`;
+            if (btn) btn.innerHTML = `<span class="inline-block animate-spin">⟳</span><span>Syncing...</span>`;
 
-            const customUrl = localStorage.getItem('oddshub_apps_script_url');
             let success = false;
+            const customUrl = localStorage.getItem('oddshub_apps_script_url');
 
             if (customUrl) {{
                 try {{
                     const res = await fetch(customUrl);
                     const json = await res.json();
-                    if (json && json.matchups) {{
+                    if (json && json.matchups && json.matchups.length > 0) {{
                         appData = json;
-                        localStorage.setItem('oddshub_cached_data', JSON.stringify(json));
+                        try {{ localStorage.setItem('oddshub_cached_data', JSON.stringify(json)); }} catch(e) {{}}
                         success = true;
                     }}
                 }} catch (e) {{
@@ -1740,19 +1737,24 @@ def build_mobile_app_html():
             if (!success) {{
                 try {{
                     const res = await fetch('./mobile_data.json?t=' + Date.now());
-                    const json = await res.json();
-                    if (json && json.matchups) {{
-                        appData = json;
-                        localStorage.setItem('oddshub_cached_data', JSON.stringify(json));
-                        success = true;
+                    if (res.ok) {{
+                        const json = await res.json();
+                        if (json && json.matchups && json.matchups.length > 0) {{
+                            appData = json;
+                            try {{ localStorage.setItem('oddshub_cached_data', JSON.stringify(json)); }} catch(e) {{}}
+                            success = true;
+                        }}
                     }}
                 }} catch (e) {{
-                    console.log('Using embedded dataset');
+                    console.warn('Could not fetch ./mobile_data.json:', e);
                 }}
             }}
 
-            btn.innerHTML = `<span>⟳</span><span>Sync</span>`;
-            renderAll();
+            if (btn) btn.innerHTML = `<span>⟳</span><span>Sync</span>`;
+            if (success) {{
+                updateSportPills();
+                renderAll();
+            }}
         }}
 
         // Settings Modal
@@ -1792,39 +1794,30 @@ def build_mobile_app_html():
         }}
 
         // Initialization
-        window.addEventListener('DOMContentLoaded', () => {{
+        window.addEventListener('DOMContentLoaded', async () => {{
+            // 1. Immediately render cached data from localStorage (instant 0ms perceived load!)
             const cached = localStorage.getItem('oddshub_cached_data');
-            let useEmbedded = true;
             if (cached) {{
                 try {{
                     const parsed = JSON.parse(cached);
-                    const parseTime = (tStr) => {{
-                        if (!tStr) return 0;
-                        try {{
-                            return new Date(tStr.replace(' ET', '').trim()).getTime() || 0;
-                        }} catch(e) {{
-                            return 0;
-                        }}
-                    }};
-                    const cachedTime = parseTime(parsed.updated_at);
-                    const initialTime = parseTime(window.INITIAL_DATA?.updated_at);
-                    if (cachedTime > initialTime && parsed.matchups && parsed.matchups.length > 0) {{
+                    if (parsed && parsed.matchups && parsed.matchups.length > 0) {{
                         appData = parsed;
-                        useEmbedded = false;
                     }}
                 }} catch(e) {{}}
             }}
-            if (useEmbedded) {{
-                appData = window.INITIAL_DATA || {{ matchups: [], arbs: [], props: [] }};
-                try {{
-                    localStorage.setItem('oddshub_cached_data', JSON.stringify(appData));
-                }} catch(e) {{}}
+            if (!appData || !appData.matchups) {{
+                appData = {{ updated_at: '', matchups: [], arbs: [], props: [] }};
             }}
+
             updateNovigModeButtons();
+            updateSportPills();
             renderAll();
             calculateArb();
             calculateFreeBet();
             updatePayoutEstimate();
+
+            // 2. Fetch fresh live lines from ./mobile_data.json in background
+            await refreshData();
         }});
     </script>
 </body>

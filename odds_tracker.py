@@ -1294,13 +1294,6 @@ def main():
     
     # Export mobile-ready JSON bundle for mobile web app
     export_mobile_data(odds_data_with_liquidity, props_data)
-
-    # Auto-rebuild mobile web app HTML and index.html
-    try:
-        from build_mobile_html import build_mobile_app_html
-        build_mobile_app_html()
-    except Exception as e:
-        print(f"Note: Could not run build_mobile_app_html automatically: {e}")
     
     print(f"[{datetime.now().strftime('%H:%M:%S')}] Done!")
 

@@ -1,4 +1,4 @@
-name: Refresh Betting Lines & Rebuild Web App
+name: Refresh Betting Lines
 
 on:
   # Schedule disabled for now - runs on-demand only
@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   refresh:
-    name: Refresh Odds & Redeploy
+    name: Refresh Odds Data
     runs-on: ubuntu-latest
 
     steps:
@@ -39,7 +39,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Odds Tracker & Build Mobile Web App
+      - name: Run Odds Tracker
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         run: |
@@ -49,10 +49,10 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add mobile_data.json mobile_odds_hub.html index.html
+          git add mobile_data.json
           if git diff --staged --quiet; then
             echo "No new changes to deploy."
           else
-            git commit -m "Auto-refresh lines via GitHub Actions [skip ci]"
+            git commit -m "Refresh betting lines data [skip ci]"
             git push origin main
           fi
