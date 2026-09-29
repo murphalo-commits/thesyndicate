@@ -49,6 +49,7 @@ function setupSheets() {
       ["MLB (baseball_mlb)", true],
       ["NHL (icehockey_nhl)", false],
       ["Tennis (all active tournaments)", true],
+      ["GitHub PAT (For In-App Cloud Refresh)", ""],
       ["--- STATUS ---", ""],
       ["Last Updated", ""],
       ["Status Message", "Click 'Sportsbook Tracker' -> 'Refresh Odds Data' to begin!"]
@@ -573,21 +574,27 @@ function updateStatus(message, settingsSheet) {
 }
 
 /**
- * Serves live odds and player props as JSON for the OddsHub Mobile App.
- * To enable on your mobile phone:
- * In Apps Script editor -> Deploy -> New deployment -> Select type: Web app
- * -> Execute as: Me -> Who has access: Anyone
- * Copy the URL and paste it into the OddsHub Mobile Settings modal!
+ * Serves live odds feed AND triggers cloud line refreshes for the OddsHub Mobile App.
+ * 
+ * Actions:
+ * - GET ?action=refresh -> Triggers GitHub Actions line refresh workflow
+ * - GET (no params)     -> Returns live odds & player props JSON feed
  */
 function doGet(e) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
+
+  // 1. Handle Cloud Line Refresh Action
+  if (e && e.parameter && (e.parameter.action === 'refresh' || e.parameter.action === 'trigger')) {
+    return handleTriggerRefresh(ss);
+  }
+
+  // 2. Default: Return live odds & props JSON feed
   var oddsSheet = ss.getSheetByName("Odds Data");
   var propsSheet = ss.getSheetByName("Player Props Data");
   
   var oddsRows = oddsSheet ? oddsSheet.getDataRange().getValues() : [];
   var propsRows = propsSheet ? propsSheet.getDataRange().getValues() : [];
   
-  // Return simple JSON feed
   var result = {
     updated_at: Utilities.formatDate(new Date(), "America/New_York", "yyyy-MM-dd hh:mm:ss a 'ET'"),
     odds: oddsRows,
@@ -597,3 +604,92 @@ function doGet(e) {
   return ContentService.createTextOutput(JSON.stringify(result))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
+function doPost(e) {
+  return doGet(e);
+}
+
+/**
+ * Dispatches GitHub Actions workflow to run odds_tracker.py in the cloud.
+ */
+function handleTriggerRefresh(ss) {
+  // Check rate limit (prevent spamming: minimum 45s between runs)
+  var scriptProps = PropertiesService.getScriptProperties();
+  var lastTrigger = parseInt(scriptProps.getProperty("LAST_REFRESH_TIMESTAMP") || "0", 10);
+  var now = new Date().getTime();
+  var cooldownSec = 45;
+  
+  if (now - lastTrigger < cooldownSec * 1000) {
+    var remaining = Math.ceil((cooldownSec * 1000 - (now - lastTrigger)) / 1000);
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "busy",
+      remaining_seconds: remaining,
+      message: "A cloud scan was recently started. Please wait " + remaining + "s for it to finish."
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // Retrieve GitHub Personal Access Token (Script Properties or Settings sheet)
+  var token = scriptProps.getProperty("GITHUB_PAT") || "";
+  if (!token && ss) {
+    var settingsSheet = ss.getSheetByName("Settings");
+    if (settingsSheet) {
+      var vals = settingsSheet.getDataRange().getValues();
+      for (var i = 0; i < vals.length; i++) {
+        var key = vals[i][0] ? vals[i][0].toString().trim().toLowerCase() : "";
+        if (key.indexOf("github pat") !== -1 || key.indexOf("github token") !== -1) {
+          token = vals[i][1] ? vals[i][1].toString().trim() : "";
+          break;
+        }
+      }
+    }
+  }
+
+  if (!token) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "error",
+      message: "GitHub Personal Access Token is missing. Add 'GitHub PAT' to the Settings sheet or Script Properties."
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  try {
+    var ghUrl = "https://api.github.com/repos/murphalo-commits/thesyndicate/actions/workflows/refresh_lines.yml/dispatches";
+    var options = {
+      method: "post",
+      contentType: "application/json",
+      headers: {
+        "Accept": "application/vnd.github+json",
+        "Authorization": "Bearer " + token,
+        "User-Agent": "OddsHub-App"
+      },
+      payload: JSON.stringify({
+        ref: "main",
+        inputs: { reason: "Triggered from OddsHub Web App" }
+      }),
+      muteHttpExceptions: true
+    };
+
+    var response = UrlFetchApp.fetch(ghUrl, options);
+    var code = response.getResponseCode();
+
+    if (code === 204 || code === 200) {
+      scriptProps.setProperty("LAST_REFRESH_TIMESTAMP", now.toString());
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "success",
+        cooldown: cooldownSec,
+        message: "Cloud line refresh triggered! Sportsbooks are being scanned. Lines will update in ~45 seconds."
+      })).setMimeType(ContentService.MimeType.JSON);
+    } else {
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "error",
+        code: code,
+        message: "GitHub API responded with code " + code + ": " + response.getContentText()
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+  } catch(err) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "error",
+      message: "Failed to connect to GitHub Actions: " + err.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+

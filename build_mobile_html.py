@@ -83,14 +83,30 @@ def build_mobile_app_html():
                     <button onclick="toggleTheme()" class="p-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white active:scale-95 transition" title="Toggle Theme">
                         <span id="themeIcon" class="text-xs">☀️</span>
                     </button>
-                    <button onclick="openSettingsModal()" class="p-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white active:scale-95 transition text-xs" title="Settings & Refresh">
+                    <button onclick="openSettingsModal()" class="p-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white active:scale-95 transition text-xs" title="Settings">
                         ⚙️
                     </button>
-                    <button onclick="refreshData()" id="refreshBtn" class="flex items-center space-x-1 px-2 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] active:scale-95 shadow-sm transition">
+                    <button onclick="refreshData()" id="refreshBtn" class="flex items-center space-x-1 px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-[11px] active:scale-95 shadow-sm transition border border-slate-700/60" title="Sync Saved Lines">
                         <span>⟳</span>
                         <span>Sync</span>
                     </button>
+                    <button onclick="promptTriggerScan()" id="scanBtn" class="flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-gradient-to-r from-amber-500 to-emerald-500 hover:from-amber-400 hover:to-emerald-400 text-slate-950 font-black text-[11px] active:scale-95 shadow-md shadow-amber-500/10 transition" title="Run Live Sportsbook Scan">
+                        <span>⚡</span>
+                        <span>Scan</span>
+                    </button>
                 </div>
+            </div>
+
+            <!-- Sticky Scan Progress Banner -->
+            <div id="scanStatusBanner" class="hidden -mx-3.5 px-3.5 py-2 bg-gradient-to-r from-amber-950/90 via-slate-900 to-emerald-950/90 border-b border-amber-500/40 text-xs text-white items-center justify-between shadow-lg transition-all">
+                <div class="flex items-center space-x-2 min-w-0">
+                    <span id="scanSpinner" class="inline-block animate-spin text-amber-400 font-bold text-sm">⟳</span>
+                    <div class="truncate">
+                        <div id="scanStatusTitle" class="font-bold text-amber-300 text-[11px]">Cloud Odds Scan Running...</div>
+                        <div id="scanStatusSub" class="text-[9px] text-slate-300 truncate">Fetching lines from sportsbooks & updating sheets</div>
+                    </div>
+                </div>
+                <div id="scanCountdown" class="font-mono font-black text-amber-300 text-xs bg-slate-900/90 px-2 py-0.5 rounded border border-amber-500/40 shrink-0 ml-2">45s</div>
             </div>
 
             <!-- Sport Category Carousel (Scrollable Pills) -->
@@ -490,11 +506,27 @@ def build_mobile_app_html():
             </div>
 
             <div class="py-3 space-y-3 text-xs">
-                <div>
-                    <label class="block font-semibold text-slate-300 mb-1">Google Apps Script Web App URL (Optional):</label>
-                    <input type="text" id="appsScriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec"
-                        class="w-full bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-200 text-xs focus:outline-none focus:border-emerald-500">
-                    <p class="text-[10px] text-slate-400 mt-1">If provided, the app queries this URL directly on mobile to fetch live Google Sheet updates.</p>
+                <div class="bg-gradient-to-br from-slate-900 to-indigo-950/60 rounded-xl p-3 border border-indigo-500/30 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-1.5">
+                            <span class="text-amber-400 font-bold text-sm">⚡</span>
+                            <span class="font-bold text-white text-[11px]">In-App Cloud Live Odds Scan</span>
+                        </div>
+                        <span class="text-[9px] bg-indigo-500/20 text-indigo-300 px-1.5 py-0.5 rounded font-medium border border-indigo-500/30">Free Cloud</span>
+                    </div>
+                    <p class="text-[10px] text-slate-300 leading-relaxed">
+                        Enables 1-tap live sportsbook scraping directly from this app via Google Apps Script and GitHub Actions.
+                    </p>
+                    <div>
+                        <label class="block font-semibold text-slate-300 text-[10px] mb-1">Google Apps Script Web App URL:</label>
+                        <input type="text" id="appsScriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec"
+                            class="w-full bg-slate-950/80 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-200 text-xs focus:outline-none focus:border-emerald-500 font-mono">
+                    </div>
+                    <div class="pt-1">
+                        <button onclick="triggerCloudScanFromSettings()" class="w-full py-1.5 bg-gradient-to-r from-amber-500 to-emerald-500 hover:from-amber-400 hover:to-emerald-400 text-slate-950 font-black rounded-lg text-xs transition active:scale-95 shadow-sm">
+                            ⚡ Run Cloud Scan Now
+                        </button>
+                    </div>
                 </div>
 
                 <div class="bg-slate-800/80 rounded-lg p-2.5 border border-slate-700/60">
@@ -516,10 +548,49 @@ def build_mobile_app_html():
 
             <div class="pt-2 flex gap-2">
                 <button onclick="saveSettings()" class="flex-1 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg text-xs transition">
-                    Save & Sync Now
+                    Save Settings
                 </button>
                 <button onclick="closeSettingsModal()" class="px-4 py-2 bg-slate-800 text-slate-300 font-bold rounded-lg text-xs hover:bg-slate-700 transition">
                     Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cloud Scan Confirmation Modal -->
+    <div id="scanModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs">
+        <div class="bg-slate-900 border border-slate-700/80 rounded-2xl max-w-sm w-full p-4 shadow-2xl space-y-3">
+            <div class="flex items-center space-x-3 pb-2 border-b border-slate-800">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-emerald-500 flex items-center justify-center text-slate-950 font-black text-base shadow-sm">
+                    ⚡
+                </div>
+                <div>
+                    <h3 class="text-sm font-black text-white">Live Sportsbook Scan</h3>
+                    <p class="text-[10px] text-slate-400">Trigger on-demand cloud scraper</p>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-300 leading-relaxed">
+                Pulls fresh lines from <strong class="text-white">DraftKings, FanDuel, BetMGM, Novig</strong>, updates the Google Sheet, and syncs this web app automatically.
+            </p>
+
+            <div class="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800 text-[10.5px] space-y-1">
+                <div class="flex justify-between text-slate-400">
+                    <span>Estimated Duration:</span>
+                    <span class="text-amber-400 font-bold">~45 seconds</span>
+                </div>
+                <div class="flex justify-between text-slate-400">
+                    <span>Auto-Sync When Done:</span>
+                    <span class="text-emerald-400 font-bold">Yes (Instant)</span>
+                </div>
+            </div>
+
+            <div class="flex space-x-2 pt-1">
+                <button onclick="closeScanModal()" class="flex-1 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition">
+                    Cancel
+                </button>
+                <button onclick="startCloudScan()" id="confirmScanBtn" class="flex-1 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-emerald-500 hover:from-amber-400 hover:to-emerald-400 text-slate-950 font-black text-xs shadow-md active:scale-95 transition">
+                    ⚡ Start Scan Now
                 </button>
             </div>
         </div>
@@ -1808,6 +1879,107 @@ def build_mobile_app_html():
             }}
             closeSettingsModal();
             refreshData();
+        }}
+
+        // In-App Cloud Scan Logic
+        const DEFAULT_APPS_SCRIPT_URL = '';
+
+        function getWebhookUrl() {{
+            return (localStorage.getItem('oddshub_apps_script_url') || DEFAULT_APPS_SCRIPT_URL).trim();
+        }}
+
+        function promptTriggerScan() {{
+            const url = getWebhookUrl();
+            if (!url) {{
+                openSettingsModal();
+                alert('To enable 1-tap live line scanning, please paste your Google Apps Script Web App URL in the Settings field below!');
+                const inp = document.getElementById('appsScriptUrlInput');
+                if (inp) {{
+                    inp.focus();
+                    inp.classList.add('ring-2', 'ring-amber-500');
+                    setTimeout(() => inp.classList.remove('ring-2', 'ring-amber-500'), 3000);
+                }}
+                return;
+            }}
+            document.getElementById('scanModal').classList.remove('hidden');
+        }}
+
+        function closeScanModal() {{
+            document.getElementById('scanModal').classList.add('hidden');
+        }}
+
+        function triggerCloudScanFromSettings() {{
+            const urlInput = document.getElementById('appsScriptUrlInput').value.trim();
+            if (urlInput) {{
+                localStorage.setItem('oddshub_apps_script_url', urlInput);
+            }}
+            closeSettingsModal();
+            promptTriggerScan();
+        }}
+
+        let scanCountdownTimer = null;
+
+        async function startCloudScan() {{
+            const url = getWebhookUrl();
+            if (!url) return;
+
+            closeScanModal();
+
+            const banner = document.getElementById('scanStatusBanner');
+            const title = document.getElementById('scanStatusTitle');
+            const sub = document.getElementById('scanStatusSub');
+            const countdown = document.getElementById('scanCountdown');
+            const spinner = document.getElementById('scanSpinner');
+
+            banner.classList.remove('hidden');
+            banner.classList.add('flex');
+            title.textContent = 'Cloud Odds Scan Triggered...';
+            title.className = 'font-bold text-amber-300 text-[11px]';
+            sub.textContent = 'Contacting GitHub Actions cloud runner (~45s)';
+            countdown.textContent = '45s';
+            if (spinner) spinner.classList.remove('hidden');
+
+            try {{
+                const webhookEndpoint = url.includes('?') ? `${{url}}&action=refresh` : `${{url}}?action=refresh`;
+                fetch(webhookEndpoint, {{ mode: 'no-cors' }}).catch(e => console.warn('Webhook notice:', e));
+                title.textContent = 'Scraping Sportsbook Lines...';
+                sub.textContent = 'Pulling DraftKings, FanDuel, Novig & recalculating arbs';
+            }} catch (err) {{
+                console.error('Trigger error:', err);
+            }}
+
+            let secRemaining = 45;
+            if (scanCountdownTimer) clearInterval(scanCountdownTimer);
+
+            scanCountdownTimer = setInterval(async () => {{
+                secRemaining--;
+                if (secRemaining > 0) {{
+                    countdown.textContent = `${{secRemaining}}s`;
+                    if (secRemaining <= 10) {{
+                        title.textContent = 'Finalizing Google Sheets & Web App...';
+                        sub.textContent = 'Committing fresh lines data to cloud';
+                    }}
+                }} else {{
+                    clearInterval(scanCountdownTimer);
+                    scanCountdownTimer = null;
+                    countdown.textContent = '✓ Done';
+                    title.textContent = 'Scan Complete!';
+                    title.className = 'font-bold text-emerald-400 text-[11px]';
+                    sub.textContent = 'Syncing latest live data...';
+                    if (spinner) spinner.classList.add('hidden');
+
+                    await refreshData();
+
+                    if (navigator.vibrate) {{
+                        try {{ navigator.vibrate([40, 60, 80]); }} catch(e) {{}}
+                    }}
+
+                    setTimeout(() => {{
+                        banner.classList.add('hidden');
+                        banner.classList.remove('flex');
+                    }}, 4000);
+                }}
+            }}, 1000);
         }}
 
         // Dark / Light Theme Toggle
