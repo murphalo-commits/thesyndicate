@@ -692,12 +692,13 @@ def export_mobile_data(odds_data_with_liq, props_data):
 
         def sport_to_label(s):
             s_lower = str(s).lower()
-            if "nfl" in s_lower: return "NFL"
+            if "wnba" in s_lower: return "WNBA"
             if "ncaaf" in s_lower: return "NCAAF"
+            if "ncaab" in s_lower: return "NCAAB"
+            if "nfl" in s_lower: return "NFL"
             if "mlb" in s_lower or "baseball" in s_lower: return "MLB"
             if "nhl" in s_lower or "hockey" in s_lower: return "NHL"
             if "nba" in s_lower or "basketball" in s_lower: return "NBA"
-            if "wnba" in s_lower: return "WNBA"
             return s.upper()
 
         def get_team_abbr(name):
@@ -705,7 +706,15 @@ def export_mobile_data(odds_data_with_liq, props_data):
                 "Philadelphia Eagles": "PHI", "Chicago Bears": "CHI",
                 "San Diego State Aztecs": "SDSU", "James Madison Dukes": "JMU",
                 "Boise State Broncos": "BSU", "San Diego Toreros": "USD",
-                "Northern Illinois Huskies": "NIU", "Arizona Wildcats": "ARIZ"
+                "Northern Illinois Huskies": "NIU", "Arizona Wildcats": "ARIZ",
+                # WNBA
+                "Las Vegas Aces": "LVA", "Indiana Fever": "IND",
+                "Minnesota Lynx": "MIN", "New York Liberty": "NYL",
+                "Atlanta Dream": "ATL", "Washington Mystics": "WAS",
+                "Golden State Valkyries": "GSV", "Dallas Wings": "DAL",
+                "Chicago Sky": "CHI", "Connecticut Sun": "CON",
+                "Los Angeles Sparks": "LAS", "Phoenix Mercury": "PHX",
+                "Seattle Storm": "SEA"
             }
             if name in special:
                 return special[name]

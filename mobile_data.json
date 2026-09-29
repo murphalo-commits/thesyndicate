@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-09-29 08:31:14 AM ET",
+  "updated_at": "2026-09-29 08:37:47 AM ET",
   "sports_count": 5,
   "matchups_count": 115,
-  "arbs_count": 176,
+  "arbs_count": 177,
   "props_count": 0,
   "matchups": [
     {
@@ -17,7 +17,7 @@
       "best_lines": {
         "h2h_away": {
           "book": "Novig",
-          "price": 174.0,
+          "price": 170.0,
           "liquidity": 0
         },
         "h2h_home": {
@@ -34,7 +34,7 @@
         "spread_home": {
           "book": "Novig",
           "point": -1.5,
-          "price": 130.0,
+          "price": 127.0,
           "liquidity": 0
         },
         "total_over": {
@@ -70,13 +70,13 @@
             {
               "outcome": "Atlanta Braves",
               "point": "",
-              "price": -190.0,
+              "price": -195.0,
               "liquidity": 0
             },
             {
               "outcome": "Philadelphia Phillies",
               "point": "",
-              "price": 155.0,
+              "price": 160.0,
               "liquidity": 0
             }
           ],
@@ -146,7 +146,7 @@
             {
               "outcome": "Philadelphia Phillies",
               "point": "",
-              "price": 174.0,
+              "price": 170.0,
               "liquidity": 0
             }
           ]
@@ -240,13 +240,13 @@
             {
               "outcome": "Atlanta Braves",
               "point": -1.5,
-              "price": 130.0,
+              "price": 127.0,
               "liquidity": 0
             },
             {
               "outcome": "Philadelphia Phillies",
               "point": 1.5,
-              "price": -135.0,
+              "price": -133.0,
               "liquidity": 0
             }
           ]
@@ -388,13 +388,13 @@
         "total_over": {
           "book": "Novig",
           "point": 8.5,
-          "price": 113.0,
+          "price": 108.0,
           "liquidity": 0
         },
         "total_under": {
           "book": "Novig",
           "point": 8.5,
-          "price": -115.0,
+          "price": -113.0,
           "liquidity": 0
         }
       },
@@ -688,13 +688,13 @@
             {
               "outcome": "Over",
               "point": 8.5,
-              "price": 113.0,
+              "price": 108.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 8.5,
-              "price": -115.0,
+              "price": -113.0,
               "liquidity": 0
             }
           ]
@@ -724,7 +724,7 @@
         "spread_away": {
           "book": "Novig",
           "point": 1.5,
-          "price": -212.0,
+          "price": -217.0,
           "liquidity": 0
         },
         "spread_home": {
@@ -928,7 +928,7 @@
             {
               "outcome": "Florida Panthers",
               "point": 1.5,
-              "price": -212.0,
+              "price": -217.0,
               "liquidity": 0
             }
           ]
@@ -1008,13 +1008,13 @@
             {
               "outcome": "Over",
               "point": 6.5,
-              "price": 100.0,
+              "price": 105.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 6.5,
-              "price": -120.0,
+              "price": -125.0,
               "liquidity": 0
             }
           ],
@@ -1038,11 +1038,11 @@
     {
       "id": "e664a4a91ee3581675f74695e9b7e8e6",
       "sport": "WNBA",
-      "sport_label": "NBA",
+      "sport_label": "WNBA",
       "home_team": "Indiana Fever",
       "away_team": "Las Vegas Aces",
-      "home_abbr": "FEV",
-      "away_abbr": "ACE",
+      "home_abbr": "IND",
+      "away_abbr": "LVA",
       "commence_time": "2026-09-29 18:40:00",
       "best_lines": {
         "h2h_away": {
@@ -1070,13 +1070,13 @@
         "total_over": {
           "book": "Novig",
           "point": 184.5,
-          "price": -106.0,
+          "price": -104.0,
           "liquidity": 0
         },
         "total_under": {
           "book": "Novig",
           "point": 184.5,
-          "price": -102.0,
+          "price": -104.0,
           "liquidity": 0
         }
       },
@@ -1342,27 +1342,27 @@
             {
               "outcome": "Over",
               "point": 184.5,
-              "price": -106.0,
+              "price": -104.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 184.5,
-              "price": -102.0,
+              "price": -104.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Over",
-              "point": 183.5,
-              "price": -114.0,
+              "point": 184.5,
+              "price": -108.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 183.5,
-              "price": -106.0,
+              "point": 184.5,
+              "price": -112.0,
               "liquidity": 0
             }
           ],
@@ -1704,7 +1704,7 @@
             {
               "outcome": "Over",
               "point": 6.5,
-              "price": 104.0,
+              "price": 106.0,
               "liquidity": 0
             },
             {
@@ -1733,14 +1733,14 @@
           "liquidity": 0
         },
         "h2h_home": {
-          "book": "Novig",
-          "price": -125.0,
+          "book": "BetRivers",
+          "price": -124.0,
           "liquidity": 0
         },
         "spread_away": {
-          "book": "BetRivers",
+          "book": "BetMGM",
           "point": 1.5,
-          "price": -175.0,
+          "price": -185.0,
           "liquidity": 0
         },
         "spread_home": {
@@ -1824,13 +1824,13 @@
             {
               "outcome": "Boston Red Sox",
               "point": "",
-              "price": 112.0,
+              "price": 104.0,
               "liquidity": 0
             },
             {
               "outcome": "New York Yankees",
               "point": "",
-              "price": -134.0,
+              "price": -124.0,
               "liquidity": 0
             }
           ],
@@ -1844,7 +1844,7 @@
             {
               "outcome": "New York Yankees",
               "point": "",
-              "price": -125.0,
+              "price": -127.0,
               "liquidity": 0
             }
           ],
@@ -1924,13 +1924,13 @@
             {
               "outcome": "Boston Red Sox",
               "point": 1.5,
-              "price": -175.0,
+              "price": -186.0,
               "liquidity": 0
             },
             {
               "outcome": "New York Yankees",
               "point": -1.5,
-              "price": 140.0,
+              "price": 150.0,
               "liquidity": 0
             }
           ],
@@ -2076,8 +2076,8 @@
       "commence_time": "2026-09-29 20:10:00",
       "best_lines": {
         "h2h_away": {
-          "book": "Caesars",
-          "price": -104.0,
+          "book": "BetRivers",
+          "price": -103.0,
           "liquidity": 0
         },
         "h2h_home": {
@@ -2172,13 +2172,13 @@
             {
               "outcome": "Boston Bruins",
               "point": "",
-              "price": -115.0,
+              "price": -118.0,
               "liquidity": 0
             },
             {
               "outcome": "New York Rangers",
               "point": "",
-              "price": -105.0,
+              "price": -103.0,
               "liquidity": 0
             }
           ],
@@ -2186,13 +2186,13 @@
             {
               "outcome": "Boston Bruins",
               "point": "",
-              "price": -110.0,
+              "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "New York Rangers",
               "point": "",
-              "price": -110.0,
+              "price": -105.0,
               "liquidity": 0
             }
           ],
@@ -2258,13 +2258,13 @@
             {
               "outcome": "Boston Bruins",
               "point": -1.5,
-              "price": 220.0,
+              "price": 215.0,
               "liquidity": 0
             },
             {
               "outcome": "New York Rangers",
               "point": 1.5,
-              "price": -295.0,
+              "price": -286.0,
               "liquidity": 0
             }
           ],
@@ -2358,13 +2358,13 @@
             {
               "outcome": "Over",
               "point": 5.5,
-              "price": -127.0,
+              "price": -130.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 5.5,
-              "price": 100.0,
+              "price": 104.0,
               "liquidity": 0
             }
           ],
@@ -2402,27 +2402,27 @@
     {
       "id": "eca9a911020f3960d13599af0595d164",
       "sport": "WNBA",
-      "sport_label": "NBA",
+      "sport_label": "WNBA",
       "home_team": "New York Liberty",
       "away_team": "Minnesota Lynx",
-      "home_abbr": "LIB",
-      "away_abbr": "LYN",
+      "home_abbr": "NYL",
+      "away_abbr": "MIN",
       "commence_time": "2026-09-29 20:40:00",
       "best_lines": {
         "h2h_away": {
           "book": "Novig",
-          "price": -156.0,
+          "price": -150.0,
           "liquidity": 0
         },
         "h2h_home": {
           "book": "Novig",
-          "price": 150.0,
+          "price": 144.0,
           "liquidity": 0
         },
         "spread_away": {
           "book": "Novig",
           "point": -3.5,
-          "price": 100.0,
+          "price": 102.0,
           "liquidity": 0
         },
         "spread_home": {
@@ -2534,13 +2534,13 @@
             {
               "outcome": "Minnesota Lynx",
               "point": "",
-              "price": -156.0,
+              "price": -150.0,
               "liquidity": 0
             },
             {
               "outcome": "New York Liberty",
               "point": "",
-              "price": 150.0,
+              "price": 144.0,
               "liquidity": 0
             }
           ]
@@ -2634,7 +2634,7 @@
             {
               "outcome": "Minnesota Lynx",
               "point": -3.5,
-              "price": 100.0,
+              "price": 102.0,
               "liquidity": 0
             },
             {
@@ -2692,13 +2692,13 @@
             {
               "outcome": "Over",
               "point": 172.5,
-              "price": -110.0,
+              "price": -105.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 172.5,
-              "price": -110.0,
+              "price": -115.0,
               "liquidity": 0
             }
           ],
@@ -3260,7 +3260,7 @@
             {
               "outcome": "Edmonton Oilers",
               "point": -1.5,
-              "price": -132.0,
+              "price": -134.0,
               "liquidity": 0
             },
             {
@@ -3360,13 +3360,13 @@
             {
               "outcome": "Over",
               "point": 6.5,
-              "price": -118.0,
+              "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 6.5,
-              "price": -104.0,
+              "price": -105.0,
               "liquidity": 0
             }
           ],
@@ -3374,13 +3374,13 @@
             {
               "outcome": "Over",
               "point": 6.5,
-              "price": -118.0,
+              "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 6.5,
-              "price": -102.0,
+              "price": -105.0,
               "liquidity": 0
             }
           ],
@@ -3766,11 +3766,11 @@
     {
       "id": "2e0dc047f09840084e34e02f5d39b8fb",
       "sport": "WNBA",
-      "sport_label": "NBA",
+      "sport_label": "WNBA",
       "home_team": "Washington Mystics",
       "away_team": "Atlanta Dream",
-      "home_abbr": "MYS",
-      "away_abbr": "DRE",
+      "home_abbr": "WAS",
+      "away_abbr": "ATL",
       "commence_time": "2026-09-30 19:10:00",
       "best_lines": {
         "h2h_away": {
@@ -4098,7 +4098,7 @@
             {
               "outcome": "Over",
               "point": 164.5,
-              "price": -120.0,
+              "price": -115.0,
               "liquidity": 0
             },
             {
@@ -4656,11 +4656,11 @@
     {
       "id": "9c267dad149001fe5eccdf229290ec13",
       "sport": "WNBA",
-      "sport_label": "NBA",
+      "sport_label": "WNBA",
       "home_team": "Dallas Wings",
       "away_team": "Golden State Valkyries",
-      "home_abbr": "WIN",
-      "away_abbr": "VAL",
+      "home_abbr": "DAL",
+      "away_abbr": "GSV",
       "commence_time": "2026-09-30 21:00:00",
       "best_lines": {
         "h2h_away": {
@@ -4959,14 +4959,14 @@
           "Novig": [
             {
               "outcome": "Over",
-              "point": 141.5,
-              "price": -852.0,
+              "point": 156.5,
+              "price": -104.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 141.5,
-              "price": -100000.0,
+              "point": 156.5,
+              "price": -117.0,
               "liquidity": 0
             }
           ],
@@ -5929,7 +5929,7 @@
       "best_lines": {
         "h2h_away": {
           "book": "Novig",
-          "price": 120.0,
+          "price": 122.0,
           "liquidity": 0
         },
         "h2h_home": {
@@ -6002,7 +6002,7 @@
             {
               "outcome": "Western Kentucky Hilltoppers",
               "point": "",
-              "price": 120.0,
+              "price": 122.0,
               "liquidity": 0
             }
           ],
@@ -6508,7 +6508,7 @@
         "total_over": {
           "book": "Novig",
           "point": 38.5,
-          "price": 106.0,
+          "price": 104.0,
           "liquidity": 0
         },
         "total_under": {
@@ -6780,7 +6780,7 @@
             {
               "outcome": "Over",
               "point": 38.5,
-              "price": 106.0,
+              "price": 104.0,
               "liquidity": 0
             },
             {
@@ -6833,24 +6833,24 @@
       "best_lines": {
         "h2h_away": {
           "book": "Novig",
-          "price": 111.0,
+          "price": 108.0,
           "liquidity": 0
         },
         "h2h_home": {
           "book": "BetMGM",
-          "price": -112.0,
+          "price": -108.0,
           "liquidity": 0
         },
         "spread_away": {
           "book": "FanDuel",
           "point": 1.5,
-          "price": -110.0,
+          "price": -115.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "Novig",
+          "book": "DraftKings",
           "point": -1.5,
-          "price": 104.0,
+          "price": 100.0,
           "liquidity": 0
         },
         "total_over": {
@@ -6872,13 +6872,13 @@
             {
               "outcome": "North Texas Mean Green",
               "point": "",
-              "price": -102.0,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Tulsa Golden Hurricane",
               "point": "",
-              "price": -118.0,
+              "price": -110.0,
               "liquidity": 0
             }
           ],
@@ -6886,7 +6886,7 @@
             {
               "outcome": "North Texas Mean Green",
               "point": "",
-              "price": 111.0,
+              "price": 108.0,
               "liquidity": 0
             },
             {
@@ -6900,13 +6900,13 @@
             {
               "outcome": "North Texas Mean Green",
               "point": "",
-              "price": -103.0,
+              "price": -105.0,
               "liquidity": 0
             },
             {
               "outcome": "Tulsa Golden Hurricane",
               "point": "",
-              "price": -122.0,
+              "price": -118.0,
               "liquidity": 0
             }
           ],
@@ -6956,13 +6956,13 @@
             {
               "outcome": "North Texas Mean Green",
               "point": "",
-              "price": -105.0,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Tulsa Golden Hurricane",
               "point": "",
-              "price": -112.0,
+              "price": -108.0,
               "liquidity": 0
             }
           ]
@@ -6972,41 +6972,41 @@
             {
               "outcome": "North Texas Mean Green",
               "point": 1.5,
-              "price": -110.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Tulsa Golden Hurricane",
-              "point": -1.5,
-              "price": -110.0,
-              "liquidity": 0
-            }
-          ],
-          "Novig": [
-            {
-              "outcome": "North Texas Mean Green",
-              "point": 1.5,
-              "price": -111.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Tulsa Golden Hurricane",
-              "point": -1.5,
-              "price": 104.0,
-              "liquidity": 0
-            }
-          ],
-          "BetRivers": [
-            {
-              "outcome": "North Texas Mean Green",
-              "point": 1.5,
               "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "Tulsa Golden Hurricane",
               "point": -1.5,
-              "price": -108.0,
+              "price": -105.0,
+              "liquidity": 0
+            }
+          ],
+          "Novig": [
+            {
+              "outcome": "North Texas Mean Green",
+              "point": -11.5,
+              "price": -100000.0,
+              "liquidity": 0
+            },
+            {
+              "outcome": "Tulsa Golden Hurricane",
+              "point": 11.5,
+              "price": -99900.0,
+              "liquidity": 0
+            }
+          ],
+          "BetRivers": [
+            {
+              "outcome": "North Texas Mean Green",
+              "point": 1.0,
+              "price": -112.0,
+              "liquidity": 0
+            },
+            {
+              "outcome": "Tulsa Golden Hurricane",
+              "point": -1.0,
+              "price": -112.0,
               "liquidity": 0
             }
           ],
@@ -7056,13 +7056,13 @@
             {
               "outcome": "North Texas Mean Green",
               "point": 1.0,
-              "price": -110.0,
+              "price": -120.0,
               "liquidity": 0
             },
             {
               "outcome": "Tulsa Golden Hurricane",
               "point": -1.0,
-              "price": -108.0,
+              "price": -110.0,
               "liquidity": 0
             }
           ]
@@ -13215,12 +13215,12 @@
       "best_lines": {
         "h2h_away": {
           "book": "Novig",
-          "price": 1900.0,
+          "price": 1941.0,
           "liquidity": 0
         },
         "h2h_home": {
           "book": "Novig",
-          "price": -2122.0,
+          "price": -2226.0,
           "liquidity": 0
         },
         "spread_away": {
@@ -13232,7 +13232,7 @@
         "spread_home": {
           "book": "Novig",
           "point": -23.5,
-          "price": -111.0,
+          "price": -113.0,
           "liquidity": 0
         },
         "total_over": {
@@ -13268,13 +13268,13 @@
             {
               "outcome": "Georgia Bulldogs",
               "point": "",
-              "price": -2122.0,
+              "price": -2226.0,
               "liquidity": 0
             },
             {
               "outcome": "Vanderbilt Commodores",
               "point": "",
-              "price": 1900.0,
+              "price": 1941.0,
               "liquidity": 0
             }
           ],
@@ -13354,7 +13354,7 @@
             {
               "outcome": "Georgia Bulldogs",
               "point": -23.5,
-              "price": -111.0,
+              "price": -113.0,
               "liquidity": 0
             },
             {
@@ -15114,9 +15114,9 @@
           "liquidity": 0
         },
         "total_over": {
-          "book": "Novig",
+          "book": "Fanatics",
           "point": 52.5,
-          "price": -111.0,
+          "price": -110.0,
           "liquidity": 0
         },
         "total_under": {
@@ -15373,13 +15373,13 @@
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 53.0,
+              "point": 52.5,
               "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 53.0,
+              "point": 52.5,
               "price": -110.0,
               "liquidity": 0
             }
@@ -16582,13 +16582,13 @@
             {
               "outcome": "Florida State Seminoles",
               "point": 2.5,
-              "price": 100.0,
+              "price": -105.0,
               "liquidity": 0
             },
             {
               "outcome": "Virginia Cavaliers",
               "point": -2.5,
-              "price": -120.0,
+              "price": -115.0,
               "liquidity": 0
             }
           ],
@@ -16707,7 +16707,7 @@
       "best_lines": {
         "h2h_away": {
           "book": "Novig",
-          "price": 108.0,
+          "price": 111.0,
           "liquidity": 0
         },
         "h2h_home": {
@@ -16766,7 +16766,7 @@
             {
               "outcome": "Old Dominion Monarchs",
               "point": "",
-              "price": 108.0,
+              "price": 111.0,
               "liquidity": 0
             }
           ],
@@ -17690,7 +17690,7 @@
         "total_over": {
           "book": "Novig",
           "point": 58.5,
-          "price": -106.0,
+          "price": -104.0,
           "liquidity": 0
         },
         "total_under": {
@@ -17920,7 +17920,7 @@
             {
               "outcome": "Over",
               "point": 58.5,
-              "price": -106.0,
+              "price": -104.0,
               "liquidity": 0
             },
             {
@@ -19028,7 +19028,7 @@
         "spread_away": {
           "book": "Novig",
           "point": 22.5,
-          "price": -102.0,
+          "price": 100.0,
           "liquidity": 0
         },
         "spread_home": {
@@ -19176,7 +19176,7 @@
             {
               "outcome": "UTEP Miners",
               "point": 22.5,
-              "price": -102.0,
+              "price": 100.0,
               "liquidity": 0
             }
           ],
@@ -27066,7 +27066,7 @@
         "spread_away": {
           "book": "Novig",
           "point": -3.5,
-          "price": 100.0,
+          "price": 102.0,
           "liquidity": 0
         },
         "spread_home": {
@@ -27264,7 +27264,7 @@
             {
               "outcome": "Indianapolis Colts",
               "point": -3.5,
-              "price": 100.0,
+              "price": 102.0,
               "liquidity": 0
             },
             {
@@ -27350,13 +27350,13 @@
             {
               "outcome": "Over",
               "point": 47.0,
-              "price": -109.0,
+              "price": -112.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 47.0,
-              "price": -112.0,
+              "price": -109.0,
               "liquidity": 0
             }
           ],
@@ -27604,7 +27604,7 @@
             {
               "outcome": "New York Giants",
               "point": 1.5,
-              "price": -108.0,
+              "price": -106.0,
               "liquidity": 0
             }
           ],
@@ -27768,7 +27768,7 @@
         "spread_home": {
           "book": "Novig",
           "point": -11.5,
-          "price": 106.0,
+          "price": 104.0,
           "liquidity": 0
         },
         "total_over": {
@@ -27790,13 +27790,13 @@
             {
               "outcome": "Baltimore Ravens",
               "point": "",
-              "price": -750.0,
+              "price": -700.0,
               "liquidity": 0
             },
             {
               "outcome": "Tennessee Titans",
               "point": "",
-              "price": 525.0,
+              "price": 500.0,
               "liquidity": 0
             }
           ],
@@ -27860,13 +27860,13 @@
             {
               "outcome": "Baltimore Ravens",
               "point": "",
-              "price": -650.0,
+              "price": -700.0,
               "liquidity": 0
             },
             {
               "outcome": "Tennessee Titans",
               "point": "",
-              "price": 500.0,
+              "price": 525.0,
               "liquidity": 0
             }
           ],
@@ -27946,7 +27946,7 @@
             {
               "outcome": "Baltimore Ravens",
               "point": -11.5,
-              "price": 106.0,
+              "price": 104.0,
               "liquidity": 0
             },
             {
@@ -27960,13 +27960,13 @@
             {
               "outcome": "Baltimore Ravens",
               "point": -11.5,
-              "price": -108.0,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Tennessee Titans",
               "point": 11.5,
-              "price": -110.0,
+              "price": -108.0,
               "liquidity": 0
             }
           ],
@@ -28279,14 +28279,14 @@
           "BetRivers": [
             {
               "outcome": "Buffalo Bills",
-              "point": -6.5,
-              "price": -115.0,
+              "point": -7.0,
+              "price": -103.0,
               "liquidity": 0
             },
             {
               "outcome": "New England Patriots",
-              "point": 6.5,
-              "price": -107.0,
+              "point": 7.0,
+              "price": -118.0,
               "liquidity": 0
             }
           ],
@@ -28562,7 +28562,7 @@
             {
               "outcome": "New York Jets",
               "point": "",
-              "price": 155.0,
+              "price": 150.0,
               "liquidity": 0
             }
           ],
@@ -28656,13 +28656,13 @@
             {
               "outcome": "Chicago Bears",
               "point": -3.5,
-              "price": -105.0,
+              "price": -108.0,
               "liquidity": 0
             },
             {
               "outcome": "New York Jets",
               "point": 3.5,
-              "price": -112.0,
+              "price": -110.0,
               "liquidity": 0
             }
           ],
@@ -28699,14 +28699,14 @@
           "Caesars": [
             {
               "outcome": "Over",
-              "point": 43.0,
-              "price": -112.0,
+              "point": 43.5,
+              "price": -105.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 43.0,
-              "price": -108.0,
+              "point": 43.5,
+              "price": -115.0,
               "liquidity": 0
             }
           ],
@@ -28756,13 +28756,13 @@
             {
               "outcome": "Over",
               "point": 43.0,
-              "price": -120.0,
+              "price": -112.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 43.0,
-              "price": -110.0,
+              "price": -105.0,
               "liquidity": 0
             }
           ],
@@ -29143,7 +29143,7 @@
       "best_lines": {
         "h2h_away": {
           "book": "Novig",
-          "price": 127.0,
+          "price": 125.0,
           "liquidity": 0
         },
         "h2h_home": {
@@ -29238,7 +29238,7 @@
             {
               "outcome": "Dallas Cowboys",
               "point": "",
-              "price": 127.0,
+              "price": 125.0,
               "liquidity": 0
             },
             {
@@ -29465,13 +29465,13 @@
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 48.0,
+              "point": 47.5,
               "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 48.0,
+              "point": 47.5,
               "price": -110.0,
               "liquidity": 0
             }
@@ -29490,7 +29490,7 @@
       "commence_time": "2026-10-04 13:00:00",
       "best_lines": {
         "h2h_away": {
-          "book": "FanDuel",
+          "book": "Novig",
           "price": -178.0,
           "liquidity": 0
         },
@@ -29558,13 +29558,13 @@
             {
               "outcome": "Green Bay Packers",
               "point": "",
-              "price": -178.0,
+              "price": -190.0,
               "liquidity": 0
             },
             {
               "outcome": "Tampa Bay Buccaneers",
               "point": "",
-              "price": 150.0,
+              "price": 160.0,
               "liquidity": 0
             }
           ],
@@ -29600,7 +29600,7 @@
             {
               "outcome": "Green Bay Packers",
               "point": "",
-              "price": -190.0,
+              "price": -200.0,
               "liquidity": 0
             },
             {
@@ -29658,13 +29658,13 @@
             {
               "outcome": "Green Bay Packers",
               "point": -3.5,
-              "price": -110.0,
+              "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "Tampa Bay Buccaneers",
               "point": 3.5,
-              "price": -110.0,
+              "price": -105.0,
               "liquidity": 0
             }
           ],
@@ -29700,7 +29700,7 @@
             {
               "outcome": "Green Bay Packers",
               "point": -4.0,
-              "price": -108.0,
+              "price": -110.0,
               "liquidity": 0
             },
             {
@@ -29799,14 +29799,14 @@
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 39.5,
+              "point": 40.0,
               "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 39.5,
-              "price": -108.0,
+              "point": 40.0,
+              "price": -120.0,
               "liquidity": 0
             }
           ],
@@ -29844,7 +29844,7 @@
         },
         "h2h_home": {
           "book": "Novig",
-          "price": 150.0,
+          "price": 144.0,
           "liquidity": 0
         },
         "spread_away": {
@@ -29940,7 +29940,7 @@
             {
               "outcome": "Philadelphia Eagles",
               "point": "",
-              "price": 150.0,
+              "price": 144.0,
               "liquidity": 0
             }
           ],
@@ -30492,8 +30492,8 @@
       "commence_time": "2026-10-04 16:25:00",
       "best_lines": {
         "h2h_away": {
-          "book": "DraftKings",
-          "price": 130.0,
+          "book": "Novig",
+          "price": 133.0,
           "liquidity": 0
         },
         "h2h_home": {
@@ -30588,7 +30588,7 @@
             {
               "outcome": "Denver Broncos",
               "point": "",
-              "price": 130.0,
+              "price": 133.0,
               "liquidity": 0
             },
             {
@@ -33359,13 +33359,13 @@
       "matchup": "Pittsburgh Steelers @ Cleveland Browns",
       "market": "Total (38.5)",
       "roi": 0.15,
-      "hold": 100.47,
+      "hold": 100.94,
       "commence_time": "2026-10-01 20:15:00",
       "side_a": {
         "name": "Over",
         "outcome": "Over 38.5",
         "book": "Novig",
-        "price": 106.0,
+        "price": 104.0,
         "liquidity": 0
       },
       "side_b": {
@@ -33405,13 +33405,13 @@
       "matchup": "Indianapolis Colts @ Washington Commanders",
       "market": "Spread (3.5)",
       "roi": 0.2,
-      "hold": 100.98,
+      "hold": 100.49,
       "commence_time": "2026-10-04 09:30:00",
       "side_a": {
         "name": "Indianapolis Colts",
         "outcome": "Indianapolis Colts -3.5",
         "book": "Novig",
-        "price": 100.0,
+        "price": 102.0,
         "liquidity": 0
       },
       "side_b": {
@@ -33520,7 +33520,7 @@
       "matchup": "Tennessee Titans @ Baltimore Ravens",
       "market": "Spread (11.5)",
       "roi": 0.2,
-      "hold": 100.47,
+      "hold": 100.94,
       "commence_time": "2026-10-04 13:00:00",
       "side_a": {
         "name": "Tennessee Titans",
@@ -33533,7 +33533,7 @@
         "name": "Baltimore Ravens",
         "outcome": "Baltimore Ravens -11.5",
         "book": "Novig",
-        "price": 106.0,
+        "price": 104.0,
         "liquidity": 0
       }
     },
@@ -33653,29 +33653,6 @@
       }
     },
     {
-      "id": "arb_ml_daf55e2df5341c007fee5a0fc5bbc2d4",
-      "sport": "NFL",
-      "matchup": "Dallas Cowboys @ Houston Texans",
-      "market": "Moneyline",
-      "roi": 0.1,
-      "hold": 101.13,
-      "commence_time": "2026-10-04 13:00:00",
-      "side_a": {
-        "name": "Dallas Cowboys",
-        "outcome": "Dallas Cowboys ML",
-        "book": "Novig",
-        "price": 127.0,
-        "liquidity": 0
-      },
-      "side_b": {
-        "name": "Houston Texans",
-        "outcome": "Houston Texans ML",
-        "book": "Novig",
-        "price": -133.0,
-        "liquidity": 0
-      }
-    },
-    {
       "id": "arb_spd_daf55e2df5341c007fee5a0fc5bbc2d4_2.5",
       "sport": "NFL",
       "matchup": "Dallas Cowboys @ Houston Texans",
@@ -33709,7 +33686,7 @@
       "side_a": {
         "name": "Green Bay Packers",
         "outcome": "Green Bay Packers ML",
-        "book": "FanDuel",
+        "book": "Novig",
         "price": -178.0,
         "liquidity": 0
       },
@@ -33750,7 +33727,7 @@
       "matchup": "Los Angeles Rams @ Philadelphia Eagles",
       "market": "Moneyline",
       "roi": 0.1,
-      "hold": 100.32,
+      "hold": 101.3,
       "commence_time": "2026-10-04 13:00:00",
       "side_a": {
         "name": "Los Angeles Rams",
@@ -33763,7 +33740,7 @@
         "name": "Philadelphia Eagles",
         "outcome": "Philadelphia Eagles ML",
         "book": "Novig",
-        "price": 150.0,
+        "price": 144.0,
         "liquidity": 0
       }
     },
@@ -33842,13 +33819,13 @@
       "matchup": "Denver Broncos @ San Francisco 49ers",
       "market": "Moneyline",
       "roi": 0.1,
-      "hold": 101.46,
+      "hold": 100.9,
       "commence_time": "2026-10-04 16:25:00",
       "side_a": {
         "name": "Denver Broncos",
         "outcome": "Denver Broncos ML",
-        "book": "DraftKings",
-        "price": 130.0,
+        "book": "Novig",
+        "price": 133.0,
         "liquidity": 0
       },
       "side_b": {
@@ -34072,13 +34049,13 @@
       "matchup": "Western Kentucky Hilltoppers @ New Mexico State Aggies",
       "market": "Moneyline",
       "roi": 0.1,
-      "hold": 101.01,
+      "hold": 100.6,
       "commence_time": "2026-10-01 20:00:00",
       "side_a": {
         "name": "Western Kentucky Hilltoppers",
         "outcome": "Western Kentucky Hilltoppers ML",
         "book": "Novig",
-        "price": 120.0,
+        "price": 122.0,
         "liquidity": 0
       },
       "side_b": {
@@ -34141,43 +34118,20 @@
       "matchup": "North Texas Mean Green @ Tulsa Golden Hurricane",
       "market": "Moneyline",
       "roi": 0.1,
-      "hold": 100.22,
+      "hold": 100.0,
       "commence_time": "2026-10-01 21:00:00",
       "side_a": {
         "name": "North Texas Mean Green",
         "outcome": "North Texas Mean Green ML",
         "book": "Novig",
-        "price": 111.0,
+        "price": 108.0,
         "liquidity": 0
       },
       "side_b": {
         "name": "Tulsa Golden Hurricane",
         "outcome": "Tulsa Golden Hurricane ML",
         "book": "BetMGM",
-        "price": -112.0,
-        "liquidity": 0
-      }
-    },
-    {
-      "id": "arb_spd_3c64f3dd8efd756a90f09303e5517006_1.5",
-      "sport": "NCAAF",
-      "matchup": "North Texas Mean Green @ Tulsa Golden Hurricane",
-      "market": "Spread (1.5)",
-      "roi": 0.2,
-      "hold": 101.4,
-      "commence_time": "2026-10-01 21:00:00",
-      "side_a": {
-        "name": "North Texas Mean Green",
-        "outcome": "North Texas Mean Green +1.5",
-        "book": "FanDuel",
-        "price": -110.0,
-        "liquidity": 0
-      },
-      "side_b": {
-        "name": "Tulsa Golden Hurricane",
-        "outcome": "Tulsa Golden Hurricane -1.5",
-        "book": "Novig",
-        "price": 104.0,
+        "price": -108.0,
         "liquidity": 0
       }
     },
@@ -34877,20 +34831,20 @@
       "matchup": "Vanderbilt Commodores @ Georgia Bulldogs",
       "market": "Moneyline",
       "roi": 0.1,
-      "hold": 100.5,
+      "hold": 100.6,
       "commence_time": "2026-10-03 12:45:00",
       "side_a": {
         "name": "Vanderbilt Commodores",
         "outcome": "Vanderbilt Commodores ML",
         "book": "Novig",
-        "price": 1900.0,
+        "price": 1941.0,
         "liquidity": 0
       },
       "side_b": {
         "name": "Georgia Bulldogs",
         "outcome": "Georgia Bulldogs ML",
         "book": "Novig",
-        "price": -2122.0,
+        "price": -2226.0,
         "liquidity": 0
       }
     },
@@ -35102,6 +35056,29 @@
       }
     },
     {
+      "id": "arb_tot_f28938b05f7d4b4187e879917f6e583a_52.5",
+      "sport": "NCAAF",
+      "matchup": "California Golden Bears @ UNLV Rebels",
+      "market": "Total (52.5)",
+      "roi": 0.15,
+      "hold": 101.4,
+      "commence_time": "2026-10-03 15:30:00",
+      "side_a": {
+        "name": "Over",
+        "outcome": "Over 52.5",
+        "book": "Fanatics",
+        "price": -110.0,
+        "liquidity": 0
+      },
+      "side_b": {
+        "name": "Under",
+        "outcome": "Under 52.5",
+        "book": "Novig",
+        "price": 104.0,
+        "liquidity": 0
+      }
+    },
+    {
       "id": "arb_ml_9b2bcb758c7d7f4cb25d5102e4e9068e",
       "sport": "NCAAF",
       "matchup": "Memphis Tigers @ Charlotte 49ers",
@@ -35259,6 +35236,29 @@
         "outcome": "Florida State Seminoles ML",
         "book": "Novig",
         "price": 127.0,
+        "liquidity": 0
+      }
+    },
+    {
+      "id": "arb_ml_e4f058459f5ee64f3cff3ac1aed79e64",
+      "sport": "NCAAF",
+      "matchup": "Old Dominion Monarchs @ Georgia State Panthers",
+      "market": "Moneyline",
+      "roi": 0.1,
+      "hold": 100.88,
+      "commence_time": "2026-10-03 15:30:00",
+      "side_a": {
+        "name": "Old Dominion Monarchs",
+        "outcome": "Old Dominion Monarchs ML",
+        "book": "Novig",
+        "price": 111.0,
+        "liquidity": 0
+      },
+      "side_b": {
+        "name": "Georgia State Panthers",
+        "outcome": "Georgia State Panthers ML",
+        "book": "Novig",
+        "price": -115.0,
         "liquidity": 0
       }
     },
@@ -35535,6 +35535,29 @@
         "outcome": "New Mexico Lobos ML",
         "book": "Novig",
         "price": -1438.0,
+        "liquidity": 0
+      }
+    },
+    {
+      "id": "arb_spd_e7e3e3bfc3fd7fca7550ecf48cb78666_22.5",
+      "sport": "NCAAF",
+      "matchup": "UTEP Miners @ New Mexico Lobos",
+      "market": "Spread (22.5)",
+      "roi": 0.2,
+      "hold": 101.46,
+      "commence_time": "2026-10-03 16:00:00",
+      "side_a": {
+        "name": "UTEP Miners",
+        "outcome": "UTEP Miners +22.5",
+        "book": "Novig",
+        "price": 100.0,
+        "liquidity": 0
+      },
+      "side_b": {
+        "name": "New Mexico Lobos",
+        "outcome": "New Mexico Lobos -22.5",
+        "book": "Novig",
+        "price": -106.0,
         "liquidity": 0
       }
     },
@@ -36483,7 +36506,7 @@
     },
     {
       "id": "arb_ml_e664a4a91ee3581675f74695e9b7e8e6",
-      "sport": "NBA",
+      "sport": "WNBA",
       "matchup": "Las Vegas Aces @ Indiana Fever",
       "market": "Moneyline",
       "roi": 0.1,
@@ -36506,7 +36529,7 @@
     },
     {
       "id": "arb_spd_e664a4a91ee3581675f74695e9b7e8e6_1.5",
-      "sport": "NBA",
+      "sport": "WNBA",
       "matchup": "Las Vegas Aces @ Indiana Fever",
       "market": "Spread (1.5)",
       "roi": 0.2,
@@ -36529,40 +36552,40 @@
     },
     {
       "id": "arb_ml_eca9a911020f3960d13599af0595d164",
-      "sport": "NBA",
+      "sport": "WNBA",
       "matchup": "Minnesota Lynx @ New York Liberty",
       "market": "Moneyline",
       "roi": 0.1,
-      "hold": 100.94,
+      "hold": 100.98,
       "commence_time": "2026-09-29 20:40:00",
       "side_a": {
         "name": "Minnesota Lynx",
         "outcome": "Minnesota Lynx ML",
         "book": "Novig",
-        "price": -156.0,
+        "price": -150.0,
         "liquidity": 0
       },
       "side_b": {
         "name": "New York Liberty",
         "outcome": "New York Liberty ML",
         "book": "Novig",
-        "price": 150.0,
+        "price": 144.0,
         "liquidity": 0
       }
     },
     {
       "id": "arb_spd_eca9a911020f3960d13599af0595d164_3.5",
-      "sport": "NBA",
+      "sport": "WNBA",
       "matchup": "Minnesota Lynx @ New York Liberty",
       "market": "Spread (3.5)",
       "roi": 0.2,
-      "hold": 100.98,
+      "hold": 100.49,
       "commence_time": "2026-09-29 20:40:00",
       "side_a": {
         "name": "Minnesota Lynx",
         "outcome": "Minnesota Lynx -3.5",
         "book": "Novig",
-        "price": 100.0,
+        "price": 102.0,
         "liquidity": 0
       },
       "side_b": {
@@ -36575,7 +36598,7 @@
     },
     {
       "id": "arb_tot_eca9a911020f3960d13599af0595d164_172.5",
-      "sport": "NBA",
+      "sport": "WNBA",
       "matchup": "Minnesota Lynx @ New York Liberty",
       "market": "Total (172.5)",
       "roi": 0.15,
@@ -36602,13 +36625,13 @@
       "matchup": "Philadelphia Phillies @ Atlanta Braves",
       "market": "Moneyline",
       "roi": 0.1,
-      "hold": 100.53,
+      "hold": 101.07,
       "commence_time": "2026-09-29 14:00:00",
       "side_a": {
         "name": "Philadelphia Phillies",
         "outcome": "Philadelphia Phillies ML",
         "book": "Novig",
-        "price": 174.0,
+        "price": 170.0,
         "liquidity": 0
       },
       "side_b": {
@@ -36624,8 +36647,8 @@
       "sport": "MLB",
       "matchup": "Philadelphia Phillies @ Atlanta Braves",
       "market": "Spread (1.5)",
-      "roi": 0.57,
-      "hold": 99.43,
+      "roi": 0.2,
+      "hold": 100.0,
       "commence_time": "2026-09-29 14:00:00",
       "side_a": {
         "name": "Philadelphia Phillies",
@@ -36638,7 +36661,7 @@
         "name": "Atlanta Braves",
         "outcome": "Atlanta Braves -1.5",
         "book": "Novig",
-        "price": 130.0,
+        "price": 127.0,
         "liquidity": 0
       }
     },
@@ -36717,20 +36740,20 @@
       "matchup": "Chicago White Sox @ Houston Astros",
       "market": "Total (8.5)",
       "roi": 0.15,
-      "hold": 100.44,
+      "hold": 101.13,
       "commence_time": "2026-09-29 17:00:00",
       "side_a": {
         "name": "Over",
         "outcome": "Over 8.5",
         "book": "Novig",
-        "price": 113.0,
+        "price": 108.0,
         "liquidity": 0
       },
       "side_b": {
         "name": "Under",
         "outcome": "Under 8.5",
         "book": "Novig",
-        "price": -115.0,
+        "price": -113.0,
         "liquidity": 0
       }
     },
@@ -36740,7 +36763,7 @@
       "matchup": "Boston Red Sox @ New York Yankees",
       "market": "Moneyline",
       "roi": 0.1,
-      "hold": 100.6,
+      "hold": 100.4,
       "commence_time": "2026-09-29 20:10:00",
       "side_a": {
         "name": "Boston Red Sox",
@@ -36752,8 +36775,8 @@
       "side_b": {
         "name": "New York Yankees",
         "outcome": "New York Yankees ML",
-        "book": "Novig",
-        "price": -125.0,
+        "book": "BetRivers",
+        "price": -124.0,
         "liquidity": 0
       }
     },
@@ -36762,14 +36785,14 @@
       "sport": "MLB",
       "matchup": "Boston Red Sox @ New York Yankees",
       "market": "Spread (1.5)",
-      "roi": 0.9,
-      "hold": 99.1,
+      "roi": 0.2,
+      "hold": 100.37,
       "commence_time": "2026-09-29 20:10:00",
       "side_a": {
         "name": "Boston Red Sox",
         "outcome": "Boston Red Sox +1.5",
-        "book": "BetRivers",
-        "price": -175.0,
+        "book": "BetMGM",
+        "price": -185.0,
         "liquidity": 0
       },
       "side_b": {
@@ -36901,13 +36924,13 @@
       "matchup": "Florida Panthers @ Carolina Hurricanes",
       "market": "Spread (1.5)",
       "roi": 0.2,
-      "hold": 100.95,
+      "hold": 101.46,
       "commence_time": "2026-09-29 17:10:47",
       "side_a": {
         "name": "Florida Panthers",
         "outcome": "Florida Panthers +1.5",
         "book": "Novig",
-        "price": -212.0,
+        "price": -217.0,
         "liquidity": 0
       },
       "side_b": {
@@ -37016,13 +37039,13 @@
       "matchup": "New York Rangers @ Boston Bruins",
       "market": "Moneyline",
       "roi": 0.1,
-      "hold": 100.98,
+      "hold": 100.74,
       "commence_time": "2026-09-29 20:10:00",
       "side_a": {
         "name": "New York Rangers",
         "outcome": "New York Rangers ML",
-        "book": "Caesars",
-        "price": -104.0,
+        "book": "BetRivers",
+        "price": -103.0,
         "liquidity": 0
       },
       "side_b": {
