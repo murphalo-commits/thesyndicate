@@ -1882,7 +1882,7 @@ def build_mobile_app_html():
         }}
 
         // In-App Cloud Scan Logic
-        const DEFAULT_APPS_SCRIPT_URL = '';
+        const DEFAULT_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyjTQYiFdNS01kdxJNM6tSHIkZPEozEOM1kYWk_fifiKYPu-E7LqY7wsudKSt1Y-MzL/exec';
 
         function getWebhookUrl() {{
             return (localStorage.getItem('oddshub_apps_script_url') || DEFAULT_APPS_SCRIPT_URL).trim();
