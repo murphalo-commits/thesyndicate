@@ -447,52 +447,40 @@ def call_novig_api(key, method, path, query="", body=None):
 
 
 def classify_outcome(event_name, market_type, o_desc, competitor_name):
-      """Classifies an outcome dynamically as Home, Away, Over, or Under based on name patterns."""
-      o_lower = o_desc.lower()
-      if market_type == "TOTAL":
-          if "over" in o_lower:
-              return "Over"
-          elif "under" in o_lower:
-              return "Under"
-          return ""
-          
-      event_lower = event_name.lower()
-      split_chars = [" @ ", " at ", " vs ", " v "]
-      away_team = ""
-      home_team = ""
-      for char in split_chars:
-          if char in event_lower:
-              parts = event_lower.split(char)
-              away_team = parts[0].strip()
-              home_team = parts[1].strip()
-              break
-              
-      if not away_team or not home_team:
-          return ""
-          
-      comp_lower = competitor_name.lower() if competitor_name else o_lower
-      cleaned_comp = comp_lower.split("-")[0].split("+")[0].strip()
-      
-      if cleaned_comp in away_team or away_team in cleaned_comp:
-          return "Away"
-      elif cleaned_comp in home_team or home_team in cleaned_comp:
-          return "Home"
-          
-      # Acronym fallback (e.g. PSU -> Penn State)
-      away_acronym = "".join([t[0] for t in away_team.split() if t not in ["and", "or"]])
-      home_acronym = "".join([t[0] for t in home_team.split() if t not in ["and", "or"]])
-      if away_acronym == cleaned_comp:
-          return "Away"
-      elif home_acronym == cleaned_comp:
-          return "Home"
-          
-      return ""
+    o_lower = o_desc.lower()
+    if market_type == "TOTAL":
+        if "over" in o_lower: return "Over"
+        elif "under" in o_lower: return "Under"
+        return ""
+        
+    event_lower = event_name.lower()
+    split_chars = [" @ ", " at ", " vs ", " v "]
+    away_team = ""
+    home_team = ""
+    for char in split_chars:
+        if char in event_lower:
+            parts = event_lower.split(char)
+            away_team = parts[0].strip()
+            home_team = parts[1].strip()
+            break
+            
+    if not away_team or not home_team:
+        return ""
+        
+    comp_lower = competitor_name.lower() if competitor_name else o_lower
+    cleaned_comp = comp_lower.split("-")[0].split("+")[0].strip()
+    
+    if cleaned_comp in away_team or away_team in cleaned_comp: return "Away"
+    elif cleaned_comp in home_team or home_team in cleaned_comp: return "Home"
+        
+    away_acronym = "".join([t[0] for t in away_team.split() if t not in ["and", "or"]])
+    home_acronym = "".join([t[0] for t in home_team.split() if t not in ["and", "or"]])
+    if away_acronym == cleaned_comp: return "Away"
+    elif home_acronym == cleaned_comp: return "Home"
+        
+    return ""
 
-
-
-
-def fetch_novig_depth(leagues, odds_format):
-    """Fetches detailed order book depth using Novig V3 API."""
+def fetch_novig_depth(leagues, odds_format, odds_data=[]):
     key = get_trading_key()
     if not key:
         print("No Novig Trading Key configured. Skipping Novig depth fetch.")
@@ -502,27 +490,70 @@ def fetch_novig_depth(leagues, odds_format):
     try:
         print("Querying Novig V3 API for events and markets...")
         
-        # 1. Fetch Events to map EventId -> Event Name
+        # Identify matches we actually care about
+        target_matchups = set()
+        for row in odds_data:
+            bookmaker = row[5]
+            if bookmaker.lower() == "novig":
+                target_matchups.add((row[3].lower(), row[4].lower())) # home, away
+                
         events_map = {}
+        target_event_ids = []
         for league in leagues:
-            res = call_novig_api(key, "GET", "/v3/catalog/events", f"league={league}&limit=500")
-            if res.status_code == 200:
-                for ev in res.json().get("items", []):
-                    events_map[ev["eventId"]] = ev["description"]
-                    
-        # 2. Fetch Markets
-        markets = []
-        for league in leagues:
-            res = call_novig_api(key, "GET", "/v3/catalog/markets", f"league={league}&limit=500")
-            if res.status_code == 200:
-                for m in res.json().get("items", []):
-                    if m["marketType"] in ["SPREAD", "TOTAL", "MONEY", "MONEYLINE"]:
-                        if len(m.get("outcomes", [])) == 2:
-                            markets.append(m)
+            cursor = ""
+            while True:
+                q = f"after={cursor}&league={league}&limit=5000" if cursor else f"league={league}&limit=5000"
+                res = call_novig_api(key, "GET", "/v3/catalog/events", q)
+                if res.status_code == 200:
+                    data = res.json()
+                    for ev in data.get("items", []):
+                        ev_desc = ev["description"]
+                        events_map[ev["eventId"]] = ev_desc
+                        
+                        ev_lower = ev_desc.lower()
+                        # Simple inclusion matching for target teams
+                        matched = False
+                        if not target_matchups:
+                            matched = True # If no odds_data passed, fallback to fetching all
+                        else:
+                            for h_team, a_team in target_matchups:
+                                h_words = set(w for w in h_team.split() if len(w) > 3 and w not in ["state", "university"])
+                                a_words = set(w for w in a_team.split() if len(w) > 3 and w not in ["state", "university"])
+                                ev_words = set(ev_lower.split())
+                                has_home = (h_team in ev_lower) or bool(h_words.intersection(ev_words))
+                                has_away = (a_team in ev_lower) or bool(a_words.intersection(ev_words))
+                                if has_home and has_away:
+                                    matched = True
+                                    break
+                                    
+                        if matched:
+                            target_event_ids.append(ev["eventId"])
                             
-        print(f"Discovered {len(markets)} applicable two-outcome markets across {leagues}.")
+                    cursor = data.get("next")
+                    if not cursor: break
+                else:
+                    break
+                    
+        # 2. Fetch Markets for targeted events ONLY
+        markets = []
+        for ev_id in target_event_ids:
+            cursor = ""
+            while True:
+                q = f"after={cursor}&event={ev_id}&limit=5000" if cursor else f"event={ev_id}&limit=5000"
+                res = call_novig_api(key, "GET", "/v3/catalog/markets", q)
+                if res.status_code == 200:
+                    data = res.json()
+                    for m in data.get("items", []):
+                        if m["marketType"] in ["SPREAD", "TOTAL", "MONEY", "MONEYLINE"]:
+                            if len(m.get("outcomes", [])) == 2:
+                                markets.append(m)
+                    cursor = data.get("next")
+                    if not cursor: break
+                else:
+                    break
+                    
+        print(f"Discovered {len(markets)} targeted two-outcome markets across {leagues}.")
         
-        # 3. Fetch Orderbooks
         def fetch_book(m):
             mid = m["marketId"]
             book_res = call_novig_api(key, "GET", f"/v3/catalog/markets/{mid}/book", "depth=3")
@@ -538,86 +569,48 @@ def fetch_novig_depth(leagues, odds_format):
             for future in as_completed(futures):
                 try:
                     res = future.result()
-                    if "book" in res:
-                        market_results.append(res)
-                except Exception:
-                    pass
+                    if "book" in res: market_results.append(res)
+                except Exception: pass
         print(f"Fetched {len(market_results)} orderbooks in {time.time() - start:.2f}s")
         
-        # 4. Generate Depth Rows
         for m in market_results:
-            m_id = m["marketId"]
             ev_id = m["eventId"]
             ev_name = events_map.get(ev_id, "")
-            league = m.get("league", "") # Not strictly guaranteed in V3 market obj, but okay
-            if not league:
-                # Infer from leagues passed
-                league = leagues[0] if leagues else ""
+            league = leagues[0] if leagues else ""
                 
-            outcomes = m["outcomes"]
-            out_A = outcomes[0]
-            out_B = outcomes[1]
-            
+            out_A = m["outcomes"][0]
+            out_B = m["outcomes"][1]
             orders_dict = m["book"].get("orders", {})
-            orders_A = orders_dict.get(out_A["outcomeId"], [])
-            orders_B = orders_dict.get(out_B["outcomeId"], [])
+            bids_A = [{"price": float(o["price"]), "qty": float(o["qty"]), "isBid": True} for o in orders_dict.get(out_A["outcomeId"], [])]
+            bids_B = [{"price": float(o["price"]), "qty": float(o["qty"]), "isBid": True} for o in orders_dict.get(out_B["outcomeId"], [])]
             
-            # Orders are just list of Bids in V3: [{"price": "0.51", "qty": 25000}]
-            def parse_bids(raw_orders):
-                return [{"price": float(o["price"]), "qty": float(o["qty"]), "isBid": True} for o in raw_orders]
-                
-            bids_A = parse_bids(orders_A)
-            bids_B = parse_bids(orders_B)
-            
-            # Outcome names might be raw. For classification:
             class_A = classify_outcome(ev_name, m["marketType"], out_A["name"], "")
             class_B = classify_outcome(ev_name, m["marketType"], out_B["name"], "")
+            strike_str = m.get("strike", "") or ""
             
-            # Strike
-            strike_str = m.get("strike", "")
-            if strike_str is None:
-                strike_str = ""
-            
-            # --- OUTCOME A ---
             for idx, bid in enumerate(bids_B[:3]):
                 back_price = 1 - bid["price"]
                 odds = prob_to_american(back_price, odds_format)
-                max_bet_risk = bid["qty"] * back_price
-                depth_rows.append([
-                    ev_name, league, m["marketType"], out_A["name"],
-                    strike_str, "Back", odds, round(max_bet_risk, 2), idx + 1, class_A
-                ])
+                depth_rows.append([ev_name, league, m["marketType"], out_A["name"], strike_str, "Back", odds, round(bid["qty"] * back_price, 2), idx + 1, class_A])
             for idx, bid in enumerate(bids_A[:3]):
                 lay_price = bid["price"]
                 odds = prob_to_american(lay_price, odds_format)
-                max_bet_risk = bid["qty"] * (1 - lay_price)
-                depth_rows.append([
-                    ev_name, league, m["marketType"], out_A["name"],
-                    strike_str, "Lay", odds, round(max_bet_risk, 2), idx + 1, class_A
-                ])
+                depth_rows.append([ev_name, league, m["marketType"], out_A["name"], strike_str, "Lay", odds, round(bid["qty"] * (1 - lay_price), 2), idx + 1, class_A])
                 
-            # --- OUTCOME B ---
             for idx, bid in enumerate(bids_A[:3]):
                 back_price = 1 - bid["price"]
                 odds = prob_to_american(back_price, odds_format)
-                max_bet_risk = bid["qty"] * back_price
-                depth_rows.append([
-                    ev_name, league, m["marketType"], out_B["name"],
-                    strike_str, "Back", odds, round(max_bet_risk, 2), idx + 1, class_B
-                ])
+                depth_rows.append([ev_name, league, m["marketType"], out_B["name"], strike_str, "Back", odds, round(bid["qty"] * back_price, 2), idx + 1, class_B])
             for idx, bid in enumerate(bids_B[:3]):
                 lay_price = bid["price"]
                 odds = prob_to_american(lay_price, odds_format)
-                max_bet_risk = bid["qty"] * (1 - lay_price)
-                depth_rows.append([
-                    ev_name, league, m["marketType"], out_B["name"],
-                    strike_str, "Lay", odds, round(max_bet_risk, 2), idx + 1, class_B
-                ])
+                depth_rows.append([ev_name, league, m["marketType"], out_B["name"], strike_str, "Lay", odds, round(bid["qty"] * (1 - lay_price), 2), idx + 1, class_B])
                 
     except Exception as e:
         print("Error fetching detailed Novig depth:", e)
         
     return depth_rows
+
 
 def find_novig_quote(home_team, away_team, market_key, outcome_name, point, depth_data):
     """Matches an outcome row to its corresponding Level 1 Back odds and liquidity from Novig GQL depth."""
@@ -698,6 +691,8 @@ def find_novig_quote(home_team, away_team, market_key, outcome_name, point, dept
             except Exception:
                 pass
                 
+    return None, ""
+
 def export_mobile_data(odds_data_with_liq, props_data):
     """Exports lightweight JSON bundle for mobile web app."""
     try:
@@ -1163,7 +1158,7 @@ def main():
         novig_leagues = list(set(novig_leagues)) # Deduplicate
         
         if novig_leagues:
-            depth_data = fetch_novig_depth(novig_leagues, odds_format)
+            depth_data = fetch_novig_depth(novig_leagues, odds_format, odds_data)
             
         if depth_data:
             print(f"Writing {len(depth_data)} rows of depth levels to 'Novig Market Depth' tab...")
@@ -1311,5 +1306,12 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
 
 
