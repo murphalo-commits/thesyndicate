@@ -543,8 +543,11 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
                 if res.status_code == 200:
                     data = res.json()
                     for m in data.get("items", []):
-                        if m["marketType"] in ["SPREAD", "TOTAL", "MONEY", "MONEYLINE"]:
-                            if len(m.get("outcomes", [])) == 2:
+                        if m['marketType'] in ['SPREAD', 'TOTAL', 'MONEY', 'MONEYLINE']:
+                            m_desc = m.get('name', '').lower() + ' ' + m.get('description', '').lower()
+                            if 'half' in m_desc or 'quarter' in m_desc or 'period' in m_desc or 'inning' in m_desc or '1q' in m_desc or '2q' in m_desc or '3q' in m_desc or '4q' in m_desc or '1h' in m_desc or '2h' in m_desc:
+                                continue
+                            if len(m.get('outcomes', [])) == 2:
                                 markets.append(m)
                     cursor = data.get("next")
                     if not cursor: break
@@ -1305,6 +1308,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
