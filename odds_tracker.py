@@ -740,6 +740,12 @@ def export_mobile_data(odds_data_with_liq, props_data):
             tokens = name.split()
             return tokens[-1][:3].upper() if tokens else name[:3].upper()
 
+        def _parse_liq(v):
+            try:
+                return round(float(str(v).replace('$', '').replace(',', '').strip()), 2)
+            except Exception:
+                return 0
+
         events = {}
         for row in odds_data_with_liq:
             eid, sport, commence, home, away, book, market, outcome, point, price, _, liq = row
@@ -772,7 +778,7 @@ def export_mobile_data(odds_data_with_liq, props_data):
                 "outcome": outcome,
                 "point": point,
                 "price": price_val,
-                "liquidity": float(liq) if liq and str(liq).replace('.','').isdigit() else 0
+                "liquidity": _parse_liq(liq)
             })
 
         matchups_list = []
