@@ -445,6 +445,52 @@ def call_novig_api(key, method, path, query="", body=None):
     
     return requests.request(method, url, data=data, headers=headers)
 
+
+def classify_outcome(event_name, market_type, o_desc, competitor_name):
+      """Classifies an outcome dynamically as Home, Away, Over, or Under based on name patterns."""
+      o_lower = o_desc.lower()
+      if market_type == "TOTAL":
+          if "over" in o_lower:
+              return "Over"
+          elif "under" in o_lower:
+              return "Under"
+          return ""
+          
+      event_lower = event_name.lower()
+      split_chars = [" @ ", " at ", " vs ", " v "]
+      away_team = ""
+      home_team = ""
+      for char in split_chars:
+          if char in event_lower:
+              parts = event_lower.split(char)
+              away_team = parts[0].strip()
+              home_team = parts[1].strip()
+              break
+              
+      if not away_team or not home_team:
+          return ""
+          
+      comp_lower = competitor_name.lower() if competitor_name else o_lower
+      cleaned_comp = comp_lower.split("-")[0].split("+")[0].strip()
+      
+      if cleaned_comp in away_team or away_team in cleaned_comp:
+          return "Away"
+      elif cleaned_comp in home_team or home_team in cleaned_comp:
+          return "Home"
+          
+      # Acronym fallback (e.g. PSU -> Penn State)
+      away_acronym = "".join([t[0] for t in away_team.split() if t not in ["and", "or"]])
+      home_acronym = "".join([t[0] for t in home_team.split() if t not in ["and", "or"]])
+      if away_acronym == cleaned_comp:
+          return "Away"
+      elif home_acronym == cleaned_comp:
+          return "Home"
+          
+      return ""
+
+
+
+
 def fetch_novig_depth(leagues, odds_format):
     """Fetches detailed order book depth using Novig V3 API."""
     key = get_trading_key()
@@ -1265,3 +1311,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
