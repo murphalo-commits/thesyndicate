@@ -613,6 +613,8 @@
         let currentTab = 'odds';
         let currentSport = 'ALL';
         let currentMarket = 'all';
+        let currentDateFilter = 'ALL';
+        let currentLiqFilter = 0;
         let currentPropCategory = 'ALL';
         let searchQuery = '';
         let showNovigMode = 'retail'; // 'retail' (guaranteed books) or 'all' (includes Novig)
@@ -1290,6 +1292,20 @@
             }
 
             // Sort by guaranteed profit / ROI from most to least!
+            
+            if (currentDateFilter !== 'ALL') {
+                allList = allList.filter(a => a.commence_time && a.commence_time.startsWith(currentDateFilter));
+            }
+            
+            if (currentLiqFilter > 0) {
+                allList = allList.filter(a => {
+                    if (!a.is_novig) return true;
+                    const lA = (a.side_a.book === 'Novig') ? (parseFloat(a.side_a.liquidity) || 0) : Infinity;
+                    const lB = (a.side_b.book === 'Novig') ? (parseFloat(a.side_b.liquidity) || 0) : Infinity;
+                    return (lA >= currentLiqFilter && lB >= currentLiqFilter);
+                });
+            }
+
             allList.sort((a, b) => (parseFloat(b.roi) || 0) - (parseFloat(a.roi) || 0));
 
             // Count metrics across all filtered arbs

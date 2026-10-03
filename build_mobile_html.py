@@ -618,7 +618,7 @@ def build_mobile_app_html():
         // State
         let currentTab = 'odds';
         let currentSport = 'ALL';
-        let currentMarket = 'all';
+        let currentMarket = 'all';\n        let currentDateFilter = 'ALL';\n        let currentLiqFilter = 0;
         let currentPropCategory = 'ALL';
         let searchQuery = '';
         let showNovigMode = 'retail'; // 'retail' (guaranteed books) or 'all' (includes Novig)
@@ -1296,7 +1296,20 @@ def build_mobile_app_html():
             }}
 
             // Sort by guaranteed profit / ROI from most to least!
-            allList.sort((a, b) => (parseFloat(b.roi) || 0) - (parseFloat(a.roi) || 0));
+            
+            if (currentDateFilter !== 'ALL') {{
+                allList = allList.filter(a => a.commence_time && a.commence_time.startsWith(currentDateFilter));
+            }}
+            
+            if (currentLiqFilter > 0) {{
+                allList = allList.filter(a => {{
+                    if (!a.is_novig) return true;
+                    const lA = (a.side_a.book === 'Novig') ? (parseFloat(a.side_a.liquidity) || 0) : Infinity;
+                    const lB = (a.side_b.book === 'Novig') ? (parseFloat(a.side_b.liquidity) || 0) : Infinity;
+                    return (lA >= currentLiqFilter && lB >= currentLiqFilter);
+                }});
+            }}
+\n            allList.sort((a, b) => (parseFloat(b.roi) || 0) - (parseFloat(a.roi) || 0));
 
             // Count metrics across all filtered arbs
             const totalCount = allList.length;
