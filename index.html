@@ -859,14 +859,14 @@
             
             if (marketType === 'h2h') {
                 const item = bookData.find(x => x.outcome === teamName);
-                return item ? { price: item.price, book: bookName } : null;
+                return item ? { price: item.price, book: bookName, liquidity: item.liquidity } : null;
             } else if (marketType === 'spreads') {
                 const item = bookData.find(x => x.outcome === teamName);
-                return item ? { point: item.point, price: item.price, book: bookName } : null;
+                return item ? { point: item.point, price: item.price, book: bookName, liquidity: item.liquidity } : null;
             } else if (marketType === 'totals') {
                 const targetOutcome = isAway ? 'over' : 'under';
                 const item = bookData.find(x => x.outcome.toLowerCase() === targetOutcome);
-                return item ? { point: item.point, price: item.price, book: bookName } : null;
+                return item ? { point: item.point, price: item.price, book: bookName, liquidity: item.liquidity } : null;
             }
             return null;
         }
@@ -888,14 +888,18 @@
             // Check if Novig offers an edge when in Retail Best mode
             const hasNovigEdge = (showNovigMode === 'retail' && !isNovig && novigAlt && novigAlt.price !== null && (americanToDec(novigAlt.price) > americanToDec(data.price) + 0.001));
             const novigEdgeBadge = hasNovigEdge ? `<span class="inline-flex items-center text-[7px] font-black px-1 py-0.2 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 leading-none shrink-0" title="Novig Exchange: ${formatAmericanOdds(novigAlt.price)}">⚡${formatAmericanOdds(novigAlt.price)}</span>` : '';
+            const liqBadge = (isNovig && data.liquidity) ? `<span class="text-[7px] font-bold text-emerald-400 ml-1 tracking-tight shrink-0">Liq $${Math.round(data.liquidity)}</span>` : '';
 
             if (type === 'ml') {
                 return `
                     <div class="h-11 bg-slate-900/90 border ${isNovig ? 'border-emerald-500/50 bg-emerald-950/20' : 'border-slate-700/60'} rounded-xl px-1 flex flex-col items-center justify-center select-none active:scale-95 transition">
-                        <span class="text-xs font-black ${isNovig ? 'text-emerald-400' : 'text-white'} leading-none tracking-tight">${formattedPrice}</span>
+                        <div class="flex items-center justify-center space-x-0.5">
+                            <span class="text-xs font-black ${isNovig ? 'text-emerald-400' : 'text-white'} leading-none tracking-tight">${formattedPrice}</span>
+                        </div>
                         <div class="flex items-center justify-center space-x-1 mt-1 leading-none">
                             ${novigEdgeBadge ? novigEdgeBadge : '<span class="text-[8.5px] font-medium text-slate-400">ML</span>'}
                             ${bookBadge}
+                            ${liqBadge}
                         </div>
                     </div>
                 `;
@@ -909,9 +913,10 @@
                             <span class="text-xs font-bold text-white tracking-tight">${pointStr}</span>
                             ${bookBadge}
                         </div>
-                        <div class="flex items-center justify-center space-x-1 mt-1 leading-none">
+                        <div class="flex items-center justify-center space-x-0.5 mt-1 leading-none">
                             <span class="text-[9.5px] font-extrabold ${isNovig ? 'text-emerald-400' : 'text-slate-300'}">${formattedPrice}</span>
                             ${novigEdgeBadge}
+                            ${liqBadge}
                         </div>
                     </div>
                 `;
@@ -926,9 +931,10 @@
                             <span class="text-xs font-bold text-white tracking-tight">${pointStr}</span>
                             ${bookBadge}
                         </div>
-                        <div class="flex items-center justify-center space-x-1 mt-1 leading-none">
+                        <div class="flex items-center justify-center space-x-0.5 mt-1 leading-none">
                             <span class="text-[9.5px] font-extrabold ${isNovig ? 'text-emerald-400' : 'text-slate-300'}">${formattedPrice}</span>
                             ${novigEdgeBadge}
+                            ${liqBadge}
                         </div>
                     </div>
                 `;
