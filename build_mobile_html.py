@@ -1835,7 +1835,43 @@ def build_mobile_app_html():
         }}
 
         // Master Render
-        function renderAll() {{
+        
+function populateDateDropdown() {{
+    const dates = new Set();
+    appData.matchups.forEach(m => {{
+        if (m.commence_time) {{
+            const datePart = m.commence_time.split(' ')[0];
+            dates.add(datePart);
+        }}
+    }});
+    const select = document.getElementById('dateFilter');
+    if(!select) return;
+    select.innerHTML = '<option value="ALL">All Dates</option>';
+    Array.from(dates).sort().forEach(d => {{
+        const opt = document.createElement('option');
+        opt.value = d;
+        try {{
+            const parts = d.split('-');
+            const dateObj = new Date(parts[0], parts[1]-1, parts[2]);
+            const formatStr = dateObj.toLocaleDateString('en-US', {{ weekday: 'short', month: 'short', day: 'numeric' }});
+            opt.textContent = formatStr;
+        }} catch(e) {{
+            opt.textContent = d;
+        }}
+        select.appendChild(opt);
+    }});
+}}
+
+function setDateFilter(dateStr) {{
+    currentDateFilter = dateStr;
+    renderAll();
+}}
+
+function setLiqFilter(val) {{
+    currentLiqFilter = parseInt(val, 10);
+    renderAll();
+}}
+\nfunction renderAll() {{
             updateSportPills();
             renderMatchups();
             renderArbs();
