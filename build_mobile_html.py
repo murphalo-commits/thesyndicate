@@ -1846,6 +1846,7 @@ function populateDateDropdown() {{
     }});
     const select = document.getElementById('dateFilter');
     if(!select) return;
+    const prevVal = currentDateFilter;
     select.innerHTML = '<option value="ALL">All Dates</option>';
     Array.from(dates).sort().forEach(d => {{
         const opt = document.createElement('option');
@@ -1860,6 +1861,12 @@ function populateDateDropdown() {{
         }}
         select.appendChild(opt);
     }});
+    if (prevVal !== 'ALL' && dates.has(prevVal)) {{
+        select.value = prevVal;
+    }} else {{
+        select.value = 'ALL';
+        currentDateFilter = 'ALL';
+    }}
 }}
 
 function setDateFilter(dateStr) {{
@@ -1871,7 +1878,8 @@ function setLiqFilter(val) {{
     currentLiqFilter = parseInt(val, 10);
     renderAll();
 }}
-\nfunction renderAll() {{
+        function renderAll() {{
+            populateDateDropdown();
             updateSportPills();
             renderMatchups();
             renderArbs();
