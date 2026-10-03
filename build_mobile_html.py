@@ -994,6 +994,25 @@ def build_mobile_app_html():
                 );
             }}
 
+            if (currentDateFilter !== 'ALL') {{
+                list = list.filter(m => m.commence_time && m.commence_time.startsWith(currentDateFilter));
+            }}
+
+            if (currentLiqFilter > 0) {{
+                list = list.filter(m => {{
+                    const checkLiq = (item) => item && item.book === 'Novig' && (parseFloat(item.liquidity) || 0) >= currentLiqFilter;
+                    const b = m.best_lines || {{}};
+                    return (
+                        checkLiq(b.h2h_away) || checkLiq(b.h2h_home) ||
+                        checkLiq(b.spread_away) || checkLiq(b.spread_home) ||
+                        checkLiq(b.total_over) || checkLiq(b.total_under) ||
+                        checkLiq(b.retail_h2h_away) || checkLiq(b.retail_h2h_home) ||
+                        checkLiq(b.retail_spread_away) || checkLiq(b.retail_spread_home) ||
+                        checkLiq(b.retail_total_over) || checkLiq(b.retail_total_under)
+                    );
+                }});
+            }}
+
             document.getElementById('matchupCountLabel').textContent = `Showing ${{list.length}} ${{currentSport === 'ALL' ? 'Upcoming' : currentSport}} Games (${{showNovigMode === 'retail' ? 'Retail Best' : 'Retail + Novig'}})`;
 
             if (list.length === 0) {{
