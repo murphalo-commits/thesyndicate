@@ -494,8 +494,7 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
         target_matchups = set()
         for row in odds_data:
             bookmaker = row[5]
-            if bookmaker.lower() == "novig":
-                target_matchups.add((row[3].lower(), row[4].lower())) # home, away
+            target_matchups.add((row[3].lower(), row[4].lower())) # home, away
                 
         events_map = {}
         target_event_ids = []
@@ -1306,6 +1305,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
