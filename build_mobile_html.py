@@ -909,7 +909,7 @@ def build_mobile_app_html():
             // Check if Novig offers an edge when in Retail Best mode
             const hasNovigEdge = (showNovigMode === 'retail' && !isNovig && novigAlt && novigAlt.price !== null && (americanToDec(novigAlt.price) > americanToDec(data.price) + 0.001));
             const novigEdgeBadge = hasNovigEdge ? `<span class="inline-flex items-center text-[7px] font-black px-1 py-0.2 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 leading-none shrink-0" title="Novig Exchange: ${{formatAmericanOdds(novigAlt.price)}}">⚡${{formatAmericanOdds(novigAlt.price)}}</span>` : '';
-            const liqBadge = (isNovig && data.liquidity) ? `<span class="text-[7px] font-bold text-emerald-400 ml-1 tracking-tight shrink-0">Liq $${{Math.round(data.liquidity)}}</span>` : '';
+            const liqBadge = (isNovig && data.liquidity !== null && data.liquidity !== undefined) ? `<span class="text-[7px] font-bold text-emerald-400 ml-1 tracking-tight shrink-0">Liq $${{Math.round(data.liquidity)}}</span>` : '';
 
             if (type === 'ml') {{
                 return `
@@ -1418,7 +1418,7 @@ def build_mobile_app_html():
                                         ${{getBookBadge(arb.side_a.book)}}
                                         <span class="text-xs font-bold text-white truncate">${{arb.side_a.book}}</span>
                                     </div>
-                                    ${{arb.side_a.liquidity ? `<span class="text-[9px] text-emerald-400 font-semibold shrink-0">Liq $${{arb.side_a.liquidity}}</span>` : ''}}
+                                    ${{(arb.side_a.liquidity !== null && arb.side_a.liquidity !== undefined) ? `<span class="text-[9px] text-emerald-400 font-semibold shrink-0">Liq $${{arb.side_a.liquidity}}</span>` : ''}}
                                 </div>
                                 <div class="text-[11px] font-bold text-slate-200 truncate">${{arb.side_a.outcome}}</div>
                                 <div class="text-sm font-black text-cyan-400 my-0.5">${{formatAmericanOdds(arb.side_a.price)}}</div>
@@ -1441,7 +1441,7 @@ def build_mobile_app_html():
                                         ${{getBookBadge(arb.side_b.book)}}
                                         <span class="text-xs font-bold text-white truncate">${{arb.side_b.book}}</span>
                                     </div>
-                                    ${{arb.side_b.liquidity ? `<span class="text-[9px] text-emerald-400 font-semibold shrink-0">Liq $${{arb.side_b.liquidity}}</span>` : ''}}
+                                    ${{(arb.side_b.liquidity !== null && arb.side_b.liquidity !== undefined) ? `<span class="text-[9px] text-emerald-400 font-semibold shrink-0">Liq $${{arb.side_b.liquidity}}</span>` : ''}}
                                 </div>
                                 <div class="text-[11px] font-bold text-slate-200 truncate">${{arb.side_b.outcome}}</div>
                                 <div class="text-sm font-black text-cyan-400 my-0.5">${{formatAmericanOdds(arb.side_b.price)}}</div>

@@ -583,8 +583,8 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
             out_A = m["outcomes"][0]
             out_B = m["outcomes"][1]
             orders_dict = m["book"].get("orders", {})
-            bids_A = [{"price": float(o["price"]), "qty": float(o["qty"]), "isBid": True} for o in orders_dict.get(out_A["outcomeId"], [])]
-            bids_B = [{"price": float(o["price"]), "qty": float(o["qty"]), "isBid": True} for o in orders_dict.get(out_B["outcomeId"], [])]
+            bids_A = [{"price": float(o["price"]), "qty": float(o["qty"]), "isBid": True} for o in orders_dict.get(out_A["outcomeId"], []) if float(o["qty"]) >= 0.01]
+            bids_B = [{"price": float(o["price"]), "qty": float(o["qty"]), "isBid": True} for o in orders_dict.get(out_B["outcomeId"], []) if float(o["qty"]) >= 0.01]
             
             class_A = classify_outcome(ev_name, m["marketType"], out_A["name"], "")
             class_B = classify_outcome(ev_name, m["marketType"], out_B["name"], "")
