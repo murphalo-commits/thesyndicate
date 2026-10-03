@@ -44,6 +44,8 @@ jobs:
       - name: Run Odds Tracker
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+          NOVIG_KEY_ID: ${{ secrets.NOVIG_KEY_ID }}
+          NOVIG_PRIVATE_KEY: ${{ secrets.NOVIG_PRIVATE_KEY }}
         run: |
           python odds_tracker.py
 
@@ -58,3 +60,4 @@ jobs:
             git commit -m "Refresh betting lines data [skip ci]"
             git push origin main
           fi
+

@@ -388,230 +388,184 @@ def prob_to_american(prob, format_type="american"):
     else:
         return int(round(((1 - prob) / prob) * 100))
 
-def post_gql(query_data, max_retries=3, backoff=2):
-    """Sends a POST request to Novig's public GraphQL endpoint with retry logic."""
-    for attempt in range(1, max_retries + 1):
-        try:
-            req = urllib.request.Request(
-                NOVIG_GQL_URL, 
-                data=json.dumps(query_data).encode("utf-8"), 
-                headers={
-                    "Content-Type": "application/json",
-                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
-                }, 
-                method="POST"
-            )
-            with urllib.request.urlopen(req, timeout=15) as res:
-                return json.loads(res.read().decode("utf-8"))
-        except Exception as e:
-            if attempt < max_retries:
-                print(f"Warning: Novig GraphQL attempt {attempt}/{max_retries} failed: {e}. Retrying in {backoff * attempt}s...")
-                time.sleep(backoff * attempt)
-            else:
-                raise e
+import os
+import time
+import json
+import base64
+import hashlib
+import requests
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
-def classify_outcome(event_name, market_type, o_desc, competitor_name):
-    """Classifies an outcome dynamically as Home, Away, Over, or Under based on name patterns."""
-    o_lower = o_desc.lower()
-    if market_type == "TOTAL":
-        if "over" in o_lower:
-            return "Over"
-        elif "under" in o_lower:
-            return "Under"
-        return ""
-        
-    event_lower = event_name.lower()
-    split_chars = [" @ ", " at ", " vs ", " v "]
-    away_team = ""
-    home_team = ""
-    for char in split_chars:
-        if char in event_lower:
-            parts = event_lower.split(char)
-            away_team = parts[0].strip()
-            home_team = parts[1].strip()
-            break
-            
-    if not away_team or not home_team:
-        return ""
-        
-    comp_lower = competitor_name.lower() if competitor_name else o_lower
-    cleaned_comp = comp_lower.split("-")[0].split("+")[0].strip()
+def get_trading_key():
+    key_id = os.environ.get("NOVIG_KEY_ID")
+    pem_path = os.environ.get("NOVIG_PEM_PATH", "trading_key.pem")
+    pem_data = os.environ.get("NOVIG_PRIVATE_KEY")
     
-    if cleaned_comp in away_team or away_team in cleaned_comp:
-        return "Away"
-    elif cleaned_comp in home_team or home_team in cleaned_comp:
-        return "Home"
+    # Check if user has it configured (local fallback uses C:/Users/Brian/trading_key.pem)
+    if not key_id:
+        # Fallback to hardcoded local for ease of testing based on the screenshot
+        key_id = "8cf32c2e-97e3-40ad-9b04-775c033eb9fb"
+        pem_path = "C:/Users/Brian/trading_key.pem"
         
-    # Acronym fallback (e.g. PSU -> Penn State)
-    away_acronym = "".join([t[0] for t in away_team.split() if t not in ["and", "or"]])
-    home_acronym = "".join([t[0] for t in home_team.split() if t not in ["and", "or"]])
-    if away_acronym == cleaned_comp:
-        return "Away"
-    elif home_acronym == cleaned_comp:
-        return "Home"
+    try:
+        from cryptography.hazmat.primitives.serialization import load_pem_private_key
+        if pem_data:
+            pem_data = pem_data.replace('\\n', '\n')
+            private_key = load_pem_private_key(pem_data.encode(), None)
+        else:
+            with open(pem_path, "rb") as f:
+                private_key = load_pem_private_key(f.read(), None)
+        return key_id, private_key
+    except Exception as e:
+        print(f"Error loading Novig Trading Key: {e}")
+        return None
+
+def call_novig_api(key, method, path, query="", body=None):
+    from cryptography.hazmat.primitives.asymmetric import ec
+    from cryptography.hazmat.primitives import hashes
+    HOST = "https://api.novig.com"
+    key_id, private = key
+    data = b"" if body is None else json.dumps(body).encode()
+    ts = str(int(time.time() * 1000))
+    digest = hashlib.sha256(data).hexdigest()
+    text = "\n".join(["NOVIG-V3", ts, method, path, query, digest])
+    
+    try:
+        signature = base64.b64encode(private.sign(text.encode(), ec.ECDSA(hashes.SHA256())))
+    except TypeError:
+        signature = base64.b64encode(private.sign(text.encode()))
         
-    return ""
+    url = HOST + path + (f"?{query}" if query else "")
+    headers = {
+        "Novig-Key-Id": key_id,
+        "Novig-Timestamp": ts,
+        "Novig-Signature": signature.decode(),
+        "Content-Type": "application/json",
+    }
+    
+    return requests.request(method, url, data=data, headers=headers)
 
 def fetch_novig_depth(leagues, odds_format):
-    """Fetches detailed order book depth by splitting metadata and orders to avoid timeouts.
-    Uses two-outcome cross-matching logic to resolve backing/laying odds from one-sided bids database.
-    """
-    metadata_query = {
-        "query": """
-        query GetMetadata($leagues: [String!]) {
-          event(where: { _and: [{ status: { _in: ["OPEN_PREGAME", "OPEN_INGAME"] } }, { game: { league: { _in: $leagues } } }] }) {
-            description
-            game {
-              league
-            }
-            markets(where: { type: { _in: ["SPREAD", "TOTAL", "MONEY", "MONEYLINE"] } }) {
-              id
-              description
-              type
-              strike
-              outcomes {
-                id
-                description
-                competitor {
-                  name
-                }
-              }
-            }
-          }
-        }
-        """,
-        "variables": {
-            "leagues": leagues
-        }
-    }
-    
-    orders_query = {
-        "query": """
-        query GetActiveOrders {
-          order(where: { status: { _eq: "OPEN" } }) {
-            outcome_id
-            price
-            qty
-            isBid
-          }
-        }
-        """
-    }
-    
+    """Fetches detailed order book depth using Novig V3 API."""
+    key = get_trading_key()
+    if not key:
+        print("No Novig Trading Key configured. Skipping Novig depth fetch.")
+        return []
+        
     depth_rows = []
     try:
-        print("Querying Novig GraphQL API for metadata...")
-        meta_res = post_gql(metadata_query)
-        if "errors" in meta_res:
-            print("Error fetching Novig metadata:", meta_res["errors"])
-            return []
-        events = meta_res.get("data", {}).get("event", [])
+        print("Querying Novig V3 API for events and markets...")
         
-        print("Querying Novig GraphQL API for active orders...")
-        orders_res = post_gql(orders_query)
-        if "errors" in orders_res:
-            print("Error fetching Novig active orders:", orders_res["errors"])
-            return []
-        orders = orders_res.get("data", {}).get("order", [])
-        
-        # Build maps
-        outcome_map = {}
-        market_outcomes = {}
-        for ev in events:
-            ev_name = ev["description"]
-            league = ev.get("game", {}).get("league", "")
-            for m in ev.get("markets", []):
-                m_id = m["id"]
-                market_outcomes[m_id] = []
-                for o in m.get("outcomes", []):
-                    comp_name = o["competitor"]["name"] if o.get("competitor") else ""
-                    outcome_obj = {
-                        "id": o["id"],
-                        "description": o["description"],
-                        "competitor_name": comp_name,
-                        "market_type": m["type"],
-                        "strike": m["strike"] if m["strike"] is not None else "",
-                        "event_name": ev_name,
-                        "league": league
-                    }
-                    outcome_map[o["id"]] = outcome_obj
-                    market_outcomes[m_id].append(outcome_obj)
+        # 1. Fetch Events to map EventId -> Event Name
+        events_map = {}
+        for league in leagues:
+            res = call_novig_api(key, "GET", "/v3/catalog/events", f"league={league}&limit=500")
+            if res.status_code == 200:
+                for ev in res.json().get("items", []):
+                    events_map[ev["eventId"]] = ev["description"]
                     
-        # Group orders by outcome ID
-        orders_by_outcome = {}
-        for order in orders:
-            o_id = order["outcome_id"]
-            if o_id in outcome_map:
-                if o_id not in orders_by_outcome:
-                    orders_by_outcome[o_id] = []
-                orders_by_outcome[o_id].append(order)
+        # 2. Fetch Markets
+        markets = []
+        for league in leagues:
+            res = call_novig_api(key, "GET", "/v3/catalog/markets", f"league={league}&limit=500")
+            if res.status_code == 200:
+                for m in res.json().get("items", []):
+                    if m["marketType"] in ["SPREAD", "TOTAL", "MONEY", "MONEYLINE"]:
+                        if len(m.get("outcomes", [])) == 2:
+                            markets.append(m)
+                            
+        print(f"Discovered {len(markets)} applicable two-outcome markets across {leagues}.")
+        
+        # 3. Fetch Orderbooks
+        def fetch_book(m):
+            mid = m["marketId"]
+            book_res = call_novig_api(key, "GET", f"/v3/catalog/markets/{mid}/book", "depth=3")
+            if book_res.status_code == 200:
+                m["book"] = book_res.json()
+            return m
+            
+        print(f"Fetching {len(markets)} real-time orderbooks concurrently...")
+        start = time.time()
+        market_results = []
+        with ThreadPoolExecutor(max_workers=15) as executor:
+            futures = {executor.submit(fetch_book, m): m for m in markets}
+            for future in as_completed(futures):
+                try:
+                    res = future.result()
+                    if "book" in res:
+                        market_results.append(res)
+                except Exception:
+                    pass
+        print(f"Fetched {len(market_results)} orderbooks in {time.time() - start:.2f}s")
+        
+        # 4. Generate Depth Rows
+        for m in market_results:
+            m_id = m["marketId"]
+            ev_id = m["eventId"]
+            ev_name = events_map.get(ev_id, "")
+            league = m.get("league", "") # Not strictly guaranteed in V3 market obj, but okay
+            if not league:
+                # Infer from leagues passed
+                league = leagues[0] if leagues else ""
                 
-        def aggregate_bids(raw_orders):
-            agg = {}
-            for o in raw_orders:
-                if not o.get("isBid"):
-                    continue
-                p = round(float(o["price"]), 4)
-                agg[p] = agg.get(p, 0.0) + float(o["qty"])
-            sorted_p = sorted(agg.keys(), reverse=True)
-            return [{"price": p, "qty": agg[p], "isBid": True} for p in sorted_p]
-
-        # Generate cross-matched back/lay depth levels
-        for m_id, outcomes in market_outcomes.items():
-            if len(outcomes) != 2:
-                continue  # Only handle standard two-outcome markets
-                
+            outcomes = m["outcomes"]
             out_A = outcomes[0]
             out_B = outcomes[1]
             
-            orders_A = orders_by_outcome.get(out_A["id"], [])
-            orders_B = orders_by_outcome.get(out_B["id"], [])
+            orders_dict = m["book"].get("orders", {})
+            orders_A = orders_dict.get(out_A["outcomeId"], [])
+            orders_B = orders_dict.get(out_B["outcomeId"], [])
             
-            bids_A = aggregate_bids(orders_A)
-            bids_B = aggregate_bids(orders_B)
+            # Orders are just list of Bids in V3: [{"price": "0.51", "qty": 25000}]
+            def parse_bids(raw_orders):
+                return [{"price": float(o["price"]), "qty": float(o["qty"]), "isBid": True} for o in raw_orders]
+                
+            bids_A = parse_bids(orders_A)
+            bids_B = parse_bids(orders_B)
             
-            # Dynamically classify outcomes as Home, Away, Over, or Under
-            class_A = classify_outcome(out_A["event_name"], out_A["market_type"], out_A["description"], out_A["competitor_name"])
-            class_B = classify_outcome(out_B["event_name"], out_B["market_type"], out_B["description"], out_B["competitor_name"])
+            # Outcome names might be raw. For classification:
+            class_A = classify_outcome(ev_name, m["marketType"], out_A["name"], "")
+            class_B = classify_outcome(ev_name, m["marketType"], out_B["name"], "")
+            
+            # Strike
+            strike_str = m.get("strike", "")
+            if strike_str is None:
+                strike_str = ""
             
             # --- OUTCOME A ---
-            # 1. Backing A (matches Bids on B)
             for idx, bid in enumerate(bids_B[:3]):
                 back_price = 1 - bid["price"]
                 odds = prob_to_american(back_price, odds_format)
-                max_bet_risk = (bid["qty"] / 100) * back_price
+                max_bet_risk = bid["qty"] * back_price
                 depth_rows.append([
-                    out_A["event_name"], out_A["league"], out_A["market_type"], out_A["description"],
-                    out_A["strike"], "Back", odds, round(max_bet_risk, 2), idx + 1, class_A
+                    ev_name, league, m["marketType"], out_A["name"],
+                    strike_str, "Back", odds, round(max_bet_risk, 2), idx + 1, class_A
                 ])
-            # 2. Laying A (matches Bids on A)
             for idx, bid in enumerate(bids_A[:3]):
                 lay_price = bid["price"]
                 odds = prob_to_american(lay_price, odds_format)
-                max_bet_risk = (bid["qty"] / 100) * (1 - lay_price)
+                max_bet_risk = bid["qty"] * (1 - lay_price)
                 depth_rows.append([
-                    out_A["event_name"], out_A["league"], out_A["market_type"], out_A["description"],
-                    out_A["strike"], "Lay", odds, round(max_bet_risk, 2), idx + 1, class_A
+                    ev_name, league, m["marketType"], out_A["name"],
+                    strike_str, "Lay", odds, round(max_bet_risk, 2), idx + 1, class_A
                 ])
                 
             # --- OUTCOME B ---
-            # 3. Backing B (matches Bids on A)
             for idx, bid in enumerate(bids_A[:3]):
                 back_price = 1 - bid["price"]
                 odds = prob_to_american(back_price, odds_format)
-                max_bet_risk = (bid["qty"] / 100) * back_price
+                max_bet_risk = bid["qty"] * back_price
                 depth_rows.append([
-                    out_B["event_name"], out_B["league"], out_B["market_type"], out_B["description"],
-                    out_B["strike"], "Back", odds, round(max_bet_risk, 2), idx + 1, class_B
+                    ev_name, league, m["marketType"], out_B["name"],
+                    strike_str, "Back", odds, round(max_bet_risk, 2), idx + 1, class_B
                 ])
-            # 4. Laying B (matches Bids on B)
             for idx, bid in enumerate(bids_B[:3]):
                 lay_price = bid["price"]
                 odds = prob_to_american(lay_price, odds_format)
-                max_bet_risk = (bid["qty"] / 100) * (1 - lay_price)
+                max_bet_risk = bid["qty"] * (1 - lay_price)
                 depth_rows.append([
-                    out_B["event_name"], out_B["league"], out_B["market_type"], out_B["description"],
-                    out_B["strike"], "Lay", odds, round(max_bet_risk, 2), idx + 1, class_B
+                    ev_name, league, m["marketType"], out_B["name"],
+                    strike_str, "Lay", odds, round(max_bet_risk, 2), idx + 1, class_B
                 ])
                 
     except Exception as e:
