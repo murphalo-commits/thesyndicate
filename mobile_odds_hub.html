@@ -963,15 +963,22 @@
             const container = document.getElementById('matchupsContainer');
             let list = appData.matchups || [];
 
+            const now = new Date();
             if (currentSport === 'LIVE') {
-                const now = new Date();
                 list = list.filter(m => {
                     if (!m.commence_time) return false;
                     const d = new Date(m.commence_time.replace(/-/g, '/') + ' EST');
                     return now > d;
                 });
-            } else if (currentSport !== 'ALL') {
-                list = list.filter(m => m.sport_label === currentSport);
+            } else {
+                list = list.filter(m => {
+                    if (!m.commence_time) return true;
+                    const d = new Date(m.commence_time.replace(/-/g, '/') + ' EST');
+                    return now <= d;
+                });
+                if (currentSport !== 'ALL') {
+                    list = list.filter(m => m.sport_label === currentSport);
+                }
             }
 
             if (searchQuery) {
@@ -1288,15 +1295,22 @@
             // Rule: Novig can only be AT MOST ONE side of the bet!
             allList = allList.filter(a => !(a.side_a.book === 'Novig' && a.side_b.book === 'Novig'));
 
+            const now = new Date();
             if (currentSport === 'LIVE') {
-                const now = new Date();
                 allList = allList.filter(a => {
                     if (!a.commence_time) return false;
                     const d = new Date(a.commence_time.replace(/-/g, '/') + ' EST');
                     return now > d;
                 });
-            } else if (currentSport !== 'ALL') {
-                allList = allList.filter(a => a.sport === currentSport);
+            } else {
+                allList = allList.filter(a => {
+                    if (!a.commence_time) return true;
+                    const d = new Date(a.commence_time.replace(/-/g, '/') + ' EST');
+                    return now <= d;
+                });
+                if (currentSport !== 'ALL') {
+                    allList = allList.filter(a => a.sport === currentSport);
+                }
             }
 
             if (searchQuery) {
