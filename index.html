@@ -136,7 +136,19 @@
                 <button id="clearSearchBtn" onclick="clearSearch()" class="absolute right-2 top-1 text-slate-400 hover:text-white text-xs hidden p-0.5">✕</button>
             </div>
             
-            <!-- Action Network Style Market Segmented Bar -->
+                          <div class="flex space-x-2">
+                  <select id="dateFilter" onchange="setDateFilter(this.value)" class="flex-1 bg-slate-800/90 border border-slate-700/80 rounded-xl px-2 py-1 text-[11px] font-semibold text-slate-300 focus:outline-none focus:border-emerald-500 appearance-none">
+                      <option value="ALL">All Dates</option>
+                  </select>
+                  <select id="liqFilter" onchange="setLiqFilter(this.value)" class="flex-1 bg-slate-800/90 border border-slate-700/80 rounded-xl px-2 py-1 text-[11px] font-semibold text-slate-300 focus:outline-none focus:border-emerald-500 appearance-none">
+                      <option value="0">Any Liquidity</option>
+                      <option value="50">$50+ Liq</option>
+                      <option value="100">$100+ Liq</option>
+                      <option value="500">$500+ Liq</option>
+                      <option value="1000">$1,000+ Liq</option>
+                  </select>
+              </div>
+              <!-- Action Network Style Market Segmented Bar -->
             <div class="grid grid-cols-4 bg-slate-900/90 p-0.5 rounded-xl border border-slate-800 text-[11px] font-semibold text-center" id="marketPillsContainer">
                 <button onclick="setMarketFilter('all')" id="mktBtn_all" class="market-pill py-1 rounded-lg bg-slate-700 text-white font-bold transition">All Lines</button>
                 <button onclick="setMarketFilter('spreads')" id="mktBtn_spreads" class="market-pill py-1 rounded-lg text-slate-400 hover:text-white transition">Spread</button>
