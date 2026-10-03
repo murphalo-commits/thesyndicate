@@ -795,7 +795,10 @@
 
             let html = `
                 <button onclick="setSportFilter('ALL')" id="sportBtn_ALL" class="sport-pill px-2.5 py-1 rounded-full ${currentSport === 'ALL' ? 'bg-emerald-500 text-slate-950 font-bold' : 'bg-slate-800 text-slate-300 hover:text-white'} whitespace-nowrap shadow-sm text-[11px] transition">
-                    🔥 All Sports
+                    🔥 All
+                </button>
+                <button onclick="setSportFilter('LIVE')" id="sportBtn_LIVE" class="sport-pill px-2.5 py-1 rounded-full ${currentSport === 'LIVE' ? 'bg-red-500 text-white font-bold shadow-[0_0_8px_rgba(239,68,68,0.6)]' : 'bg-slate-800 text-slate-300 hover:text-red-400'} whitespace-nowrap text-[11px] transition">
+                    🔴 Live
                 </button>
             `;
 
@@ -960,7 +963,14 @@
             const container = document.getElementById('matchupsContainer');
             let list = appData.matchups || [];
 
-            if (currentSport !== 'ALL') {
+            if (currentSport === 'LIVE') {
+                const now = new Date();
+                list = list.filter(m => {
+                    if (!m.commence_time) return false;
+                    const d = new Date(m.commence_time.replace(/-/g, '/') + ' EST');
+                    return now > d;
+                });
+            } else if (currentSport !== 'ALL') {
                 list = list.filter(m => m.sport_label === currentSport);
             }
 
@@ -1278,7 +1288,14 @@
             // Rule: Novig can only be AT MOST ONE side of the bet!
             allList = allList.filter(a => !(a.side_a.book === 'Novig' && a.side_b.book === 'Novig'));
 
-            if (currentSport !== 'ALL') {
+            if (currentSport === 'LIVE') {
+                const now = new Date();
+                allList = allList.filter(a => {
+                    if (!a.commence_time) return false;
+                    const d = new Date(a.commence_time.replace(/-/g, '/') + ' EST');
+                    return now > d;
+                });
+            } else if (currentSport !== 'ALL') {
                 allList = allList.filter(a => a.sport === currentSport);
             }
 
