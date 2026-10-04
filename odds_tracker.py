@@ -595,6 +595,9 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
             
             class_A = classify_outcome(ev_name, m["marketType"], out_A["name"], "")
             class_B = classify_outcome(ev_name, m["marketType"], out_B["name"], "")
+            if m["marketType"] in ["MONEY", "MONEYLINE", "SPREAD", "SPREADS"]:
+                if not class_A: class_A = "Home"
+                if not class_B: class_B = "Away"
             strike_str = m.get("strike", "") or ""
             
             for idx, bid in enumerate(bids_B[:3]):
