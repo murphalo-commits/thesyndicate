@@ -1006,9 +1006,9 @@ def build_mobile_app_html():
                         checkLiq(b.h2h_away) || checkLiq(b.h2h_home) ||
                         checkLiq(b.spread_away) || checkLiq(b.spread_home) ||
                         checkLiq(b.total_over) || checkLiq(b.total_under) ||
-                        checkLiq(b.retail_h2h_away) || checkLiq(b.retail_h2h_home) ||
-                        checkLiq(b.retail_spread_away) || checkLiq(b.retail_spread_home) ||
-                        checkLiq(b.retail_total_over) || checkLiq(b.retail_total_under)
+                        checkLiq(b.novig_h2h_away) || checkLiq(b.novig_h2h_home) ||
+                        checkLiq(b.novig_spread_away) || checkLiq(b.novig_spread_home) ||
+                        checkLiq(b.novig_total_over) || checkLiq(b.novig_total_under)
                     );
                 }});
             }}
