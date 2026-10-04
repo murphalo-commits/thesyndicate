@@ -572,6 +572,33 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
             else:
                 break
                     
+        # Filter markets to only those whose strike matches The Odds API
+        if odds_data:
+            valid_strikes_by_event = {}
+            for row in odds_data:
+                if len(row) >= 9:
+                    a_team, h_team, m_key, pt = row[4], row[3], row[6], row[8]
+                    if pt != "":
+                        ev_name = f"{a_team.title()} @ {h_team.title()}"
+                        if ev_name not in valid_strikes_by_event:
+                            valid_strikes_by_event[ev_name] = {"SPREAD": set(), "TOTAL": set()}
+                        if m_key == "spreads": valid_strikes_by_event[ev_name]["SPREAD"].add(abs(float(pt)))
+                        elif m_key == "totals": valid_strikes_by_event[ev_name]["TOTAL"].add(float(pt))
+            
+            filtered_markets = []
+            for m in markets:
+                ev_name = events_map.get(m.get('eventId'))
+                m_type = m['marketType']
+                if m_type in ['MONEY', 'MONEYLINE']:
+                    filtered_markets.append(m)
+                elif m_type in ['SPREAD', 'TOTAL'] and ev_name in valid_strikes_by_event:
+                    strike_str = m.get('strike', '')
+                    if strike_str:
+                        val = abs(float(strike_str)) if m_type == 'SPREAD' else float(strike_str)
+                        if val in valid_strikes_by_event[ev_name][m_type]:
+                            filtered_markets.append(m)
+            markets = filtered_markets
+
         print(f"Discovered {len(markets)} targeted two-outcome markets across {leagues}.")
         
         def fetch_book(m):
