@@ -1197,6 +1197,10 @@ def main():
             point = row[8]
             
             n_odds, liquidity = find_novig_quote(home_team, away_team, market_key, outcome_name, point, depth_data)
+            # If we have depth data but this quote is missing (e.g. filtered dust order), drop it
+            if n_odds is None and depth_data:
+                continue
+                
             # If Novig GQL has real-time odds, ensure the price reflects live exchange book
             if n_odds:
                 row[9] = n_odds
