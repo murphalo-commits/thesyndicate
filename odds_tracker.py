@@ -421,15 +421,28 @@ def get_trading_key():
         return None
 
 def call_novig_api(key, method, path, query="", body=None):
-    import requests
-    import json
+    from cryptography.hazmat.primitives.asymmetric import ec
+    from cryptography.hazmat.primitives import hashes
     HOST = "https://api.novig.com"
-    if path.startswith("/v3/catalog"):
-        path = path.replace("/v3/catalog", "/v3/public/catalog")
+    key_id, private = key
+    data = b"" if body is None else json.dumps(body).encode()
+    ts = str(int(time.time() * 1000))
+    digest = hashlib.sha256(data).hexdigest()
+    text = "\n".join(["NOVIG-V3", ts, method, path, query, digest])
+    
+    try:
+        signature = base64.b64encode(private.sign(text.encode(), ec.ECDSA(hashes.SHA256())))
+    except TypeError:
+        signature = base64.b64encode(private.sign(text.encode()))
         
     url = HOST + path + (f"?{query}" if query else "")
-    data = json.dumps(body).encode() if body else b""
-    headers = {"Content-Type": "application/json"}
+    headers = {
+        "Novig-Key-Id": key_id,
+        "Novig-Timestamp": ts,
+        "Novig-Signature": signature.decode(),
+        "Content-Type": "application/json",
+    }
+    
     return requests.request(method, url, data=data, headers=headers)
 
 
@@ -469,7 +482,10 @@ def classify_outcome(event_name, market_type, o_desc, competitor_name):
 
 def fetch_novig_depth(leagues, odds_format, odds_data=[]):
     key = get_trading_key()
-    
+    if not key:
+        print("No Novig Trading Key configured. Skipping Novig depth fetch.")
+        return []
+        
     depth_rows = []
     try:
         print("Querying Novig V3 API for events and markets...")
@@ -542,15 +558,21 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
         
         def fetch_book(m):
             mid = m["marketId"]
-            book_res = call_novig_api(key, "GET", f"/v3/catalog/markets/{mid}/book", "depth=3")
-            if book_res.status_code == 200:
-                m["book"] = book_res.json()
+            for _ in range(3):
+                book_res = call_novig_api(key, "GET", f"/v3/catalog/markets/{mid}/book", "depth=3")
+                if book_res.status_code == 200:
+                    m["book"] = book_res.json()
+                    break
+                elif book_res.status_code == 429:
+                    time.sleep(1)
+                else:
+                    break
             return m
             
         print(f"Fetching {len(markets)} real-time orderbooks concurrently...")
         start = time.time()
         market_results = []
-        with ThreadPoolExecutor(max_workers=15) as executor:
+        with ThreadPoolExecutor(max_workers=5) as executor:
             futures = {executor.submit(fetch_book, m): m for m in markets}
             for future in as_completed(futures):
                 try:
@@ -566,7 +588,8 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
                 
             out_A = m["outcomes"][0]
             out_B = m["outcomes"][1]
-            orders_dict = m["book"].get("orders", {})
+            book = m.get("book", {})
+            orders_dict = book.get("orders", {})
             bids_A = [{"price": float(o["price"]), "qty": float(o["qty"]) / 100.0, "isBid": True} for o in orders_dict.get(out_A["outcomeId"], []) if (float(o["qty"]) / 100.0) >= 1.0]
             bids_B = [{"price": float(o["price"]), "qty": float(o["qty"]) / 100.0, "isBid": True} for o in orders_dict.get(out_B["outcomeId"], []) if (float(o["qty"]) / 100.0) >= 1.0]
             
@@ -1181,8 +1204,8 @@ def main():
             point = row[8]
             
             n_odds, liquidity = find_novig_quote(home_team, away_team, market_key, outcome_name, point, depth_data)
-            # If we have depth data but this quote is missing (e.g. filtered dust order), drop it
-            if n_odds is None and depth_data:
+            # Drop any Novig line we can't verify in our depth data, even if depth failed to fetch
+            if n_odds is None:
                 continue
                 
             # If Novig GQL has real-time odds, ensure the price reflects live exchange book
