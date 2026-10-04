@@ -430,6 +430,10 @@ def call_novig_api(key, method, path, query="", body=None):
     from cryptography.hazmat.primitives.asymmetric import ec
     from cryptography.hazmat.primitives import hashes
     HOST = "https://api.novig.com"
+    if key is None:
+        url = HOST + path.replace('/v3/catalog/', '/v3/public/catalog/') + (f"?{query}" if query else "")
+        return requests.request(method, url)
+        
     key_id, private = key
     data = b"" if body is None else json.dumps(body).encode()
     ts = str(int(time.time() * 1000))
@@ -488,8 +492,15 @@ def classify_outcome(event_name, market_type, o_desc, competitor_name):
 
 def fetch_novig_depth(leagues, odds_format, odds_data=[]):
     key = get_trading_key()
+    if key:
+        # Test if the key actually works
+        test_res = call_novig_api(key, "GET", "/v3/catalog/events", "limit=1")
+        if test_res.status_code == 401 or test_res.status_code == 403:
+            print(f"Novig Trading Key is invalid or unauthorized ({test_res.status_code}). Falling back to public API.")
+            key = None
+
     if not key:
-        print("No Novig Trading Key configured. Falling back to rate-limited public API.")
+        print("No Novig Trading Key configured or key is invalid. Falling back to rate-limited public API.")
         
     depth_rows = []
     try:
@@ -563,15 +574,15 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
         
         def fetch_book(m):
             mid = m["marketId"]
-            for _ in range(3):
-                if key is None:
-                    time.sleep(1)
+            delay = 1
+            for _ in range(5):
                 book_res = call_novig_api(key, "GET", f"/v3/catalog/markets/{mid}/book", "depth=3")
                 if book_res.status_code == 200:
                     m["book"] = book_res.json()
                     break
                 elif book_res.status_code == 429:
-                    time.sleep(1)
+                    time.sleep(delay)
+                    delay *= 2
                 else:
                     break
             return m
@@ -579,8 +590,7 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
         print(f"Fetching {len(markets)} real-time orderbooks concurrently...")
         start = time.time()
         market_results = []
-        workers = 1 if key is None else 5
-        with ThreadPoolExecutor(max_workers=workers) as executor:
+        with ThreadPoolExecutor(max_workers=5) as executor:
             futures = {executor.submit(fetch_book, m): m for m in markets}
             for future in as_completed(futures):
                 try:
@@ -627,6 +637,8 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
                 depth_rows.append([ev_name, league, m["marketType"], out_B["name"], strike_str, "Lay", odds, round(bid["qty"] * (1 - lay_price), 2), idx + 1, class_B])
                 
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         print("Error fetching detailed Novig depth:", e)
         
     return depth_rows
@@ -1216,7 +1228,7 @@ def main():
             
             n_odds, liquidity = find_novig_quote(home_team, away_team, market_key, outcome_name, point, depth_data)
             # Drop any Novig line we can't verify in our depth data, even if depth failed to fetch
-            if n_odds is None:
+            if n_odds is None and depth_data:
                 continue
                 
             # If Novig GQL has real-time odds, ensure the price reflects live exchange book
