@@ -411,6 +411,12 @@ def get_trading_key():
         from cryptography.hazmat.primitives.serialization import load_pem_private_key
         if pem_data:
             pem_data = pem_data.replace('\\n', '\n')
+            if '-----BEGIN PRIVATE KEY-----' in pem_data:
+                # Github Secrets can completely mangle PEM newlines
+                import re
+                pem_data = re.sub(r'(-----BEGIN PRIVATE KEY-----)\s*(.*?)\s*(-----END PRIVATE KEY-----)',
+                                  lambda m: m.group(1) + '\n' + '\n'.join([m.group(2).replace(' ', '').replace('\n', '')[i:i+64] for i in range(0, len(m.group(2).replace(' ', '').replace('\n', '')), 64)]) + '\n' + m.group(3),
+                                  pem_data, flags=re.DOTALL)
             private_key = load_pem_private_key(pem_data.encode(), None)
         else:
             with open(pem_path, "rb") as f:
@@ -483,8 +489,7 @@ def classify_outcome(event_name, market_type, o_desc, competitor_name):
 def fetch_novig_depth(leagues, odds_format, odds_data=[]):
     key = get_trading_key()
     if not key:
-        print("No Novig Trading Key configured. Skipping Novig depth fetch.")
-        return []
+        print("No Novig Trading Key configured. Falling back to rate-limited public API.")
         
     depth_rows = []
     try:
@@ -559,6 +564,8 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
         def fetch_book(m):
             mid = m["marketId"]
             for _ in range(3):
+                if key is None:
+                    time.sleep(1)
                 book_res = call_novig_api(key, "GET", f"/v3/catalog/markets/{mid}/book", "depth=3")
                 if book_res.status_code == 200:
                     m["book"] = book_res.json()
@@ -572,7 +579,8 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
         print(f"Fetching {len(markets)} real-time orderbooks concurrently...")
         start = time.time()
         market_results = []
-        with ThreadPoolExecutor(max_workers=5) as executor:
+        workers = 1 if key is None else 5
+        with ThreadPoolExecutor(max_workers=workers) as executor:
             futures = {executor.submit(fetch_book, m): m for m in markets}
             for future in as_completed(futures):
                 try:
