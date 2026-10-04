@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-10-03 08:56:19 PM ET",
+  "updated_at": "2026-10-03 09:10:52 PM ET",
   "sports_count": 3,
-  "matchups_count": 59,
-  "arbs_count": 11,
+  "matchups_count": 60,
+  "arbs_count": 13,
   "props_count": 0,
   "matchups": [
     {
@@ -18,53 +18,53 @@
         "h2h_away": null,
         "h2h_home": null,
         "spread_away": {
-          "book": "FanDuel",
-          "point": -25.5,
-          "price": -110.0,
+          "book": "Fanatics",
+          "point": -29.5,
+          "price": -140.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "FanDuel",
-          "point": 25.5,
-          "price": -120.0,
+          "book": "BetMGM",
+          "point": 29.5,
+          "price": 125.0,
           "liquidity": 0
         },
         "total_over": {
-          "book": "BetMGM",
-          "point": 82.5,
-          "price": -105.0,
+          "book": "Fanatics",
+          "point": 88.5,
+          "price": -170.0,
           "liquidity": 0
         },
         "total_under": {
-          "book": "FanDuel",
-          "point": 82.5,
-          "price": 110.0,
+          "book": "DraftKings",
+          "point": 88.5,
+          "price": 169.0,
           "liquidity": 0
         },
         "retail_h2h_away": null,
         "retail_h2h_home": null,
         "retail_spread_away": {
-          "book": "FanDuel",
-          "point": -25.5,
-          "price": -110.0,
+          "book": "Fanatics",
+          "point": -29.5,
+          "price": -140.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "FanDuel",
-          "point": 25.5,
-          "price": -120.0,
+          "book": "BetMGM",
+          "point": 29.5,
+          "price": 125.0,
           "liquidity": 0
         },
         "retail_total_over": {
-          "book": "BetMGM",
-          "point": 82.5,
-          "price": -105.0,
+          "book": "Fanatics",
+          "point": 88.5,
+          "price": -170.0,
           "liquidity": 0
         },
         "retail_total_under": {
-          "book": "FanDuel",
-          "point": 82.5,
-          "price": 110.0,
+          "book": "DraftKings",
+          "point": 88.5,
+          "price": 169.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -80,56 +80,56 @@
           "FanDuel": [
             {
               "outcome": "Colorado State Rams",
-              "point": 25.5,
-              "price": -120.0,
+              "point": 29.5,
+              "price": 118.0,
               "liquidity": 0
             },
             {
               "outcome": "Oregon State Beavers",
-              "point": -25.5,
-              "price": -110.0,
+              "point": -29.5,
+              "price": -158.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Colorado State Rams",
-              "point": 25.5,
-              "price": -120.0,
+              "point": 29.5,
+              "price": 105.0,
               "liquidity": 0
             },
             {
               "outcome": "Oregon State Beavers",
-              "point": -25.5,
-              "price": -110.0,
+              "point": -29.5,
+              "price": -140.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Colorado State Rams",
-              "point": 27.5,
-              "price": -116.0,
+              "point": 29.5,
+              "price": 106.0,
               "liquidity": 0
             },
             {
               "outcome": "Oregon State Beavers",
-              "point": -27.5,
-              "price": -114.0,
+              "point": -29.5,
+              "price": -140.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Colorado State Rams",
-              "point": 25.5,
-              "price": -120.0,
+              "point": 29.5,
+              "price": 125.0,
               "liquidity": 0
             },
             {
               "outcome": "Oregon State Beavers",
-              "point": -25.5,
-              "price": -110.0,
+              "point": -29.5,
+              "price": -165.0,
               "liquidity": 0
             }
           ]
@@ -138,56 +138,56 @@
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 82.5,
-              "price": -146.0,
+              "point": 88.5,
+              "price": -178.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 82.5,
-              "price": 110.0,
+              "point": 88.5,
+              "price": 132.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 83.5,
-              "price": 110.0,
+              "point": 88.5,
+              "price": -170.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 83.5,
-              "price": -150.0,
+              "point": 88.5,
+              "price": 125.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 82.5,
-              "price": -118.0,
+              "point": 88.5,
+              "price": -229.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 82.5,
-              "price": -112.0,
+              "point": 88.5,
+              "price": 169.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 82.5,
-              "price": -105.0,
+              "point": 88.5,
+              "price": -220.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 82.5,
-              "price": -130.0,
+              "point": 88.5,
+              "price": 160.0,
               "liquidity": 0
             }
           ]
@@ -208,52 +208,52 @@
         "h2h_home": null,
         "spread_away": {
           "book": "BetMGM",
-          "point": 59.5,
-          "price": -115.0,
+          "point": 56.5,
+          "price": -250.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "BetMGM",
-          "point": -59.5,
-          "price": -112.0,
+          "book": "FanDuel",
+          "point": -56.5,
+          "price": 240.0,
           "liquidity": 0
         },
         "total_over": {
           "book": "BetMGM",
-          "point": 83.5,
-          "price": 150.0,
+          "point": 77.5,
+          "price": -108.0,
           "liquidity": 0
         },
         "total_under": {
-          "book": "FanDuel",
-          "point": 83.5,
-          "price": -188.0,
+          "book": "BetMGM",
+          "point": 77.5,
+          "price": -120.0,
           "liquidity": 0
         },
         "retail_h2h_away": null,
         "retail_h2h_home": null,
         "retail_spread_away": {
           "book": "BetMGM",
-          "point": 59.5,
-          "price": -115.0,
+          "point": 56.5,
+          "price": -250.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "BetMGM",
-          "point": -59.5,
-          "price": -112.0,
+          "book": "FanDuel",
+          "point": -56.5,
+          "price": 240.0,
           "liquidity": 0
         },
         "retail_total_over": {
           "book": "BetMGM",
-          "point": 83.5,
-          "price": 150.0,
+          "point": 77.5,
+          "price": -108.0,
           "liquidity": 0
         },
         "retail_total_under": {
-          "book": "FanDuel",
-          "point": 83.5,
-          "price": -188.0,
+          "book": "BetMGM",
+          "point": 77.5,
+          "price": -120.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -269,14 +269,14 @@
           "FanDuel": [
             {
               "outcome": "Florida Atlantic Owls",
-              "point": -61.5,
-              "price": -122.0,
+              "point": -56.5,
+              "price": 240.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas Southern Tigers",
-              "point": 61.5,
-              "price": -108.0,
+              "point": 56.5,
+              "price": -350.0,
               "liquidity": 0
             }
           ],
@@ -284,41 +284,41 @@
             {
               "outcome": "Florida Atlantic Owls",
               "point": -56.5,
-              "price": -170.0,
+              "price": 225.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas Southern Tigers",
               "point": 56.5,
-              "price": 125.0,
+              "price": -350.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Florida Atlantic Owls",
-              "point": -62.5,
-              "price": -136.0,
+              "point": -56.5,
+              "price": 191.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas Southern Tigers",
-              "point": 62.5,
-              "price": 102.0,
+              "point": 56.5,
+              "price": -261.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Florida Atlantic Owls",
-              "point": -59.5,
-              "price": -112.0,
+              "point": -56.5,
+              "price": 185.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas Southern Tigers",
-              "point": 59.5,
-              "price": -115.0,
+              "point": 56.5,
+              "price": -250.0,
               "liquidity": 0
             }
           ]
@@ -327,42 +327,42 @@
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 83.5,
-              "price": 140.0,
+              "point": 76.5,
+              "price": 112.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 83.5,
-              "price": -188.0,
+              "point": 76.5,
+              "price": -148.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 83.5,
-              "price": 149.0,
+              "point": 78.5,
+              "price": -122.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 83.5,
-              "price": -200.0,
+              "point": 78.5,
+              "price": -109.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 83.5,
-              "price": 150.0,
+              "point": 77.5,
+              "price": -108.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 83.5,
-              "price": -210.0,
+              "point": 77.5,
+              "price": -120.0,
               "liquidity": 0
             }
           ]
@@ -380,71 +380,71 @@
       "commence_time": "2026-10-03 06:31:00 PM",
       "best_lines": {
         "h2h_away": {
-          "book": "FanDuel",
-          "price": 630.0,
+          "book": "Fanatics",
+          "price": 2200.0,
           "liquidity": 0
         },
         "h2h_home": {
-          "book": "BetMGM",
-          "price": -800.0,
+          "book": "FanDuel",
+          "price": -7000.0,
           "liquidity": 0
         },
         "spread_away": {
           "book": "BetMGM",
-          "point": 1.5,
-          "price": -1200.0,
+          "point": -1.5,
+          "price": 2800.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "BetRivers",
-          "point": -1.5,
-          "price": 900.0,
+          "book": "BetMGM",
+          "point": 1.5,
+          "price": -10000.0,
           "liquidity": 0
         },
         "total_over": {
-          "book": "FanDuel",
+          "book": "Fanatics",
           "point": 1.5,
-          "price": 230.0,
+          "price": 1100.0,
           "liquidity": 0
         },
         "total_under": {
           "book": "Caesars",
           "point": 1.5,
-          "price": -265.0,
+          "price": -1000.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
-          "book": "FanDuel",
-          "price": 630.0,
+          "book": "Fanatics",
+          "price": 2200.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
-          "book": "BetMGM",
-          "price": -800.0,
+          "book": "FanDuel",
+          "price": -7000.0,
           "liquidity": 0
         },
         "retail_spread_away": {
           "book": "BetMGM",
-          "point": 1.5,
-          "price": -1200.0,
+          "point": -1.5,
+          "price": 2800.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "BetRivers",
-          "point": -1.5,
-          "price": 900.0,
+          "book": "BetMGM",
+          "point": 1.5,
+          "price": -10000.0,
           "liquidity": 0
         },
         "retail_total_over": {
-          "book": "FanDuel",
+          "book": "Fanatics",
           "point": 1.5,
-          "price": 230.0,
+          "price": 1100.0,
           "liquidity": 0
         },
         "retail_total_under": {
           "book": "Caesars",
           "point": 1.5,
-          "price": -265.0,
+          "price": -1000.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -460,27 +460,13 @@
             {
               "outcome": "New York Yankees",
               "point": "",
-              "price": 630.0,
+              "price": 1500.0,
               "liquidity": 0
             },
             {
               "outcome": "Tampa Bay Rays",
               "point": "",
-              "price": -1200.0,
-              "liquidity": 0
-            }
-          ],
-          "DraftKings": [
-            {
-              "outcome": "New York Yankees",
-              "point": "",
-              "price": 600.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Tampa Bay Rays",
-              "point": "",
-              "price": -1180.0,
+              "price": -7000.0,
               "liquidity": 0
             }
           ],
@@ -488,13 +474,13 @@
             {
               "outcome": "New York Yankees",
               "point": "",
-              "price": 525.0,
+              "price": 1400.0,
               "liquidity": 0
             },
             {
               "outcome": "Tampa Bay Rays",
               "point": "",
-              "price": -800.0,
+              "price": -10000.0,
               "liquidity": 0
             }
           ],
@@ -502,27 +488,13 @@
             {
               "outcome": "New York Yankees",
               "point": "",
-              "price": 575.0,
+              "price": 2200.0,
               "liquidity": 0
             },
             {
               "outcome": "Tampa Bay Rays",
               "point": "",
-              "price": -1000.0,
-              "liquidity": 0
-            }
-          ],
-          "BetRivers": [
-            {
-              "outcome": "New York Yankees",
-              "point": "",
-              "price": 510.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Tampa Bay Rays",
-              "point": "",
-              "price": -1115.0,
+              "price": -8000.0,
               "liquidity": 0
             }
           ],
@@ -530,99 +502,43 @@
             {
               "outcome": "New York Yankees",
               "point": "",
-              "price": 525.0,
+              "price": 2000.0,
               "liquidity": 0
             },
             {
               "outcome": "Tampa Bay Rays",
               "point": "",
-              "price": -950.0,
+              "price": -10000.0,
               "liquidity": 0
             }
           ]
         },
         "spreads": {
-          "FanDuel": [
-            {
-              "outcome": "New York Yankees",
-              "point": 1.5,
-              "price": -1600.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Tampa Bay Rays",
-              "point": -1.5,
-              "price": 680.0,
-              "liquidity": 0
-            }
-          ],
-          "DraftKings": [
-            {
-              "outcome": "New York Yankees",
-              "point": 1.5,
-              "price": -1740.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Tampa Bay Rays",
-              "point": -1.5,
-              "price": 740.0,
-              "liquidity": 0
-            }
-          ],
           "BetMGM": [
             {
               "outcome": "New York Yankees",
-              "point": 1.5,
-              "price": -1200.0,
+              "point": -1.5,
+              "price": 2800.0,
               "liquidity": 0
             },
             {
               "outcome": "Tampa Bay Rays",
-              "point": -1.5,
-              "price": 650.0,
-              "liquidity": 0
-            }
-          ],
-          "Fanatics": [
-            {
-              "outcome": "New York Yankees",
-              "point": 1.5,
-              "price": -1500.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Tampa Bay Rays",
-              "point": -1.5,
-              "price": 700.0,
-              "liquidity": 0
-            }
-          ],
-          "BetRivers": [
-            {
-              "outcome": "New York Yankees",
               "point": 1.5,
               "price": -10000.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Tampa Bay Rays",
-              "point": -1.5,
-              "price": 900.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "New York Yankees",
-              "point": 1.5,
-              "price": -1250.0,
+              "point": -1.5,
+              "price": 1200.0,
               "liquidity": 0
             },
             {
               "outcome": "Tampa Bay Rays",
-              "point": -1.5,
-              "price": 625.0,
+              "point": 1.5,
+              "price": -10000.0,
               "liquidity": 0
             }
           ]
@@ -632,13 +548,13 @@
             {
               "outcome": "Over",
               "point": 1.5,
-              "price": 230.0,
+              "price": 920.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 1.5,
-              "price": -330.0,
+              "price": -3500.0,
               "liquidity": 0
             }
           ],
@@ -646,27 +562,27 @@
             {
               "outcome": "Over",
               "point": 1.5,
-              "price": 225.0,
+              "price": 1080.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 1.5,
-              "price": -310.0,
+              "price": -4800.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 1.5,
-              "price": 210.0,
+              "point": 2.5,
+              "price": 900.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 1.5,
-              "price": -285.0,
+              "point": 2.5,
+              "price": -2500.0,
               "liquidity": 0
             }
           ],
@@ -674,27 +590,27 @@
             {
               "outcome": "Over",
               "point": 1.5,
-              "price": 210.0,
+              "price": 1100.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 1.5,
-              "price": -300.0,
+              "price": -3000.0,
               "liquidity": 0
             }
           ],
           "BetRivers": [
             {
               "outcome": "Over",
-              "point": 1.5,
-              "price": 230.0,
+              "point": 2.5,
+              "price": 1000.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 1.5,
-              "price": -345.0,
+              "point": 2.5,
+              "price": -10000.0,
               "liquidity": 0
             }
           ],
@@ -702,13 +618,13 @@
             {
               "outcome": "Over",
               "point": 1.5,
-              "price": 191.0,
+              "price": 550.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 1.5,
-              "price": -265.0,
+              "price": -1000.0,
               "liquidity": 0
             }
           ]
@@ -725,72 +641,56 @@
       "away_abbr": "RAZ",
       "commence_time": "2026-10-03 07:00:00 PM",
       "best_lines": {
-        "h2h_away": {
-          "book": "Fanatics",
-          "price": 5000.0,
-          "liquidity": 0
-        },
-        "h2h_home": {
-          "book": "Caesars",
-          "price": -10000.0,
-          "liquidity": 0
-        },
+        "h2h_away": null,
+        "h2h_home": null,
         "spread_away": {
-          "book": "DraftKings",
-          "point": 24.5,
-          "price": -122.0,
+          "book": "BetMGM",
+          "point": 27.5,
+          "price": -118.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "FanDuel",
-          "point": -24.5,
-          "price": -104.0,
+          "book": "Caesars",
+          "point": -27.5,
+          "price": 100.0,
           "liquidity": 0
         },
         "total_over": {
-          "book": "DraftKings",
-          "point": 53.5,
-          "price": -118.0,
+          "book": "Fanatics",
+          "point": 52.5,
+          "price": 110.0,
           "liquidity": 0
         },
         "total_under": {
           "book": "Caesars",
-          "point": 53.5,
-          "price": -104.0,
+          "point": 52.5,
+          "price": -136.0,
           "liquidity": 0
         },
-        "retail_h2h_away": {
-          "book": "Fanatics",
-          "price": 5000.0,
-          "liquidity": 0
-        },
-        "retail_h2h_home": {
-          "book": "Caesars",
-          "price": -10000.0,
-          "liquidity": 0
-        },
+        "retail_h2h_away": null,
+        "retail_h2h_home": null,
         "retail_spread_away": {
-          "book": "DraftKings",
-          "point": 24.5,
-          "price": -122.0,
+          "book": "BetMGM",
+          "point": 27.5,
+          "price": -118.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "FanDuel",
-          "point": -24.5,
-          "price": -104.0,
+          "book": "Caesars",
+          "point": -27.5,
+          "price": 100.0,
           "liquidity": 0
         },
         "retail_total_over": {
-          "book": "DraftKings",
-          "point": 53.5,
-          "price": -118.0,
+          "book": "Fanatics",
+          "point": 52.5,
+          "price": 110.0,
           "liquidity": 0
         },
         "retail_total_under": {
           "book": "Caesars",
-          "point": 53.5,
-          "price": -104.0,
+          "point": 52.5,
+          "price": -136.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -801,118 +701,75 @@
         "novig_total_under": null
       },
       "all_markets": {
-        "h2h": {
-          "FanDuel": [
-            {
-              "outcome": "Arkansas Razorbacks",
-              "point": "",
-              "price": 4000.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Texas A&M Aggies",
-              "point": "",
-              "price": -100000.0,
-              "liquidity": 0
-            }
-          ],
-          "Fanatics": [
-            {
-              "outcome": "Arkansas Razorbacks",
-              "point": "",
-              "price": 5000.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Texas A&M Aggies",
-              "point": "",
-              "price": -50000.0,
-              "liquidity": 0
-            }
-          ],
-          "Caesars": [
-            {
-              "outcome": "Arkansas Razorbacks",
-              "point": "",
-              "price": 2400.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Texas A&M Aggies",
-              "point": "",
-              "price": -10000.0,
-              "liquidity": 0
-            }
-          ]
-        },
+        "h2h": {},
         "spreads": {
           "FanDuel": [
             {
               "outcome": "Arkansas Razorbacks",
-              "point": 24.5,
-              "price": -128.0,
+              "point": 27.5,
+              "price": -125.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas A&M Aggies",
-              "point": -24.5,
-              "price": -104.0,
+              "point": -27.5,
+              "price": -106.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Arkansas Razorbacks",
-              "point": 26.5,
-              "price": -110.0,
+              "point": 27.5,
+              "price": -125.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas A&M Aggies",
-              "point": -26.5,
-              "price": -120.0,
+              "point": -27.5,
+              "price": -105.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Arkansas Razorbacks",
-              "point": 24.5,
-              "price": -122.0,
+              "point": 27.5,
+              "price": -119.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas A&M Aggies",
-              "point": -24.5,
-              "price": -109.0,
+              "point": -27.5,
+              "price": -112.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Arkansas Razorbacks",
-              "point": 24.5,
-              "price": -122.0,
+              "point": 27.5,
+              "price": -129.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas A&M Aggies",
-              "point": -24.5,
-              "price": -106.0,
+              "point": -27.5,
+              "price": 100.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Arkansas Razorbacks",
-              "point": 24.5,
-              "price": -125.0,
+              "point": 27.5,
+              "price": -118.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas A&M Aggies",
-              "point": -24.5,
-              "price": -108.0,
+              "point": -27.5,
+              "price": -110.0,
               "liquidity": 0
             }
           ]
@@ -921,70 +778,70 @@
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 54.5,
-              "price": -128.0,
+              "point": 52.5,
+              "price": 104.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 54.5,
-              "price": -104.0,
+              "point": 52.5,
+              "price": -138.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 54.5,
-              "price": -125.0,
+              "point": 52.5,
+              "price": 110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 54.5,
-              "price": -105.0,
+              "point": 52.5,
+              "price": -150.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 53.5,
-              "price": -118.0,
+              "point": 51.5,
+              "price": -147.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 53.5,
-              "price": -112.0,
+              "point": 51.5,
+              "price": 111.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Over",
-              "point": 53.5,
-              "price": -125.0,
+              "point": 52.5,
+              "price": 105.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 53.5,
-              "price": -104.0,
+              "point": 52.5,
+              "price": -136.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 54.5,
-              "price": -120.0,
+              "point": 52.5,
+              "price": 110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 54.5,
-              "price": -110.0,
+              "point": 52.5,
+              "price": -145.0,
               "liquidity": 0
             }
           ]
@@ -1003,70 +860,70 @@
       "best_lines": {
         "h2h_away": {
           "book": "BetMGM",
-          "price": -650.0,
+          "price": -1100.0,
           "liquidity": 0
         },
         "h2h_home": {
-          "book": "FanDuel",
-          "price": 540.0,
+          "book": "DraftKings",
+          "price": 1080.0,
           "liquidity": 0
         },
         "spread_away": {
-          "book": "BetMGM",
-          "point": -10.5,
-          "price": -105.0,
+          "book": "Fanatics",
+          "point": -13.5,
+          "price": 105.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "FanDuel",
-          "point": 10.5,
-          "price": -112.0,
+          "book": "DraftKings",
+          "point": 13.5,
+          "price": -115.0,
           "liquidity": 0
         },
         "total_over": {
-          "book": "BetMGM",
-          "point": 52.5,
-          "price": -110.0,
+          "book": "Fanatics",
+          "point": 43.5,
+          "price": 110.0,
           "liquidity": 0
         },
         "total_under": {
           "book": "FanDuel",
-          "point": 52.5,
-          "price": -112.0,
+          "point": 43.5,
+          "price": -130.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
           "book": "BetMGM",
-          "price": -650.0,
+          "price": -1100.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
-          "book": "FanDuel",
-          "price": 540.0,
+          "book": "DraftKings",
+          "price": 1080.0,
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "BetMGM",
-          "point": -10.5,
-          "price": -105.0,
+          "book": "Fanatics",
+          "point": -13.5,
+          "price": 105.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "FanDuel",
-          "point": 10.5,
-          "price": -112.0,
+          "book": "DraftKings",
+          "point": 13.5,
+          "price": -115.0,
           "liquidity": 0
         },
         "retail_total_over": {
-          "book": "BetMGM",
-          "point": 52.5,
-          "price": -110.0,
+          "book": "Fanatics",
+          "point": 43.5,
+          "price": 110.0,
           "liquidity": 0
         },
         "retail_total_under": {
           "book": "FanDuel",
-          "point": 52.5,
-          "price": -112.0,
+          "point": 43.5,
+          "price": -130.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -1082,13 +939,13 @@
             {
               "outcome": "Rice Owls",
               "point": "",
-              "price": 540.0,
+              "price": 870.0,
               "liquidity": 0
             },
             {
               "outcome": "UTSA Roadrunners",
               "point": "",
-              "price": -950.0,
+              "price": -2500.0,
               "liquidity": 0
             }
           ],
@@ -1096,13 +953,13 @@
             {
               "outcome": "Rice Owls",
               "point": "",
-              "price": 503.0,
+              "price": 1080.0,
               "liquidity": 0
             },
             {
               "outcome": "UTSA Roadrunners",
               "point": "",
-              "price": -780.0,
+              "price": -2200.0,
               "liquidity": 0
             }
           ],
@@ -1110,13 +967,13 @@
             {
               "outcome": "Rice Owls",
               "point": "",
-              "price": 525.0,
+              "price": 750.0,
               "liquidity": 0
             },
             {
               "outcome": "UTSA Roadrunners",
               "point": "",
-              "price": -900.0,
+              "price": -1500.0,
               "liquidity": 0
             }
           ],
@@ -1124,13 +981,13 @@
             {
               "outcome": "Rice Owls",
               "point": "",
-              "price": 500.0,
+              "price": 775.0,
               "liquidity": 0
             },
             {
               "outcome": "UTSA Roadrunners",
               "point": "",
-              "price": -650.0,
+              "price": -1100.0,
               "liquidity": 0
             }
           ]
@@ -1139,56 +996,56 @@
           "FanDuel": [
             {
               "outcome": "Rice Owls",
-              "point": 10.5,
-              "price": -112.0,
+              "point": 12.5,
+              "price": -128.0,
               "liquidity": 0
             },
             {
               "outcome": "UTSA Roadrunners",
-              "point": -10.5,
-              "price": -118.0,
+              "point": -12.5,
+              "price": -104.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Rice Owls",
-              "point": 10.5,
+              "point": 13.5,
               "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "UTSA Roadrunners",
-              "point": -10.5,
-              "price": -116.0,
+              "point": -13.5,
+              "price": -115.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Rice Owls",
-              "point": 10.5,
-              "price": -120.0,
+              "point": 13.5,
+              "price": -140.0,
               "liquidity": 0
             },
             {
               "outcome": "UTSA Roadrunners",
-              "point": -10.5,
-              "price": -110.0,
+              "point": -13.5,
+              "price": 105.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Rice Owls",
-              "point": 10.5,
-              "price": -125.0,
+              "point": 11.5,
+              "price": -102.0,
               "liquidity": 0
             },
             {
               "outcome": "UTSA Roadrunners",
-              "point": -10.5,
-              "price": -105.0,
+              "point": -11.5,
+              "price": -118.0,
               "liquidity": 0
             }
           ]
@@ -1197,56 +1054,56 @@
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 52.5,
-              "price": -118.0,
+              "point": 43.5,
+              "price": -102.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 52.5,
-              "price": -112.0,
+              "point": 43.5,
+              "price": -130.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 51.5,
-              "price": -102.0,
+              "point": 41.5,
+              "price": -116.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 51.5,
-              "price": -130.0,
+              "point": 41.5,
+              "price": -115.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 53.5,
-              "price": -110.0,
+              "point": 43.5,
+              "price": 110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 53.5,
-              "price": -120.0,
+              "point": 43.5,
+              "price": -150.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 52.5,
-              "price": -110.0,
+              "point": 42.5,
+              "price": -130.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 52.5,
-              "price": -120.0,
+              "point": 42.5,
+              "price": -102.0,
               "liquidity": 0
             }
           ]
@@ -1264,71 +1121,71 @@
       "commence_time": "2026-10-03 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
-          "book": "DraftKings",
-          "price": 3600.0,
+          "book": "FanDuel",
+          "price": 4000.0,
           "liquidity": 0
         },
         "h2h_home": {
-          "book": "DraftKings",
-          "price": -10000.0,
+          "book": "Fanatics",
+          "price": -20000.0,
           "liquidity": 0
         },
         "spread_away": {
-          "book": "FanDuel",
+          "book": "Fanatics",
           "point": 23.5,
-          "price": -112.0,
+          "price": -110.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "DraftKings",
+          "book": "BetMGM",
           "point": -23.5,
-          "price": -108.0,
+          "price": -105.0,
           "liquidity": 0
         },
         "total_over": {
-          "book": "Fanatics",
-          "point": 72.5,
-          "price": -105.0,
+          "book": "DraftKings",
+          "point": 79.5,
+          "price": -114.0,
           "liquidity": 0
         },
         "total_under": {
           "book": "BetMGM",
-          "point": 72.5,
-          "price": -108.0,
+          "point": 79.5,
+          "price": -105.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
-          "book": "DraftKings",
-          "price": 3600.0,
+          "book": "FanDuel",
+          "price": 4000.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
-          "book": "DraftKings",
-          "price": -10000.0,
+          "book": "Fanatics",
+          "price": -20000.0,
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "FanDuel",
+          "book": "Fanatics",
           "point": 23.5,
-          "price": -112.0,
+          "price": -110.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "DraftKings",
+          "book": "BetMGM",
           "point": -23.5,
-          "price": -108.0,
+          "price": -105.0,
           "liquidity": 0
         },
         "retail_total_over": {
-          "book": "Fanatics",
-          "point": 72.5,
-          "price": -105.0,
+          "book": "DraftKings",
+          "point": 79.5,
+          "price": -114.0,
           "liquidity": 0
         },
         "retail_total_under": {
           "book": "BetMGM",
-          "point": 72.5,
-          "price": -108.0,
+          "point": 79.5,
+          "price": -105.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -1344,27 +1201,13 @@
             {
               "outcome": "South Alabama Jaguars",
               "point": "",
-              "price": -50000.0,
+              "price": -100000.0,
               "liquidity": 0
             },
             {
               "outcome": "UL Monroe Warhawks",
               "point": "",
-              "price": 3000.0,
-              "liquidity": 0
-            }
-          ],
-          "DraftKings": [
-            {
-              "outcome": "South Alabama Jaguars",
-              "point": "",
-              "price": -10000.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "UL Monroe Warhawks",
-              "point": "",
-              "price": 3600.0,
+              "price": 4000.0,
               "liquidity": 0
             }
           ],
@@ -1381,48 +1224,34 @@
               "price": 3500.0,
               "liquidity": 0
             }
-          ],
-          "BetMGM": [
-            {
-              "outcome": "South Alabama Jaguars",
-              "point": "",
-              "price": -100000.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "UL Monroe Warhawks",
-              "point": "",
-              "price": 3300.0,
-              "liquidity": 0
-            }
           ]
         },
         "spreads": {
           "FanDuel": [
             {
               "outcome": "South Alabama Jaguars",
-              "point": -23.5,
-              "price": -118.0,
+              "point": -24.5,
+              "price": 102.0,
               "liquidity": 0
             },
             {
               "outcome": "UL Monroe Warhawks",
-              "point": 23.5,
-              "price": -112.0,
+              "point": 24.5,
+              "price": -136.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "South Alabama Jaguars",
-              "point": -23.5,
-              "price": -108.0,
+              "point": -24.5,
+              "price": 100.0,
               "liquidity": 0
             },
             {
               "outcome": "UL Monroe Warhawks",
-              "point": 23.5,
-              "price": -123.0,
+              "point": 24.5,
+              "price": -132.0,
               "liquidity": 0
             }
           ],
@@ -1430,27 +1259,27 @@
             {
               "outcome": "South Alabama Jaguars",
               "point": -23.5,
-              "price": -110.0,
+              "price": -120.0,
               "liquidity": 0
             },
             {
               "outcome": "UL Monroe Warhawks",
               "point": 23.5,
-              "price": -120.0,
+              "price": -110.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "South Alabama Jaguars",
-              "point": -22.5,
-              "price": -118.0,
+              "point": -23.5,
+              "price": -105.0,
               "liquidity": 0
             },
             {
               "outcome": "UL Monroe Warhawks",
-              "point": 22.5,
-              "price": -110.0,
+              "point": 23.5,
+              "price": -125.0,
               "liquidity": 0
             }
           ]
@@ -1459,56 +1288,56 @@
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 72.5,
-              "price": -106.0,
+              "point": 79.5,
+              "price": -118.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 72.5,
-              "price": -125.0,
+              "point": 79.5,
+              "price": -112.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 72.5,
-              "price": -115.0,
+              "point": 79.5,
+              "price": -114.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 72.5,
-              "price": -115.0,
+              "point": 79.5,
+              "price": -116.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 72.5,
-              "price": -105.0,
+              "point": 79.5,
+              "price": -120.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 72.5,
-              "price": -125.0,
+              "point": 79.5,
+              "price": -110.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 72.5,
-              "price": -120.0,
+              "point": 79.5,
+              "price": -125.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 72.5,
-              "price": -108.0,
+              "point": 79.5,
+              "price": -105.0,
               "liquidity": 0
             }
           ]
@@ -1527,70 +1356,70 @@
       "best_lines": {
         "h2h_away": {
           "book": "BetMGM",
-          "price": -450.0,
+          "price": -375.0,
           "liquidity": 0
         },
         "h2h_home": {
-          "book": "DraftKings",
-          "price": 354.0,
+          "book": "FanDuel",
+          "price": 340.0,
           "liquidity": 0
         },
         "spread_away": {
           "book": "BetMGM",
-          "point": -7.5,
-          "price": 100.0,
+          "point": -6.5,
+          "price": -130.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "FanDuel",
-          "point": 7.5,
-          "price": -118.0,
+          "book": "Fanatics",
+          "point": 6.5,
+          "price": 120.0,
           "liquidity": 0
         },
         "total_over": {
           "book": "Fanatics",
-          "point": 52.5,
-          "price": -115.0,
+          "point": 50.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "total_under": {
-          "book": "FanDuel",
-          "point": 52.5,
-          "price": -110.0,
+          "book": "DraftKings",
+          "point": 50.5,
+          "price": -111.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
           "book": "BetMGM",
-          "price": -450.0,
+          "price": -375.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
-          "book": "DraftKings",
-          "price": 354.0,
+          "book": "FanDuel",
+          "price": 340.0,
           "liquidity": 0
         },
         "retail_spread_away": {
           "book": "BetMGM",
-          "point": -7.5,
-          "price": 100.0,
+          "point": -6.5,
+          "price": -130.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "FanDuel",
-          "point": 7.5,
-          "price": -118.0,
+          "book": "Fanatics",
+          "point": 6.5,
+          "price": 120.0,
           "liquidity": 0
         },
         "retail_total_over": {
           "book": "Fanatics",
-          "point": 52.5,
-          "price": -115.0,
+          "point": 50.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "retail_total_under": {
-          "book": "FanDuel",
-          "point": 52.5,
-          "price": -110.0,
+          "book": "DraftKings",
+          "point": 50.5,
+          "price": -111.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -1606,13 +1435,13 @@
             {
               "outcome": "Coastal Carolina Chanticleers",
               "point": "",
-              "price": 354.0,
+              "price": 333.0,
               "liquidity": 0
             },
             {
               "outcome": "Georgia Southern Eagles",
               "point": "",
-              "price": -523.0,
+              "price": -474.0,
               "liquidity": 0
             }
           ],
@@ -1620,13 +1449,13 @@
             {
               "outcome": "Coastal Carolina Chanticleers",
               "point": "",
-              "price": 350.0,
+              "price": 340.0,
               "liquidity": 0
             },
             {
               "outcome": "Georgia Southern Eagles",
               "point": "",
-              "price": -520.0,
+              "price": -500.0,
               "liquidity": 0
             }
           ],
@@ -1634,13 +1463,13 @@
             {
               "outcome": "Coastal Carolina Chanticleers",
               "point": "",
-              "price": 350.0,
+              "price": 340.0,
               "liquidity": 0
             },
             {
               "outcome": "Georgia Southern Eagles",
               "point": "",
-              "price": -525.0,
+              "price": -500.0,
               "liquidity": 0
             }
           ],
@@ -1648,13 +1477,13 @@
             {
               "outcome": "Coastal Carolina Chanticleers",
               "point": "",
-              "price": 350.0,
+              "price": 300.0,
               "liquidity": 0
             },
             {
               "outcome": "Georgia Southern Eagles",
               "point": "",
-              "price": -450.0,
+              "price": -375.0,
               "liquidity": 0
             }
           ]
@@ -1664,13 +1493,13 @@
             {
               "outcome": "Coastal Carolina Chanticleers",
               "point": 7.5,
-              "price": -124.0,
+              "price": -142.0,
               "liquidity": 0
             },
             {
               "outcome": "Georgia Southern Eagles",
               "point": -7.5,
-              "price": -107.0,
+              "price": 107.0,
               "liquidity": 0
             }
           ],
@@ -1678,41 +1507,41 @@
             {
               "outcome": "Coastal Carolina Chanticleers",
               "point": 7.5,
-              "price": -118.0,
+              "price": -136.0,
               "liquidity": 0
             },
             {
               "outcome": "Georgia Southern Eagles",
               "point": -7.5,
-              "price": -112.0,
+              "price": 102.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Coastal Carolina Chanticleers",
-              "point": 7.5,
-              "price": -125.0,
+              "point": 6.5,
+              "price": 120.0,
               "liquidity": 0
             },
             {
               "outcome": "Georgia Southern Eagles",
-              "point": -7.5,
-              "price": -105.0,
+              "point": -6.5,
+              "price": -165.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Coastal Carolina Chanticleers",
-              "point": 7.5,
-              "price": -120.0,
+              "point": 6.5,
+              "price": 105.0,
               "liquidity": 0
             },
             {
               "outcome": "Georgia Southern Eagles",
-              "point": -7.5,
-              "price": 100.0,
+              "point": -6.5,
+              "price": -130.0,
               "liquidity": 0
             }
           ]
@@ -1721,56 +1550,56 @@
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 52.5,
-              "price": -118.0,
+              "point": 50.5,
+              "price": -120.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 52.5,
-              "price": -112.0,
+              "point": 50.5,
+              "price": -111.0,
               "liquidity": 0
             }
           ],
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 52.5,
-              "price": -120.0,
+              "point": 50.5,
+              "price": -114.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 52.5,
-              "price": -110.0,
+              "point": 50.5,
+              "price": -114.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 52.5,
-              "price": -115.0,
+              "point": 50.5,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 52.5,
-              "price": -115.0,
+              "point": 50.5,
+              "price": -120.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 53.5,
-              "price": -110.0,
+              "point": 50.5,
+              "price": -112.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 53.5,
-              "price": -118.0,
+              "point": 50.5,
+              "price": -115.0,
               "liquidity": 0
             }
           ]
@@ -1788,8 +1617,8 @@
       "commence_time": "2026-10-03 07:05:09 PM",
       "best_lines": {
         "h2h_away": {
-          "book": "Caesars",
-          "price": -220.0,
+          "book": "FanDuel",
+          "price": -235.0,
           "liquidity": 0
         },
         "h2h_home": {
@@ -1798,32 +1627,32 @@
           "liquidity": 0
         },
         "spread_away": {
-          "book": "Caesars",
+          "book": "FanDuel",
           "point": -3.5,
-          "price": -111.0,
+          "price": 114.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "Fanatics",
+          "book": "DraftKings",
           "point": 3.5,
-          "price": 105.0,
+          "price": -122.0,
           "liquidity": 0
         },
         "total_over": {
-          "book": "Caesars",
-          "point": 35.5,
-          "price": -108.0,
+          "book": "Fanatics",
+          "point": 31.5,
+          "price": 105.0,
           "liquidity": 0
         },
         "total_under": {
           "book": "BetMGM",
-          "point": 35.5,
-          "price": -110.0,
+          "point": 31.5,
+          "price": -125.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
-          "book": "Caesars",
-          "price": -220.0,
+          "book": "FanDuel",
+          "price": -235.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
@@ -1832,27 +1661,27 @@
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "Caesars",
+          "book": "FanDuel",
           "point": -3.5,
-          "price": -111.0,
+          "price": 114.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "Fanatics",
+          "book": "DraftKings",
           "point": 3.5,
-          "price": 105.0,
+          "price": -122.0,
           "liquidity": 0
         },
         "retail_total_over": {
-          "book": "Caesars",
-          "point": 35.5,
-          "price": -108.0,
+          "book": "Fanatics",
+          "point": 31.5,
+          "price": 105.0,
           "liquidity": 0
         },
         "retail_total_under": {
           "book": "BetMGM",
-          "point": 35.5,
-          "price": -110.0,
+          "point": 31.5,
+          "price": -125.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -1868,13 +1697,13 @@
             {
               "outcome": "BYU Cougars",
               "point": "",
-              "price": -271.0,
+              "price": -257.0,
               "liquidity": 0
             },
             {
               "outcome": "TCU Horned Frogs",
               "point": "",
-              "price": 199.0,
+              "price": 189.0,
               "liquidity": 0
             }
           ],
@@ -1888,7 +1717,7 @@
             {
               "outcome": "TCU Horned Frogs",
               "point": "",
-              "price": 176.0,
+              "price": 180.0,
               "liquidity": 0
             }
           ],
@@ -1910,13 +1739,13 @@
             {
               "outcome": "BYU Cougars",
               "point": "",
-              "price": -220.0,
+              "price": -235.0,
               "liquidity": 0
             },
             {
               "outcome": "TCU Horned Frogs",
               "point": "",
-              "price": 160.0,
+              "price": 170.0,
               "liquidity": 0
             }
           ],
@@ -1939,14 +1768,14 @@
           "DraftKings": [
             {
               "outcome": "BYU Cougars",
-              "point": -4.5,
-              "price": -111.0,
+              "point": -3.5,
+              "price": -108.0,
               "liquidity": 0
             },
             {
               "outcome": "TCU Horned Frogs",
-              "point": 4.5,
-              "price": -119.0,
+              "point": 3.5,
+              "price": -122.0,
               "liquidity": 0
             }
           ],
@@ -1954,13 +1783,13 @@
             {
               "outcome": "BYU Cougars",
               "point": -3.5,
-              "price": -120.0,
+              "price": 114.0,
               "liquidity": 0
             },
             {
               "outcome": "TCU Horned Frogs",
               "point": 3.5,
-              "price": -110.0,
+              "price": -152.0,
               "liquidity": 0
             }
           ],
@@ -1968,13 +1797,13 @@
             {
               "outcome": "BYU Cougars",
               "point": -3.5,
-              "price": -140.0,
+              "price": -105.0,
               "liquidity": 0
             },
             {
               "outcome": "TCU Horned Frogs",
               "point": 3.5,
-              "price": 105.0,
+              "price": -125.0,
               "liquidity": 0
             }
           ],
@@ -1982,27 +1811,27 @@
             {
               "outcome": "BYU Cougars",
               "point": -3.5,
-              "price": -111.0,
+              "price": 108.0,
               "liquidity": 0
             },
             {
               "outcome": "TCU Horned Frogs",
               "point": 3.5,
-              "price": -120.0,
+              "price": -140.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "BYU Cougars",
-              "point": -4.5,
-              "price": -102.0,
+              "point": -3.5,
+              "price": 105.0,
               "liquidity": 0
             },
             {
               "outcome": "TCU Horned Frogs",
-              "point": 4.5,
-              "price": -118.0,
+              "point": 3.5,
+              "price": -125.0,
               "liquidity": 0
             }
           ]
@@ -2011,70 +1840,70 @@
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 34.5,
-              "price": -135.0,
+              "point": 30.5,
+              "price": -137.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 34.5,
-              "price": 102.0,
+              "point": 30.5,
+              "price": 103.0,
               "liquidity": 0
             }
           ],
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 35.5,
-              "price": -118.0,
+              "point": 31.5,
+              "price": -102.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 35.5,
-              "price": -112.0,
+              "point": 31.5,
+              "price": -130.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 35.5,
-              "price": -110.0,
+              "point": 31.5,
+              "price": 105.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 35.5,
-              "price": -120.0,
+              "point": 31.5,
+              "price": -140.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Over",
-              "point": 35.5,
-              "price": -108.0,
+              "point": 31.5,
+              "price": 102.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 35.5,
-              "price": -122.0,
+              "point": 31.5,
+              "price": -135.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 35.5,
-              "price": -108.0,
+              "point": 31.5,
+              "price": -105.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 35.5,
-              "price": -110.0,
+              "point": 31.5,
+              "price": -125.0,
               "liquidity": 0
             }
           ]
@@ -2093,70 +1922,70 @@
       "best_lines": {
         "h2h_away": {
           "book": "Fanatics",
-          "price": 370.0,
+          "price": 235.0,
           "liquidity": 0
         },
         "h2h_home": {
-          "book": "DraftKings",
-          "price": -434.0,
+          "book": "FanDuel",
+          "price": -290.0,
           "liquidity": 0
         },
         "spread_away": {
-          "book": "FanDuel",
-          "point": 7.5,
+          "book": "BetMGM",
+          "point": 6.5,
           "price": -108.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "BetMGM",
-          "point": -7.5,
-          "price": 100.0,
+          "book": "FanDuel",
+          "point": -6.5,
+          "price": -104.0,
           "liquidity": 0
         },
         "total_over": {
-          "book": "BetMGM",
-          "point": 45.5,
-          "price": -110.0,
+          "book": "FanDuel",
+          "point": 44.5,
+          "price": -114.0,
           "liquidity": 0
         },
         "total_under": {
-          "book": "FanDuel",
-          "point": 45.5,
-          "price": 100.0,
+          "book": "DraftKings",
+          "point": 44.5,
+          "price": 103.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
           "book": "Fanatics",
-          "price": 370.0,
+          "price": 235.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
-          "book": "DraftKings",
-          "price": -434.0,
+          "book": "FanDuel",
+          "price": -290.0,
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "FanDuel",
-          "point": 7.5,
+          "book": "BetMGM",
+          "point": 6.5,
           "price": -108.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "BetMGM",
-          "point": -7.5,
-          "price": 100.0,
+          "book": "FanDuel",
+          "point": -6.5,
+          "price": -104.0,
           "liquidity": 0
         },
         "retail_total_over": {
-          "book": "BetMGM",
-          "point": 45.5,
-          "price": -110.0,
+          "book": "FanDuel",
+          "point": 44.5,
+          "price": -114.0,
           "liquidity": 0
         },
         "retail_total_under": {
-          "book": "FanDuel",
-          "point": 45.5,
-          "price": 100.0,
+          "book": "DraftKings",
+          "point": 44.5,
+          "price": 103.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -2172,13 +2001,13 @@
             {
               "outcome": "Army Black Knights",
               "point": "",
-              "price": 305.0,
+              "price": 220.0,
               "liquidity": 0
             },
             {
               "outcome": "Louisiana Tech Bulldogs",
               "point": "",
-              "price": -434.0,
+              "price": -303.0,
               "liquidity": 0
             }
           ],
@@ -2186,13 +2015,13 @@
             {
               "outcome": "Army Black Knights",
               "point": "",
-              "price": 360.0,
+              "price": 215.0,
               "liquidity": 0
             },
             {
               "outcome": "Louisiana Tech Bulldogs",
               "point": "",
-              "price": -530.0,
+              "price": -290.0,
               "liquidity": 0
             }
           ],
@@ -2200,13 +2029,13 @@
             {
               "outcome": "Army Black Knights",
               "point": "",
-              "price": 370.0,
+              "price": 235.0,
               "liquidity": 0
             },
             {
               "outcome": "Louisiana Tech Bulldogs",
               "point": "",
-              "price": -550.0,
+              "price": -320.0,
               "liquidity": 0
             }
           ],
@@ -2214,13 +2043,13 @@
             {
               "outcome": "Army Black Knights",
               "point": "",
-              "price": 310.0,
+              "price": 230.0,
               "liquidity": 0
             },
             {
               "outcome": "Louisiana Tech Bulldogs",
               "point": "",
-              "price": -450.0,
+              "price": -300.0,
               "liquidity": 0
             }
           ]
@@ -2229,56 +2058,56 @@
           "DraftKings": [
             {
               "outcome": "Army Black Knights",
-              "point": 7.5,
-              "price": -131.0,
+              "point": 6.5,
+              "price": -116.0,
               "liquidity": 0
             },
             {
               "outcome": "Louisiana Tech Bulldogs",
-              "point": -7.5,
-              "price": -101.0,
+              "point": -6.5,
+              "price": -114.0,
               "liquidity": 0
             }
           ],
           "FanDuel": [
             {
               "outcome": "Army Black Knights",
-              "point": 7.5,
-              "price": -108.0,
+              "point": 6.5,
+              "price": -128.0,
               "liquidity": 0
             },
             {
               "outcome": "Louisiana Tech Bulldogs",
-              "point": -7.5,
-              "price": -122.0,
+              "point": -6.5,
+              "price": -104.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Army Black Knights",
-              "point": 6.5,
-              "price": 140.0,
+              "point": 5.5,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Louisiana Tech Bulldogs",
-              "point": -6.5,
-              "price": -195.0,
+              "point": -5.5,
+              "price": -120.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Army Black Knights",
-              "point": 7.5,
-              "price": -135.0,
+              "point": 6.5,
+              "price": -108.0,
               "liquidity": 0
             },
             {
               "outcome": "Louisiana Tech Bulldogs",
-              "point": -7.5,
-              "price": 100.0,
+              "point": -6.5,
+              "price": -110.0,
               "liquidity": 0
             }
           ]
@@ -2287,56 +2116,56 @@
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 47.5,
-              "price": -118.0,
+              "point": 44.5,
+              "price": -137.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 47.5,
-              "price": -112.0,
+              "point": 44.5,
+              "price": 103.0,
               "liquidity": 0
             }
           ],
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 45.5,
-              "price": -132.0,
+              "point": 44.5,
+              "price": -114.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 45.5,
-              "price": 100.0,
+              "point": 44.5,
+              "price": -114.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 45.5,
-              "price": -125.0,
+              "point": 44.5,
+              "price": -135.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 45.5,
-              "price": -105.0,
+              "point": 44.5,
+              "price": 100.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 45.5,
-              "price": -110.0,
+              "point": 44.5,
+              "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 45.5,
-              "price": -108.0,
+              "point": 44.5,
+              "price": -102.0,
               "liquidity": 0
             }
           ]
@@ -2354,71 +2183,71 @@
       "commence_time": "2026-10-03 07:33:00 PM",
       "best_lines": {
         "h2h_away": {
-          "book": "DraftKings",
-          "price": 3800.0,
+          "book": "Caesars",
+          "price": 1750.0,
           "liquidity": 0
         },
         "h2h_home": {
-          "book": "DraftKings",
+          "book": "Caesars",
           "price": -10000.0,
           "liquidity": 0
         },
         "spread_away": {
-          "book": "BetMGM",
-          "point": 24.5,
-          "price": -108.0,
+          "book": "FanDuel",
+          "point": 27.5,
+          "price": -102.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "FanDuel",
-          "point": -24.5,
-          "price": -104.0,
+          "book": "BetMGM",
+          "point": -27.5,
+          "price": -118.0,
           "liquidity": 0
         },
         "total_over": {
           "book": "FanDuel",
-          "point": 55.5,
-          "price": -106.0,
+          "point": 61.5,
+          "price": -114.0,
           "liquidity": 0
         },
         "total_under": {
           "book": "BetMGM",
-          "point": 55.5,
-          "price": -112.0,
+          "point": 61.5,
+          "price": -102.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
-          "book": "DraftKings",
-          "price": 3800.0,
+          "book": "Caesars",
+          "price": 1750.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
-          "book": "DraftKings",
+          "book": "Caesars",
           "price": -10000.0,
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "BetMGM",
-          "point": 24.5,
-          "price": -108.0,
+          "book": "FanDuel",
+          "point": 27.5,
+          "price": -102.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "FanDuel",
-          "point": -24.5,
-          "price": -104.0,
+          "book": "BetMGM",
+          "point": -27.5,
+          "price": -118.0,
           "liquidity": 0
         },
         "retail_total_over": {
           "book": "FanDuel",
-          "point": 55.5,
-          "price": -106.0,
+          "point": 61.5,
+          "price": -114.0,
           "liquidity": 0
         },
         "retail_total_under": {
           "book": "BetMGM",
-          "point": 55.5,
-          "price": -112.0,
+          "point": 61.5,
+          "price": -102.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -2430,34 +2259,6 @@
       },
       "all_markets": {
         "h2h": {
-          "FanDuel": [
-            {
-              "outcome": "Boise State Broncos",
-              "point": "",
-              "price": -50000.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Utah State Aggies",
-              "point": "",
-              "price": 3500.0,
-              "liquidity": 0
-            }
-          ],
-          "DraftKings": [
-            {
-              "outcome": "Boise State Broncos",
-              "point": "",
-              "price": -10000.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Utah State Aggies",
-              "point": "",
-              "price": 3800.0,
-              "liquidity": 0
-            }
-          ],
           "Caesars": [
             {
               "outcome": "Boise State Broncos",
@@ -2468,7 +2269,7 @@
             {
               "outcome": "Utah State Aggies",
               "point": "",
-              "price": 1800.0,
+              "price": 1750.0,
               "liquidity": 0
             }
           ]
@@ -2477,70 +2278,70 @@
           "FanDuel": [
             {
               "outcome": "Boise State Broncos",
-              "point": -24.5,
-              "price": -104.0,
+              "point": -27.5,
+              "price": -130.0,
               "liquidity": 0
             },
             {
               "outcome": "Utah State Aggies",
-              "point": 24.5,
-              "price": -128.0,
+              "point": 27.5,
+              "price": -102.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Boise State Broncos",
-              "point": -24.5,
-              "price": -120.0,
+              "point": -27.5,
+              "price": -125.0,
               "liquidity": 0
             },
             {
               "outcome": "Utah State Aggies",
-              "point": 24.5,
-              "price": -110.0,
+              "point": 27.5,
+              "price": -105.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Boise State Broncos",
-              "point": -24.5,
-              "price": -122.0,
+              "point": -26.5,
+              "price": -119.0,
               "liquidity": 0
             },
             {
               "outcome": "Utah State Aggies",
-              "point": 24.5,
-              "price": -109.0,
+              "point": 26.5,
+              "price": -112.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Boise State Broncos",
-              "point": -24.5,
-              "price": -112.0,
+              "point": -27.5,
+              "price": -124.0,
               "liquidity": 0
             },
             {
               "outcome": "Utah State Aggies",
-              "point": 24.5,
-              "price": -117.0,
+              "point": 27.5,
+              "price": -105.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Boise State Broncos",
-              "point": -24.5,
-              "price": -110.0,
+              "point": -27.5,
+              "price": -118.0,
               "liquidity": 0
             },
             {
               "outcome": "Utah State Aggies",
-              "point": 24.5,
-              "price": -108.0,
+              "point": 27.5,
+              "price": -102.0,
               "liquidity": 0
             }
           ]
@@ -2549,70 +2350,70 @@
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 55.5,
-              "price": -106.0,
+              "point": 61.5,
+              "price": -114.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 55.5,
-              "price": -125.0,
+              "point": 61.5,
+              "price": -114.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 55.5,
-              "price": -110.0,
+              "point": 61.5,
+              "price": -125.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 55.5,
-              "price": -120.0,
+              "point": 61.5,
+              "price": -105.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 55.5,
-              "price": -109.0,
+              "point": 62.5,
+              "price": -103.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 55.5,
-              "price": -122.0,
+              "point": 62.5,
+              "price": -129.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Over",
-              "point": 55.5,
-              "price": -108.0,
+              "point": 60.5,
+              "price": -150.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 55.5,
-              "price": -120.0,
+              "point": 60.5,
+              "price": 116.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 55.5,
-              "price": -108.0,
+              "point": 61.5,
+              "price": -118.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 55.5,
-              "price": -112.0,
+              "point": 61.5,
+              "price": -102.0,
               "liquidity": 0
             }
           ]
@@ -2630,71 +2431,71 @@
       "commence_time": "2026-10-03 07:33:00 PM",
       "best_lines": {
         "h2h_away": {
-          "book": "Fanatics",
-          "price": -165.0,
+          "book": "FanDuel",
+          "price": -170.0,
           "liquidity": 0
         },
         "h2h_home": {
-          "book": "BetMGM",
-          "price": 138.0,
+          "book": "Fanatics",
+          "price": 150.0,
           "liquidity": 0
         },
         "spread_away": {
-          "book": "Fanatics",
+          "book": "BetMGM",
           "point": -3.5,
-          "price": 120.0,
+          "price": 105.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "BetMGM",
+          "book": "Fanatics",
           "point": 3.5,
-          "price": -130.0,
+          "price": -125.0,
           "liquidity": 0
         },
         "total_over": {
           "book": "BetMGM",
           "point": 37.5,
-          "price": -105.0,
+          "price": 110.0,
           "liquidity": 0
         },
         "total_under": {
           "book": "BetMGM",
           "point": 37.5,
-          "price": -115.0,
+          "price": -130.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
-          "book": "Fanatics",
-          "price": -165.0,
+          "book": "FanDuel",
+          "price": -170.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
-          "book": "BetMGM",
-          "price": 138.0,
+          "book": "Fanatics",
+          "price": 150.0,
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "Fanatics",
+          "book": "BetMGM",
           "point": -3.5,
-          "price": 120.0,
+          "price": 105.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "BetMGM",
+          "book": "Fanatics",
           "point": 3.5,
-          "price": -130.0,
+          "price": -125.0,
           "liquidity": 0
         },
         "retail_total_over": {
           "book": "BetMGM",
           "point": 37.5,
-          "price": -105.0,
+          "price": 110.0,
           "liquidity": 0
         },
         "retail_total_under": {
           "book": "BetMGM",
           "point": 37.5,
-          "price": -115.0,
+          "price": -130.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -2724,13 +2525,13 @@
             {
               "outcome": "South Florida Bulls",
               "point": "",
-              "price": 134.0,
+              "price": 140.0,
               "liquidity": 0
             },
             {
               "outcome": "Temple Owls",
               "point": "",
-              "price": -179.0,
+              "price": -188.0,
               "liquidity": 0
             }
           ],
@@ -2738,13 +2539,13 @@
             {
               "outcome": "South Florida Bulls",
               "point": "",
-              "price": 125.0,
+              "price": 150.0,
               "liquidity": 0
             },
             {
               "outcome": "Temple Owls",
               "point": "",
-              "price": -165.0,
+              "price": -195.0,
               "liquidity": 0
             }
           ],
@@ -2752,27 +2553,13 @@
             {
               "outcome": "South Florida Bulls",
               "point": "",
-              "price": 136.0,
+              "price": 144.0,
               "liquidity": 0
             },
             {
               "outcome": "Temple Owls",
               "point": "",
-              "price": -176.0,
-              "liquidity": 0
-            }
-          ],
-          "BetMGM": [
-            {
-              "outcome": "South Florida Bulls",
-              "point": "",
-              "price": 138.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Temple Owls",
-              "point": "",
-              "price": -165.0,
+              "price": -190.0,
               "liquidity": 0
             }
           ]
@@ -2782,13 +2569,13 @@
             {
               "outcome": "South Florida Bulls",
               "point": 3.5,
-              "price": -136.0,
+              "price": -138.0,
               "liquidity": 0
             },
             {
               "outcome": "Temple Owls",
               "point": -3.5,
-              "price": 102.0,
+              "price": 104.0,
               "liquidity": 0
             }
           ],
@@ -2796,7 +2583,49 @@
             {
               "outcome": "South Florida Bulls",
               "point": 3.5,
-              "price": -139.0,
+              "price": -132.0,
+              "liquidity": 0
+            },
+            {
+              "outcome": "Temple Owls",
+              "point": -3.5,
+              "price": 100.0,
+              "liquidity": 0
+            }
+          ],
+          "Fanatics": [
+            {
+              "outcome": "South Florida Bulls",
+              "point": 3.5,
+              "price": -125.0,
+              "liquidity": 0
+            },
+            {
+              "outcome": "Temple Owls",
+              "point": -3.5,
+              "price": -105.0,
+              "liquidity": 0
+            }
+          ],
+          "Caesars": [
+            {
+              "outcome": "South Florida Bulls",
+              "point": 3.5,
+              "price": -134.0,
+              "liquidity": 0
+            },
+            {
+              "outcome": "Temple Owls",
+              "point": -3.5,
+              "price": 104.0,
+              "liquidity": 0
+            }
+          ],
+          "BetMGM": [
+            {
+              "outcome": "South Florida Bulls",
+              "point": 3.5,
+              "price": -125.0,
               "liquidity": 0
             },
             {
@@ -2805,104 +2634,62 @@
               "price": 105.0,
               "liquidity": 0
             }
-          ],
-          "Fanatics": [
-            {
-              "outcome": "South Florida Bulls",
-              "point": 3.5,
-              "price": -165.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Temple Owls",
-              "point": -3.5,
-              "price": 120.0,
-              "liquidity": 0
-            }
-          ],
-          "Caesars": [
-            {
-              "outcome": "South Florida Bulls",
-              "point": 3.5,
-              "price": -137.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Temple Owls",
-              "point": -3.5,
-              "price": 106.0,
-              "liquidity": 0
-            }
-          ],
-          "BetMGM": [
-            {
-              "outcome": "South Florida Bulls",
-              "point": 3.5,
-              "price": -130.0,
-              "liquidity": 0
-            },
-            {
-              "outcome": "Temple Owls",
-              "point": -3.5,
-              "price": 110.0,
-              "liquidity": 0
-            }
           ]
         },
         "totals": {
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 38.5,
-              "price": 100.0,
+              "point": 37.5,
+              "price": 106.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 38.5,
-              "price": -132.0,
+              "point": 37.5,
+              "price": -140.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 37.5,
-              "price": -109.0,
+              "point": 36.5,
+              "price": -135.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 37.5,
-              "price": -121.0,
+              "point": 36.5,
+              "price": 102.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 37.5,
-              "price": -110.0,
+              "point": 36.5,
+              "price": -135.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 37.5,
-              "price": -120.0,
+              "point": 36.5,
+              "price": 100.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Over",
-              "point": 37.5,
-              "price": -108.0,
+              "point": 36.5,
+              "price": -132.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 37.5,
-              "price": -120.0,
+              "point": 36.5,
+              "price": 102.0,
               "liquidity": 0
             }
           ],
@@ -2910,13 +2697,13 @@
             {
               "outcome": "Over",
               "point": 37.5,
-              "price": -105.0,
+              "price": 110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 37.5,
-              "price": -115.0,
+              "price": -130.0,
               "liquidity": 0
             }
           ]
@@ -2934,71 +2721,71 @@
       "commence_time": "2026-10-03 07:36:00 PM",
       "best_lines": {
         "h2h_away": {
-          "book": "DraftKings",
-          "price": -216.0,
+          "book": "BetMGM",
+          "price": -165.0,
           "liquidity": 0
         },
         "h2h_home": {
           "book": "FanDuel",
-          "price": 190.0,
+          "price": 154.0,
           "liquidity": 0
         },
         "spread_away": {
-          "book": "Caesars",
-          "point": -4.5,
-          "price": -105.0,
+          "book": "FanDuel",
+          "point": -3.5,
+          "price": 106.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "BetMGM",
-          "point": 4.5,
-          "price": -110.0,
+          "book": "Fanatics",
+          "point": 3.5,
+          "price": -125.0,
           "liquidity": 0
         },
         "total_over": {
-          "book": "Fanatics",
-          "point": 36.5,
-          "price": -115.0,
+          "book": "Caesars",
+          "point": 34.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "total_under": {
-          "book": "BetMGM",
-          "point": 36.5,
-          "price": -102.0,
+          "book": "FanDuel",
+          "point": 34.5,
+          "price": -114.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
-          "book": "DraftKings",
-          "price": -216.0,
+          "book": "BetMGM",
+          "price": -165.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
           "book": "FanDuel",
-          "price": 190.0,
+          "price": 154.0,
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "Caesars",
-          "point": -4.5,
-          "price": -105.0,
+          "book": "FanDuel",
+          "point": -3.5,
+          "price": 106.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "BetMGM",
-          "point": 4.5,
-          "price": -110.0,
+          "book": "Fanatics",
+          "point": 3.5,
+          "price": -125.0,
           "liquidity": 0
         },
         "retail_total_over": {
-          "book": "Fanatics",
-          "point": 36.5,
-          "price": -115.0,
+          "book": "Caesars",
+          "point": 34.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "retail_total_under": {
-          "book": "BetMGM",
-          "point": 36.5,
-          "price": -102.0,
+          "book": "FanDuel",
+          "point": 34.5,
+          "price": -114.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -3014,13 +2801,13 @@
             {
               "outcome": "Colorado Buffaloes",
               "point": "",
-              "price": 190.0,
+              "price": 154.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas Tech Red Raiders",
               "point": "",
-              "price": -250.0,
+              "price": -200.0,
               "liquidity": 0
             }
           ],
@@ -3028,13 +2815,13 @@
             {
               "outcome": "Colorado Buffaloes",
               "point": "",
-              "price": 160.0,
+              "price": 137.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas Tech Red Raiders",
               "point": "",
-              "price": -216.0,
+              "price": -184.0,
               "liquidity": 0
             }
           ],
@@ -3042,13 +2829,13 @@
             {
               "outcome": "Colorado Buffaloes",
               "point": "",
-              "price": 170.0,
+              "price": 145.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas Tech Red Raiders",
               "point": "",
-              "price": -225.0,
+              "price": -190.0,
               "liquidity": 0
             }
           ],
@@ -3056,13 +2843,27 @@
             {
               "outcome": "Colorado Buffaloes",
               "point": "",
-              "price": 188.0,
+              "price": 147.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas Tech Red Raiders",
               "point": "",
-              "price": -250.0,
+              "price": -193.0,
+              "liquidity": 0
+            }
+          ],
+          "BetMGM": [
+            {
+              "outcome": "Colorado Buffaloes",
+              "point": "",
+              "price": 140.0,
+              "liquidity": 0
+            },
+            {
+              "outcome": "Texas Tech Red Raiders",
+              "point": "",
+              "price": -165.0,
               "liquidity": 0
             }
           ]
@@ -3071,28 +2872,28 @@
           "FanDuel": [
             {
               "outcome": "Colorado Buffaloes",
-              "point": 4.5,
-              "price": -118.0,
+              "point": 3.5,
+              "price": -140.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas Tech Red Raiders",
-              "point": -4.5,
-              "price": -112.0,
+              "point": -3.5,
+              "price": 106.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Colorado Buffaloes",
-              "point": 4.5,
-              "price": -119.0,
+              "point": 3.5,
+              "price": -133.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas Tech Red Raiders",
-              "point": -4.5,
-              "price": -112.0,
+              "point": -3.5,
+              "price": 100.0,
               "liquidity": 0
             }
           ],
@@ -3100,41 +2901,41 @@
             {
               "outcome": "Colorado Buffaloes",
               "point": 3.5,
-              "price": -110.0,
+              "price": -125.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas Tech Red Raiders",
               "point": -3.5,
-              "price": -120.0,
+              "price": -105.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Colorado Buffaloes",
-              "point": 4.5,
-              "price": -124.0,
+              "point": 3.5,
+              "price": -137.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas Tech Red Raiders",
-              "point": -4.5,
-              "price": -105.0,
+              "point": -3.5,
+              "price": 106.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Colorado Buffaloes",
-              "point": 4.5,
-              "price": -110.0,
+              "point": 3.5,
+              "price": -145.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas Tech Red Raiders",
-              "point": -4.5,
-              "price": -108.0,
+              "point": -3.5,
+              "price": 105.0,
               "liquidity": 0
             }
           ]
@@ -3143,70 +2944,70 @@
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 36.5,
-              "price": -122.0,
+              "point": 34.5,
+              "price": -114.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 36.5,
-              "price": -108.0,
+              "point": 34.5,
+              "price": -114.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 36.5,
-              "price": -128.0,
+              "point": 34.5,
+              "price": -111.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 36.5,
-              "price": -104.0,
+              "point": 34.5,
+              "price": -119.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 36.5,
-              "price": -115.0,
+              "point": 35.5,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 36.5,
-              "price": -115.0,
+              "point": 35.5,
+              "price": -120.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Over",
-              "point": 36.5,
-              "price": -122.0,
+              "point": 34.5,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 36.5,
-              "price": -107.0,
+              "point": 34.5,
+              "price": -118.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 36.5,
-              "price": -118.0,
+              "point": 34.5,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 36.5,
-              "price": -102.0,
+              "point": 34.5,
+              "price": -118.0,
               "liquidity": 0
             }
           ]
@@ -3224,71 +3025,71 @@
       "commence_time": "2026-10-03 07:37:00 PM",
       "best_lines": {
         "h2h_away": {
-          "book": "DraftKings",
-          "price": 193.0,
+          "book": "FanDuel",
+          "price": 142.0,
           "liquidity": 0
         },
         "h2h_home": {
-          "book": "Caesars",
-          "price": -230.0,
+          "book": "BetMGM",
+          "price": -165.0,
           "liquidity": 0
         },
         "spread_away": {
-          "book": "BetMGM",
-          "point": 3.5,
-          "price": -108.0,
+          "book": "DraftKings",
+          "point": 2.5,
+          "price": 111.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "Caesars",
-          "point": -3.5,
-          "price": -115.0,
+          "book": "Fanatics",
+          "point": -2.5,
+          "price": -135.0,
           "liquidity": 0
         },
         "total_over": {
-          "book": "DraftKings",
-          "point": 54.5,
-          "price": -109.0,
+          "book": "BetMGM",
+          "point": 52.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "total_under": {
-          "book": "Fanatics",
-          "point": 54.5,
-          "price": -110.0,
+          "book": "Caesars",
+          "point": 52.5,
+          "price": -113.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
-          "book": "DraftKings",
-          "price": 193.0,
+          "book": "FanDuel",
+          "price": 142.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
-          "book": "Caesars",
-          "price": -230.0,
+          "book": "BetMGM",
+          "price": -165.0,
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "BetMGM",
-          "point": 3.5,
-          "price": -108.0,
+          "book": "DraftKings",
+          "point": 2.5,
+          "price": 111.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "Caesars",
-          "point": -3.5,
-          "price": -115.0,
+          "book": "Fanatics",
+          "point": -2.5,
+          "price": -135.0,
           "liquidity": 0
         },
         "retail_total_over": {
-          "book": "DraftKings",
-          "point": 54.5,
-          "price": -109.0,
+          "book": "BetMGM",
+          "point": 52.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "retail_total_under": {
-          "book": "Fanatics",
-          "point": 54.5,
-          "price": -110.0,
+          "book": "Caesars",
+          "point": 52.5,
+          "price": -113.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -3304,13 +3105,13 @@
             {
               "outcome": "USC Trojans",
               "point": "",
-              "price": -262.0,
+              "price": -187.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington Huskies",
               "point": "",
-              "price": 193.0,
+              "price": 140.0,
               "liquidity": 0
             }
           ],
@@ -3318,13 +3119,13 @@
             {
               "outcome": "USC Trojans",
               "point": "",
-              "price": -235.0,
+              "price": -184.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington Huskies",
               "point": "",
-              "price": 180.0,
+              "price": 142.0,
               "liquidity": 0
             }
           ],
@@ -3332,13 +3133,13 @@
             {
               "outcome": "USC Trojans",
               "point": "",
-              "price": -240.0,
+              "price": -185.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington Huskies",
               "point": "",
-              "price": 180.0,
+              "price": 140.0,
               "liquidity": 0
             }
           ],
@@ -3346,13 +3147,13 @@
             {
               "outcome": "USC Trojans",
               "point": "",
-              "price": -230.0,
+              "price": -179.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington Huskies",
               "point": "",
-              "price": 174.0,
+              "price": 139.0,
               "liquidity": 0
             }
           ],
@@ -3360,13 +3161,13 @@
             {
               "outcome": "USC Trojans",
               "point": "",
-              "price": -235.0,
+              "price": -165.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington Huskies",
               "point": "",
-              "price": 175.0,
+              "price": 130.0,
               "liquidity": 0
             }
           ]
@@ -3375,56 +3176,56 @@
           "DraftKings": [
             {
               "outcome": "USC Trojans",
-              "point": -4.5,
-              "price": -111.0,
+              "point": -2.5,
+              "price": -147.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington Huskies",
-              "point": 4.5,
-              "price": -119.0,
+              "point": 2.5,
+              "price": 111.0,
               "liquidity": 0
             }
           ],
           "FanDuel": [
             {
               "outcome": "USC Trojans",
-              "point": -4.5,
-              "price": -108.0,
+              "point": -2.5,
+              "price": -144.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington Huskies",
-              "point": 4.5,
-              "price": -122.0,
+              "point": 2.5,
+              "price": 108.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "USC Trojans",
-              "point": -3.5,
-              "price": -120.0,
+              "point": -2.5,
+              "price": -135.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington Huskies",
-              "point": 3.5,
-              "price": -110.0,
+              "point": 2.5,
+              "price": 100.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "USC Trojans",
-              "point": -3.5,
-              "price": -115.0,
+              "point": -2.5,
+              "price": -139.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington Huskies",
-              "point": 3.5,
-              "price": -112.0,
+              "point": 2.5,
+              "price": 108.0,
               "liquidity": 0
             }
           ],
@@ -3432,13 +3233,13 @@
             {
               "outcome": "USC Trojans",
               "point": -3.5,
-              "price": -120.0,
+              "price": 110.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington Huskies",
               "point": 3.5,
-              "price": -108.0,
+              "price": -145.0,
               "liquidity": 0
             }
           ]
@@ -3447,70 +3248,70 @@
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 54.5,
-              "price": -109.0,
+              "point": 52.5,
+              "price": -112.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 54.5,
-              "price": -122.0,
+              "point": 52.5,
+              "price": -119.0,
               "liquidity": 0
             }
           ],
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 53.5,
-              "price": -132.0,
+              "point": 52.5,
+              "price": -114.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 53.5,
-              "price": 100.0,
+              "point": 52.5,
+              "price": -114.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 54.5,
-              "price": -120.0,
+              "point": 52.5,
+              "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 54.5,
-              "price": -110.0,
+              "point": 52.5,
+              "price": -115.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Over",
-              "point": 54.5,
-              "price": -117.0,
+              "point": 52.5,
+              "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 54.5,
-              "price": -110.0,
+              "point": 52.5,
+              "price": -113.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 55.5,
+              "point": 52.5,
               "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 55.5,
-              "price": -118.0,
+              "point": 52.5,
+              "price": -120.0,
               "liquidity": 0
             }
           ]
@@ -3528,71 +3329,71 @@
       "commence_time": "2026-10-03 07:44:57 PM",
       "best_lines": {
         "h2h_away": {
-          "book": "DraftKings",
-          "price": -8900.0,
+          "book": "FanDuel",
+          "price": -7000.0,
           "liquidity": 0
         },
         "h2h_home": {
           "book": "DraftKings",
-          "price": 2500.0,
+          "price": 3000.0,
           "liquidity": 0
         },
         "spread_away": {
-          "book": "Fanatics",
-          "point": -24.5,
-          "price": 105.0,
+          "book": "Caesars",
+          "point": -22.5,
+          "price": -117.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "BetMGM",
-          "point": 24.5,
-          "price": -125.0,
+          "book": "Caesars",
+          "point": 22.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "total_over": {
           "book": "BetMGM",
-          "point": 50.5,
-          "price": -108.0,
+          "point": 46.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "total_under": {
           "book": "BetMGM",
-          "point": 50.5,
-          "price": -110.0,
+          "point": 46.5,
+          "price": -108.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
-          "book": "DraftKings",
-          "price": -8900.0,
+          "book": "FanDuel",
+          "price": -7000.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
           "book": "DraftKings",
-          "price": 2500.0,
+          "price": 3000.0,
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "Fanatics",
-          "point": -24.5,
-          "price": 105.0,
+          "book": "Caesars",
+          "point": -22.5,
+          "price": -117.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "BetMGM",
-          "point": 24.5,
-          "price": -125.0,
+          "book": "Caesars",
+          "point": 22.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "retail_total_over": {
           "book": "BetMGM",
-          "point": 50.5,
-          "price": -108.0,
+          "point": 46.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "retail_total_under": {
           "book": "BetMGM",
-          "point": 50.5,
-          "price": -110.0,
+          "point": 46.5,
+          "price": -108.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -3608,13 +3409,13 @@
             {
               "outcome": "Clemson Tigers",
               "point": "",
-              "price": 2500.0,
+              "price": 3000.0,
               "liquidity": 0
             },
             {
               "outcome": "Miami Hurricanes",
               "point": "",
-              "price": -8900.0,
+              "price": -10000.0,
               "liquidity": 0
             }
           ],
@@ -3628,7 +3429,7 @@
             {
               "outcome": "Miami Hurricanes",
               "point": "",
-              "price": -20000.0,
+              "price": -15000.0,
               "liquidity": 0
             }
           ],
@@ -3636,13 +3437,13 @@
             {
               "outcome": "Clemson Tigers",
               "point": "",
-              "price": 1700.0,
+              "price": 1500.0,
               "liquidity": 0
             },
             {
               "outcome": "Miami Hurricanes",
               "point": "",
-              "price": -10000.0,
+              "price": -7000.0,
               "liquidity": 0
             }
           ],
@@ -3650,13 +3451,13 @@
             {
               "outcome": "Clemson Tigers",
               "point": "",
-              "price": 2200.0,
+              "price": 2800.0,
               "liquidity": 0
             },
             {
               "outcome": "Miami Hurricanes",
               "point": "",
-              "price": -10000.0,
+              "price": -12000.0,
               "liquidity": 0
             }
           ]
@@ -3665,70 +3466,70 @@
           "DraftKings": [
             {
               "outcome": "Clemson Tigers",
-              "point": 23.5,
-              "price": -106.0,
+              "point": 22.5,
+              "price": -111.0,
               "liquidity": 0
             },
             {
               "outcome": "Miami Hurricanes",
-              "point": -23.5,
-              "price": -125.0,
+              "point": -22.5,
+              "price": -120.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Clemson Tigers",
-              "point": 24.5,
-              "price": -125.0,
+              "point": 21.5,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Miami Hurricanes",
-              "point": -24.5,
-              "price": -105.0,
+              "point": -21.5,
+              "price": -118.0,
               "liquidity": 0
             }
           ],
           "FanDuel": [
             {
               "outcome": "Clemson Tigers",
-              "point": 23.5,
-              "price": -108.0,
+              "point": 21.5,
+              "price": -114.0,
               "liquidity": 0
             },
             {
               "outcome": "Miami Hurricanes",
-              "point": -23.5,
-              "price": -122.0,
+              "point": -21.5,
+              "price": -118.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Clemson Tigers",
-              "point": 24.5,
-              "price": -140.0,
+              "point": 23.5,
+              "price": -120.0,
               "liquidity": 0
             },
             {
               "outcome": "Miami Hurricanes",
-              "point": -24.5,
-              "price": 105.0,
+              "point": -23.5,
+              "price": -110.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Clemson Tigers",
-              "point": 23.5,
-              "price": -109.0,
+              "point": 22.5,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Miami Hurricanes",
-              "point": -23.5,
-              "price": -120.0,
+              "point": -22.5,
+              "price": -117.0,
               "liquidity": 0
             }
           ]
@@ -3737,41 +3538,41 @@
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 50.5,
-              "price": -114.0,
+              "point": 46.5,
+              "price": -120.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 50.5,
-              "price": -117.0,
+              "point": 46.5,
+              "price": -111.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 50.5,
-              "price": -108.0,
+              "point": 46.5,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 50.5,
-              "price": -110.0,
+              "point": 46.5,
+              "price": -108.0,
               "liquidity": 0
             }
           ],
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 49.5,
+              "point": 44.5,
               "price": -112.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 49.5,
+              "point": 44.5,
               "price": -118.0,
               "liquidity": 0
             }
@@ -3779,13 +3580,13 @@
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 49.5,
+              "point": 45.5,
               "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 49.5,
+              "point": 45.5,
               "price": -115.0,
               "liquidity": 0
             }
@@ -3793,14 +3594,14 @@
           "Caesars": [
             {
               "outcome": "Over",
-              "point": 49.5,
-              "price": -121.0,
+              "point": 44.5,
+              "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 49.5,
-              "price": -107.0,
+              "point": 44.5,
+              "price": -113.0,
               "liquidity": 0
             }
           ]
@@ -3828,27 +3629,27 @@
           "liquidity": 0
         },
         "spread_away": {
-          "book": "Fanatics",
-          "point": 51.5,
-          "price": -105.0,
+          "book": "BetMGM",
+          "point": 55.5,
+          "price": 105.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "Caesars",
-          "point": -51.5,
+          "book": "Fanatics",
+          "point": -55.5,
           "price": -110.0,
           "liquidity": 0
         },
         "total_over": {
-          "book": "Caesars",
-          "point": 57.5,
-          "price": -110.0,
+          "book": "BetMGM",
+          "point": 59.5,
+          "price": -108.0,
           "liquidity": 0
         },
         "total_under": {
-          "book": "Fanatics",
-          "point": 57.5,
-          "price": -115.0,
+          "book": "DraftKings",
+          "point": 59.5,
+          "price": -116.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
@@ -3862,27 +3663,27 @@
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "Fanatics",
-          "point": 51.5,
-          "price": -105.0,
+          "book": "BetMGM",
+          "point": 55.5,
+          "price": 105.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "Caesars",
-          "point": -51.5,
+          "book": "Fanatics",
+          "point": -55.5,
           "price": -110.0,
           "liquidity": 0
         },
         "retail_total_over": {
-          "book": "Caesars",
-          "point": 57.5,
-          "price": -110.0,
+          "book": "BetMGM",
+          "point": 59.5,
+          "price": -108.0,
           "liquidity": 0
         },
         "retail_total_under": {
-          "book": "Fanatics",
-          "point": 57.5,
-          "price": -115.0,
+          "book": "DraftKings",
+          "point": 59.5,
+          "price": -116.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -3913,13 +3714,13 @@
           "FanDuel": [
             {
               "outcome": "LSU Tigers",
-              "point": -49.5,
+              "point": -55.5,
               "price": -132.0,
               "liquidity": 0
             },
             {
               "outcome": "McNeese State Cowboys",
-              "point": 49.5,
+              "point": 55.5,
               "price": 100.0,
               "liquidity": 0
             }
@@ -3927,27 +3728,27 @@
           "Fanatics": [
             {
               "outcome": "LSU Tigers",
-              "point": -51.5,
-              "price": -125.0,
+              "point": -55.5,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "McNeese State Cowboys",
-              "point": 51.5,
-              "price": -105.0,
+              "point": 55.5,
+              "price": -120.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "LSU Tigers",
-              "point": -51.5,
+              "point": -55.5,
               "price": -116.0,
               "liquidity": 0
             },
             {
               "outcome": "McNeese State Cowboys",
-              "point": 51.5,
+              "point": 55.5,
               "price": -114.0,
               "liquidity": 0
             }
@@ -3955,28 +3756,28 @@
           "BetMGM": [
             {
               "outcome": "LSU Tigers",
-              "point": -50.5,
-              "price": -105.0,
+              "point": -55.5,
+              "price": -140.0,
               "liquidity": 0
             },
             {
               "outcome": "McNeese State Cowboys",
-              "point": 50.5,
-              "price": -130.0,
+              "point": 55.5,
+              "price": 105.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "LSU Tigers",
-              "point": -51.5,
-              "price": -110.0,
+              "point": -55.5,
+              "price": -120.0,
               "liquidity": 0
             },
             {
               "outcome": "McNeese State Cowboys",
-              "point": 51.5,
-              "price": -118.0,
+              "point": 55.5,
+              "price": -110.0,
               "liquidity": 0
             }
           ]
@@ -3985,41 +3786,41 @@
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 56.5,
-              "price": -108.0,
+              "point": 59.5,
+              "price": -112.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 56.5,
-              "price": -122.0,
+              "point": 59.5,
+              "price": -118.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 57.5,
-              "price": -115.0,
+              "point": 60.5,
+              "price": 100.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 57.5,
-              "price": -115.0,
+              "point": 60.5,
+              "price": -135.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 57.5,
+              "point": 59.5,
               "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 57.5,
+              "point": 59.5,
               "price": -116.0,
               "liquidity": 0
             }
@@ -4027,27 +3828,27 @@
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 56.5,
-              "price": -110.0,
+              "point": 59.5,
+              "price": -108.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 56.5,
-              "price": -118.0,
+              "point": 59.5,
+              "price": -125.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Over",
-              "point": 57.5,
-              "price": -110.0,
+              "point": 59.5,
+              "price": -109.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 57.5,
+              "point": 59.5,
               "price": -120.0,
               "liquidity": 0
             }
@@ -4066,71 +3867,71 @@
       "commence_time": "2026-10-03 08:02:41 PM",
       "best_lines": {
         "h2h_away": {
-          "book": "FanDuel",
-          "price": 340.0,
+          "book": "Fanatics",
+          "price": 240.0,
           "liquidity": 0
         },
         "h2h_home": {
-          "book": "BetMGM",
-          "price": -325.0,
+          "book": "FanDuel",
+          "price": -265.0,
           "liquidity": 0
         },
         "spread_away": {
-          "book": "FanDuel",
-          "point": 7.5,
-          "price": -112.0,
+          "book": "BetMGM",
+          "point": 6.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "DraftKings",
-          "point": -7.5,
-          "price": -103.0,
+          "book": "BetMGM",
+          "point": -6.5,
+          "price": -108.0,
           "liquidity": 0
         },
         "total_over": {
-          "book": "BetMGM",
-          "point": 39.5,
-          "price": -110.0,
+          "book": "DraftKings",
+          "point": 36.5,
+          "price": -117.0,
           "liquidity": 0
         },
         "total_under": {
-          "book": "BetMGM",
-          "point": 39.5,
-          "price": -108.0,
+          "book": "FanDuel",
+          "point": 36.5,
+          "price": -102.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
-          "book": "FanDuel",
-          "price": 340.0,
+          "book": "Fanatics",
+          "price": 240.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
-          "book": "BetMGM",
-          "price": -325.0,
+          "book": "FanDuel",
+          "price": -265.0,
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "FanDuel",
-          "point": 7.5,
-          "price": -112.0,
-          "liquidity": 0
-        },
-        "retail_spread_home": {
-          "book": "DraftKings",
-          "point": -7.5,
-          "price": -103.0,
-          "liquidity": 0
-        },
-        "retail_total_over": {
           "book": "BetMGM",
-          "point": 39.5,
+          "point": 6.5,
           "price": -110.0,
           "liquidity": 0
         },
-        "retail_total_under": {
+        "retail_spread_home": {
           "book": "BetMGM",
-          "point": 39.5,
+          "point": -6.5,
           "price": -108.0,
+          "liquidity": 0
+        },
+        "retail_total_over": {
+          "book": "DraftKings",
+          "point": 36.5,
+          "price": -117.0,
+          "liquidity": 0
+        },
+        "retail_total_under": {
+          "book": "FanDuel",
+          "point": 36.5,
+          "price": -102.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -4146,13 +3947,13 @@
             {
               "outcome": "Arkansas State Red Wolves",
               "point": "",
-              "price": 286.0,
+              "price": 237.0,
               "liquidity": 0
             },
             {
               "outcome": "Louisiana Ragin Cajuns",
               "point": "",
-              "price": -405.0,
+              "price": -328.0,
               "liquidity": 0
             }
           ],
@@ -4160,13 +3961,13 @@
             {
               "outcome": "Arkansas State Red Wolves",
               "point": "",
-              "price": 340.0,
+              "price": 200.0,
               "liquidity": 0
             },
             {
               "outcome": "Louisiana Ragin Cajuns",
               "point": "",
-              "price": -500.0,
+              "price": -265.0,
               "liquidity": 0
             }
           ],
@@ -4174,13 +3975,13 @@
             {
               "outcome": "Arkansas State Red Wolves",
               "point": "",
-              "price": 325.0,
+              "price": 240.0,
               "liquidity": 0
             },
             {
               "outcome": "Louisiana Ragin Cajuns",
               "point": "",
-              "price": -475.0,
+              "price": -330.0,
               "liquidity": 0
             }
           ],
@@ -4188,13 +3989,13 @@
             {
               "outcome": "Arkansas State Red Wolves",
               "point": "",
-              "price": 250.0,
+              "price": 230.0,
               "liquidity": 0
             },
             {
               "outcome": "Louisiana Ragin Cajuns",
               "point": "",
-              "price": -325.0,
+              "price": -300.0,
               "liquidity": 0
             }
           ]
@@ -4203,28 +4004,42 @@
           "DraftKings": [
             {
               "outcome": "Arkansas State Red Wolves",
-              "point": 7.5,
-              "price": -129.0,
+              "point": 6.5,
+              "price": -117.0,
               "liquidity": 0
             },
             {
               "outcome": "Louisiana Ragin Cajuns",
-              "point": -7.5,
-              "price": -103.0,
+              "point": -6.5,
+              "price": -113.0,
               "liquidity": 0
             }
           ],
           "FanDuel": [
             {
               "outcome": "Arkansas State Red Wolves",
-              "point": 7.5,
-              "price": -112.0,
+              "point": 4.5,
+              "price": -114.0,
               "liquidity": 0
             },
             {
               "outcome": "Louisiana Ragin Cajuns",
-              "point": -7.5,
-              "price": -118.0,
+              "point": -4.5,
+              "price": -114.0,
+              "liquidity": 0
+            }
+          ],
+          "Fanatics": [
+            {
+              "outcome": "Arkansas State Red Wolves",
+              "point": 5.5,
+              "price": -105.0,
+              "liquidity": 0
+            },
+            {
+              "outcome": "Louisiana Ragin Cajuns",
+              "point": -5.5,
+              "price": -125.0,
               "liquidity": 0
             }
           ],
@@ -4232,13 +4047,13 @@
             {
               "outcome": "Arkansas State Red Wolves",
               "point": 6.5,
-              "price": 105.0,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Louisiana Ragin Cajuns",
               "point": -6.5,
-              "price": -125.0,
+              "price": -108.0,
               "liquidity": 0
             }
           ]
@@ -4247,42 +4062,56 @@
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 39.5,
-              "price": -120.0,
+              "point": 36.5,
+              "price": -117.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 39.5,
-              "price": -111.0,
+              "point": 36.5,
+              "price": -114.0,
               "liquidity": 0
             }
           ],
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 38.5,
-              "price": -112.0,
+              "point": 36.5,
+              "price": -130.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 38.5,
-              "price": -118.0,
+              "point": 36.5,
+              "price": -102.0,
+              "liquidity": 0
+            }
+          ],
+          "Fanatics": [
+            {
+              "outcome": "Over",
+              "point": 36.5,
+              "price": -125.0,
+              "liquidity": 0
+            },
+            {
+              "outcome": "Under",
+              "point": 36.5,
+              "price": -105.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 39.5,
-              "price": -110.0,
+              "point": 35.5,
+              "price": -118.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 39.5,
-              "price": -108.0,
+              "point": 35.5,
+              "price": -110.0,
               "liquidity": 0
             }
           ]
@@ -4310,27 +4139,27 @@
           "liquidity": 0
         },
         "spread_away": {
-          "book": "DraftKings",
-          "point": -30.5,
-          "price": -119.0,
+          "book": "BetMGM",
+          "point": -35.5,
+          "price": -108.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "FanDuel",
-          "point": 30.5,
-          "price": -102.0,
+          "book": "BetMGM",
+          "point": 35.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "total_over": {
-          "book": "FanDuel",
-          "point": 51.5,
-          "price": -114.0,
+          "book": "Caesars",
+          "point": 53.5,
+          "price": -109.0,
           "liquidity": 0
         },
         "total_under": {
-          "book": "Caesars",
-          "point": 51.5,
-          "price": -109.0,
+          "book": "BetMGM",
+          "point": 53.5,
+          "price": -115.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
@@ -4344,27 +4173,27 @@
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "DraftKings",
-          "point": -30.5,
-          "price": -119.0,
+          "book": "BetMGM",
+          "point": -35.5,
+          "price": -108.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "FanDuel",
-          "point": 30.5,
-          "price": -102.0,
+          "book": "BetMGM",
+          "point": 35.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "retail_total_over": {
-          "book": "FanDuel",
-          "point": 51.5,
-          "price": -114.0,
+          "book": "Caesars",
+          "point": 53.5,
+          "price": -109.0,
           "liquidity": 0
         },
         "retail_total_under": {
-          "book": "Caesars",
-          "point": 51.5,
-          "price": -109.0,
+          "book": "BetMGM",
+          "point": 53.5,
+          "price": -115.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -4410,69 +4239,69 @@
             {
               "outcome": "Indiana Hoosiers",
               "point": -30.5,
-              "price": -130.0,
+              "price": -114.0,
               "liquidity": 0
             },
             {
               "outcome": "Rutgers Scarlet Knights",
               "point": 30.5,
-              "price": -102.0,
+              "price": -114.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Indiana Hoosiers",
-              "point": -30.5,
-              "price": -119.0,
+              "point": -35.5,
+              "price": -114.0,
               "liquidity": 0
             },
             {
               "outcome": "Rutgers Scarlet Knights",
-              "point": 30.5,
-              "price": -112.0,
+              "point": 35.5,
+              "price": -116.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Indiana Hoosiers",
-              "point": -30.5,
-              "price": -120.0,
+              "point": -35.5,
+              "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "Rutgers Scarlet Knights",
-              "point": 30.5,
-              "price": -110.0,
+              "point": 35.5,
+              "price": -115.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Indiana Hoosiers",
-              "point": -30.5,
-              "price": -122.0,
+              "point": -35.5,
+              "price": -114.0,
               "liquidity": 0
             },
             {
               "outcome": "Rutgers Scarlet Knights",
-              "point": 30.5,
-              "price": -106.0,
+              "point": 35.5,
+              "price": -114.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Indiana Hoosiers",
-              "point": -31.5,
-              "price": -115.0,
+              "point": -35.5,
+              "price": -108.0,
               "liquidity": 0
             },
             {
               "outcome": "Rutgers Scarlet Knights",
-              "point": 31.5,
-              "price": -115.0,
+              "point": 35.5,
+              "price": -110.0,
               "liquidity": 0
             }
           ]
@@ -4481,70 +4310,70 @@
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 51.5,
-              "price": -114.0,
+              "point": 50.5,
+              "price": -118.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 51.5,
-              "price": -114.0,
+              "point": 50.5,
+              "price": -112.0,
               "liquidity": 0
             }
           ],
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 51.5,
-              "price": -118.0,
+              "point": 53.5,
+              "price": -111.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 51.5,
-              "price": -113.0,
+              "point": 53.5,
+              "price": -120.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 51.5,
-              "price": -120.0,
+              "point": 52.5,
+              "price": -140.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 51.5,
-              "price": -110.0,
+              "point": 52.5,
+              "price": 105.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Over",
-              "point": 51.5,
-              "price": -118.0,
+              "point": 53.5,
+              "price": -109.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 51.5,
-              "price": -109.0,
+              "point": 53.5,
+              "price": -118.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 52.5,
-              "price": -105.0,
+              "point": 53.5,
+              "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 52.5,
-              "price": -125.0,
+              "point": 53.5,
+              "price": -115.0,
               "liquidity": 0
             }
           ]
@@ -4563,70 +4392,70 @@
       "best_lines": {
         "h2h_away": {
           "book": "BetRivers",
-          "price": 155.0,
+          "price": -190.0,
           "liquidity": 0
         },
         "h2h_home": {
-          "book": "BetMGM",
-          "price": -185.0,
+          "book": "Caesars",
+          "price": 171.0,
           "liquidity": 0
         },
         "spread_away": {
-          "book": "DraftKings",
-          "point": 1.5,
-          "price": -151.0,
+          "book": "BetRivers",
+          "point": -1.5,
+          "price": 100.0,
           "liquidity": 0
         },
         "spread_home": {
           "book": "BetMGM",
-          "point": -1.5,
-          "price": 130.0,
+          "point": 1.5,
+          "price": 100.0,
           "liquidity": 0
         },
         "total_over": {
-          "book": "BetMGM",
-          "point": 5.5,
-          "price": -125.0,
+          "book": "FanDuel",
+          "point": 8.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "total_under": {
-          "book": "Fanatics",
-          "point": 5.5,
-          "price": 105.0,
+          "book": "DraftKings",
+          "point": 8.5,
+          "price": -108.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
           "book": "BetRivers",
-          "price": 155.0,
+          "price": -190.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
-          "book": "BetMGM",
-          "price": -185.0,
+          "book": "Caesars",
+          "price": 171.0,
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "DraftKings",
-          "point": 1.5,
-          "price": -151.0,
+          "book": "BetRivers",
+          "point": -1.5,
+          "price": 100.0,
           "liquidity": 0
         },
         "retail_spread_home": {
           "book": "BetMGM",
-          "point": -1.5,
-          "price": 130.0,
+          "point": 1.5,
+          "price": 100.0,
           "liquidity": 0
         },
         "retail_total_over": {
-          "book": "BetMGM",
-          "point": 5.5,
-          "price": -125.0,
+          "book": "FanDuel",
+          "point": 8.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "retail_total_under": {
-          "book": "Fanatics",
-          "point": 5.5,
-          "price": 105.0,
+          "book": "DraftKings",
+          "point": 8.5,
+          "price": -108.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -4642,13 +4471,13 @@
             {
               "outcome": "Milwaukee Brewers",
               "point": "",
-              "price": -199.0,
+              "price": 167.0,
               "liquidity": 0
             },
             {
               "outcome": "San Diego Padres",
               "point": "",
-              "price": 151.0,
+              "price": -222.0,
               "liquidity": 0
             }
           ],
@@ -4656,13 +4485,13 @@
             {
               "outcome": "Milwaukee Brewers",
               "point": "",
-              "price": -194.0,
+              "price": 164.0,
               "liquidity": 0
             },
             {
               "outcome": "San Diego Padres",
               "point": "",
-              "price": 150.0,
+              "price": -215.0,
               "liquidity": 0
             }
           ],
@@ -4670,13 +4499,13 @@
             {
               "outcome": "Milwaukee Brewers",
               "point": "",
-              "price": -185.0,
+              "price": 165.0,
               "liquidity": 0
             },
             {
               "outcome": "San Diego Padres",
               "point": "",
-              "price": 145.0,
+              "price": -210.0,
               "liquidity": 0
             }
           ],
@@ -4684,13 +4513,13 @@
             {
               "outcome": "Milwaukee Brewers",
               "point": "",
-              "price": -200.0,
+              "price": 155.0,
               "liquidity": 0
             },
             {
               "outcome": "San Diego Padres",
               "point": "",
-              "price": 150.0,
+              "price": -205.0,
               "liquidity": 0
             }
           ],
@@ -4698,13 +4527,13 @@
             {
               "outcome": "Milwaukee Brewers",
               "point": "",
-              "price": -225.0,
+              "price": 133.0,
               "liquidity": 0
             },
             {
               "outcome": "San Diego Padres",
               "point": "",
-              "price": 155.0,
+              "price": -190.0,
               "liquidity": 0
             }
           ],
@@ -4712,13 +4541,13 @@
             {
               "outcome": "Milwaukee Brewers",
               "point": "",
-              "price": -197.0,
+              "price": 171.0,
               "liquidity": 0
             },
             {
               "outcome": "San Diego Padres",
               "point": "",
-              "price": 152.0,
+              "price": -225.0,
               "liquidity": 0
             }
           ]
@@ -4727,84 +4556,84 @@
           "DraftKings": [
             {
               "outcome": "Milwaukee Brewers",
-              "point": -1.5,
-              "price": 116.0,
+              "point": 1.5,
+              "price": -105.0,
               "liquidity": 0
             },
             {
               "outcome": "San Diego Padres",
-              "point": 1.5,
-              "price": -151.0,
+              "point": -1.5,
+              "price": -123.0,
               "liquidity": 0
             }
           ],
           "FanDuel": [
             {
               "outcome": "Milwaukee Brewers",
-              "point": -1.5,
-              "price": 114.0,
+              "point": 1.5,
+              "price": -106.0,
               "liquidity": 0
             },
             {
               "outcome": "San Diego Padres",
-              "point": 1.5,
-              "price": -152.0,
+              "point": -1.5,
+              "price": -125.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Milwaukee Brewers",
-              "point": -1.5,
-              "price": 130.0,
+              "point": 1.5,
+              "price": 100.0,
               "liquidity": 0
             },
             {
               "outcome": "San Diego Padres",
-              "point": 1.5,
-              "price": -165.0,
+              "point": -1.5,
+              "price": -130.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Milwaukee Brewers",
-              "point": -1.5,
-              "price": 115.0,
+              "point": 1.5,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "San Diego Padres",
-              "point": 1.5,
-              "price": -155.0,
+              "point": -1.5,
+              "price": -120.0,
               "liquidity": 0
             }
           ],
           "BetRivers": [
             {
               "outcome": "Milwaukee Brewers",
-              "point": -1.5,
-              "price": 115.0,
+              "point": 1.5,
+              "price": -139.0,
               "liquidity": 0
             },
             {
               "outcome": "San Diego Padres",
-              "point": 1.5,
-              "price": -162.0,
+              "point": -1.5,
+              "price": 100.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Milwaukee Brewers",
-              "point": -1.5,
-              "price": 117.0,
+              "point": 1.5,
+              "price": -107.0,
               "liquidity": 0
             },
             {
               "outcome": "San Diego Padres",
-              "point": 1.5,
-              "price": -154.0,
+              "point": -1.5,
+              "price": -122.0,
               "liquidity": 0
             }
           ]
@@ -4813,84 +4642,84 @@
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 5.5,
-              "price": -135.0,
+              "point": 8.5,
+              "price": -121.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 5.5,
-              "price": 104.0,
+              "point": 8.5,
+              "price": -108.0,
               "liquidity": 0
             }
           ],
           "FanDuel": [
             {
               "outcome": "Over",
-              "point": 5.5,
-              "price": -138.0,
+              "point": 8.5,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 5.5,
-              "price": 104.0,
+              "point": 8.5,
+              "price": -120.0,
               "liquidity": 0
             }
           ],
           "BetMGM": [
             {
               "outcome": "Over",
-              "point": 5.5,
-              "price": -125.0,
+              "point": 8.5,
+              "price": -118.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 5.5,
-              "price": 100.0,
+              "point": 8.5,
+              "price": -110.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Over",
-              "point": 5.5,
-              "price": -140.0,
+              "point": 8.5,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 5.5,
-              "price": 105.0,
+              "point": 8.5,
+              "price": -120.0,
               "liquidity": 0
             }
           ],
           "BetRivers": [
             {
               "outcome": "Over",
-              "point": 6.5,
-              "price": 102.0,
+              "point": 8.5,
+              "price": -114.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 6.5,
-              "price": -143.0,
+              "point": 8.5,
+              "price": -122.0,
               "liquidity": 0
             }
           ],
           "Caesars": [
             {
               "outcome": "Over",
-              "point": 6.0,
-              "price": -112.0,
+              "point": 8.5,
+              "price": -120.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 6.0,
-              "price": -117.0,
+              "point": 8.5,
+              "price": -109.0,
               "liquidity": 0
             }
           ]
@@ -4908,8 +4737,8 @@
       "commence_time": "2026-10-03 09:30:00 PM",
       "best_lines": {
         "h2h_away": {
-          "book": "BetRivers",
-          "price": 112.0,
+          "book": "DraftKings",
+          "price": 110.0,
           "liquidity": 0
         },
         "h2h_home": {
@@ -4918,7 +4747,7 @@
           "liquidity": 0
         },
         "spread_away": {
-          "book": "BetMGM",
+          "book": "Fanatics",
           "point": 2.5,
           "price": -110.0,
           "liquidity": 0
@@ -4932,18 +4761,18 @@
         "total_over": {
           "book": "BetRivers",
           "point": 44.5,
-          "price": -109.0,
+          "price": -110.0,
           "liquidity": 0
         },
         "total_under": {
-          "book": "BetMGM",
+          "book": "DraftKings",
           "point": 44.5,
-          "price": 100.0,
+          "price": -102.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
-          "book": "BetRivers",
-          "price": 112.0,
+          "book": "DraftKings",
+          "price": 110.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
@@ -4952,7 +4781,7 @@
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "BetMGM",
+          "book": "Fanatics",
           "point": 2.5,
           "price": -110.0,
           "liquidity": 0
@@ -4966,13 +4795,13 @@
         "retail_total_over": {
           "book": "BetRivers",
           "point": 44.5,
-          "price": -109.0,
+          "price": -110.0,
           "liquidity": 0
         },
         "retail_total_under": {
-          "book": "BetMGM",
+          "book": "DraftKings",
           "point": 44.5,
-          "price": 100.0,
+          "price": -102.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -5002,13 +4831,13 @@
             {
               "outcome": "Fresno State Bulldogs",
               "point": "",
-              "price": 112.0,
+              "price": 106.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington State Cougars",
               "point": "",
-              "price": -137.0,
+              "price": -130.0,
               "liquidity": 0
             }
           ],
@@ -5087,27 +4916,27 @@
           "BetRivers": [
             {
               "outcome": "Fresno State Bulldogs",
-              "point": 2.5,
-              "price": -114.0,
+              "point": 2.0,
+              "price": -113.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington State Cougars",
-              "point": -2.5,
-              "price": -109.0,
+              "point": -2.0,
+              "price": -110.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Fresno State Bulldogs",
-              "point": 2.0,
+              "point": 2.5,
               "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington State Cougars",
-              "point": -2.0,
+              "point": -2.5,
               "price": -110.0,
               "liquidity": 0
             }
@@ -5174,13 +5003,13 @@
             {
               "outcome": "Over",
               "point": 44.5,
-              "price": -109.0,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 44.5,
-              "price": -114.0,
+              "price": -113.0,
               "liquidity": 0
             }
           ],
@@ -5230,13 +5059,13 @@
             {
               "outcome": "Over",
               "point": 44.5,
-              "price": -120.0,
+              "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
               "point": 44.5,
-              "price": 100.0,
+              "price": -105.0,
               "liquidity": 0
             }
           ]
@@ -5254,7 +5083,7 @@
       "commence_time": "2026-10-03 10:30:00 PM",
       "best_lines": {
         "h2h_away": {
-          "book": "DraftKings",
+          "book": "Fanatics",
           "price": 145.0,
           "liquidity": 0
         },
@@ -5288,7 +5117,7 @@
           "liquidity": 0
         },
         "retail_h2h_away": {
-          "book": "DraftKings",
+          "book": "Fanatics",
           "price": 145.0,
           "liquidity": 0
         },
@@ -5362,13 +5191,13 @@
             {
               "outcome": "Arizona State Sun Devils",
               "point": "",
-              "price": -170.0,
+              "price": -175.0,
               "liquidity": 0
             },
             {
               "outcome": "Baylor Bears",
               "point": "",
-              "price": 140.0,
+              "price": 145.0,
               "liquidity": 0
             }
           ],
@@ -5601,7 +5430,7 @@
       "best_lines": {
         "h2h_away": {
           "book": "FanDuel",
-          "price": -335.0,
+          "price": -345.0,
           "liquidity": 0
         },
         "h2h_home": {
@@ -5610,13 +5439,13 @@
           "liquidity": 0
         },
         "spread_away": {
-          "book": "FanDuel",
+          "book": "Caesars",
           "point": -9.5,
-          "price": -112.0,
+          "price": -114.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "Fanatics",
+          "book": "FanDuel",
           "point": 9.5,
           "price": -105.0,
           "liquidity": 0
@@ -5635,7 +5464,7 @@
         },
         "retail_h2h_away": {
           "book": "FanDuel",
-          "price": -335.0,
+          "price": -345.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
@@ -5644,13 +5473,13 @@
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "FanDuel",
+          "book": "Caesars",
           "point": -9.5,
-          "price": -112.0,
+          "price": -114.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "Fanatics",
+          "book": "FanDuel",
           "point": 9.5,
           "price": -105.0,
           "liquidity": 0
@@ -5680,13 +5509,13 @@
             {
               "outcome": "San Diego State Aztecs",
               "point": "",
-              "price": 265.0,
+              "price": 270.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas State Bobcats",
               "point": "",
-              "price": -335.0,
+              "price": -345.0,
               "liquidity": 0
             }
           ],
@@ -5766,13 +5595,13 @@
             {
               "outcome": "San Diego State Aztecs",
               "point": 9.5,
-              "price": -108.0,
+              "price": -105.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas State Bobcats",
               "point": -9.5,
-              "price": -112.0,
+              "price": -115.0,
               "liquidity": 0
             }
           ],
@@ -5793,14 +5622,14 @@
           "Fanatics": [
             {
               "outcome": "San Diego State Aztecs",
-              "point": 9.5,
-              "price": -105.0,
+              "point": 10.0,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas State Bobcats",
-              "point": -9.5,
-              "price": -115.0,
+              "point": -10.0,
+              "price": -110.0,
               "liquidity": 0
             }
           ],
@@ -5835,14 +5664,14 @@
           "BetMGM": [
             {
               "outcome": "San Diego State Aztecs",
-              "point": 9.5,
+              "point": 9.0,
               "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Texas State Bobcats",
-              "point": -9.5,
-              "price": -118.0,
+              "point": -9.0,
+              "price": -120.0,
               "liquidity": 0
             }
           ]
@@ -5968,15 +5797,15 @@
           "liquidity": 0
         },
         "total_over": {
-          "book": "BetRivers",
-          "point": 55.5,
-          "price": -112.0,
+          "book": "DraftKings",
+          "point": 56.5,
+          "price": -108.0,
           "liquidity": 0
         },
         "total_under": {
-          "book": "FanDuel",
-          "point": 55.5,
-          "price": -106.0,
+          "book": "BetMGM",
+          "point": 56.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
@@ -6002,15 +5831,15 @@
           "liquidity": 0
         },
         "retail_total_over": {
-          "book": "BetRivers",
-          "point": 55.5,
-          "price": -112.0,
+          "book": "DraftKings",
+          "point": 56.5,
+          "price": -108.0,
           "liquidity": 0
         },
         "retail_total_under": {
-          "book": "FanDuel",
-          "point": 55.5,
-          "price": -106.0,
+          "book": "BetMGM",
+          "point": 56.5,
+          "price": -110.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -6054,13 +5883,13 @@
             {
               "outcome": "Arizona Wildcats",
               "point": "",
-              "price": -265.0,
+              "price": -278.0,
               "liquidity": 0
             },
             {
               "outcome": "Cincinnati Bearcats",
               "point": "",
-              "price": 205.0,
+              "price": 215.0,
               "liquidity": 0
             }
           ],
@@ -6068,13 +5897,13 @@
             {
               "outcome": "Arizona Wildcats",
               "point": "",
-              "price": -260.0,
+              "price": -265.0,
               "liquidity": 0
             },
             {
               "outcome": "Cincinnati Bearcats",
               "point": "",
-              "price": 210.0,
+              "price": 215.0,
               "liquidity": 0
             }
           ],
@@ -6082,13 +5911,13 @@
             {
               "outcome": "Arizona Wildcats",
               "point": "",
-              "price": -260.0,
+              "price": -265.0,
               "liquidity": 0
             },
             {
               "outcome": "Cincinnati Bearcats",
               "point": "",
-              "price": 210.0,
+              "price": 215.0,
               "liquidity": 0
             }
           ],
@@ -6140,13 +5969,13 @@
             {
               "outcome": "Arizona Wildcats",
               "point": -7.0,
-              "price": -107.0,
+              "price": -109.0,
               "liquidity": 0
             },
             {
               "outcome": "Cincinnati Bearcats",
               "point": 7.0,
-              "price": -117.0,
+              "price": -114.0,
               "liquidity": 0
             }
           ],
@@ -6225,14 +6054,14 @@
           "BetRivers": [
             {
               "outcome": "Over",
-              "point": 55.5,
-              "price": -112.0,
+              "point": 56.0,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 55.5,
-              "price": -112.0,
+              "point": 56.0,
+              "price": -113.0,
               "liquidity": 0
             }
           ],
@@ -7340,15 +7169,15 @@
           "liquidity": 0
         },
         "spread_away": {
-          "book": "DraftKings",
-          "point": 7.0,
-          "price": -115.0,
+          "book": "Caesars",
+          "point": 6.5,
+          "price": 100.0,
           "liquidity": 0
         },
         "spread_home": {
-          "book": "BetRivers",
-          "point": -7.0,
-          "price": -104.0,
+          "book": "Fanatics",
+          "point": -6.5,
+          "price": -115.0,
           "liquidity": 0
         },
         "total_over": {
@@ -7374,15 +7203,15 @@
           "liquidity": 0
         },
         "retail_spread_away": {
-          "book": "DraftKings",
-          "point": 7.0,
-          "price": -115.0,
+          "book": "Caesars",
+          "point": 6.5,
+          "price": 100.0,
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "BetRivers",
-          "point": -7.0,
-          "price": -104.0,
+          "book": "Fanatics",
+          "point": -6.5,
+          "price": -115.0,
           "liquidity": 0
         },
         "retail_total_over": {
@@ -7552,7 +7381,7 @@
             {
               "outcome": "Buffalo Bills",
               "point": -7.0,
-              "price": -105.0,
+              "price": -102.0,
               "liquidity": 0
             },
             {
@@ -7565,14 +7394,14 @@
           "Fanatics": [
             {
               "outcome": "Buffalo Bills",
-              "point": -7.0,
-              "price": -105.0,
+              "point": -6.5,
+              "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "New England Patriots",
-              "point": 7.0,
-              "price": -115.0,
+              "point": 6.5,
+              "price": -105.0,
               "liquidity": 0
             }
           ]
@@ -9628,27 +9457,27 @@
             {
               "outcome": "Miami Dolphins",
               "point": 10.0,
-              "price": -108.0,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Minnesota Vikings",
               "point": -10.0,
-              "price": -110.0,
+              "price": -108.0,
               "liquidity": 0
             }
           ],
           "Fanatics": [
             {
               "outcome": "Miami Dolphins",
-              "point": 9.5,
-              "price": -105.0,
+              "point": 10.0,
+              "price": -115.0,
               "liquidity": 0
             },
             {
               "outcome": "Minnesota Vikings",
-              "point": -9.5,
-              "price": -115.0,
+              "point": -10.0,
+              "price": -105.0,
               "liquidity": 0
             }
           ]
@@ -10333,14 +10162,14 @@
           "Fanatics": [
             {
               "outcome": "Kansas City Chiefs",
-              "point": -4.5,
-              "price": -115.0,
+              "point": -5.0,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Las Vegas Raiders",
-              "point": 4.5,
-              "price": -105.0,
+              "point": 5.0,
+              "price": -110.0,
               "liquidity": 0
             }
           ]
@@ -11122,8 +10951,8 @@
       "commence_time": "2026-10-04 08:20:00 PM",
       "best_lines": {
         "h2h_away": {
-          "book": "DraftKings",
-          "price": -185.0,
+          "book": "BetRivers",
+          "price": -190.0,
           "liquidity": 0
         },
         "h2h_home": {
@@ -11144,20 +10973,20 @@
           "liquidity": 0
         },
         "total_over": {
-          "book": "FanDuel",
-          "point": 50.5,
-          "price": -118.0,
+          "book": "Caesars",
+          "point": 51.0,
+          "price": -108.0,
           "liquidity": 0
         },
         "total_under": {
-          "book": "DraftKings",
-          "point": 50.5,
-          "price": 102.0,
+          "book": "BetRivers",
+          "point": 51.0,
+          "price": -108.0,
           "liquidity": 0
         },
         "retail_h2h_away": {
-          "book": "DraftKings",
-          "price": -185.0,
+          "book": "BetRivers",
+          "price": -190.0,
           "liquidity": 0
         },
         "retail_h2h_home": {
@@ -11178,15 +11007,15 @@
           "liquidity": 0
         },
         "retail_total_over": {
-          "book": "FanDuel",
-          "point": 50.5,
-          "price": -118.0,
+          "book": "Caesars",
+          "point": 51.0,
+          "price": -108.0,
           "liquidity": 0
         },
         "retail_total_under": {
-          "book": "DraftKings",
-          "point": 50.5,
-          "price": 102.0,
+          "book": "BetRivers",
+          "point": 51.0,
+          "price": -108.0,
           "liquidity": 0
         },
         "novig_h2h_away": null,
@@ -11202,13 +11031,13 @@
             {
               "outcome": "Carolina Panthers",
               "point": "",
-              "price": 154.0,
+              "price": 160.0,
               "liquidity": 0
             },
             {
               "outcome": "Detroit Lions",
               "point": "",
-              "price": -185.0,
+              "price": -192.0,
               "liquidity": 0
             }
           ],
@@ -11258,7 +11087,7 @@
             {
               "outcome": "Carolina Panthers",
               "point": "",
-              "price": 165.0,
+              "price": 160.0,
               "liquidity": 0
             },
             {
@@ -11272,13 +11101,13 @@
             {
               "outcome": "Carolina Panthers",
               "point": "",
-              "price": 165.0,
+              "price": 170.0,
               "liquidity": 0
             },
             {
               "outcome": "Detroit Lions",
               "point": "",
-              "price": -200.0,
+              "price": -205.0,
               "liquidity": 0
             }
           ]
@@ -11288,13 +11117,13 @@
             {
               "outcome": "Carolina Panthers",
               "point": 3.5,
-              "price": -108.0,
+              "price": -105.0,
               "liquidity": 0
             },
             {
               "outcome": "Detroit Lions",
               "point": -3.5,
-              "price": -112.0,
+              "price": -115.0,
               "liquidity": 0
             }
           ],
@@ -11373,14 +11202,14 @@
           "DraftKings": [
             {
               "outcome": "Over",
-              "point": 50.5,
-              "price": -122.0,
+              "point": 51.5,
+              "price": -102.0,
               "liquidity": 0
             },
             {
               "outcome": "Under",
-              "point": 50.5,
-              "price": 102.0,
+              "point": 51.5,
+              "price": -118.0,
               "liquidity": 0
             }
           ],
@@ -11474,7 +11303,7 @@
         },
         "h2h_home": {
           "book": "FanDuel",
-          "price": 180.0,
+          "price": 188.0,
           "liquidity": 0
         },
         "spread_away": {
@@ -11484,7 +11313,7 @@
           "liquidity": 0
         },
         "spread_home": {
-          "book": "BetMGM",
+          "book": "DraftKings",
           "point": 4.5,
           "price": -110.0,
           "liquidity": 0
@@ -11508,7 +11337,7 @@
         },
         "retail_h2h_home": {
           "book": "FanDuel",
-          "price": 180.0,
+          "price": 188.0,
           "liquidity": 0
         },
         "retail_spread_away": {
@@ -11518,7 +11347,7 @@
           "liquidity": 0
         },
         "retail_spread_home": {
-          "book": "BetMGM",
+          "book": "DraftKings",
           "point": 4.5,
           "price": -110.0,
           "liquidity": 0
@@ -11576,13 +11405,13 @@
             {
               "outcome": "Indianapolis Colts",
               "point": "",
-              "price": -220.0,
+              "price": -225.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington Commanders",
               "point": "",
-              "price": 180.0,
+              "price": 188.0,
               "liquidity": 0
             }
           ],
@@ -11596,7 +11425,7 @@
             {
               "outcome": "Washington Commanders",
               "point": "",
-              "price": 170.0,
+              "price": 175.0,
               "liquidity": 0
             }
           ],
@@ -11618,13 +11447,13 @@
             {
               "outcome": "Indianapolis Colts",
               "point": "",
-              "price": -205.0,
+              "price": -215.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington Commanders",
               "point": "",
-              "price": 170.0,
+              "price": 175.0,
               "liquidity": 0
             }
           ]
@@ -11634,13 +11463,13 @@
             {
               "outcome": "Indianapolis Colts",
               "point": -4.5,
-              "price": -105.0,
+              "price": -110.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington Commanders",
               "point": 4.5,
-              "price": -115.0,
+              "price": -110.0,
               "liquidity": 0
             }
           ],
@@ -11661,14 +11490,14 @@
           "FanDuel": [
             {
               "outcome": "Indianapolis Colts",
-              "point": -3.5,
-              "price": -120.0,
+              "point": -4.5,
+              "price": -106.0,
               "liquidity": 0
             },
             {
               "outcome": "Washington Commanders",
-              "point": 3.5,
-              "price": -102.0,
+              "point": 4.5,
+              "price": -114.0,
               "liquidity": 0
             }
           ],
@@ -12143,6 +11972,184 @@
               "outcome": "Under",
               "point": 6.5,
               "price": 100.0,
+              "liquidity": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "4be245ad03895bcafcdc42d7d926b675",
+      "sport": "MLB",
+      "sport_label": "MLB",
+      "home_team": "Tampa Bay Rays",
+      "away_team": "New York Yankees",
+      "home_abbr": "RAY",
+      "away_abbr": "YAN",
+      "commence_time": "2026-10-05 08:00:00 PM",
+      "best_lines": {
+        "h2h_away": {
+          "book": "FanDuel",
+          "price": -126.0,
+          "liquidity": 0
+        },
+        "h2h_home": {
+          "book": "FanDuel",
+          "price": 108.0,
+          "liquidity": 0
+        },
+        "spread_away": {
+          "book": "FanDuel",
+          "point": -1.5,
+          "price": 150.0,
+          "liquidity": 0
+        },
+        "spread_home": {
+          "book": "DraftKings",
+          "point": 1.5,
+          "price": -172.0,
+          "liquidity": 0
+        },
+        "total_over": {
+          "book": "FanDuel",
+          "point": 6.5,
+          "price": -110.0,
+          "liquidity": 0
+        },
+        "total_under": {
+          "book": "DraftKings",
+          "point": 6.5,
+          "price": -101.0,
+          "liquidity": 0
+        },
+        "retail_h2h_away": {
+          "book": "FanDuel",
+          "price": -126.0,
+          "liquidity": 0
+        },
+        "retail_h2h_home": {
+          "book": "FanDuel",
+          "price": 108.0,
+          "liquidity": 0
+        },
+        "retail_spread_away": {
+          "book": "FanDuel",
+          "point": -1.5,
+          "price": 150.0,
+          "liquidity": 0
+        },
+        "retail_spread_home": {
+          "book": "DraftKings",
+          "point": 1.5,
+          "price": -172.0,
+          "liquidity": 0
+        },
+        "retail_total_over": {
+          "book": "FanDuel",
+          "point": 6.5,
+          "price": -110.0,
+          "liquidity": 0
+        },
+        "retail_total_under": {
+          "book": "DraftKings",
+          "point": 6.5,
+          "price": -101.0,
+          "liquidity": 0
+        },
+        "novig_h2h_away": null,
+        "novig_h2h_home": null,
+        "novig_spread_away": null,
+        "novig_spread_home": null,
+        "novig_total_over": null,
+        "novig_total_under": null
+      },
+      "all_markets": {
+        "h2h": {
+          "FanDuel": [
+            {
+              "outcome": "New York Yankees",
+              "point": "",
+              "price": -126.0,
+              "liquidity": 0
+            },
+            {
+              "outcome": "Tampa Bay Rays",
+              "point": "",
+              "price": 108.0,
+              "liquidity": 0
+            }
+          ],
+          "DraftKings": [
+            {
+              "outcome": "New York Yankees",
+              "point": "",
+              "price": -130.0,
+              "liquidity": 0
+            },
+            {
+              "outcome": "Tampa Bay Rays",
+              "point": "",
+              "price": 108.0,
+              "liquidity": 0
+            }
+          ]
+        },
+        "spreads": {
+          "FanDuel": [
+            {
+              "outcome": "New York Yankees",
+              "point": -1.5,
+              "price": 150.0,
+              "liquidity": 0
+            },
+            {
+              "outcome": "Tampa Bay Rays",
+              "point": 1.5,
+              "price": -182.0,
+              "liquidity": 0
+            }
+          ],
+          "DraftKings": [
+            {
+              "outcome": "New York Yankees",
+              "point": -1.5,
+              "price": 142.0,
+              "liquidity": 0
+            },
+            {
+              "outcome": "Tampa Bay Rays",
+              "point": 1.5,
+              "price": -172.0,
+              "liquidity": 0
+            }
+          ]
+        },
+        "totals": {
+          "FanDuel": [
+            {
+              "outcome": "Over",
+              "point": 6.5,
+              "price": -110.0,
+              "liquidity": 0
+            },
+            {
+              "outcome": "Under",
+              "point": 6.5,
+              "price": -110.0,
+              "liquidity": 0
+            }
+          ],
+          "DraftKings": [
+            {
+              "outcome": "Over",
+              "point": 6.5,
+              "price": -119.0,
+              "liquidity": 0
+            },
+            {
+              "outcome": "Under",
+              "point": 6.5,
+              "price": -101.0,
               "liquidity": 0
             }
           ]
@@ -16902,74 +16909,122 @@
   ],
   "arbs": [
     {
-      "id": "arb_tot_b30387175520051e2889230030365494_82.5_ret",
-      "sport": "NCAAF",
-      "matchup": "Oregon State Beavers @ Colorado State Rams",
-      "market": "Total (82.5)",
-      "roi": 1.16,
-      "hold": 98.84,
-      "commence_time": "2026-10-03 06:00:00 PM",
+      "id": "arb_tot_cb4d07dc15440acf3d9ebe1ad41756c1_1.5_ret",
+      "sport": "MLB",
+      "matchup": "New York Yankees @ Tampa Bay Rays",
+      "market": "Total (1.5)",
+      "roi": 0.76,
+      "hold": 99.24,
+      "commence_time": "2026-10-03 06:31:00 PM",
       "is_novig": false,
       "side_a": {
         "name": "Over",
-        "outcome": "Over 82.5",
-        "book": "BetMGM",
-        "price": -105.0,
+        "outcome": "Over 1.5",
+        "book": "Fanatics",
+        "price": 1100.0,
         "liquidity": 0
       },
       "side_b": {
         "name": "Under",
-        "outcome": "Under 82.5",
-        "book": "FanDuel",
-        "price": 110.0,
+        "outcome": "Under 1.5",
+        "book": "Caesars",
+        "price": -1000.0,
         "liquidity": 0
       }
     },
     {
-      "id": "arb_ml_1d3756ab74c013c39510958b5a632b74_ret",
-      "sport": "NCAAF",
-      "matchup": "Arkansas State Red Wolves @ Louisiana Ragin Cajuns",
-      "market": "Moneyline",
-      "roi": 0.8,
-      "hold": 99.2,
-      "commence_time": "2026-10-03 08:02:41 PM",
+      "id": "arb_spd_347a2e725dd11a54a1d964eae3d04dd2_1.5_ret",
+      "sport": "MLB",
+      "matchup": "San Diego Padres @ Milwaukee Brewers",
+      "market": "Spread (1.5)",
+      "roi": 0.0,
+      "hold": 100.0,
+      "commence_time": "2026-10-03 08:38:44 PM",
       "is_novig": false,
       "side_a": {
-        "name": "Arkansas State Red Wolves",
-        "outcome": "Arkansas State Red Wolves ML",
-        "book": "FanDuel",
-        "price": 340.0,
+        "name": "San Diego Padres",
+        "outcome": "San Diego Padres -1.5",
+        "book": "BetRivers",
+        "price": 100.0,
         "liquidity": 0
       },
       "side_b": {
-        "name": "Louisiana Ragin Cajuns",
-        "outcome": "Louisiana Ragin Cajuns ML",
+        "name": "Milwaukee Brewers",
+        "outcome": "Milwaukee Brewers +1.5",
         "book": "BetMGM",
-        "price": -325.0,
+        "price": 100.0,
         "liquidity": 0
       }
     },
     {
-      "id": "arb_ml_a73a76599a4f3422803e57bd8f61b626_ret",
-      "sport": "NFL",
-      "matchup": "Detroit Lions @ Carolina Panthers",
-      "market": "Moneyline",
-      "roi": -0.63,
-      "hold": 100.63,
-      "commence_time": "2026-10-04 08:20:00 PM",
+      "id": "arb_tot_b30387175520051e2889230030365494_88.5_ret",
+      "sport": "NCAAF",
+      "matchup": "Oregon State Beavers @ Colorado State Rams",
+      "market": "Total (88.5)",
+      "roi": -0.14,
+      "hold": 100.14,
+      "commence_time": "2026-10-03 06:00:00 PM",
       "is_novig": false,
       "side_a": {
-        "name": "Detroit Lions",
-        "outcome": "Detroit Lions ML",
-        "book": "DraftKings",
-        "price": -185.0,
+        "name": "Over",
+        "outcome": "Over 88.5",
+        "book": "Fanatics",
+        "price": -170.0,
         "liquidity": 0
       },
       "side_b": {
-        "name": "Carolina Panthers",
-        "outcome": "Carolina Panthers ML",
+        "name": "Under",
+        "outcome": "Under 88.5",
+        "book": "DraftKings",
+        "price": 169.0,
+        "liquidity": 0
+      }
+    },
+    {
+      "id": "arb_ml_279230b2d38c4e97187c3f065501a4cf_ret",
+      "sport": "NCAAF",
+      "matchup": "UTSA Roadrunners @ Rice Owls",
+      "market": "Moneyline",
+      "roi": -0.14,
+      "hold": 100.14,
+      "commence_time": "2026-10-03 07:00:00 PM",
+      "is_novig": false,
+      "side_a": {
+        "name": "UTSA Roadrunners",
+        "outcome": "UTSA Roadrunners ML",
+        "book": "BetMGM",
+        "price": -1100.0,
+        "liquidity": 0
+      },
+      "side_b": {
+        "name": "Rice Owls",
+        "outcome": "Rice Owls ML",
+        "book": "DraftKings",
+        "price": 1080.0,
+        "liquidity": 0
+      }
+    },
+    {
+      "id": "arb_spd_b3c132063b4d14cf750801c633237b9e_-56.5_ret",
+      "sport": "NCAAF",
+      "matchup": "Texas Southern Tigers @ Florida Atlantic Owls",
+      "market": "Spread (56.5)",
+      "roi": -0.84,
+      "hold": 100.84,
+      "commence_time": "2026-10-03 06:00:00 PM",
+      "is_novig": false,
+      "side_a": {
+        "name": "Texas Southern Tigers",
+        "outcome": "Texas Southern Tigers +56.5",
+        "book": "BetMGM",
+        "price": -250.0,
+        "liquidity": 0
+      },
+      "side_b": {
+        "name": "Florida Atlantic Owls",
+        "outcome": "Florida Atlantic Owls -56.5",
         "book": "FanDuel",
-        "price": 180.0,
+        "price": 240.0,
         "liquidity": 0
       }
     },
@@ -16998,30 +17053,6 @@
       }
     },
     {
-      "id": "arb_ml_ff98b80b07e2f42c76c2c255e6611247_ret",
-      "sport": "NCAAF",
-      "matchup": "Arkansas Razorbacks @ Texas A&M Aggies",
-      "market": "Moneyline",
-      "roi": -0.97,
-      "hold": 100.97,
-      "commence_time": "2026-10-03 07:00:00 PM",
-      "is_novig": false,
-      "side_a": {
-        "name": "Arkansas Razorbacks",
-        "outcome": "Arkansas Razorbacks ML",
-        "book": "Fanatics",
-        "price": 5000.0,
-        "liquidity": 0
-      },
-      "side_b": {
-        "name": "Texas A&M Aggies",
-        "outcome": "Texas A&M Aggies ML",
-        "book": "Caesars",
-        "price": -10000.0,
-        "liquidity": 0
-      }
-    },
-    {
       "id": "arb_ml_9dcccf34095cde7b0fe36250bb5be6f6_ret",
       "sport": "NCAAF",
       "matchup": "Indiana Hoosiers @ Rutgers Scarlet Knights",
@@ -17042,6 +17073,30 @@
         "outcome": "Rutgers Scarlet Knights ML",
         "book": "Fanatics",
         "price": 5000.0,
+        "liquidity": 0
+      }
+    },
+    {
+      "id": "arb_spd_833bd3a9f5a0da5b303a6a4304e2c6a3_-55.5_ret",
+      "sport": "NCAAF",
+      "matchup": "McNeese State Cowboys @ LSU Tigers",
+      "market": "Spread (55.5)",
+      "roi": -1.16,
+      "hold": 101.16,
+      "commence_time": "2026-10-03 08:00:00 PM",
+      "is_novig": false,
+      "side_a": {
+        "name": "McNeese State Cowboys",
+        "outcome": "McNeese State Cowboys +55.5",
+        "book": "BetMGM",
+        "price": 105.0,
+        "liquidity": 0
+      },
+      "side_b": {
+        "name": "LSU Tigers",
+        "outcome": "LSU Tigers -55.5",
+        "book": "Fanatics",
+        "price": -110.0,
         "liquidity": 0
       }
     },
@@ -17070,6 +17125,30 @@
       }
     },
     {
+      "id": "arb_ml_c9d8ed8aa4889486eaf10a630138ede0_ret",
+      "sport": "NFL",
+      "matchup": "Indianapolis Colts @ Washington Commanders",
+      "market": "Moneyline",
+      "roi": -1.17,
+      "hold": 101.17,
+      "commence_time": "2026-10-04 09:30:00 AM",
+      "is_novig": false,
+      "side_a": {
+        "name": "Indianapolis Colts",
+        "outcome": "Indianapolis Colts ML",
+        "book": "DraftKings",
+        "price": -198.0,
+        "liquidity": 0
+      },
+      "side_b": {
+        "name": "Washington Commanders",
+        "outcome": "Washington Commanders ML",
+        "book": "FanDuel",
+        "price": 188.0,
+        "liquidity": 0
+      }
+    },
+    {
       "id": "arb_ml_2cda9bf0fbe35a2735f0dd8aaafe9eff_ret",
       "sport": "NFL",
       "matchup": "Minnesota Vikings @ New Orleans Saints",
@@ -17094,6 +17173,30 @@
       }
     },
     {
+      "id": "arb_ml_a73a76599a4f3422803e57bd8f61b626_ret",
+      "sport": "NFL",
+      "matchup": "Detroit Lions @ Carolina Panthers",
+      "market": "Moneyline",
+      "roi": -1.23,
+      "hold": 101.23,
+      "commence_time": "2026-10-04 08:20:00 PM",
+      "is_novig": false,
+      "side_a": {
+        "name": "Detroit Lions",
+        "outcome": "Detroit Lions ML",
+        "book": "BetRivers",
+        "price": -190.0,
+        "liquidity": 0
+      },
+      "side_b": {
+        "name": "Carolina Panthers",
+        "outcome": "Carolina Panthers ML",
+        "book": "FanDuel",
+        "price": 180.0,
+        "liquidity": 0
+      }
+    },
+    {
       "id": "arb_ml_fbffd0b7722fd81d68d5d62472dc80e8_ret",
       "sport": "NFL",
       "matchup": "New York Giants @ Washington Commanders",
@@ -17114,54 +17217,6 @@
         "outcome": "Washington Commanders ML",
         "book": "BetRivers",
         "price": -141.0,
-        "liquidity": 0
-      }
-    },
-    {
-      "id": "arb_spd_b58c0d24e66471e6095c0a5f9afb7ce3_3.5_ret",
-      "sport": "NCAAF",
-      "matchup": "BYU Cougars @ TCU Horned Frogs",
-      "market": "Spread (3.5)",
-      "roi": -1.39,
-      "hold": 101.39,
-      "commence_time": "2026-10-03 07:05:09 PM",
-      "is_novig": false,
-      "side_a": {
-        "name": "BYU Cougars",
-        "outcome": "BYU Cougars -3.5",
-        "book": "Caesars",
-        "price": -111.0,
-        "liquidity": 0
-      },
-      "side_b": {
-        "name": "TCU Horned Frogs",
-        "outcome": "TCU Horned Frogs +3.5",
-        "book": "Fanatics",
-        "price": 105.0,
-        "liquidity": 0
-      }
-    },
-    {
-      "id": "arb_ml_f73081099f845f23ea7f41ef09128cdd_ret",
-      "sport": "NCAAF",
-      "matchup": "Texas State Bobcats @ San Diego State Aztecs",
-      "market": "Moneyline",
-      "roi": -1.4,
-      "hold": 101.4,
-      "commence_time": "2026-10-03 10:30:00 PM",
-      "is_novig": false,
-      "side_a": {
-        "name": "Texas State Bobcats",
-        "outcome": "Texas State Bobcats ML",
-        "book": "FanDuel",
-        "price": -335.0,
-        "liquidity": 0
-      },
-      "side_b": {
-        "name": "San Diego State Aztecs",
-        "outcome": "San Diego State Aztecs ML",
-        "book": "BetRivers",
-        "price": 310.0,
         "liquidity": 0
       }
     }
