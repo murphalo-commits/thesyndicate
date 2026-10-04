@@ -549,26 +549,28 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
                 else:
                     break
                     
-        # 2. Fetch Markets for targeted events ONLY
+        # 2. Fetch ALL Markets globally and filter in memory (public API ignores event filter)
         markets = []
-        for ev_id in target_event_ids:
-            cursor = ""
-            while True:
-                q = f"after={cursor}&event={ev_id}&limit=5000" if cursor else f"event={ev_id}&limit=5000"
-                res = call_novig_api(key, "GET", "/v3/catalog/markets", q)
-                if res.status_code == 200:
-                    data = res.json()
-                    for m in data.get("items", []):
-                        if m['marketType'] in ['SPREAD', 'TOTAL', 'MONEY', 'MONEYLINE']:
-                            m_desc = m.get('name', '').lower() + ' ' + m.get('description', '').lower()
-                            if 'half' in m_desc or 'quarter' in m_desc or 'period' in m_desc or 'inning' in m_desc or '1q' in m_desc or '2q' in m_desc or '3q' in m_desc or '4q' in m_desc or '1h' in m_desc or '2h' in m_desc:
-                                continue
-                            if len(m.get('outcomes', [])) == 2:
-                                markets.append(m)
-                    cursor = data.get("next")
-                    if not cursor: break
-                else:
-                    break
+        target_set = set(target_event_ids)
+        cursor = ""
+        while True:
+            q = f"after={cursor}&limit=5000" if cursor else f"limit=5000"
+            res = call_novig_api(key, "GET", "/v3/catalog/markets", q)
+            if res.status_code == 200:
+                data = res.json()
+                for m in data.get("items", []):
+                    if m.get('eventId') not in target_set:
+                        continue
+                    if m['marketType'] in ['SPREAD', 'TOTAL', 'MONEY', 'MONEYLINE']:
+                        m_desc = m.get('name', '').lower() + ' ' + m.get('description', '').lower()
+                        if 'half' in m_desc or 'quarter' in m_desc or 'period' in m_desc or 'inning' in m_desc or '1q' in m_desc or '2q' in m_desc or '3q' in m_desc or '4q' in m_desc or '1h' in m_desc or '2h' in m_desc:
+                            continue
+                        if len(m.get('outcomes', [])) == 2:
+                            markets.append(m)
+                cursor = data.get("next")
+                if not cursor: break
+            else:
+                break
                     
         print(f"Discovered {len(markets)} targeted two-outcome markets across {leagues}.")
         
