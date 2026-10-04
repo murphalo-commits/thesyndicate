@@ -971,13 +971,13 @@ def build_mobile_app_html():
             if (currentSport === 'LIVE') {{
                 list = list.filter(m => {{
                     if (!m.commence_time) return false;
-                    const d = new Date(m.commence_time.replace(/-/g, '/') + ' EST');
+                    const d = new Date(m.commence_time.replace(/-/g, '/') + ' GMT-0400');
                     return now > d;
                 }});
             }} else {{
                 list = list.filter(m => {{
                     if (!m.commence_time) return true;
-                    const d = new Date(m.commence_time.replace(/-/g, '/') + ' EST');
+                    const d = new Date(m.commence_time.replace(/-/g, '/') + ' GMT-0400');
                     return now <= d;
                 }});
                 if (currentSport !== 'ALL') {{
@@ -1322,13 +1322,13 @@ def build_mobile_app_html():
             if (currentSport === 'LIVE') {{
                 allList = allList.filter(a => {{
                     if (!a.commence_time) return false;
-                    const d = new Date(a.commence_time.replace(/-/g, '/') + ' EST');
+                    const d = new Date(a.commence_time.replace(/-/g, '/') + ' GMT-0400');
                     return now > d;
                 }});
             }} else {{
                 allList = allList.filter(a => {{
                     if (!a.commence_time) return true;
-                    const d = new Date(a.commence_time.replace(/-/g, '/') + ' EST');
+                    const d = new Date(a.commence_time.replace(/-/g, '/') + ' GMT-0400');
                     return now <= d;
                 }});
                 if (currentSport !== 'ALL') {{

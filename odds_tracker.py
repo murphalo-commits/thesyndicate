@@ -421,28 +421,15 @@ def get_trading_key():
         return None
 
 def call_novig_api(key, method, path, query="", body=None):
-    from cryptography.hazmat.primitives.asymmetric import ec
-    from cryptography.hazmat.primitives import hashes
+    import requests
+    import json
     HOST = "https://api.novig.com"
-    key_id, private = key
-    data = b"" if body is None else json.dumps(body).encode()
-    ts = str(int(time.time() * 1000))
-    digest = hashlib.sha256(data).hexdigest()
-    text = "\n".join(["NOVIG-V3", ts, method, path, query, digest])
-    
-    try:
-        signature = base64.b64encode(private.sign(text.encode(), ec.ECDSA(hashes.SHA256())))
-    except TypeError:
-        signature = base64.b64encode(private.sign(text.encode()))
+    if path.startswith("/v3/catalog"):
+        path = path.replace("/v3/catalog", "/v3/public/catalog")
         
     url = HOST + path + (f"?{query}" if query else "")
-    headers = {
-        "Novig-Key-Id": key_id,
-        "Novig-Timestamp": ts,
-        "Novig-Signature": signature.decode(),
-        "Content-Type": "application/json",
-    }
-    
+    data = json.dumps(body).encode() if body else b""
+    headers = {"Content-Type": "application/json"}
     return requests.request(method, url, data=data, headers=headers)
 
 
@@ -482,10 +469,7 @@ def classify_outcome(event_name, market_type, o_desc, competitor_name):
 
 def fetch_novig_depth(leagues, odds_format, odds_data=[]):
     key = get_trading_key()
-    if not key:
-        print("No Novig Trading Key configured. Skipping Novig depth fetch.")
-        return []
-        
+    
     depth_rows = []
     try:
         print("Querying Novig V3 API for events and markets...")
