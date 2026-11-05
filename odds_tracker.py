@@ -788,25 +788,113 @@ def export_mobile_data(odds_data_with_liq, props_data):
             if "nba" in s_lower or "basketball" in s_lower: return "NBA"
             return s.upper()
 
+        TWO_WORD_MASCOTS = {
+            "crimson tide", "great danes", "sun devils", "red wolves", "black knights",
+            "blue devils", "blue jackets", "big red", "big green", "blue demons",
+            "blue hens", "red wings", "yellow jackets", "rainbow warriors", "fighting illini",
+            "mountain hawks", "ragin cajuns", "ragin' cajuns", "black bears", "red foxes",
+            "thundering herd", "blue raiders", "golden gophers", "wolf pack", "tar heels",
+            "mean green", "fighting irish", "nittany lions", "scarlet knights", "golden eagles",
+            "horned frogs", "red raiders", "green wave", "golden hurricane", "river hawks",
+            "golden knights", "demon deacons", "red sox", "white sox", "blue jays",
+            "trail blazers", "maple leafs", "golden grizzlies", "golden flashes", "golden lions",
+            "golden bears", "red storm", "red flash", "red hawks", "blue hose",
+            "fighting hawks", "fighting camels", "screaming eagles", "purple eagles", "flying dutchmen"
+        }
+
+        def get_school_name(name):
+            if not name:
+                return ""
+            parts = name.strip().split()
+            if len(parts) <= 1:
+                return name.strip()
+            if len(parts) >= 3 and " ".join(parts[-2:]).lower() in TWO_WORD_MASCOTS:
+                return " ".join(parts[:-2])
+            return " ".join(parts[:-1])
+
         def get_team_abbr(name):
+            import re
             special = {
-                "Philadelphia Eagles": "PHI", "Chicago Bears": "CHI",
-                "San Diego State Aztecs": "SDSU", "James Madison Dukes": "JMU",
-                "Boise State Broncos": "BSU", "San Diego Toreros": "USD",
-                "Northern Illinois Huskies": "NIU", "Arizona Wildcats": "ARIZ",
+                # NFL
+                "Arizona Cardinals": "ARI", "Atlanta Falcons": "ATL", "Baltimore Ravens": "BAL", "Buffalo Bills": "BUF",
+                "Carolina Panthers": "CAR", "Chicago Bears": "CHI", "Cincinnati Bengals": "CIN", "Cleveland Browns": "CLE",
+                "Dallas Cowboys": "DAL", "Denver Broncos": "DEN", "Detroit Lions": "DET", "Green Bay Packers": "GB",
+                "Houston Texans": "HOU", "Indianapolis Colts": "IND", "Jacksonville Jaguars": "JAX", "Kansas City Chiefs": "KC",
+                "Las Vegas Raiders": "LV", "Los Angeles Chargers": "LAC", "Los Angeles Rams": "LAR", "Miami Dolphins": "MIA",
+                "Minnesota Vikings": "MIN", "New England Patriots": "NE", "New Orleans Saints": "NO", "New York Giants": "NYG",
+                "New York Jets": "NYJ", "Philadelphia Eagles": "PHI", "Pittsburgh Steelers": "PIT", "San Francisco 49ers": "SF",
+                "Seattle Seahawks": "SEA", "Tampa Bay Buccaneers": "TB", "Tennessee Titans": "TEN", "Washington Commanders": "WAS",
+                # NBA
+                "Atlanta Hawks": "ATL", "Boston Celtics": "BOS", "Brooklyn Nets": "BKN", "Charlotte Hornets": "CHA",
+                "Chicago Bulls": "CHI", "Cleveland Cavaliers": "CLE", "Dallas Mavericks": "DAL", "Denver Nuggets": "DEN",
+                "Detroit Pistons": "DET", "Golden State Warriors": "GSW", "Houston Rockets": "HOU", "Indiana Pacers": "IND",
+                "Los Angeles Clippers": "LAC", "Los Angeles Lakers": "LAL", "Memphis Grizzlies": "MEM", "Miami Heat": "MIA",
+                "Milwaukee Bucks": "MIL", "Minnesota Timberwolves": "MIN", "New Orleans Pelicans": "NOP", "New York Knicks": "NYK",
+                "Oklahoma City Thunder": "OKC", "Orlando Magic": "ORL", "Philadelphia 76ers": "PHI", "Phoenix Suns": "PHX",
+                "Portland Trail Blazers": "POR", "Sacramento Kings": "SAC", "San Antonio Spurs": "SAS", "Toronto Raptors": "TOR",
+                "Utah Jazz": "UTA", "Washington Wizards": "WAS",
+                # NHL
+                "Anaheim Ducks": "ANA", "Boston Bruins": "BOS", "Buffalo Sabres": "BUF", "Calgary Flames": "CGY",
+                "Carolina Hurricanes": "CAR", "Chicago Blackhawks": "CHI", "Colorado Avalanche": "COL", "Columbus Blue Jackets": "CBJ",
+                "Dallas Stars": "DAL", "Detroit Red Wings": "DET", "Edmonton Oilers": "EDM", "Florida Panthers": "FLA",
+                "Los Angeles Kings": "LAK", "Minnesota Wild": "MIN", "Montreal Canadiens": "MTL", "Montréal Canadiens": "MTL",
+                "Nashville Predators": "NSH", "New Jersey Devils": "NJD", "New York Islanders": "NYI", "New York Rangers": "NYR",
+                "Ottawa Senators": "OTT", "Philadelphia Flyers": "PHI", "Pittsburgh Penguins": "PIT", "San Jose Sharks": "SJS",
+                "Seattle Kraken": "SEA", "St Louis Blues": "STL", "Tampa Bay Lightning": "TBL", "Toronto Maple Leafs": "TOR",
+                "Utah Mammoth": "UTA", "Vancouver Canucks": "VAN", "Vegas Golden Knights": "VGK", "Washington Capitals": "WSH",
+                "Winnipeg Jets": "WPG",
                 # WNBA
-                "Las Vegas Aces": "LVA", "Indiana Fever": "IND",
-                "Minnesota Lynx": "MIN", "New York Liberty": "NYL",
-                "Atlanta Dream": "ATL", "Washington Mystics": "WAS",
-                "Golden State Valkyries": "GSV", "Dallas Wings": "DAL",
-                "Chicago Sky": "CHI", "Connecticut Sun": "CON",
-                "Los Angeles Sparks": "LAS", "Phoenix Mercury": "PHX",
-                "Seattle Storm": "SEA"
+                "Las Vegas Aces": "LVA", "Indiana Fever": "IND", "Minnesota Lynx": "MIN", "New York Liberty": "NYL",
+                "Atlanta Dream": "ATL", "Washington Mystics": "WAS", "Golden State Valkyries": "GSV", "Dallas Wings": "DAL",
+                "Chicago Sky": "CHI", "Connecticut Sun": "CON", "Los Angeles Sparks": "LAS", "Phoenix Mercury": "PHX",
+                "Seattle Storm": "SEA",
+                # College Schools
+                "North Texas": "UNT", "Penn State": "PSU", "Indiana": "IND", "Kentucky": "UK", "Kansas State": "KSU",
+                "Northwestern": "NW", "Arizona": "ARIZ", "Georgia": "UGA", "Mississippi State": "MSST", "Mississippi St": "MSST",
+                "Fresno State": "FRES", "Louisiana Tech": "LT", "Wake Forest": "WAKE", "North Carolina": "UNC", "NC State": "NCST",
+                "Duke": "DUKE", "Notre Dame": "ND", "Ohio State": "OSU", "Michigan State": "MSU", "Michigan St": "MSU",
+                "Michigan": "MICH", "Texas": "TEX", "Texas A&M": "TAMU", "Texas Tech": "TTU", "Texas State": "TXST",
+                "Oklahoma": "OU", "Oklahoma State": "OKST", "Alabama": "ALA", "Auburn": "AUB", "Clemson": "CLEM",
+                "Missouri": "MIZ", "Florida": "FLA", "Florida State": "FSU", "Miami": "MIA", "Tennessee": "TENN",
+                "Vanderbilt": "VAN", "South Carolina": "SC", "Ole Miss": "MISS", "Arkansas": "ARK", "Iowa": "IOWA",
+                "Iowa State": "ISU", "Wisconsin": "WIS", "Minnesota": "MINN", "Nebraska": "NEB", "Illinois": "ILL",
+                "Purdue": "PUR", "Maryland": "MD", "Rutgers": "RUT", "Oregon": "ORE", "Oregon State": "ORST",
+                "Washington": "WASH", "Washington State": "WSU", "Colorado": "COLO", "Utah": "UTAH", "Arizona State": "ASU",
+                "West Virginia": "WVU", "Cincinnati": "CIN", "Houston": "HOU", "Baylor": "BAY", "Kansas": "KU",
+                "Syracuse": "SYR", "Pittsburgh": "PITT", "Louisville": "LOU", "Virginia Tech": "VT", "Virginia": "UVA",
+                "Georgia Tech": "GT", "Boston College": "BC", "Boise State": "BSU", "San Diego State": "SDSU",
+                "San Diego": "USD", "Colorado State": "CSU", "Air Force": "AF", "Wyoming": "WYO", "New Mexico": "UNM",
+                "Utah State": "USU", "San Jose State": "SJSU", "Nevada": "NEV", "Hawaii": "HAW", "Tulane": "TUL",
+                "Navy": "NAVY", "Army": "ARMY", "South Florida": "USF", "East Carolina": "ECU", "Charlotte": "CLT",
+                "Florida Atlantic": "FAU", "Rice": "RICE", "Temple": "TEM", "Tulsa": "TLSA", "Appalachian State": "APP",
+                "James Madison": "JMU", "Coastal Carolina": "CCU", "Georgia Southern": "GASO", "Georgia State": "GAST",
+                "Georgia St": "GAST", "Marshall": "MRSH", "Old Dominion": "ODU", "Louisiana": "ULL", "South Alabama": "USA",
+                "Troy": "TROY", "Arkansas State": "ARST", "Southern Mississippi": "USM", "UL Monroe": "ULM",
+                "Liberty": "LIB", "Western Kentucky": "WKU", "Jacksonville State": "JVST", "Jacksonville St": "JVST",
+                "Sam Houston State": "SHSU", "Middle Tennessee": "MTSU", "New Mexico State": "NMSU",
+                "Florida International": "FIU", "Kennesaw State": "KENN", "Delaware": "DEL", "Missouri State": "MOST",
+                "Northern Illinois": "NIU", "Toledo": "TOL", "UConn": "CONN", "New Hampshire": "UNH", "Seton Hall": "SHU",
+                "Saint Peter's": "SPU", "Sacred Heart": "SHU", "Incarnate Word": "UIW", "UMass Lowell": "UML",
+                "Central Connecticut St": "CCSU", "Northwestern St": "NWST", "East Texas A&M": "ETAM", "Green Bay": "GB",
+                "Cal Poly": "CP", "Le Moyne": "LEM", "McNeese": "MCN", "DePaul": "DEP", "West Georgia": "UWG"
             }
             if name in special:
                 return special[name]
-            tokens = name.split()
-            return tokens[-1][:3].upper() if tokens else name[:3].upper()
+            school = get_school_name(name)
+            if school in special:
+                return special[school]
+            clean = re.sub(r"\s*\(.*?\)", "", school).strip()
+            words = clean.split()
+            if not words:
+                return name[:3].upper()
+            if len(words) == 1:
+                w = re.sub(r"[^A-Za-z0-9]", "", words[0])
+                return w.upper() if len(w) <= 4 else w[:3].upper()
+            if words[-1].lower() in ("st", "state"):
+                if len(words) == 2:
+                    return (words[0][:2] + "ST").upper()
+                return ("".join(w[0] for w in words[:-1]) + "ST").upper()
+            return "".join(w[0] for w in words if w[0].isalnum()).upper()[:4]
 
         def _parse_liq(v):
             try:

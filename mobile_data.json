@@ -11,8 +11,8 @@
       "sport_label": "NCAAB",
       "home_team": "North Texas Mean Green",
       "away_team": "McNeese Cowboys",
-      "home_abbr": "GRE",
-      "away_abbr": "COW",
+      "home_abbr": "UNT",
+      "away_abbr": "MCN",
       "commence_time": "2026-11-05 05:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -379,8 +379,8 @@
       "sport_label": "NCAAB",
       "home_team": "Indiana Hoosiers",
       "away_team": "Bellarmine Knights",
-      "home_abbr": "HOO",
-      "away_abbr": "KNI",
+      "home_abbr": "IND",
+      "away_abbr": "BEL",
       "commence_time": "2026-11-05 06:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -705,8 +705,8 @@
       "sport_label": "NCAAB",
       "home_team": "Penn State Nittany Lions",
       "away_team": "Chattanooga Mocs",
-      "home_abbr": "LIO",
-      "away_abbr": "MOC",
+      "home_abbr": "PSU",
+      "away_abbr": "CHA",
       "commence_time": "2026-11-05 06:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -1073,8 +1073,8 @@
       "sport_label": "NCAAB",
       "home_team": "Incarnate Word Cardinals",
       "away_team": "Chicago St Cougars",
-      "home_abbr": "CAR",
-      "away_abbr": "COU",
+      "home_abbr": "UIW",
+      "away_abbr": "CHST",
       "commence_time": "2026-11-05 06:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -1399,8 +1399,8 @@
       "sport_label": "NCAAB",
       "home_team": "Vanderbilt Commodores",
       "away_team": "Wake Forest Demon Deacons",
-      "home_abbr": "COM",
-      "away_abbr": "DEA",
+      "home_abbr": "VAN",
+      "away_abbr": "WAKE",
       "commence_time": "2026-11-05 06:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -1767,8 +1767,8 @@
       "sport_label": "NCAAB",
       "home_team": "Seton Hall Pirates",
       "away_team": "LIU Sharks",
-      "home_abbr": "PIR",
-      "away_abbr": "SHA",
+      "home_abbr": "SHU",
+      "away_abbr": "LIU",
       "commence_time": "2026-11-05 06:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -2113,8 +2113,8 @@
       "sport_label": "NCAAB",
       "home_team": "Manhattan Jaspers",
       "away_team": "Albany Great Danes",
-      "home_abbr": "JAS",
-      "away_abbr": "DAN",
+      "home_abbr": "MAN",
+      "away_abbr": "ALB",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -2459,8 +2459,8 @@
       "sport_label": "NCAAB",
       "home_team": "Alcorn St Braves",
       "away_team": "Howard Bison",
-      "home_abbr": "BRA",
-      "away_abbr": "BIS",
+      "home_abbr": "ALST",
+      "away_abbr": "HOW",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -2827,8 +2827,8 @@
       "sport_label": "NCAAB",
       "home_team": "Saint Peter's Peacocks",
       "away_team": "Binghamton Bearcats",
-      "home_abbr": "PEA",
-      "away_abbr": "BEA",
+      "home_abbr": "SPU",
+      "away_abbr": "BIN",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -3195,8 +3195,8 @@
       "sport_label": "NCAAB",
       "home_team": "Quinnipiac Bobcats",
       "away_team": "Bryant Bulldogs",
-      "home_abbr": "BOB",
-      "away_abbr": "BUL",
+      "home_abbr": "QUI",
+      "away_abbr": "BRY",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -3563,8 +3563,8 @@
       "sport_label": "NCAAB",
       "home_team": "Pittsburgh Panthers",
       "away_team": "Buffalo Bulls",
-      "home_abbr": "PAN",
-      "away_abbr": "BUL",
+      "home_abbr": "PITT",
+      "away_abbr": "BUF",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -3917,8 +3917,8 @@
       "sport_label": "NCAAB",
       "home_team": "Syracuse Orange",
       "away_team": "Central Connecticut St Blue Devils",
-      "home_abbr": "ORA",
-      "away_abbr": "DEV",
+      "home_abbr": "SYR",
+      "away_abbr": "CCSU",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -4257,8 +4257,8 @@
       "sport_label": "NCAAB",
       "home_team": "Charlotte 49ers",
       "away_team": "Georgia St Panthers",
-      "home_abbr": "49E",
-      "away_abbr": "PAN",
+      "home_abbr": "CLT",
+      "away_abbr": "GAST",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -4625,8 +4625,8 @@
       "sport_label": "NCAAB",
       "home_team": "Cincinnati Bearcats",
       "away_team": "Green Bay Phoenix",
-      "home_abbr": "BEA",
-      "away_abbr": "PHO",
+      "home_abbr": "CIN",
+      "away_abbr": "GB",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -4965,8 +4965,8 @@
       "sport_label": "NCAAB",
       "home_team": "Lehigh Mountain Hawks",
       "away_team": "Cornell Big Red",
-      "home_abbr": "HAW",
-      "away_abbr": "RED",
+      "home_abbr": "LEH",
+      "away_abbr": "COR",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -5333,8 +5333,8 @@
       "sport_label": "NCAAB",
       "home_team": "Navy Midshipmen",
       "away_team": "Delaware St Hornets",
-      "home_abbr": "MID",
-      "away_abbr": "HOR",
+      "home_abbr": "NAVY",
+      "away_abbr": "DEST",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -5701,8 +5701,8 @@
       "sport_label": "NCAAB",
       "home_team": "Fairfield Stags",
       "away_team": "Vermont Catamounts",
-      "home_abbr": "STA",
-      "away_abbr": "CAT",
+      "home_abbr": "FAI",
+      "away_abbr": "VER",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -6069,8 +6069,8 @@
       "sport_label": "NCAAB",
       "home_team": "Princeton Tigers",
       "away_team": "Hofstra Pride",
-      "home_abbr": "TIG",
-      "away_abbr": "PRI",
+      "home_abbr": "PRI",
+      "away_abbr": "HOF",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -6437,8 +6437,8 @@
       "sport_label": "NCAAB",
       "home_team": "Iona Gaels",
       "away_team": "NJIT Highlanders",
-      "home_abbr": "GAE",
-      "away_abbr": "HIG",
+      "home_abbr": "IONA",
+      "away_abbr": "NJIT",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -6805,8 +6805,8 @@
       "sport_label": "NCAAB",
       "home_team": "Sacred Heart Pioneers",
       "away_team": "Maine Black Bears",
-      "home_abbr": "PIO",
-      "away_abbr": "BEA",
+      "home_abbr": "SHU",
+      "away_abbr": "MAI",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -7173,8 +7173,8 @@
       "sport_label": "NCAAB",
       "home_team": "Marist Red Foxes",
       "away_team": "UMBC Retrievers",
-      "home_abbr": "FOX",
-      "away_abbr": "RET",
+      "home_abbr": "MAR",
+      "away_abbr": "UMBC",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -7499,8 +7499,8 @@
       "sport_label": "NCAAB",
       "home_team": "Virginia Tech Hokies",
       "away_team": "Mercer Bears",
-      "home_abbr": "HOK",
-      "away_abbr": "BEA",
+      "home_abbr": "VT",
+      "away_abbr": "MER",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -7839,8 +7839,8 @@
       "sport_label": "NCAAB",
       "home_team": "Notre Dame Fighting Irish",
       "away_team": "Mercyhurst Lakers",
-      "home_abbr": "IRI",
-      "away_abbr": "LAK",
+      "home_abbr": "ND",
+      "away_abbr": "MER",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -8179,8 +8179,8 @@
       "sport_label": "NCAAB",
       "home_team": "Merrimack Warriors",
       "away_team": "UMass Lowell River Hawks",
-      "home_abbr": "WAR",
-      "away_abbr": "HAW",
+      "home_abbr": "MER",
+      "away_abbr": "UML",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -8547,8 +8547,8 @@
       "sport_label": "NCAAB",
       "home_team": "Rider Broncs",
       "away_team": "New Hampshire Wildcats",
-      "home_abbr": "BRO",
-      "away_abbr": "WIL",
+      "home_abbr": "RID",
+      "away_abbr": "UNH",
       "commence_time": "2026-11-05 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -8915,8 +8915,8 @@
       "sport_label": "NHL",
       "home_team": "Pittsburgh Penguins",
       "away_team": "Boston Bruins",
-      "home_abbr": "PEN",
-      "away_abbr": "BRU",
+      "home_abbr": "PIT",
+      "away_abbr": "BOS",
       "commence_time": "2026-11-05 07:10:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -9343,8 +9343,8 @@
       "sport_label": "NHL",
       "home_team": "New York Islanders",
       "away_team": "Carolina Hurricanes",
-      "home_abbr": "ISL",
-      "away_abbr": "HUR",
+      "home_abbr": "NYI",
+      "away_abbr": "CAR",
       "commence_time": "2026-11-05 07:10:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -9771,8 +9771,8 @@
       "sport_label": "NHL",
       "home_team": "Tampa Bay Lightning",
       "away_team": "Chicago Blackhawks",
-      "home_abbr": "LIG",
-      "away_abbr": "BLA",
+      "home_abbr": "TBL",
+      "away_abbr": "CHI",
       "commence_time": "2026-11-05 07:10:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -10199,8 +10199,8 @@
       "sport_label": "NHL",
       "home_team": "Columbus Blue Jackets",
       "away_team": "Dallas Stars",
-      "home_abbr": "JAC",
-      "away_abbr": "STA",
+      "home_abbr": "CBJ",
+      "away_abbr": "DAL",
       "commence_time": "2026-11-05 07:10:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -10615,8 +10615,8 @@
       "sport_label": "NHL",
       "home_team": "Detroit Red Wings",
       "away_team": "Vegas Golden Knights",
-      "home_abbr": "WIN",
-      "away_abbr": "KNI",
+      "home_abbr": "DET",
+      "away_abbr": "VGK",
       "commence_time": "2026-11-05 07:10:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -11049,8 +11049,8 @@
       "sport_label": "NHL",
       "home_team": "Montr\u00e9al Canadiens",
       "away_team": "Utah Mammoth",
-      "home_abbr": "CAN",
-      "away_abbr": "MAM",
+      "home_abbr": "MTL",
+      "away_abbr": "UTA",
       "commence_time": "2026-11-05 07:10:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -11417,8 +11417,8 @@
       "sport_label": "NHL",
       "home_team": "New Jersey Devils",
       "away_team": "St Louis Blues",
-      "home_abbr": "DEV",
-      "away_abbr": "BLU",
+      "home_abbr": "NJD",
+      "away_abbr": "STL",
       "commence_time": "2026-11-05 07:10:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -11785,8 +11785,8 @@
       "sport_label": "NHL",
       "home_team": "New York Rangers",
       "away_team": "Philadelphia Flyers",
-      "home_abbr": "RAN",
-      "away_abbr": "FLY",
+      "home_abbr": "NYR",
+      "away_abbr": "PHI",
       "commence_time": "2026-11-05 07:10:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -12207,8 +12207,8 @@
       "sport_label": "NHL",
       "home_team": "Winnipeg Jets",
       "away_team": "Vancouver Canucks",
-      "home_abbr": "JET",
-      "away_abbr": "CAN",
+      "home_abbr": "WPG",
+      "away_abbr": "VAN",
       "commence_time": "2026-11-05 07:10:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -12599,8 +12599,8 @@
       "sport_label": "NCAAF",
       "home_team": "Florida Atlantic Owls",
       "away_team": "UTSA Roadrunners",
-      "home_abbr": "OWL",
-      "away_abbr": "ROA",
+      "home_abbr": "FAU",
+      "away_abbr": "UTSA",
       "commence_time": "2026-11-05 07:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -12967,8 +12967,8 @@
       "sport_label": "NCAAB",
       "home_team": "Fordham Rams",
       "away_team": "Stonehill Skyhawks",
-      "home_abbr": "RAM",
-      "away_abbr": "SKY",
+      "home_abbr": "FOR",
+      "away_abbr": "STO",
       "commence_time": "2026-11-05 07:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -13321,8 +13321,8 @@
       "sport_label": "NCAAB",
       "home_team": "Tulane Green Wave",
       "away_team": "Jackson St Tigers",
-      "home_abbr": "WAV",
-      "away_abbr": "TIG",
+      "home_abbr": "TUL",
+      "away_abbr": "JAST",
       "commence_time": "2026-11-05 07:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -13689,8 +13689,8 @@
       "sport_label": "NCAAB",
       "home_team": "Mississippi St Bulldogs",
       "away_team": "Northwestern St Demons",
-      "home_abbr": "BUL",
-      "away_abbr": "DEM",
+      "home_abbr": "MSST",
+      "away_abbr": "NWST",
       "commence_time": "2026-11-05 07:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -14043,7 +14043,7 @@
       "sport_label": "NCAAF",
       "home_team": "Southern Mississippi Golden Eagles",
       "away_team": "James Madison Dukes",
-      "home_abbr": "EAG",
+      "home_abbr": "USM",
       "away_abbr": "JMU",
       "commence_time": "2026-11-05 08:00:00 PM",
       "best_lines": {
@@ -14411,8 +14411,8 @@
       "sport_label": "NCAAB",
       "home_team": "Duke Blue Devils",
       "away_team": "Coastal Carolina Chanticleers",
-      "home_abbr": "DEV",
-      "away_abbr": "CHA",
+      "home_abbr": "DUKE",
+      "away_abbr": "CCU",
       "commence_time": "2026-11-05 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -14723,8 +14723,8 @@
       "sport_label": "NCAAB",
       "home_team": "Creighton Bluejays",
       "away_team": "Le Moyne Dolphins",
-      "home_abbr": "BLU",
-      "away_abbr": "DOL",
+      "home_abbr": "CRE",
+      "away_abbr": "LEM",
       "commence_time": "2026-11-05 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -15049,8 +15049,8 @@
       "sport_label": "NCAAB",
       "home_team": "Rice Owls",
       "away_team": "East Texas A&M Lions",
-      "home_abbr": "OWL",
-      "away_abbr": "LIO",
+      "home_abbr": "RICE",
+      "away_abbr": "ETAM",
       "commence_time": "2026-11-05 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -15417,8 +15417,8 @@
       "sport_label": "NCAAB",
       "home_team": "Florida Gators",
       "away_team": "Jacksonville Dolphins",
-      "home_abbr": "GAT",
-      "away_abbr": "DOL",
+      "home_abbr": "FLA",
+      "away_abbr": "JAC",
       "commence_time": "2026-11-05 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -15707,8 +15707,8 @@
       "sport_label": "NCAAB",
       "home_team": "Texas Longhorns",
       "away_team": "Gardner-Webb Bulldogs",
-      "home_abbr": "LON",
-      "away_abbr": "BUL",
+      "home_abbr": "TEX",
+      "away_abbr": "GAR",
       "commence_time": "2026-11-05 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -15997,8 +15997,8 @@
       "sport_label": "NCAAB",
       "home_team": "South Alabama Jaguars",
       "away_team": "Jacksonville St Gamecocks",
-      "home_abbr": "JAG",
-      "away_abbr": "GAM",
+      "home_abbr": "USA",
+      "away_abbr": "JVST",
       "commence_time": "2026-11-05 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -16351,8 +16351,8 @@
       "sport_label": "NCAAB",
       "home_team": "Loyola (Chi) Ramblers",
       "away_team": "West Georgia Wolves",
-      "home_abbr": "RAM",
-      "away_abbr": "WOL",
+      "home_abbr": "LOY",
+      "away_abbr": "UWG",
       "commence_time": "2026-11-05 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -16677,8 +16677,8 @@
       "sport_label": "NCAAB",
       "home_team": "Michigan St Spartans",
       "away_team": "Toledo Rockets",
-      "home_abbr": "SPA",
-      "away_abbr": "ROC",
+      "home_abbr": "MSU",
+      "away_abbr": "TOL",
       "commence_time": "2026-11-05 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -17031,7 +17031,7 @@
       "sport_label": "NCAAB",
       "home_team": "Tulsa Golden Hurricane",
       "away_team": "Northern Illinois Huskies",
-      "home_abbr": "HUR",
+      "home_abbr": "TLSA",
       "away_abbr": "NIU",
       "commence_time": "2026-11-05 08:00:00 PM",
       "best_lines": {
@@ -17343,8 +17343,8 @@
       "sport_label": "NCAAB",
       "home_team": "SMU Mustangs",
       "away_team": "VMI Keydets",
-      "home_abbr": "MUS",
-      "away_abbr": "KEY",
+      "home_abbr": "SMU",
+      "away_abbr": "VMI",
       "commence_time": "2026-11-05 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -17661,8 +17661,8 @@
       "sport_label": "NHL",
       "home_team": "Edmonton Oilers",
       "away_team": "Anaheim Ducks",
-      "home_abbr": "OIL",
-      "away_abbr": "DUC",
+      "home_abbr": "EDM",
+      "away_abbr": "ANA",
       "commence_time": "2026-11-05 08:10:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -18077,8 +18077,8 @@
       "sport_label": "NFL",
       "home_team": "Baltimore Ravens",
       "away_team": "Jacksonville Jaguars",
-      "home_abbr": "RAV",
-      "away_abbr": "JAG",
+      "home_abbr": "BAL",
+      "away_abbr": "JAX",
       "commence_time": "2026-11-05 08:15:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -18493,8 +18493,8 @@
       "sport_label": "NCAAB",
       "home_team": "DePaul Blue Demons",
       "away_team": "South Florida Bulls",
-      "home_abbr": "DEM",
-      "away_abbr": "BUL",
+      "home_abbr": "DEP",
+      "away_abbr": "USF",
       "commence_time": "2026-11-05 08:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -18820,7 +18820,7 @@
       "home_team": "Illinois Fighting Illini",
       "away_team": "Pennsylvania Quakers",
       "home_abbr": "ILL",
-      "away_abbr": "QUA",
+      "away_abbr": "PEN",
       "commence_time": "2026-11-05 08:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -19117,8 +19117,8 @@
       "sport_label": "NCAAB",
       "home_team": "Texas Tech Red Raiders",
       "away_team": "Bethune-Cookman Wildcats",
-      "home_abbr": "RAI",
-      "away_abbr": "WIL",
+      "home_abbr": "TTU",
+      "away_abbr": "BET",
       "commence_time": "2026-11-05 09:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -19421,8 +19421,8 @@
       "sport_label": "NCAAB",
       "home_team": "Utah Utes",
       "away_team": "Towson Tigers",
-      "home_abbr": "UTE",
-      "away_abbr": "TIG",
+      "home_abbr": "UTAH",
+      "away_abbr": "TOW",
       "commence_time": "2026-11-05 09:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -19775,8 +19775,8 @@
       "sport_label": "NBA",
       "home_team": "Phoenix Suns",
       "away_team": "Orlando Magic",
-      "home_abbr": "SUN",
-      "away_abbr": "MAG",
+      "home_abbr": "PHX",
+      "away_abbr": "ORL",
       "commence_time": "2026-11-05 09:10:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -20191,8 +20191,8 @@
       "sport_label": "NHL",
       "home_team": "Colorado Avalanche",
       "away_team": "Nashville Predators",
-      "home_abbr": "AVA",
-      "away_abbr": "PRE",
+      "home_abbr": "COL",
+      "away_abbr": "NSH",
       "commence_time": "2026-11-05 09:40:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -20607,8 +20607,8 @@
       "sport_label": "NBA",
       "home_team": "Golden State Warriors",
       "away_team": "Miami Heat",
-      "home_abbr": "WAR",
-      "away_abbr": "HEA",
+      "home_abbr": "GSW",
+      "away_abbr": "MIA",
       "commence_time": "2026-11-05 10:10:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -21036,7 +21036,7 @@
       "home_team": "Arizona Wildcats",
       "away_team": "Cal Poly Mustangs",
       "home_abbr": "ARIZ",
-      "away_abbr": "MUS",
+      "away_abbr": "CP",
       "commence_time": "2026-11-05 10:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -21347,8 +21347,8 @@
       "sport_label": "NCAAB",
       "home_team": "Boston College Eagles",
       "away_team": "Massachusetts Minutemen",
-      "home_abbr": "EAG",
-      "away_abbr": "MIN",
+      "home_abbr": "BC",
+      "away_abbr": "MAS",
       "commence_time": "2026-11-06 04:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -21561,8 +21561,8 @@
       "sport_label": "NCAAB",
       "home_team": "Virginia Cavaliers",
       "away_team": "Northeastern Huskies",
-      "home_abbr": "CAV",
-      "away_abbr": "HUS",
+      "home_abbr": "UVA",
+      "away_abbr": "NOR",
       "commence_time": "2026-11-06 05:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -21725,8 +21725,8 @@
       "sport_label": "NCAAB",
       "home_team": "Oregon Ducks",
       "away_team": "Eastern Washington Eagles",
-      "home_abbr": "DUC",
-      "away_abbr": "EAG",
+      "home_abbr": "ORE",
+      "away_abbr": "EW",
       "commence_time": "2026-11-06 06:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -21915,8 +21915,8 @@
       "sport_label": "NCAAB",
       "home_team": "Ohio State Buckeyes",
       "away_team": "Youngstown St Penguins",
-      "home_abbr": "BUC",
-      "away_abbr": "PEN",
+      "home_abbr": "OSU",
+      "away_abbr": "YOST",
       "commence_time": "2026-11-06 06:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -22133,8 +22133,8 @@
       "sport_label": "NCAAB",
       "home_team": "Purdue Boilermakers",
       "away_team": "Valparaiso Beacons",
-      "home_abbr": "BOI",
-      "away_abbr": "BEA",
+      "home_abbr": "PUR",
+      "away_abbr": "VAL",
       "commence_time": "2026-11-06 06:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -22351,8 +22351,8 @@
       "sport_label": "NCAAF",
       "home_team": "SMU Mustangs",
       "away_team": "Virginia Tech Hokies",
-      "home_abbr": "MUS",
-      "away_abbr": "HOK",
+      "home_abbr": "SMU",
+      "away_abbr": "VT",
       "commence_time": "2026-11-06 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -22697,8 +22697,8 @@
       "sport_label": "NCAAB",
       "home_team": "NC State Wolfpack",
       "away_team": "East Tennessee St Buccaneers",
-      "home_abbr": "WOL",
-      "away_abbr": "BUC",
+      "home_abbr": "NCST",
+      "away_abbr": "ETST",
       "commence_time": "2026-11-06 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -22808,8 +22808,8 @@
       "sport_label": "NCAAB",
       "home_team": "Florida St Seminoles",
       "away_team": "Troy Trojans",
-      "home_abbr": "SEM",
-      "away_abbr": "TRO",
+      "home_abbr": "FLST",
+      "away_abbr": "TROY",
       "commence_time": "2026-11-06 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -22986,8 +22986,8 @@
       "sport_label": "NCAAB",
       "home_team": "Georgia Tech Yellow Jackets",
       "away_team": "Georgia Southern Eagles",
-      "home_abbr": "JAC",
-      "away_abbr": "EAG",
+      "home_abbr": "GT",
+      "away_abbr": "GASO",
       "commence_time": "2026-11-06 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -23144,7 +23144,7 @@
       "sport_label": "NCAAB",
       "home_team": "Kentucky Wildcats",
       "away_team": "James Madison Dukes",
-      "home_abbr": "WIL",
+      "home_abbr": "UK",
       "away_abbr": "JMU",
       "commence_time": "2026-11-06 07:00:00 PM",
       "best_lines": {
@@ -23280,8 +23280,8 @@
       "sport_label": "NCAAB",
       "home_team": "Saint Louis Billikens",
       "away_team": "Missouri Tigers",
-      "home_abbr": "BIL",
-      "away_abbr": "TIG",
+      "home_abbr": "SL",
+      "away_abbr": "MIZ",
       "commence_time": "2026-11-06 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -23494,8 +23494,8 @@
       "sport_label": "NCAAB",
       "home_team": "North Carolina Tar Heels",
       "away_team": "Wofford Terriers",
-      "home_abbr": "HEE",
-      "away_abbr": "TER",
+      "home_abbr": "UNC",
+      "away_abbr": "WOF",
       "commence_time": "2026-11-06 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -23694,8 +23694,8 @@
       "sport_label": "NCAAB",
       "home_team": "UCF Knights",
       "away_team": "Yale Bulldogs",
-      "home_abbr": "KNI",
-      "away_abbr": "BUL",
+      "home_abbr": "UCF",
+      "away_abbr": "YALE",
       "commence_time": "2026-11-06 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -23886,8 +23886,8 @@
       "sport_label": "NHL",
       "home_team": "Buffalo Sabres",
       "away_team": "Columbus Blue Jackets",
-      "home_abbr": "SAB",
-      "away_abbr": "JAC",
+      "home_abbr": "BUF",
+      "away_abbr": "CBJ",
       "commence_time": "2026-11-06 07:10:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -24232,8 +24232,8 @@
       "sport_label": "NCAAF",
       "home_team": "East Carolina Pirates",
       "away_team": "South Florida Bulls",
-      "home_abbr": "PIR",
-      "away_abbr": "BUL",
+      "home_abbr": "ECU",
+      "away_abbr": "USF",
       "commence_time": "2026-11-06 07:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -24601,7 +24601,7 @@
       "home_team": "Illinois Fighting Illini",
       "away_team": "Nebraska Cornhuskers",
       "home_abbr": "ILL",
-      "away_abbr": "COR",
+      "away_abbr": "NEB",
       "commence_time": "2026-11-06 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -24968,8 +24968,8 @@
       "sport_label": "NCAAB",
       "home_team": "Marquette Golden Eagles",
       "away_team": "Detroit Mercy Titans",
-      "home_abbr": "EAG",
-      "away_abbr": "TIT",
+      "home_abbr": "MAR",
+      "away_abbr": "DM",
       "commence_time": "2026-11-06 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -25168,8 +25168,8 @@
       "sport_label": "NCAAB",
       "home_team": "Michigan Wolverines",
       "away_team": "UConn Huskies",
-      "home_abbr": "WOL",
-      "away_abbr": "HUS",
+      "home_abbr": "MICH",
+      "away_abbr": "CONN",
       "commence_time": "2026-11-06 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -25472,8 +25472,8 @@
       "sport_label": "NCAAB",
       "home_team": "Minnesota Golden Gophers",
       "away_team": "St. Thomas (MN) Tommies",
-      "home_abbr": "GOP",
-      "away_abbr": "TOM",
+      "home_abbr": "MINN",
+      "away_abbr": "ST",
       "commence_time": "2026-11-06 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -25686,8 +25686,8 @@
       "sport_label": "NCAAB",
       "home_team": "Texas A&M Aggies",
       "away_team": "Northern Kentucky Norse",
-      "home_abbr": "AGG",
-      "away_abbr": "NOR",
+      "home_abbr": "TAMU",
+      "away_abbr": "NK",
       "commence_time": "2026-11-06 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -25864,8 +25864,8 @@
       "sport_label": "NCAAB",
       "home_team": "UIC Flames",
       "away_team": "Robert Morris Colonials",
-      "home_abbr": "FLA",
-      "away_abbr": "COL",
+      "home_abbr": "UIC",
+      "away_abbr": "RM",
       "commence_time": "2026-11-06 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -26042,8 +26042,8 @@
       "sport_label": "NHL",
       "home_team": "Calgary Flames",
       "away_team": "Anaheim Ducks",
-      "home_abbr": "FLA",
-      "away_abbr": "DUC",
+      "home_abbr": "CGY",
+      "away_abbr": "ANA",
       "commence_time": "2026-11-06 08:10:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -26388,8 +26388,8 @@
       "sport_label": "NHL",
       "home_team": "Minnesota Wild",
       "away_team": "San Jose Sharks",
-      "home_abbr": "WIL",
-      "away_abbr": "SHA",
+      "home_abbr": "MIN",
+      "away_abbr": "SJS",
       "commence_time": "2026-11-06 08:10:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -26810,8 +26810,8 @@
       "sport_label": "NCAAB",
       "home_team": "Ole Miss Rebels",
       "away_team": "Central Arkansas Bears",
-      "home_abbr": "REB",
-      "away_abbr": "BEA",
+      "home_abbr": "MISS",
+      "away_abbr": "CA",
       "commence_time": "2026-11-06 08:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -26988,8 +26988,8 @@
       "sport_label": "NCAAB",
       "home_team": "Iowa Hawkeyes",
       "away_team": "Eastern Illinois Panthers",
-      "home_abbr": "HAW",
-      "away_abbr": "PAN",
+      "home_abbr": "IOWA",
+      "away_abbr": "EI",
       "commence_time": "2026-11-06 08:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -27152,8 +27152,8 @@
       "sport_label": "NCAAB",
       "home_team": "Wyoming Cowboys",
       "away_team": "Idaho State Bengals",
-      "home_abbr": "COW",
-      "away_abbr": "BEN",
+      "home_abbr": "WYO",
+      "away_abbr": "IDST",
       "commence_time": "2026-11-06 08:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -27330,8 +27330,8 @@
       "sport_label": "NCAAB",
       "home_team": "UMKC Kangaroos",
       "away_team": "Southern Illinois Salukis",
-      "home_abbr": "KAN",
-      "away_abbr": "SAL",
+      "home_abbr": "UMKC",
+      "away_abbr": "SI",
       "commence_time": "2026-11-06 08:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -27508,8 +27508,8 @@
       "sport_label": "NCAAF",
       "home_team": "Nevada Wolf Pack",
       "away_team": "New Mexico Lobos",
-      "home_abbr": "PAC",
-      "away_abbr": "LOB",
+      "home_abbr": "NEV",
+      "away_abbr": "UNM",
       "commence_time": "2026-11-06 09:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -27876,8 +27876,8 @@
       "sport_label": "NCAAB",
       "home_team": "Arizona St Sun Devils",
       "away_team": "N Colorado Bears",
-      "home_abbr": "DEV",
-      "away_abbr": "BEA",
+      "home_abbr": "ARST",
+      "away_abbr": "NC",
       "commence_time": "2026-11-06 09:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -28076,8 +28076,8 @@
       "sport_label": "NCAAB",
       "home_team": "BYU Cougars",
       "away_team": "Omaha Mavericks",
-      "home_abbr": "COU",
-      "away_abbr": "MAV",
+      "home_abbr": "BYU",
+      "away_abbr": "OMA",
       "commence_time": "2026-11-06 09:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -28240,8 +28240,8 @@
       "sport_label": "NCAAB",
       "home_team": "Kansas St Wildcats",
       "away_team": "CSU Northridge Matadors",
-      "home_abbr": "WIL",
-      "away_abbr": "MAT",
+      "home_abbr": "KAST",
+      "away_abbr": "CN",
       "commence_time": "2026-11-06 09:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -28418,8 +28418,8 @@
       "sport_label": "NCAAB",
       "home_team": "Colorado St Rams",
       "away_team": "Idaho Vandals",
-      "home_abbr": "RAM",
-      "away_abbr": "VAN",
+      "home_abbr": "COST",
+      "away_abbr": "IDA",
       "commence_time": "2026-11-06 09:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -28596,8 +28596,8 @@
       "sport_label": "NCAAB",
       "home_team": "Kansas Jayhawks",
       "away_team": "Middle Tennessee Blue Raiders",
-      "home_abbr": "JAY",
-      "away_abbr": "RAI",
+      "home_abbr": "KU",
+      "away_abbr": "MTSU",
       "commence_time": "2026-11-06 09:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -28760,8 +28760,8 @@
       "sport_label": "NCAAB",
       "home_team": "Oregon St Beavers",
       "away_team": "Cal Baptist Lancers",
-      "home_abbr": "BEA",
-      "away_abbr": "LAN",
+      "home_abbr": "ORST",
+      "away_abbr": "CB",
       "commence_time": "2026-11-06 09:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -28938,8 +28938,8 @@
       "sport_label": "NCAAB",
       "home_team": "UT-Arlington Mavericks",
       "away_team": "Portland Pilots",
-      "home_abbr": "MAV",
-      "away_abbr": "PIL",
+      "home_abbr": "UTA",
+      "away_abbr": "POR",
       "commence_time": "2026-11-06 09:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -29131,7 +29131,7 @@
       "home_team": "San Diego Toreros",
       "away_team": "Tarleton State Texans",
       "home_abbr": "USD",
-      "away_abbr": "TEX",
+      "away_abbr": "TAST",
       "commence_time": "2026-11-06 09:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -29308,8 +29308,8 @@
       "sport_label": "NCAAB",
       "home_team": "San Francisco Dons",
       "away_team": "North Dakota St Bison",
-      "home_abbr": "DON",
-      "away_abbr": "BIS",
+      "home_abbr": "SF",
+      "away_abbr": "NDST",
       "commence_time": "2026-11-06 10:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -29508,8 +29508,8 @@
       "sport_label": "NCAAB",
       "home_team": "Stanford Cardinal",
       "away_team": "Oakland Golden Grizzlies",
-      "home_abbr": "CAR",
-      "away_abbr": "GRI",
+      "home_abbr": "STA",
+      "away_abbr": "OAK",
       "commence_time": "2026-11-06 10:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -29701,7 +29701,7 @@
       "home_team": "Arizona Wildcats",
       "away_team": "TCU Horned Frogs",
       "home_abbr": "ARIZ",
-      "away_abbr": "FRO",
+      "away_abbr": "TCU",
       "commence_time": "2026-11-06 10:15:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -30046,8 +30046,8 @@
       "sport_label": "NCAAF",
       "home_team": "Coastal Carolina Chanticleers",
       "away_team": "Old Dominion Monarchs",
-      "home_abbr": "CHA",
-      "away_abbr": "MON",
+      "home_abbr": "CCU",
+      "away_abbr": "ODU",
       "commence_time": "2026-11-07 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -30414,8 +30414,8 @@
       "sport_label": "NCAAF",
       "home_team": "Kansas State Wildcats",
       "away_team": "Oklahoma State Cowboys",
-      "home_abbr": "WIL",
-      "away_abbr": "COW",
+      "home_abbr": "KSU",
+      "away_abbr": "OKST",
       "commence_time": "2026-11-07 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -30782,8 +30782,8 @@
       "sport_label": "NCAAF",
       "home_team": "Appalachian State Mountaineers",
       "away_team": "Georgia State Panthers",
-      "home_abbr": "MOU",
-      "away_abbr": "PAN",
+      "home_abbr": "APP",
+      "away_abbr": "GAST",
       "commence_time": "2026-11-07 02:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -31150,8 +31150,8 @@
       "sport_label": "NCAAF",
       "home_team": "Arkansas State Red Wolves",
       "away_team": "UL Monroe Warhawks",
-      "home_abbr": "WOL",
-      "away_abbr": "WAR",
+      "home_abbr": "ARST",
+      "away_abbr": "ULM",
       "commence_time": "2026-11-07 03:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -31518,8 +31518,8 @@
       "sport_label": "NCAAF",
       "home_team": "Kennesaw State Owls",
       "away_team": "Delaware Blue Hens",
-      "home_abbr": "OWL",
-      "away_abbr": "HEN",
+      "home_abbr": "KENN",
+      "away_abbr": "DEL",
       "commence_time": "2026-11-07 03:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -31886,8 +31886,8 @@
       "sport_label": "NCAAF",
       "home_team": "South Carolina Gamecocks",
       "away_team": "Texas A&M Aggies",
-      "home_abbr": "GAM",
-      "away_abbr": "AGG",
+      "home_abbr": "SC",
+      "away_abbr": "TAMU",
       "commence_time": "2026-11-07 03:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -32254,8 +32254,8 @@
       "sport_label": "NCAAF",
       "home_team": "LSU Tigers",
       "away_team": "Alabama Crimson Tide",
-      "home_abbr": "TIG",
-      "away_abbr": "TID",
+      "home_abbr": "LSU",
+      "away_abbr": "ALA",
       "commence_time": "2026-11-07 03:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -32600,8 +32600,8 @@
       "sport_label": "NCAAF",
       "home_team": "UAB Blazers",
       "away_team": "Charlotte 49ers",
-      "home_abbr": "BLA",
-      "away_abbr": "49E",
+      "home_abbr": "UAB",
+      "away_abbr": "CLT",
       "commence_time": "2026-11-07 03:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -32946,8 +32946,8 @@
       "sport_label": "NCAAF",
       "home_team": "Houston Cougars",
       "away_team": "Cincinnati Bearcats",
-      "home_abbr": "COU",
-      "away_abbr": "BEA",
+      "home_abbr": "HOU",
+      "away_abbr": "CIN",
       "commence_time": "2026-11-07 03:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -33314,8 +33314,8 @@
       "sport_label": "NCAAF",
       "home_team": "Georgia Southern Eagles",
       "away_team": "Marshall Thundering Herd",
-      "home_abbr": "EAG",
-      "away_abbr": "HER",
+      "home_abbr": "GASO",
+      "away_abbr": "MRSH",
       "commence_time": "2026-11-07 03:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -33682,8 +33682,8 @@
       "sport_label": "NCAAF",
       "home_team": "Wake Forest Demon Deacons",
       "away_team": "Merrimack Warriors",
-      "home_abbr": "DEA",
-      "away_abbr": "WAR",
+      "home_abbr": "WAKE",
+      "away_abbr": "MER",
       "commence_time": "2026-11-07 03:30:00 PM",
       "best_lines": {
         "h2h_away": null,
@@ -33871,8 +33871,8 @@
       "sport_label": "NCAAF",
       "home_team": "Middle Tennessee Blue Raiders",
       "away_team": "Western Kentucky Hilltoppers",
-      "home_abbr": "RAI",
-      "away_abbr": "HIL",
+      "home_abbr": "MTSU",
+      "away_abbr": "WKU",
       "commence_time": "2026-11-07 03:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -34239,8 +34239,8 @@
       "sport_label": "NCAAF",
       "home_team": "Navy Midshipmen",
       "away_team": "Temple Owls",
-      "home_abbr": "MID",
-      "away_abbr": "OWL",
+      "home_abbr": "NAVY",
+      "away_abbr": "TEM",
       "commence_time": "2026-11-07 03:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -34607,8 +34607,8 @@
       "sport_label": "NCAAF",
       "home_team": "Ohio State Buckeyes",
       "away_team": "Oregon Ducks",
-      "home_abbr": "BUC",
-      "away_abbr": "DUC",
+      "home_abbr": "OSU",
+      "away_abbr": "ORE",
       "commence_time": "2026-11-07 03:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -34975,8 +34975,8 @@
       "sport_label": "NCAAF",
       "home_team": "Washington Huskies",
       "away_team": "Penn State Nittany Lions",
-      "home_abbr": "HUS",
-      "away_abbr": "LIO",
+      "home_abbr": "WASH",
+      "away_abbr": "PSU",
       "commence_time": "2026-11-07 03:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -35343,8 +35343,8 @@
       "sport_label": "NCAAF",
       "home_team": "Kansas Jayhawks",
       "away_team": "UCF Knights",
-      "home_abbr": "JAY",
-      "away_abbr": "KNI",
+      "home_abbr": "KU",
+      "away_abbr": "UCF",
       "commence_time": "2026-11-07 03:45:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -35689,8 +35689,8 @@
       "sport_label": "NCAAF",
       "home_team": "Florida International Panthers",
       "away_team": "Missouri State Bears",
-      "home_abbr": "PAN",
-      "away_abbr": "BEA",
+      "home_abbr": "FIU",
+      "away_abbr": "MOST",
       "commence_time": "2026-11-07 04:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -36057,8 +36057,8 @@
       "sport_label": "NCAAF",
       "home_team": "Troy Trojans",
       "away_team": "Louisiana Tech Bulldogs",
-      "home_abbr": "TRO",
-      "away_abbr": "BUL",
+      "home_abbr": "TROY",
+      "away_abbr": "LT",
       "commence_time": "2026-11-07 04:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -36425,8 +36425,8 @@
       "sport_label": "NCAAF",
       "home_team": "North Texas Mean Green",
       "away_team": "Rice Owls",
-      "home_abbr": "GRE",
-      "away_abbr": "OWL",
+      "home_abbr": "UNT",
+      "away_abbr": "RICE",
       "commence_time": "2026-11-07 04:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -36793,7 +36793,7 @@
       "sport_label": "NCAAF",
       "home_team": "San Jose State Spartans",
       "away_team": "Northern Illinois Huskies",
-      "home_abbr": "SPA",
+      "home_abbr": "SJSU",
       "away_abbr": "NIU",
       "commence_time": "2026-11-07 04:00:00 PM",
       "best_lines": {
@@ -37161,8 +37161,8 @@
       "sport_label": "NCAAF",
       "home_team": "Mississippi State Bulldogs",
       "away_team": "Vanderbilt Commodores",
-      "home_abbr": "BUL",
-      "away_abbr": "COM",
+      "home_abbr": "MSST",
+      "away_abbr": "VAN",
       "commence_time": "2026-11-07 04:15:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -37529,8 +37529,8 @@
       "sport_label": "NCAAF",
       "home_team": "Wisconsin Badgers",
       "away_team": "Rutgers Scarlet Knights",
-      "home_abbr": "BAD",
-      "away_abbr": "KNI",
+      "home_abbr": "WIS",
+      "away_abbr": "RUT",
       "commence_time": "2026-11-07 04:15:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -37897,8 +37897,8 @@
       "sport_label": "NCAAF",
       "home_team": "Louisiana Ragin Cajuns",
       "away_team": "South Alabama Jaguars",
-      "home_abbr": "CAJ",
-      "away_abbr": "JAG",
+      "home_abbr": "ULL",
+      "away_abbr": "USA",
       "commence_time": "2026-11-07 05:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -38265,7 +38265,7 @@
       "sport_label": "NCAAF",
       "home_team": "Colorado State Rams",
       "away_team": "Boise State Broncos",
-      "home_abbr": "RAM",
+      "home_abbr": "CSU",
       "away_abbr": "BSU",
       "commence_time": "2026-11-07 06:00:00 PM",
       "best_lines": {
@@ -38633,8 +38633,8 @@
       "sport_label": "NCAAF",
       "home_team": "Tennessee Volunteers",
       "away_team": "Kentucky Wildcats",
-      "home_abbr": "VOL",
-      "away_abbr": "WIL",
+      "home_abbr": "TENN",
+      "away_abbr": "UK",
       "commence_time": "2026-11-07 06:15:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -39001,8 +39001,8 @@
       "sport_label": "NCAAF",
       "home_team": "Jacksonville State Gamecocks",
       "away_team": "Sam Houston State Bearkats",
-      "home_abbr": "GAM",
-      "away_abbr": "BEA",
+      "home_abbr": "JVST",
+      "away_abbr": "SHSU",
       "commence_time": "2026-11-07 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -39369,8 +39369,8 @@
       "sport_label": "NCAAF",
       "home_team": "Army Black Knights",
       "away_team": "Air Force Falcons",
-      "home_abbr": "KNI",
-      "away_abbr": "FAL",
+      "home_abbr": "ARMY",
+      "away_abbr": "AF",
       "commence_time": "2026-11-07 07:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -39695,8 +39695,8 @@
       "sport_label": "NCAAF",
       "home_team": "Arizona State Sun Devils",
       "away_team": "Colorado Buffaloes",
-      "home_abbr": "DEV",
-      "away_abbr": "BUF",
+      "home_abbr": "ASU",
+      "away_abbr": "COLO",
       "commence_time": "2026-11-07 07:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -40021,8 +40021,8 @@
       "sport_label": "NCAAF",
       "home_team": "Ole Miss Rebels",
       "away_team": "Georgia Bulldogs",
-      "home_abbr": "REB",
-      "away_abbr": "BUL",
+      "home_abbr": "MISS",
+      "away_abbr": "UGA",
       "commence_time": "2026-11-07 07:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -40347,8 +40347,8 @@
       "sport_label": "NCAAF",
       "home_team": "Georgia Tech Yellow Jackets",
       "away_team": "Louisville Cardinals",
-      "home_abbr": "JAC",
-      "away_abbr": "CAR",
+      "home_abbr": "GT",
+      "away_abbr": "LOU",
       "commence_time": "2026-11-07 07:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -40673,8 +40673,8 @@
       "sport_label": "NCAAF",
       "home_team": "Northwestern Wildcats",
       "away_team": "Iowa Hawkeyes",
-      "home_abbr": "WIL",
-      "away_abbr": "HAW",
+      "home_abbr": "NW",
+      "away_abbr": "IOWA",
       "commence_time": "2026-11-07 07:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -40977,8 +40977,8 @@
       "sport_label": "NCAAF",
       "home_team": "Notre Dame Fighting Irish",
       "away_team": "Miami Hurricanes",
-      "home_abbr": "IRI",
-      "away_abbr": "HUR",
+      "home_abbr": "ND",
+      "away_abbr": "MIA",
       "commence_time": "2026-11-07 07:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -41303,8 +41303,8 @@
       "sport_label": "NCAAF",
       "home_team": "Michigan Wolverines",
       "away_team": "Michigan State Spartans",
-      "home_abbr": "WOL",
-      "away_abbr": "SPA",
+      "home_abbr": "MICH",
+      "away_abbr": "MSU",
       "commence_time": "2026-11-07 07:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -41629,8 +41629,8 @@
       "sport_label": "NCAAF",
       "home_team": "Florida Gators",
       "away_team": "Oklahoma Sooners",
-      "home_abbr": "GAT",
-      "away_abbr": "SOO",
+      "home_abbr": "FLA",
+      "away_abbr": "OU",
       "commence_time": "2026-11-07 07:45:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -41955,8 +41955,8 @@
       "sport_label": "NCAAF",
       "home_team": "New Mexico State Aggies",
       "away_team": "Liberty Flames",
-      "home_abbr": "AGG",
-      "away_abbr": "FLA",
+      "home_abbr": "NMSU",
+      "away_abbr": "LIB",
       "commence_time": "2026-11-07 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -42281,8 +42281,8 @@
       "sport_label": "NCAAF",
       "home_team": "Utah State Aggies",
       "away_team": "Fresno State Bulldogs",
-      "home_abbr": "AGG",
-      "away_abbr": "BUL",
+      "home_abbr": "USU",
+      "away_abbr": "FRES",
       "commence_time": "2026-11-07 09:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -42607,8 +42607,8 @@
       "sport_label": "NCAAF",
       "home_team": "UTEP Miners",
       "away_team": "Hawaii Rainbow Warriors",
-      "home_abbr": "MIN",
-      "away_abbr": "WAR",
+      "home_abbr": "UTEP",
+      "away_abbr": "HAW",
       "commence_time": "2026-11-07 09:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -42933,8 +42933,8 @@
       "sport_label": "NCAAF",
       "home_team": "Texas Tech Red Raiders",
       "away_team": "West Virginia Mountaineers",
-      "home_abbr": "RAI",
-      "away_abbr": "MOU",
+      "home_abbr": "TTU",
+      "away_abbr": "WVU",
       "commence_time": "2026-11-07 09:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -43259,8 +43259,8 @@
       "sport_label": "NCAAF",
       "home_team": "Oregon State Beavers",
       "away_team": "Texas State Bobcats",
-      "home_abbr": "BEA",
-      "away_abbr": "BOB",
+      "home_abbr": "ORST",
+      "away_abbr": "TXST",
       "commence_time": "2026-11-07 10:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -43585,8 +43585,8 @@
       "sport_label": "NCAAF",
       "home_team": "UNLV Rebels",
       "away_team": "Wyoming Cowboys",
-      "home_abbr": "REB",
-      "away_abbr": "COW",
+      "home_abbr": "UNLV",
+      "away_abbr": "WYO",
       "commence_time": "2026-11-07 10:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -43911,8 +43911,8 @@
       "sport_label": "NCAAF",
       "home_team": "Utah Utes",
       "away_team": "BYU Cougars",
-      "home_abbr": "UTE",
-      "away_abbr": "COU",
+      "home_abbr": "UTAH",
+      "away_abbr": "BYU",
       "commence_time": "2026-11-07 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -44257,8 +44257,8 @@
       "sport_label": "NCAAF",
       "home_team": "Baylor Bears",
       "away_team": "Iowa State Cyclones",
-      "home_abbr": "BEA",
-      "away_abbr": "CYC",
+      "home_abbr": "BAY",
+      "away_abbr": "ISU",
       "commence_time": "2026-11-07 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -44625,8 +44625,8 @@
       "sport_label": "NCAAF",
       "home_team": "Boston College Eagles",
       "away_team": "Florida State Seminoles",
-      "home_abbr": "EAG",
-      "away_abbr": "SEM",
+      "home_abbr": "BC",
+      "away_abbr": "FSU",
       "commence_time": "2026-11-07 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -44993,8 +44993,8 @@
       "sport_label": "NCAAF",
       "home_team": "Syracuse Orange",
       "away_team": "Clemson Tigers",
-      "home_abbr": "ORA",
-      "away_abbr": "TIG",
+      "home_abbr": "SYR",
+      "away_abbr": "CLEM",
       "commence_time": "2026-11-07 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -45361,8 +45361,8 @@
       "sport_label": "NCAAF",
       "home_team": "Minnesota Golden Gophers",
       "away_team": "UCLA Bruins",
-      "home_abbr": "GOP",
-      "away_abbr": "BRU",
+      "home_abbr": "MINN",
+      "away_abbr": "UCLA",
       "commence_time": "2026-11-07 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -45729,8 +45729,8 @@
       "sport_label": "NCAAF",
       "home_team": "Missouri Tigers",
       "away_team": "Texas Longhorns",
-      "home_abbr": "TIG",
-      "away_abbr": "LON",
+      "home_abbr": "MIZ",
+      "away_abbr": "TEX",
       "commence_time": "2026-11-07 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -46097,8 +46097,8 @@
       "sport_label": "NCAAF",
       "home_team": "UConn Huskies",
       "away_team": "North Carolina Tar Heels",
-      "home_abbr": "HUS",
-      "away_abbr": "HEE",
+      "home_abbr": "CONN",
+      "away_abbr": "UNC",
       "commence_time": "2026-11-07 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -46443,8 +46443,8 @@
       "sport_label": "NCAAF",
       "home_team": "Tulane Green Wave",
       "away_team": "Tulsa Golden Hurricane",
-      "home_abbr": "WAV",
-      "away_abbr": "HUR",
+      "home_abbr": "TUL",
+      "away_abbr": "TLSA",
       "commence_time": "2026-11-07 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -46811,8 +46811,8 @@
       "sport_label": "NCAAF",
       "home_team": "NC State Wolfpack",
       "away_team": "Duke Blue Devils",
-      "home_abbr": "WOL",
-      "away_abbr": "DEV",
+      "home_abbr": "NCST",
+      "away_abbr": "DUKE",
       "commence_time": "2026-11-07 12:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -47157,8 +47157,8 @@
       "sport_label": "NCAAF",
       "home_team": "Purdue Boilermakers",
       "away_team": "Maryland Terrapins",
-      "home_abbr": "BOI",
-      "away_abbr": "TER",
+      "home_abbr": "PUR",
+      "away_abbr": "MD",
       "commence_time": "2026-11-07 12:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -47525,8 +47525,8 @@
       "sport_label": "NCAAF",
       "home_team": "Auburn Tigers",
       "away_team": "Arkansas Razorbacks",
-      "home_abbr": "TIG",
-      "away_abbr": "RAZ",
+      "home_abbr": "AUB",
+      "away_abbr": "ARK",
       "commence_time": "2026-11-07 12:45:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -47893,8 +47893,8 @@
       "sport_label": "NFL",
       "home_team": "Carolina Panthers",
       "away_team": "Denver Broncos",
-      "home_abbr": "PAN",
-      "away_abbr": "BRO",
+      "home_abbr": "CAR",
+      "away_abbr": "DEN",
       "commence_time": "2026-11-08 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -48321,8 +48321,8 @@
       "sport_label": "NFL",
       "home_team": "New Orleans Saints",
       "away_team": "Cleveland Browns",
-      "home_abbr": "SAI",
-      "away_abbr": "BRO",
+      "home_abbr": "NO",
+      "away_abbr": "CLE",
       "commence_time": "2026-11-08 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -48749,8 +48749,8 @@
       "sport_label": "NFL",
       "home_team": "Indianapolis Colts",
       "away_team": "Dallas Cowboys",
-      "home_abbr": "COL",
-      "away_abbr": "COW",
+      "home_abbr": "IND",
+      "away_abbr": "DAL",
       "commence_time": "2026-11-08 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -49165,8 +49165,8 @@
       "sport_label": "NFL",
       "home_team": "Miami Dolphins",
       "away_team": "Detroit Lions",
-      "home_abbr": "DOL",
-      "away_abbr": "LIO",
+      "home_abbr": "MIA",
+      "away_abbr": "DET",
       "commence_time": "2026-11-08 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -49581,8 +49581,8 @@
       "sport_label": "NFL",
       "home_team": "Kansas City Chiefs",
       "away_team": "New York Jets",
-      "home_abbr": "CHI",
-      "away_abbr": "JET",
+      "home_abbr": "KC",
+      "away_abbr": "NYJ",
       "commence_time": "2026-11-08 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -49997,8 +49997,8 @@
       "sport_label": "NFL",
       "home_team": "Washington Commanders",
       "away_team": "Los Angeles Rams",
-      "home_abbr": "COM",
-      "away_abbr": "RAM",
+      "home_abbr": "WAS",
+      "away_abbr": "LAR",
       "commence_time": "2026-11-08 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -50426,7 +50426,7 @@
       "home_team": "Philadelphia Eagles",
       "away_team": "New York Giants",
       "home_abbr": "PHI",
-      "away_abbr": "GIA",
+      "away_abbr": "NYG",
       "commence_time": "2026-11-08 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -50841,8 +50841,8 @@
       "sport_label": "NFL",
       "home_team": "Los Angeles Chargers",
       "away_team": "Houston Texans",
-      "home_abbr": "CHA",
-      "away_abbr": "TEX",
+      "home_abbr": "LAC",
+      "away_abbr": "HOU",
       "commence_time": "2026-11-08 04:05:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -51269,8 +51269,8 @@
       "sport_label": "NFL",
       "home_team": "San Francisco 49ers",
       "away_team": "Las Vegas Raiders",
-      "home_abbr": "49E",
-      "away_abbr": "RAI",
+      "home_abbr": "SF",
+      "away_abbr": "LV",
       "commence_time": "2026-11-08 04:05:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -51638,7 +51638,7 @@
       "home_team": "Seattle Seahawks",
       "away_team": "Arizona Cardinals",
       "home_abbr": "SEA",
-      "away_abbr": "CAR",
+      "away_abbr": "ARI",
       "commence_time": "2026-11-08 04:25:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -52053,8 +52053,8 @@
       "sport_label": "NFL",
       "home_team": "New England Patriots",
       "away_team": "Green Bay Packers",
-      "home_abbr": "PAT",
-      "away_abbr": "PAC",
+      "home_abbr": "NE",
+      "away_abbr": "GB",
       "commence_time": "2026-11-08 04:25:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -52470,7 +52470,7 @@
       "home_team": "Chicago Bears",
       "away_team": "Tampa Bay Buccaneers",
       "home_abbr": "CHI",
-      "away_abbr": "BUC",
+      "away_abbr": "TB",
       "commence_time": "2026-11-08 08:20:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -52885,8 +52885,8 @@
       "sport_label": "NFL",
       "home_team": "Atlanta Falcons",
       "away_team": "Cincinnati Bengals",
-      "home_abbr": "FAL",
-      "away_abbr": "BEN",
+      "home_abbr": "ATL",
+      "away_abbr": "CIN",
       "commence_time": "2026-11-08 09:30:00 AM",
       "best_lines": {
         "h2h_away": {
@@ -53301,8 +53301,8 @@
       "sport_label": "NFL",
       "home_team": "Minnesota Vikings",
       "away_team": "Buffalo Bills",
-      "home_abbr": "VIK",
-      "away_abbr": "BIL",
+      "home_abbr": "MIN",
+      "away_abbr": "BUF",
       "commence_time": "2026-11-09 08:15:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -53729,8 +53729,8 @@
       "sport_label": "NCAAF",
       "home_team": "Akron Zips",
       "away_team": "Western Michigan Broncos",
-      "home_abbr": "ZIP",
-      "away_abbr": "BRO",
+      "home_abbr": "AKR",
+      "away_abbr": "WM",
       "commence_time": "2026-11-10 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -53887,8 +53887,8 @@
       "sport_label": "NCAAF",
       "home_team": "Bowling Green Falcons",
       "away_team": "Kent State Golden Flashes",
-      "home_abbr": "FAL",
-      "away_abbr": "FLA",
+      "home_abbr": "BG",
+      "away_abbr": "KEST",
       "commence_time": "2026-11-10 07:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -54045,8 +54045,8 @@
       "sport_label": "NCAAF",
       "home_team": "Miami (OH) RedHawks",
       "away_team": "Ohio Bobcats",
-      "home_abbr": "RED",
-      "away_abbr": "BOB",
+      "home_abbr": "MIA",
+      "away_abbr": "OHIO",
       "commence_time": "2026-11-10 08:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -54203,8 +54203,8 @@
       "sport_label": "NCAAF",
       "home_team": "Ball State Cardinals",
       "away_team": "Buffalo Bulls",
-      "home_abbr": "CAR",
-      "away_abbr": "BUL",
+      "home_abbr": "BAST",
+      "away_abbr": "BUF",
       "commence_time": "2026-11-11 07:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -54361,8 +54361,8 @@
       "sport_label": "NCAAF",
       "home_team": "Central Michigan Chippewas",
       "away_team": "Sacramento State Hornets",
-      "home_abbr": "CHI",
-      "away_abbr": "HOR",
+      "home_abbr": "CM",
+      "away_abbr": "SAST",
       "commence_time": "2026-11-11 07:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -54519,8 +54519,8 @@
       "sport_label": "NCAAF",
       "home_team": "Toledo Rockets",
       "away_team": "UMass Minutemen",
-      "home_abbr": "ROC",
-      "away_abbr": "MIN",
+      "home_abbr": "TOL",
+      "away_abbr": "UMA",
       "commence_time": "2026-11-11 07:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -54655,8 +54655,8 @@
       "sport_label": "NFL",
       "home_team": "New York Giants",
       "away_team": "Washington Commanders",
-      "home_abbr": "GIA",
-      "away_abbr": "COM",
+      "home_abbr": "NYG",
+      "away_abbr": "WAS",
       "commence_time": "2026-11-12 08:15:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -54987,7 +54987,7 @@
       "sport_label": "NCAAF",
       "home_team": "UCLA Bruins",
       "away_team": "Illinois Fighting Illini",
-      "home_abbr": "BRU",
+      "home_abbr": "UCLA",
       "away_abbr": "ILL",
       "commence_time": "2026-11-13 09:00:00 PM",
       "best_lines": {
@@ -55123,8 +55123,8 @@
       "sport_label": "NCAAF",
       "home_team": "Indiana Hoosiers",
       "away_team": "USC Trojans",
-      "home_abbr": "HOO",
-      "away_abbr": "TRO",
+      "home_abbr": "IND",
+      "away_abbr": "USC",
       "commence_time": "2026-11-14 03:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -55301,8 +55301,8 @@
       "sport_label": "NCAAF",
       "home_team": "Oregon Ducks",
       "away_team": "Michigan Wolverines",
-      "home_abbr": "DUC",
-      "away_abbr": "WOL",
+      "home_abbr": "ORE",
+      "away_abbr": "MICH",
       "commence_time": "2026-11-14 03:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -55438,7 +55438,7 @@
       "home_team": "Boise State Broncos",
       "away_team": "Oregon State Beavers",
       "home_abbr": "BSU",
-      "away_abbr": "BEA",
+      "away_abbr": "ORST",
       "commence_time": "2026-11-14 06:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -55574,7 +55574,7 @@
       "home_team": "Arizona Wildcats",
       "away_team": "Utah Utes",
       "home_abbr": "ARIZ",
-      "away_abbr": "UTE",
+      "away_abbr": "UTAH",
       "commence_time": "2026-11-14 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -55709,8 +55709,8 @@
       "sport_label": "NCAAF",
       "home_team": "BYU Cougars",
       "away_team": "Baylor Bears",
-      "home_abbr": "COU",
-      "away_abbr": "BEA",
+      "home_abbr": "BYU",
+      "away_abbr": "BAY",
       "commence_time": "2026-11-14 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -55845,8 +55845,8 @@
       "sport_label": "NCAAF",
       "home_team": "Kentucky Wildcats",
       "away_team": "Florida Gators",
-      "home_abbr": "WIL",
-      "away_abbr": "GAT",
+      "home_abbr": "UK",
+      "away_abbr": "FLA",
       "commence_time": "2026-11-14 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -55981,8 +55981,8 @@
       "sport_label": "NCAAF",
       "home_team": "Georgia Bulldogs",
       "away_team": "Missouri Tigers",
-      "home_abbr": "BUL",
-      "away_abbr": "TIG",
+      "home_abbr": "UGA",
+      "away_abbr": "MIZ",
       "commence_time": "2026-11-14 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -56117,8 +56117,8 @@
       "sport_label": "NCAAF",
       "home_team": "LSU Tigers",
       "away_team": "Texas Longhorns",
-      "home_abbr": "TIG",
-      "away_abbr": "LON",
+      "home_abbr": "LSU",
+      "away_abbr": "TEX",
       "commence_time": "2026-11-14 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -56253,8 +56253,8 @@
       "sport_label": "NCAAF",
       "home_team": "North Carolina Tar Heels",
       "away_team": "Louisville Cardinals",
-      "home_abbr": "HEE",
-      "away_abbr": "CAR",
+      "home_abbr": "UNC",
+      "away_abbr": "LOU",
       "commence_time": "2026-11-14 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -56389,8 +56389,8 @@
       "sport_label": "NCAAF",
       "home_team": "Ohio State Buckeyes",
       "away_team": "Northwestern Wildcats",
-      "home_abbr": "BUC",
-      "away_abbr": "WIL",
+      "home_abbr": "OSU",
+      "away_abbr": "NW",
       "commence_time": "2026-11-14 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -56525,8 +56525,8 @@
       "sport_label": "NCAAF",
       "home_team": "Oklahoma State Cowboys",
       "away_team": "Texas Tech Red Raiders",
-      "home_abbr": "COW",
-      "away_abbr": "RAI",
+      "home_abbr": "OKST",
+      "away_abbr": "TTU",
       "commence_time": "2026-11-14 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -56661,8 +56661,8 @@
       "sport_label": "NCAAF",
       "home_team": "SMU Mustangs",
       "away_team": "Wake Forest Demon Deacons",
-      "home_abbr": "MUS",
-      "away_abbr": "DEA",
+      "home_abbr": "SMU",
+      "away_abbr": "WAKE",
       "commence_time": "2026-11-14 12:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -56797,8 +56797,8 @@
       "sport_label": "NFL",
       "home_team": "Atlanta Falcons",
       "away_team": "Kansas City Chiefs",
-      "home_abbr": "FAL",
-      "away_abbr": "CHI",
+      "home_abbr": "ATL",
+      "away_abbr": "KC",
       "commence_time": "2026-11-15 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -57119,8 +57119,8 @@
       "sport_label": "NFL",
       "home_team": "New York Jets",
       "away_team": "Buffalo Bills",
-      "home_abbr": "JET",
-      "away_abbr": "BIL",
+      "home_abbr": "NYJ",
+      "away_abbr": "BUF",
       "commence_time": "2026-11-15 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -57435,8 +57435,8 @@
       "sport_label": "NFL",
       "home_team": "New Orleans Saints",
       "away_team": "Carolina Panthers",
-      "home_abbr": "SAI",
-      "away_abbr": "PAN",
+      "home_abbr": "NO",
+      "away_abbr": "CAR",
       "commence_time": "2026-11-15 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -57767,8 +57767,8 @@
       "sport_label": "NFL",
       "home_team": "Cleveland Browns",
       "away_team": "Houston Texans",
-      "home_abbr": "BRO",
-      "away_abbr": "TEX",
+      "home_abbr": "CLE",
+      "away_abbr": "HOU",
       "commence_time": "2026-11-15 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -58099,8 +58099,8 @@
       "sport_label": "NFL",
       "home_team": "Green Bay Packers",
       "away_team": "Minnesota Vikings",
-      "home_abbr": "PAC",
-      "away_abbr": "VIK",
+      "home_abbr": "GB",
+      "away_abbr": "MIN",
       "commence_time": "2026-11-15 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -58421,8 +58421,8 @@
       "sport_label": "NFL",
       "home_team": "Indianapolis Colts",
       "away_team": "Miami Dolphins",
-      "home_abbr": "COL",
-      "away_abbr": "DOL",
+      "home_abbr": "IND",
+      "away_abbr": "MIA",
       "commence_time": "2026-11-15 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -58765,8 +58765,8 @@
       "sport_label": "NFL",
       "home_team": "Tennessee Titans",
       "away_team": "Jacksonville Jaguars",
-      "home_abbr": "TIT",
-      "away_abbr": "JAG",
+      "home_abbr": "TEN",
+      "away_abbr": "JAX",
       "commence_time": "2026-11-15 01:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -59097,8 +59097,8 @@
       "sport_label": "NFL",
       "home_team": "Arizona Cardinals",
       "away_team": "Los Angeles Rams",
-      "home_abbr": "CAR",
-      "away_abbr": "RAM",
+      "home_abbr": "ARI",
+      "away_abbr": "LAR",
       "commence_time": "2026-11-15 04:05:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -59429,8 +59429,8 @@
       "sport_label": "NFL",
       "home_team": "Dallas Cowboys",
       "away_team": "San Francisco 49ers",
-      "home_abbr": "COW",
-      "away_abbr": "49E",
+      "home_abbr": "DAL",
+      "away_abbr": "SF",
       "commence_time": "2026-11-15 04:25:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -59713,8 +59713,8 @@
       "sport_label": "NFL",
       "home_team": "Cincinnati Bengals",
       "away_team": "Pittsburgh Steelers",
-      "home_abbr": "BEN",
-      "away_abbr": "STE",
+      "home_abbr": "CIN",
+      "away_abbr": "PIT",
       "commence_time": "2026-11-15 08:20:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -60045,8 +60045,8 @@
       "sport_label": "NFL",
       "home_team": "Detroit Lions",
       "away_team": "New England Patriots",
-      "home_abbr": "LIO",
-      "away_abbr": "PAT",
+      "home_abbr": "DET",
+      "away_abbr": "NE",
       "commence_time": "2026-11-15 09:30:00 AM",
       "best_lines": {
         "h2h_away": {
@@ -60365,8 +60365,8 @@
       "sport_label": "NFL",
       "home_team": "Baltimore Ravens",
       "away_team": "Los Angeles Chargers",
-      "home_abbr": "RAV",
-      "away_abbr": "CHA",
+      "home_abbr": "BAL",
+      "away_abbr": "LAC",
       "commence_time": "2026-11-16 08:15:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -60645,8 +60645,8 @@
       "sport_label": "NBA",
       "home_team": "Boston Celtics",
       "away_team": "Miami Heat",
-      "home_abbr": "CEL",
-      "away_abbr": "HEA",
+      "home_abbr": "BOS",
+      "away_abbr": "MIA",
       "commence_time": "2026-12-25 02:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -60858,8 +60858,8 @@
       "sport_label": "NBA",
       "home_team": "Los Angeles Lakers",
       "away_team": "Philadelphia 76ers",
-      "home_abbr": "LAK",
-      "away_abbr": "76E",
+      "home_abbr": "LAL",
+      "away_abbr": "PHI",
       "commence_time": "2026-12-25 05:00:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -61058,8 +61058,8 @@
       "sport_label": "NBA",
       "home_team": "Golden State Warriors",
       "away_team": "Denver Nuggets",
-      "home_abbr": "WAR",
-      "away_abbr": "NUG",
+      "home_abbr": "GSW",
+      "away_abbr": "DEN",
       "commence_time": "2026-12-25 10:30:00 PM",
       "best_lines": {
         "h2h_away": {
@@ -61194,8 +61194,8 @@
       "sport_label": "NBA",
       "home_team": "New York Knicks",
       "away_team": "San Antonio Spurs",
-      "home_abbr": "KNI",
-      "away_abbr": "SPU",
+      "home_abbr": "NYK",
+      "away_abbr": "SAS",
       "commence_time": "2026-12-25 12:00:00 PM",
       "best_lines": {
         "h2h_away": {

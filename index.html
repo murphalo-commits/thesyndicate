@@ -658,14 +658,136 @@
             return `<span class="inline-flex items-center justify-center text-[7.5px] font-black px-1 py-0.5 rounded leading-none shrink-0 ${info.bg}">${info.code}</span>`;
         }
 
-        function getTeamNickname(fullName) {
+        const TWO_WORD_MASCOTS = new Set([
+            'crimson tide', 'great danes', 'sun devils', 'red wolves', 'black knights',
+            'blue devils', 'blue jackets', 'big red', 'big green', 'blue demons',
+            'blue hens', 'red wings', 'yellow jackets', 'rainbow warriors', 'fighting illini',
+            'mountain hawks', 'ragin cajuns', "ragin' cajuns", 'black bears', 'red foxes',
+            'thundering herd', 'blue raiders', 'golden gophers', 'wolf pack', 'tar heels',
+            'mean green', 'fighting irish', 'nittany lions', 'scarlet knights', 'golden eagles',
+            'horned frogs', 'red raiders', 'green wave', 'golden hurricane', 'river hawks',
+            'golden knights', 'demon deacons', 'red sox', 'white sox', 'blue jays',
+            'trail blazers', 'maple leafs', 'golden grizzlies', 'golden flashes', 'golden lions',
+            'golden bears', 'red storm', 'red flash', 'red hawks', 'blue hose',
+            'fighting hawks', 'fighting camels', 'screaming eagles', 'purple eagles', 'flying dutchmen'
+        ]);
+
+        const TEAM_ABBR_MAP = {
+            // NFL
+            'Arizona Cardinals': 'ARI', 'Atlanta Falcons': 'ATL', 'Baltimore Ravens': 'BAL', 'Buffalo Bills': 'BUF',
+            'Carolina Panthers': 'CAR', 'Chicago Bears': 'CHI', 'Cincinnati Bengals': 'CIN', 'Cleveland Browns': 'CLE',
+            'Dallas Cowboys': 'DAL', 'Denver Broncos': 'DEN', 'Detroit Lions': 'DET', 'Green Bay Packers': 'GB',
+            'Houston Texans': 'HOU', 'Indianapolis Colts': 'IND', 'Jacksonville Jaguars': 'JAX', 'Kansas City Chiefs': 'KC',
+            'Las Vegas Raiders': 'LV', 'Los Angeles Chargers': 'LAC', 'Los Angeles Rams': 'LAR', 'Miami Dolphins': 'MIA',
+            'Minnesota Vikings': 'MIN', 'New England Patriots': 'NE', 'New Orleans Saints': 'NO', 'New York Giants': 'NYG',
+            'New York Jets': 'NYJ', 'Philadelphia Eagles': 'PHI', 'Pittsburgh Steelers': 'PIT', 'San Francisco 49ers': 'SF',
+            'Seattle Seahawks': 'SEA', 'Tampa Bay Buccaneers': 'TB', 'Tennessee Titans': 'TEN', 'Washington Commanders': 'WAS',
+            // NBA
+            'Atlanta Hawks': 'ATL', 'Boston Celtics': 'BOS', 'Brooklyn Nets': 'BKN', 'Charlotte Hornets': 'CHA',
+            'Chicago Bulls': 'CHI', 'Cleveland Cavaliers': 'CLE', 'Dallas Mavericks': 'DAL', 'Denver Nuggets': 'DEN',
+            'Detroit Pistons': 'DET', 'Golden State Warriors': 'GSW', 'Houston Rockets': 'HOU', 'Indiana Pacers': 'IND',
+            'Los Angeles Clippers': 'LAC', 'Los Angeles Lakers': 'LAL', 'Memphis Grizzlies': 'MEM', 'Miami Heat': 'MIA',
+            'Milwaukee Bucks': 'MIL', 'Minnesota Timberwolves': 'MIN', 'New Orleans Pelicans': 'NOP', 'New York Knicks': 'NYK',
+            'Oklahoma City Thunder': 'OKC', 'Orlando Magic': 'ORL', 'Philadelphia 76ers': 'PHI', 'Phoenix Suns': 'PHX',
+            'Portland Trail Blazers': 'POR', 'Sacramento Kings': 'SAC', 'San Antonio Spurs': 'SAS', 'Toronto Raptors': 'TOR',
+            'Utah Jazz': 'UTA', 'Washington Wizards': 'WAS',
+            // NHL
+            'Anaheim Ducks': 'ANA', 'Boston Bruins': 'BOS', 'Buffalo Sabres': 'BUF', 'Calgary Flames': 'CGY',
+            'Carolina Hurricanes': 'CAR', 'Chicago Blackhawks': 'CHI', 'Colorado Avalanche': 'COL', 'Columbus Blue Jackets': 'CBJ',
+            'Dallas Stars': 'DAL', 'Detroit Red Wings': 'DET', 'Edmonton Oilers': 'EDM', 'Florida Panthers': 'FLA',
+            'Los Angeles Kings': 'LAK', 'Minnesota Wild': 'MIN', 'Montreal Canadiens': 'MTL', 'Montréal Canadiens': 'MTL',
+            'Nashville Predators': 'NSH', 'New Jersey Devils': 'NJD', 'New York Islanders': 'NYI', 'New York Rangers': 'NYR',
+            'Ottawa Senators': 'OTT', 'Philadelphia Flyers': 'PHI', 'Pittsburgh Penguins': 'PIT', 'San Jose Sharks': 'SJS',
+            'Seattle Kraken': 'SEA', 'St Louis Blues': 'STL', 'Tampa Bay Lightning': 'TBL', 'Toronto Maple Leafs': 'TOR',
+            'Utah Mammoth': 'UTA', 'Vancouver Canucks': 'VAN', 'Vegas Golden Knights': 'VGK', 'Washington Capitals': 'WSH',
+            'Winnipeg Jets': 'WPG',
+            // WNBA
+            'Las Vegas Aces': 'LVA', 'Indiana Fever': 'IND', 'Minnesota Lynx': 'MIN', 'New York Liberty': 'NYL',
+            'Atlanta Dream': 'ATL', 'Washington Mystics': 'WAS', 'Golden State Valkyries': 'GSV', 'Dallas Wings': 'DAL',
+            'Chicago Sky': 'CHI', 'Connecticut Sun': 'CON', 'Los Angeles Sparks': 'LAS', 'Phoenix Mercury': 'PHX',
+            'Seattle Storm': 'SEA',
+            // College Schools
+            'North Texas': 'UNT', 'Penn State': 'PSU', 'Indiana': 'IND', 'Kentucky': 'UK', 'Kansas State': 'KSU',
+            'Northwestern': 'NW', 'Arizona': 'ARIZ', 'Georgia': 'UGA', 'Mississippi State': 'MSST', 'Mississippi St': 'MSST',
+            'Fresno State': 'FRES', 'Louisiana Tech': 'LT', 'Wake Forest': 'WAKE', 'North Carolina': 'UNC', 'NC State': 'NCST',
+            'Duke': 'DUKE', 'Notre Dame': 'ND', 'Ohio State': 'OSU', 'Michigan State': 'MSU', 'Michigan St': 'MSU',
+            'Michigan': 'MICH', 'Texas': 'TEX', 'Texas A&M': 'TAMU', 'Texas Tech': 'TTU', 'Texas State': 'TXST',
+            'Oklahoma': 'OU', 'Oklahoma State': 'OKST', 'Alabama': 'ALA', 'Auburn': 'AUB', 'Clemson': 'CLEM',
+            'Missouri': 'MIZ', 'Florida': 'FLA', 'Florida State': 'FSU', 'Miami': 'MIA', 'Tennessee': 'TENN',
+            'Vanderbilt': 'VAN', 'South Carolina': 'SC', 'Ole Miss': 'MISS', 'Arkansas': 'ARK', 'Iowa': 'IOWA',
+            'Iowa State': 'ISU', 'Wisconsin': 'WIS', 'Minnesota': 'MINN', 'Nebraska': 'NEB', 'Illinois': 'ILL',
+            'Purdue': 'PUR', 'Maryland': 'MD', 'Rutgers': 'RUT', 'Oregon': 'ORE', 'Oregon State': 'ORST',
+            'Washington': 'WASH', 'Washington State': 'WSU', 'Colorado': 'COLO', 'Utah': 'UTAH', 'Arizona State': 'ASU',
+            'West Virginia': 'WVU', 'Cincinnati': 'CIN', 'Houston': 'HOU', 'Baylor': 'BAY', 'Kansas': 'KU',
+            'Syracuse': 'SYR', 'Pittsburgh': 'PITT', 'Louisville': 'LOU', 'Virginia Tech': 'VT', 'Virginia': 'UVA',
+            'Georgia Tech': 'GT', 'Boston College': 'BC', 'Boise State': 'BSU', 'San Diego State': 'SDSU',
+            'San Diego': 'USD', 'Colorado State': 'CSU', 'Air Force': 'AF', 'Wyoming': 'WYO', 'New Mexico': 'UNM',
+            'Utah State': 'USU', 'San Jose State': 'SJSU', 'Nevada': 'NEV', 'Hawaii': 'HAW', 'Tulane': 'TUL',
+            'Navy': 'NAVY', 'Army': 'ARMY', 'South Florida': 'USF', 'East Carolina': 'ECU', 'Charlotte': 'CLT',
+            'Florida Atlantic': 'FAU', 'Rice': 'RICE', 'Temple': 'TEM', 'Tulsa': 'TLSA', 'Appalachian State': 'APP',
+            'James Madison': 'JMU', 'Coastal Carolina': 'CCU', 'Georgia Southern': 'GASO', 'Georgia State': 'GAST',
+            'Georgia St': 'GAST', 'Marshall': 'MRSH', 'Old Dominion': 'ODU', 'Louisiana': 'ULL', 'South Alabama': 'USA',
+            'Troy': 'TROY', 'Arkansas State': 'ARST', 'Southern Mississippi': 'USM', 'UL Monroe': 'ULM',
+            'Liberty': 'LIB', 'Western Kentucky': 'WKU', 'Jacksonville State': 'JVST', 'Jacksonville St': 'JVST',
+            'Sam Houston State': 'SHSU', 'Middle Tennessee': 'MTSU', 'New Mexico State': 'NMSU',
+            'Florida International': 'FIU', 'Kennesaw State': 'KENN', 'Delaware': 'DEL', 'Missouri State': 'MOST',
+            'Northern Illinois': 'NIU', 'Toledo': 'TOL', 'UConn': 'CONN', 'New Hampshire': 'UNH', 'Seton Hall': 'SHU',
+            "Saint Peter's": 'SPU', 'Sacred Heart': 'SHU', 'Incarnate Word': 'UIW', 'UMass Lowell': 'UML',
+            'Central Connecticut St': 'CCSU', 'Northwestern St': 'NWST', 'East Texas A&M': 'ETAM', 'Green Bay': 'GB',
+            'Cal Poly': 'CP', 'Le Moyne': 'LEM', 'McNeese': 'MCN', 'DePaul': 'DEP', 'West Georgia': 'UWG'
+        };
+
+        function getSchoolName(fullName) {
             if (!fullName) return '';
-            const parts = fullName.trim().split(' ');
-            if (parts.length <= 1) return fullName;
-            if (parts.length >= 2 && (parts[parts.length - 2].toLowerCase() === 'red' || parts[parts.length - 2].toLowerCase() === 'white')) {
-                return parts.slice(-2).join(' ');
+            const parts = fullName.trim().split(/\s+/);
+            if (parts.length <= 1) return fullName.trim();
+            if (parts.length >= 3) {
+                const lastTwo = parts.slice(-2).join(' ').toLowerCase();
+                if (TWO_WORD_MASCOTS.has(lastTwo)) {
+                    return parts.slice(0, -2).join(' ');
+                }
             }
-            return parts[parts.length - 1];
+            return parts.slice(0, -1).join(' ');
+        }
+
+        function getSchoolAbbr(fullName) {
+            if (!fullName) return '';
+            if (TEAM_ABBR_MAP[fullName]) return TEAM_ABBR_MAP[fullName];
+            const school = getSchoolName(fullName);
+            if (TEAM_ABBR_MAP[school]) return TEAM_ABBR_MAP[school];
+            const clean = school.replace(/\s*\(.*?\)/g, '').trim();
+            const words = clean.split(/\s+/).filter(Boolean);
+            if (words.length === 0) return fullName.slice(0, 3).toUpperCase();
+            if (words.length === 1) {
+                const w = words[0].replace(/[^A-Za-z0-9]/g, '');
+                return w.length <= 4 ? w.toUpperCase() : w.slice(0, 3).toUpperCase();
+            }
+            const lastWord = words[words.length - 1].toLowerCase();
+            if (lastWord === 'st' || lastWord === 'state') {
+                if (words.length === 2) {
+                    return (words[0].slice(0, 2) + 'ST').toUpperCase();
+                }
+                return (words.slice(0, -1).map(w => w[0]).join('') + 'ST').toUpperCase();
+            }
+            return words.map(w => w[0]).filter(c => /[A-Za-z0-9]/.test(c)).join('').toUpperCase().slice(0, 4);
+        }
+
+        function formatMatchupSchools(matchupStr) {
+            if (!matchupStr || !matchupStr.includes(' @ ')) return matchupStr || '';
+            const [away, home] = matchupStr.split(' @ ');
+            return `${getSchoolName(away)} @ ${getSchoolName(home)}`;
+        }
+
+        function formatOutcomeSchool(sideObj) {
+            if (!sideObj || !sideObj.outcome) return '';
+            if (sideObj.name && sideObj.name !== 'Over' && sideObj.name !== 'Under' && sideObj.outcome.startsWith(sideObj.name)) {
+                return getSchoolName(sideObj.name) + sideObj.outcome.slice(sideObj.name.length);
+            }
+            return sideObj.outcome;
+        }
+
+        function getTeamNickname(fullName) {
+            return getSchoolName(fullName);
         }
 
         function formatGameTime(timeStr) {
@@ -985,8 +1107,8 @@
                 list = list.filter(m => 
                     m.home_team.toLowerCase().includes(searchQuery) ||
                     m.away_team.toLowerCase().includes(searchQuery) ||
-                    m.home_abbr.toLowerCase().includes(searchQuery) ||
-                    m.away_abbr.toLowerCase().includes(searchQuery)
+                    getSchoolAbbr(m.home_team).toLowerCase().includes(searchQuery) ||
+                    getSchoolAbbr(m.away_team).toLowerCase().includes(searchQuery)
                 );
             }
 
@@ -1180,12 +1302,12 @@
                         <!-- Away Team Row -->
                         <div class="grid grid-cols-4 gap-1 items-center mb-1">
                             <div class="flex items-center space-x-1.5 pr-1 min-w-0">
-                                <div class="w-6 h-6 rounded-full bg-slate-700/70 border border-slate-600/80 flex items-center justify-center text-[9px] font-black text-slate-200 shrink-0">
-                                    ${m.away_abbr.slice(0, 3)}
+                                <div class="w-6 h-6 rounded-full bg-slate-700/70 border border-slate-600/80 flex items-center justify-center text-[8.5px] font-black text-slate-200 shrink-0">
+                                    ${getSchoolAbbr(m.away_team).slice(0, 4)}
                                 </div>
                                 <div class="min-w-0 flex-1">
-                                    <div class="text-xs font-black text-white leading-tight truncate">${m.away_abbr}</div>
-                                    <div class="text-[9.5px] text-slate-400 font-medium leading-tight truncate">${getTeamNickname(m.away_team)}</div>
+                                    <div class="text-[11px] font-black text-white leading-tight truncate">${getSchoolName(m.away_team)}</div>
+                                    <div class="text-[9.5px] text-slate-400 font-medium leading-tight truncate">${getSchoolAbbr(m.away_team)}</div>
                                 </div>
                             </div>
                             <div class="min-w-0">${awayCell1}</div>
@@ -1196,12 +1318,12 @@
                         <!-- Home Team Row -->
                         <div class="grid grid-cols-4 gap-1 items-center">
                             <div class="flex items-center space-x-1.5 pr-1 min-w-0">
-                                <div class="w-6 h-6 rounded-full bg-slate-700/70 border border-slate-600/80 flex items-center justify-center text-[9px] font-black text-slate-200 shrink-0">
-                                    ${m.home_abbr.slice(0, 3)}
+                                <div class="w-6 h-6 rounded-full bg-slate-700/70 border border-slate-600/80 flex items-center justify-center text-[8.5px] font-black text-slate-200 shrink-0">
+                                    ${getSchoolAbbr(m.home_team).slice(0, 4)}
                                 </div>
                                 <div class="min-w-0 flex-1">
-                                    <div class="text-xs font-black text-white leading-tight truncate">${m.home_abbr}</div>
-                                    <div class="text-[9.5px] text-slate-400 font-medium leading-tight truncate">${getTeamNickname(m.home_team)}</div>
+                                    <div class="text-[11px] font-black text-white leading-tight truncate">${getSchoolName(m.home_team)}</div>
+                                    <div class="text-[9.5px] text-slate-400 font-medium leading-tight truncate">${getSchoolAbbr(m.home_team)}</div>
                                 </div>
                             </div>
                             <div class="min-w-0">${homeCell1}</div>
@@ -1413,7 +1535,7 @@
                             <div class="min-w-0 flex-1 pr-2">
                                 <div class="flex items-center space-x-1.5">
                                     <span class="text-[9.5px] px-1.5 py-0.5 rounded bg-slate-700 text-slate-200 font-bold uppercase shrink-0">${arb.sport}</span>
-                                    <h3 class="text-xs font-bold text-white truncate">${arb.matchup}</h3>
+                                    <h3 class="text-xs font-bold text-white truncate">${formatMatchupSchools(arb.matchup)}</h3>
                                 </div>
                                 <div class="flex items-center space-x-1.5 mt-0.5">
                                     <span class="text-[10px] text-slate-400 truncate">${arb.market} • ${formatGameTime(arb.commence_time)}</span>
@@ -1436,7 +1558,7 @@
                                     </div>
                                     ${(arb.side_a.liquidity !== null && arb.side_a.liquidity !== undefined) ? `<span class="text-[9px] text-emerald-400 font-semibold shrink-0">Liq $${arb.side_a.liquidity}</span>` : ''}
                                 </div>
-                                <div class="text-[11px] font-bold text-slate-200 truncate">${arb.side_a.outcome}</div>
+                                <div class="text-[11px] font-bold text-slate-200 truncate">${formatOutcomeSchool(arb.side_a)}</div>
                                 <div class="text-sm font-black text-cyan-400 my-0.5">${formatAmericanOdds(arb.side_a.price)}</div>
                                 
                                 <div class="mt-1.5 pt-1.5 border-t border-slate-800 text-[10px]">
@@ -1459,7 +1581,7 @@
                                     </div>
                                     ${(arb.side_b.liquidity !== null && arb.side_b.liquidity !== undefined) ? `<span class="text-[9px] text-emerald-400 font-semibold shrink-0">Liq $${arb.side_b.liquidity}</span>` : ''}
                                 </div>
-                                <div class="text-[11px] font-bold text-slate-200 truncate">${arb.side_b.outcome}</div>
+                                <div class="text-[11px] font-bold text-slate-200 truncate">${formatOutcomeSchool(arb.side_b)}</div>
                                 <div class="text-sm font-black text-cyan-400 my-0.5">${formatAmericanOdds(arb.side_b.price)}</div>
                                 
                                 <div class="mt-1.5 pt-1.5 border-t border-slate-800 text-[10px]">
@@ -1589,7 +1711,7 @@
                         <div class="flex items-center justify-between mb-2">
                             <div class="min-w-0 flex-1 pr-2">
                                 <h3 class="text-xs font-black text-white truncate">${p.player}</h3>
-                                <p class="text-[10px] text-slate-400 truncate">${p.market} • ${p.matchup}</p>
+                                <p class="text-[10px] text-slate-400 truncate">${p.market} • ${formatMatchupSchools(p.matchup)}</p>
                             </div>
                             ${p.discrepancy ? `<span class="text-[9.5px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 shrink-0 whitespace-nowrap">⚡ ${p.discrepancy}</span>` : ''}
                         </div>
