@@ -737,8 +737,9 @@
             'Cal Poly': 'CP', 'Le Moyne': 'LEM', 'McNeese': 'MCN', 'DePaul': 'DEP', 'West Georgia': 'UWG'
         };
 
-        function getSchoolName(fullName) {
+        function getSchoolName(fullName, sportLabel) {
             if (!fullName) return '';
+            if (sportLabel === 'GOLF' || sportLabel === 'TENNIS') return fullName.trim();
             const parts = fullName.trim().split(/\s+/);
             if (parts.length <= 1) return fullName.trim();
             if (parts.length >= 3) {
@@ -750,8 +751,12 @@
             return parts.slice(0, -1).join(' ');
         }
 
-        function getSchoolAbbr(fullName) {
+        function getSchoolAbbr(fullName, sportLabel) {
             if (!fullName) return '';
+            if (sportLabel === 'GOLF' || sportLabel === 'TENNIS') {
+                const p = fullName.trim().split(/\s+/);
+                return (p[p.length - 1] || fullName).replace(/[^A-Za-z]/g, '').slice(0, 3).toUpperCase();
+            }
             if (TEAM_ABBR_MAP[fullName]) return TEAM_ABBR_MAP[fullName];
             const school = getSchoolName(fullName);
             if (TEAM_ABBR_MAP[school]) return TEAM_ABBR_MAP[school];
@@ -890,6 +895,7 @@
             'MLB': '⚾',
             'NCAAF': '🎓',
             'NCAAB': '🏀',
+            'GOLF': '⛳',
             'TENNIS': '🎾',
             'SOCCER': '⚽'
         };
@@ -901,11 +907,14 @@
             (appData.matchups || []).forEach(m => {
                 if (m.sport_label) availableSports.add(m.sport_label);
             });
+            (appData.outrights || []).forEach(o => {
+                if (o.sport_label) availableSports.add(o.sport_label);
+            });
             (appData.arbs || []).forEach(a => {
                 if (a.sport) availableSports.add(a.sport);
             });
 
-            const priorityOrder = ['WNBA', 'NFL', 'NHL', 'MLB', 'NCAAF', 'NBA'];
+            const priorityOrder = ['NFL', 'NCAAF', 'NBA', 'NCAAB', 'NHL', 'GOLF', 'MLB', 'WNBA', 'TENNIS'];
             const sortedSports = Array.from(availableSports).sort((a, b) => {
                 const idxA = priorityOrder.indexOf(a);
                 const idxB = priorityOrder.indexOf(b);
@@ -1131,18 +1140,111 @@
                 });
             }
 
-            document.getElementById('matchupCountLabel').textContent = `Showing ${list.length} ${currentSport === 'ALL' ? 'Upcoming' : currentSport} Games (${showNovigMode === 'retail' ? 'Retail Best' : 'Retail + Novig'})`;
+            let outrightsList = appData.outrights || [];
+            if (currentSport === 'LIVE') {
+                outrightsList = [];
+            } else if (currentSport !== 'ALL') {
+                outrightsList = outrightsList.filter(o => o.sport_label === currentSport);
+            }
+            if (currentDateFilter !== 'ALL') {
+                outrightsList = outrightsList.filter(o => o.commence_time && o.commence_time.startsWith(currentDateFilter));
+            }
+            if (searchQuery) {
+                outrightsList = outrightsList.filter(o =>
+                    (o.tournament || '').toLowerCase().includes(searchQuery) ||
+                    (o.golfers || []).some(g => g.name.toLowerCase().includes(searchQuery))
+                );
+            }
 
-            if (list.length === 0) {
+            const totalShown = list.length + outrightsList.length;
+            document.getElementById('matchupCountLabel').textContent = `Showing ${list.length} ${currentSport === 'ALL' ? 'Upcoming' : currentSport} Games${outrightsList.length ? ` & ${outrightsList.length} Tournaments` : ''} (${showNovigMode === 'retail' ? 'Retail Best' : 'Retail + Novig'})`;
+
+            if (totalShown === 0) {
                 container.innerHTML = `
                     <div class="text-center py-12 text-slate-500 text-xs">
-                        No matchups found matching your filters.
+                        No matchups or tournaments found matching your filters.
                     </div>
                 `;
                 return;
             }
 
             let html = '';
+
+            // Render Tournament Outright Leaderboards (e.g., Golf Tournaments)
+            outrightsList.forEach((tourn) => {
+                const allGolfers = tourn.golfers || [];
+                const filteredGolfers = searchQuery
+                    ? allGolfers.filter(g => g.name.toLowerCase().includes(searchQuery) || (tourn.tournament || '').toLowerCase().includes(searchQuery))
+                    : allGolfers;
+                const isExpanded = window._expandedOutrights && window._expandedOutrights[tourn.id];
+                const visibleGolfers = (searchQuery || isExpanded) ? filteredGolfers : filteredGolfers.slice(0, 12);
+                const allBooks = ['DraftKings', 'FanDuel', 'BetMGM', 'Caesars', 'Fanatics', 'BetRivers', 'Novig'];
+
+                let rowsHtml = '';
+                visibleGolfers.forEach((g, idx) => {
+                    const useNovig = (showNovigMode !== 'retail');
+                    const bestPrice = useNovig ? g.best_price : (g.retail_best_price ?? g.best_price);
+                    const bestBook = useNovig ? g.best_book : (g.retail_best_book || g.best_book);
+                    const isNovigBest = bestBook === 'Novig';
+                    const bookComparisons = allBooks
+                        .filter(b => g.books && g.books[b] !== undefined)
+                        .map(b => {
+                            const p = g.books[b];
+                            const isBest = p === bestPrice;
+                            return `<div class="flex items-center justify-between bg-slate-950/70 px-2 py-1 rounded border ${isBest ? 'border-emerald-500/40' : 'border-slate-800'}">
+                                ${getBookBadge(b)}
+                                <span class="text-[10px] font-bold ${isBest ? 'text-emerald-400' : 'text-slate-300'} ml-1">${formatAmericanOdds(p)}</span>
+                            </div>`;
+                        }).join('');
+
+                    rowsHtml += `
+                        <div class="py-1.5 border-b border-slate-800/80 last:border-none">
+                            <div class="flex items-center justify-between cursor-pointer" onclick="toggleGolferRow('${tourn.id}_${idx}')">
+                                <div class="flex items-center space-x-2 min-w-0 pr-2">
+                                    <span class="w-5 text-[10px] font-bold text-slate-500 text-right shrink-0">${idx + 1}.</span>
+                                    <span class="text-xs font-bold text-white truncate">${g.name}</span>
+                                </div>
+                                <div class="flex items-center space-x-1.5 shrink-0">
+                                    <div class="px-2 py-1 rounded-lg bg-slate-900 border ${isNovigBest ? 'border-emerald-500/50 text-emerald-400' : 'border-slate-700 text-emerald-400'} font-black text-xs flex items-center space-x-1.5">
+                                        <span>${formatAmericanOdds(bestPrice)}</span>
+                                        ${getBookBadge(bestBook)}
+                                    </div>
+                                    <span class="text-slate-500 text-[10px]" id="golferArrow_${tourn.id}_${idx}">▾</span>
+                                </div>
+                            </div>
+                            <div id="golferBooks_${tourn.id}_${idx}" class="hidden mt-1.5 pl-7 grid grid-cols-3 gap-1">
+                                ${bookComparisons}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `
+                    <div class="bg-slate-800/90 border border-emerald-500/30 rounded-2xl p-3 shadow-sm">
+                        <div class="flex items-center justify-between text-xs pb-2 border-b border-slate-700/70 mb-2">
+                            <div class="flex items-center space-x-1.5 font-bold text-slate-200 min-w-0 pr-1">
+                                <span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9.5px] font-black uppercase shrink-0">⛳ ${tourn.sport_label}</span>
+                                <span class="text-xs font-black text-white truncate">${tourn.tournament}</span>
+                            </div>
+                            <span class="text-[10px] text-slate-400 font-medium shrink-0">${formatGameTime(tourn.commence_time)}</span>
+                        </div>
+                        <div class="flex items-center justify-between text-[10px] text-slate-400 font-bold uppercase tracking-wider px-1 mb-1">
+                            <span>Golfer (${filteredGolfers.length} in field • tap row to compare books)</span>
+                            <span>Best Winner Odds</span>
+                        </div>
+                        <div class="divide-y divide-slate-800/60">
+                            ${rowsHtml}
+                        </div>
+                        ${(!searchQuery && filteredGolfers.length > 12) ? `
+                            <div class="mt-2 pt-1.5 border-t border-slate-700/60 text-center">
+                                <button onclick="toggleOutrightExpand('${tourn.id}')" class="text-indigo-400 hover:text-indigo-300 font-bold text-[11px] active:scale-95 transition">
+                                    ${isExpanded ? 'Show Top 12 Contenders ▴' : `Show All ${filteredGolfers.length} Golfers ▾`}
+                                </button>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
             list.forEach((m) => {
                 const lines = m.best_lines || {};
                 
@@ -1303,11 +1405,11 @@
                         <div class="grid grid-cols-4 gap-1 items-center mb-1">
                             <div class="flex items-center space-x-1.5 pr-1 min-w-0">
                                 <div class="w-6 h-6 rounded-full bg-slate-700/70 border border-slate-600/80 flex items-center justify-center text-[8.5px] font-black text-slate-200 shrink-0">
-                                    ${getSchoolAbbr(m.away_team).slice(0, 4)}
+                                    ${getSchoolAbbr(m.away_team, m.sport_label).slice(0, 4)}
                                 </div>
                                 <div class="min-w-0 flex-1">
-                                    <div class="text-[11px] font-black text-white leading-tight truncate">${getSchoolName(m.away_team)}</div>
-                                    <div class="text-[9.5px] text-slate-400 font-medium leading-tight truncate">${getSchoolAbbr(m.away_team)}</div>
+                                    <div class="text-[11px] font-black text-white leading-tight truncate">${getSchoolName(m.away_team, m.sport_label)}</div>
+                                    <div class="text-[9.5px] text-slate-400 font-medium leading-tight truncate">${getSchoolAbbr(m.away_team, m.sport_label)}</div>
                                 </div>
                             </div>
                             <div class="min-w-0">${awayCell1}</div>
@@ -1319,11 +1421,11 @@
                         <div class="grid grid-cols-4 gap-1 items-center">
                             <div class="flex items-center space-x-1.5 pr-1 min-w-0">
                                 <div class="w-6 h-6 rounded-full bg-slate-700/70 border border-slate-600/80 flex items-center justify-center text-[8.5px] font-black text-slate-200 shrink-0">
-                                    ${getSchoolAbbr(m.home_team).slice(0, 4)}
+                                    ${getSchoolAbbr(m.home_team, m.sport_label).slice(0, 4)}
                                 </div>
                                 <div class="min-w-0 flex-1">
-                                    <div class="text-[11px] font-black text-white leading-tight truncate">${getSchoolName(m.home_team)}</div>
-                                    <div class="text-[9.5px] text-slate-400 font-medium leading-tight truncate">${getSchoolAbbr(m.home_team)}</div>
+                                    <div class="text-[11px] font-black text-white leading-tight truncate">${getSchoolName(m.home_team, m.sport_label)}</div>
+                                    <div class="text-[9.5px] text-slate-400 font-medium leading-tight truncate">${getSchoolAbbr(m.home_team, m.sport_label)}</div>
                                 </div>
                             </div>
                             <div class="min-w-0">${homeCell1}</div>
@@ -1412,6 +1514,25 @@
                 el.classList.add('hidden');
                 arrow.textContent = '▾';
             }
+        }
+
+        function toggleGolferRow(key) {
+            const el = document.getElementById(`golferBooks_${key}`);
+            const arrow = document.getElementById(`golferArrow_${key}`);
+            if (!el) return;
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                if (arrow) arrow.textContent = '▴';
+            } else {
+                el.classList.add('hidden');
+                if (arrow) arrow.textContent = '▾';
+            }
+        }
+
+        function toggleOutrightExpand(tournId) {
+            if (!window._expandedOutrights) window._expandedOutrights = {};
+            window._expandedOutrights[tournId] = !window._expandedOutrights[tournId];
+            renderMatchups();
         }
 
         function setArbFilter(filter) {

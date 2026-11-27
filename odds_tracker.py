@@ -143,6 +143,27 @@ def ensure_settings_rows(settings_sheet):
             if "STATUS" in k:
                 status_idx = i
                 break
+
+        if "Golf (all active tournaments & matches)" not in keys:
+            golf_idx = None
+            if "Tennis (all active tournaments)" in keys:
+                golf_idx = keys.index("Tennis (all active tournaments)") + 2
+            elif "--- PLAYER PROPS (SPORT SELECTOR) ---" in keys:
+                golf_idx = keys.index("--- PLAYER PROPS (SPORT SELECTOR) ---") + 1
+            elif status_idx:
+                golf_idx = status_idx
+            if golf_idx:
+                settings_sheet.insert_row(["Golf (all active tournaments & matches)", "TRUE"], index=golf_idx)
+                if status_idx and golf_idx <= status_idx:
+                    status_idx += 1
+            else:
+                settings_sheet.append_row(["Golf (all active tournaments & matches)", "TRUE"])
+            records = settings_sheet.col_values(1)
+            keys = [r.strip() for r in records]
+            for i, k in enumerate(keys, start=1):
+                if "STATUS" in k:
+                    status_idx = i
+                    break
                 
         if "--- PLAYER PROPS (SPORT SELECTOR) ---" not in keys:
             target_idx = status_idx
@@ -161,6 +182,27 @@ def ensure_settings_rows(settings_sheet):
             if "STATUS" in k:
                 status_idx = i
                 break
+
+        if "Golf (all active tournaments & matches)" not in keys:
+            golf_idx = None
+            if "Tennis (all active tournaments)" in keys:
+                golf_idx = keys.index("Tennis (all active tournaments)") + 2
+            elif "--- PLAYER PROPS (SPORT SELECTOR) ---" in keys:
+                golf_idx = keys.index("--- PLAYER PROPS (SPORT SELECTOR) ---") + 1
+            elif status_idx:
+                golf_idx = status_idx
+            if golf_idx:
+                settings_sheet.insert_row(["Golf (all active tournaments & matches)", "TRUE"], index=golf_idx)
+                if status_idx and golf_idx <= status_idx:
+                    status_idx += 1
+            else:
+                settings_sheet.append_row(["Golf (all active tournaments & matches)", "TRUE"])
+            records = settings_sheet.col_values(1)
+            keys = [r.strip() for r in records]
+            for i, k in enumerate(keys, start=1):
+                if "STATUS" in k:
+                    status_idx = i
+                    break
 
         if "Fetch Player Props" not in keys:
             if status_idx:
@@ -234,6 +276,7 @@ def map_sport_to_novig_league(sport_key):
     if "mlb" in sk: return ["MLB"]
     if "nhl" in sk: return ["NHL"]
     if "tennis" in sk: return ["ATP", "WTA"]
+    if "golf" in sk or "pga" in sk: return ["PGA", "GOLF", "LIV"]
     return []
 
 def get_active_tennis_sports(api_key):
@@ -246,6 +289,18 @@ def get_active_tennis_sports(api_key):
             return [s["key"] for s in sports if s["key"].startswith("tennis_")]
     except Exception as e:
         print("Warning: Failed to fetch active tennis sports:", e)
+        return []
+
+def get_active_golf_sports(api_key):
+    """Queries active golf tournament and match keys from The Odds API (free call)."""
+    url = f"{ODDS_API_BASE}/sports/?apiKey={api_key}"
+    try:
+        req = urllib.request.Request(url, method="GET")
+        with urllib.request.urlopen(req) as res:
+            sports = json.loads(res.read().decode("utf-8"))
+            return [s["key"] for s in sports if s["key"].startswith("golf_")]
+    except Exception as e:
+        print("Warning: Failed to fetch active golf sports:", e)
         return []
 
 def fetch_odds_api(api_key, sports, bookmakers, odds_format):
@@ -261,9 +316,11 @@ def fetch_odds_api(api_key, sports, bookmakers, odds_format):
         
     for sport in sports:
         print(f"Fetching {sport} from The Odds API...")
+        is_golf = sport.startswith("golf_")
+        markets_param = "outrights" if is_golf else "h2h,spreads,totals"
         url = (
             f"{ODDS_API_BASE}/sports/{sport}/odds/"
-            f"?apiKey={api_key}&regions={regions}&markets=h2h,spreads,totals"
+            f"?apiKey={api_key}&regions={regions}&markets={markets_param}"
             f"&oddsFormat={odds_format}&bookmakers={','.join(bookmakers)}"
         )
         try:
@@ -273,10 +330,10 @@ def fetch_odds_api(api_key, sports, bookmakers, odds_format):
                 events_by_sport[sport] = events
                 for event in events:
                     event_id = event["id"]
-                    sport_title = event["sport_title"]
-                    commence_time = event["commence_time"]
-                    home_team = event["home_team"]
-                    away_team = event["away_team"]
+                    sport_title = event.get("sport_title") or sport
+                    commence_time = event.get("commence_time", "")
+                    home_team = event.get("home_team") or sport_title
+                    away_team = event.get("away_team") or ("Tournament Field" if is_golf else "")
                     
                     for book in event.get("bookmakers", []):
                         book_title = book["title"]
@@ -509,10 +566,11 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
         # Identify matches we actually care about
         target_matchups = set()
         for row in odds_data:
-            bookmaker = row[5]
-            target_matchups.add((row[3].lower(), row[4].lower())) # home, away
+            if row[3] and row[4] and row[6] != "outrights":
+                target_matchups.add((row[3].lower(), row[4].lower())) # home, away
                 
         events_map = {}
+        events_league_map = {}
         target_event_ids = []
         for league in leagues:
             cursor = ""
@@ -524,12 +582,13 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
                     for ev in data.get("items", []):
                         ev_desc = ev["description"]
                         events_map[ev["eventId"]] = ev_desc
+                        events_league_map[ev["eventId"]] = league
                         
                         ev_lower = ev_desc.lower()
-                        # Simple inclusion matching for target teams
+                        # Simple inclusion matching for target teams (always include active Golf events)
                         matched = False
-                        if not target_matchups:
-                            matched = True # If no odds_data passed, fallback to fetching all
+                        if league in ["PGA", "GOLF", "LIV"] or not target_matchups:
+                            matched = True
                         else:
                             for h_team, a_team in target_matchups:
                                 h_words = set(w for w in h_team.split() if len(w) > 3 and w not in ["state", "university"])
@@ -559,11 +618,13 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
             if res.status_code == 200:
                 data = res.json()
                 for m in data.get("items", []):
-                    if m.get('eventId') not in target_set:
+                    ev_id = m.get('eventId')
+                    if ev_id not in target_set:
                         continue
-                    if m['marketType'] in ['SPREAD', 'TOTAL', 'MONEY', 'MONEYLINE']:
+                    is_golf_ev = events_league_map.get(ev_id) in ["PGA", "GOLF", "LIV"]
+                    if is_golf_ev or m['marketType'] in ['SPREAD', 'TOTAL', 'MONEY', 'MONEYLINE']:
                         m_desc = m.get('name', '').lower() + ' ' + m.get('description', '').lower()
-                        if 'half' in m_desc or 'quarter' in m_desc or 'period' in m_desc or 'inning' in m_desc or '1q' in m_desc or '2q' in m_desc or '3q' in m_desc or '4q' in m_desc or '1h' in m_desc or '2h' in m_desc:
+                        if not is_golf_ev and ('half' in m_desc or 'quarter' in m_desc or 'period' in m_desc or 'inning' in m_desc or '1q' in m_desc or '2q' in m_desc or '3q' in m_desc or '4q' in m_desc or '1h' in m_desc or '2h' in m_desc):
                             continue
                         if len(m.get('outcomes', [])) == 2:
                             markets.append(m)
@@ -578,7 +639,7 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
             for row in odds_data:
                 if len(row) >= 9:
                     a_team, h_team, m_key, pt = row[4], row[3], row[6], row[8]
-                    if pt != "":
+                    if pt != "" and a_team and h_team:
                         ev_name = f"{a_team.title()} @ {h_team.title()}"
                         if ev_name not in valid_strikes_by_event:
                             valid_strikes_by_event[ev_name] = {"SPREAD": set(), "TOTAL": set()}
@@ -587,9 +648,10 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
             
             filtered_markets = []
             for m in markets:
-                ev_name = events_map.get(m.get('eventId'))
+                ev_id = m.get('eventId')
+                ev_name = events_map.get(ev_id)
                 m_type = m['marketType']
-                if m_type in ['MONEY', 'MONEYLINE']:
+                if events_league_map.get(ev_id) in ["PGA", "GOLF", "LIV"] or m_type in ['MONEY', 'MONEYLINE']:
                     filtered_markets.append(m)
                 elif m_type in ['SPREAD', 'TOTAL'] and ev_name in valid_strikes_by_event:
                     strike_str = m.get('strike', '')
@@ -631,7 +693,7 @@ def fetch_novig_depth(leagues, odds_format, odds_data=[]):
         for m in market_results:
             ev_id = m["eventId"]
             ev_name = events_map.get(ev_id, "")
-            league = leagues[0] if leagues else ""
+            league = events_league_map.get(ev_id, leagues[0] if leagues else "")
                 
             out_A = m["outcomes"][0]
             out_B = m["outcomes"][1]
@@ -694,6 +756,21 @@ def find_novig_quote(home_team, away_team, market_key, outcome_name, point, dept
         target_types = ["SPREAD"]
     elif market_key == "totals":
         target_types = ["TOTAL"]
+    elif market_key == "outrights":
+        out_lower = outcome_name.lower()
+        tourn_words = set(w for w in home_team.lower().split() if len(w) > 3 and w not in ["tournament", "winner", "golf", "championship"])
+        for row in depth_data:
+            ev_name, league, m_type, o_name, strike, side, odds, max_bet_risk, depth_level, o_class = row
+            if side != "Back" or str(depth_level) != "1":
+                continue
+            if league not in ["PGA", "GOLF", "LIV"]:
+                continue
+            o_low = o_name.lower()
+            if out_lower in o_low and " no" not in o_low:
+                ev_low = ev_name.lower()
+                if not tourn_words or any(w in ev_low for w in tourn_words):
+                    return odds, max_bet_risk
+        return None, ""
         
     home_lower = home_team.lower()
     away_lower = away_team.lower()
@@ -786,6 +863,8 @@ def export_mobile_data(odds_data_with_liq, props_data):
             if "mlb" in s_lower or "baseball" in s_lower: return "MLB"
             if "nhl" in s_lower or "hockey" in s_lower: return "NHL"
             if "nba" in s_lower or "basketball" in s_lower: return "NBA"
+            if "tennis" in s_lower or "atp" in s_lower or "wta" in s_lower: return "TENNIS"
+            if "golf" in s_lower or "pga" in s_lower or "masters" in s_lower or "open" in s_lower or "liv" in s_lower: return "GOLF"
             return s.upper()
 
         TWO_WORD_MASCOTS = {
@@ -903,11 +982,32 @@ def export_mobile_data(odds_data_with_liq, props_data):
                 return 0
 
         events = {}
+        outrights_events = {}
         for row in odds_data_with_liq:
             eid, sport, commence, home, away, book, market, outcome, point, price, _, liq = row
             try:
                 price_val = float(price)
             except Exception:
+                continue
+
+            if market in ["outrights", "outright"]:
+                if eid not in outrights_events:
+                    outrights_events[eid] = {
+                        "id": eid,
+                        "sport": sport,
+                        "sport_label": sport_to_label(sport),
+                        "tournament": home or sport,
+                        "commence_time": commence,
+                        "golfers": {}
+                    }
+                t_ev = outrights_events[eid]
+                if outcome not in t_ev["golfers"]:
+                    t_ev["golfers"][outcome] = []
+                t_ev["golfers"][outcome].append({
+                    "book": book,
+                    "price": price_val,
+                    "liquidity": _parse_liq(liq)
+                })
                 continue
 
             if eid not in events:
@@ -936,6 +1036,43 @@ def export_mobile_data(odds_data_with_liq, props_data):
                 "price": price_val,
                 "liquidity": _parse_liq(liq)
             })
+
+        outrights_list = []
+        for eid, t_ev in outrights_events.items():
+            golfers_out = []
+            for g_name, entries in t_ev["golfers"].items():
+                best_overall = max(entries, key=lambda x: x["price"])
+                retail_entries = [x for x in entries if x["book"].lower() != "novig"]
+                novig_entries = [x for x in entries if x["book"].lower() == "novig"]
+                best_retail = max(retail_entries, key=lambda x: x["price"]) if retail_entries else best_overall
+                best_novig = max(novig_entries, key=lambda x: x["price"]) if novig_entries else None
+                books_dict = {}
+                for x in entries:
+                    if x["book"] not in books_dict or x["price"] > books_dict[x["book"]]:
+                        books_dict[x["book"]] = x["price"]
+                golfers_out.append({
+                    "name": g_name,
+                    "best_book": best_overall["book"],
+                    "best_price": best_overall["price"],
+                    "best_liquidity": best_overall["liquidity"],
+                    "retail_best_book": best_retail["book"],
+                    "retail_best_price": best_retail["price"],
+                    "novig_price": best_novig["price"] if best_novig else None,
+                    "novig_liquidity": best_novig["liquidity"] if best_novig else 0,
+                    "books": books_dict
+                })
+            # Sort from favorite (highest implied prob / lowest American odds) to longshot
+            golfers_out.sort(key=lambda g: -american_to_implied(g["retail_best_price"]))
+            outrights_list.append({
+                "id": eid,
+                "sport": t_ev["sport"],
+                "sport_label": t_ev["sport_label"],
+                "tournament": t_ev["tournament"],
+                "commence_time": t_ev["commence_time"],
+                "golfers_count": len(golfers_out),
+                "golfers": golfers_out
+            })
+        outrights_list.sort(key=lambda x: x["commence_time"] or "")
 
         matchups_list = []
         arbs_list = []
@@ -1222,19 +1359,22 @@ def export_mobile_data(odds_data_with_liq, props_data):
                     "all_lines": lines_by_book
                 })
 
+        all_sport_labels = set(m["sport_label"] for m in matchups_list) | set(o["sport_label"] for o in outrights_list)
         output = {
             "updated_at": get_eastern_now().strftime("%Y-%m-%d %I:%M:%S %p ET"),
-            "sports_count": len(set(m["sport_label"] for m in matchups_list)),
+            "sports_count": len(all_sport_labels),
             "matchups_count": len(matchups_list),
+            "outrights_count": len(outrights_list),
             "arbs_count": len(arbs_list),
             "props_count": len(props_list),
             "matchups": matchups_list,
+            "outrights": outrights_list,
             "arbs": arbs_list,
             "props": props_list
         }
         with open("mobile_data.json", "w", encoding="utf-8") as f:
             json.dump(output, f, indent=2)
-        print(f"Exported mobile_data.json ({len(matchups_list)} matchups, {len(arbs_list)} arbs, {len(props_list)} props).")
+        print(f"Exported mobile_data.json ({len(matchups_list)} matchups, {len(outrights_list)} outrights, {len(arbs_list)} arbs, {len(props_list)} props).")
     except Exception as e:
         print(f"Warning: Could not export mobile_data.json: {e}")
 
@@ -1279,6 +1419,13 @@ def main():
         print("Scanning active tennis tournament keys...")
         active_tennis = get_active_tennis_sports(api_key)
         sports.extend(active_tennis)
+
+    # Include golf dynamically (default True if newly added)
+    golf_enabled = settings.get("Golf (all active tournaments & matches)", True) is True
+    if golf_enabled:
+        print("Scanning active golf tournament & match keys...")
+        active_golf = get_active_golf_sports(api_key)
+        sports.extend(active_golf)
         
     # Get bookmakers
     bookmakers = []
@@ -1319,6 +1466,8 @@ def main():
         for sport in sports:
             mapped = map_sport_to_novig_league(sport)
             novig_leagues.extend(mapped)
+        if golf_enabled:
+            novig_leagues.extend(["PGA", "GOLF", "LIV"])
         novig_leagues = list(set(novig_leagues)) # Deduplicate
         
         if novig_leagues:

@@ -49,6 +49,7 @@ function setupSheets() {
       ["MLB (baseball_mlb)", true],
       ["NHL (icehockey_nhl)", false],
       ["Tennis (all active tournaments)", true],
+      ["Golf (all active tournaments & matches)", true],
       ["GitHub PAT (For In-App Cloud Refresh)", ""],
       ["--- STATUS ---", ""],
       ["Last Updated", ""],
@@ -172,6 +173,13 @@ function updateOdds() {
     var activeTennisSports = getActiveTennisSports(apiKey);
     sportsToQuery = sportsToQuery.concat(activeTennisSports);
   }
+
+  // Dynamic Golf tourney & match checking
+  if (settings["Golf (all active tournaments & matches)"] !== false) {
+    updateStatus("Scanning active golf tournaments & matches...", settingsSheet);
+    var activeGolfSports = getActiveGolfSports(apiKey);
+    sportsToQuery = sportsToQuery.concat(activeGolfSports);
+  }
   
   if (sportsToQuery.length === 0) {
     updateStatus("Error: No sports selected. Check at least one sport in the Settings sheet.", settingsSheet);
@@ -191,10 +199,12 @@ function updateOdds() {
   
   sportsToQuery.forEach(function(sportKey) {
     try {
+      var isGolf = sportKey.indexOf("golf_") === 0;
+      var marketsParam = isGolf ? "outrights" : "h2h,spreads,totals";
       var url = "https://api.the-odds-api.com/v4/sports/" + sportKey + "/odds/" +
                 "?apiKey=" + apiKey +
                 "&regions=" + regions +
-                "&markets=h2h,spreads,totals" +
+                "&markets=" + marketsParam +
                 "&oddsFormat=" + oddsFormat +
                 "&bookmakers=" + enabledBooks.join(",");
       
@@ -216,10 +226,10 @@ function updateOdds() {
       
       data.forEach(function(event) {
         var eventId = event.id;
-        var sportTitle = event.sport_title;
+        var sportTitle = event.sport_title || sportKey;
         var commenceTime = event.commence_time;
-        var homeTeam = event.home_team;
-        var awayTeam = event.away_team;
+        var homeTeam = event.home_team || sportTitle;
+        var awayTeam = event.away_team || (isGolf ? "Tournament Field" : "");
         
         event.bookmakers.forEach(function(bookmaker) {
           var bookmakerTitle = bookmaker.title;
@@ -339,6 +349,28 @@ function getActiveTennisSports(apiKey) {
     Logger.log("Failed to fetch active tennis tournaments: " + e.message);
   }
   return tennisSports;
+}
+
+/**
+ * Queries the list of currently in-season sports to find all active golf keys.
+ */
+function getActiveGolfSports(apiKey) {
+  var golfSports = [];
+  try {
+    var url = "https://api.the-odds-api.com/v4/sports/?apiKey=" + apiKey;
+    var response = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
+    if (response.getResponseCode() === 200) {
+      var sports = JSON.parse(response.getContentText());
+      sports.forEach(function(sport) {
+        if (sport.key.indexOf("golf_") === 0) {
+          golfSports.push(sport.key);
+        }
+      });
+    }
+  } catch (e) {
+    Logger.log("Failed to fetch active golf tournaments: " + e.message);
+  }
+  return golfSports;
 }
 
 /**
